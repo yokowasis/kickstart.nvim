@@ -121,8 +121,8 @@ vim.keymap.set('x', '<C-insert>', '"+y', { desc = '[Y]ank to system clipboard', 
 vim.keymap.set('n', '<leader>db', ':DBUIToggle<cr>', { desc = '[D]ata[b]ase', noremap = true, silent = true })
 
 -- Map Ctrl+S to save
-vim.keymap.set('n', '<C-S>', ':w<cr>:Prettier<cr>:mksession! session.vim<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
-vim.keymap.set('i', '<C-S>', '<Esc>:w<cr>:Prettier<cr>:mksession! session.vim<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<C-S>', ':w<cr>:mksession! session.vim<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<C-S>', '<Esc>:w<cr>:mksession! session.vim<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
 
 -- "Tab Navigation
 vim.keymap.set('n', '<leader><up>', ':tabnew<CR>', { desc = 'New Tab', noremap = true, silent = true })
@@ -311,8 +311,8 @@ vim.api.nvim_set_keymap('x', '<M-right>', 'w', { noremap = true, silent = false 
 vim.api.nvim_set_keymap('n', '<M-left>', 'b', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<M-right>', 'w', { noremap = true, silent = false })
 
-vim.api.nvim_set_keymap('n', '<D-s>', ':w<CR>:Prettier<CR>mksession! session.vim<cr>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('i', '<D-s>', '<esc>:w<CR>:Prettier<CR>mksession! session.vim<cr>i', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<D-s>', ':w<CR>mksession! session.vim<cr>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('i', '<D-s>', '<esc>:w<CR>mksession! session.vim<cr>i', { noremap = true, silent = false })
 
 -- npm / yarn operation
 vim.api.nvim_set_keymap('n', '<leader>rb', ':lua RunCommandAndNotify("npm run build")<CR>', { noremap = true, silent = false, desc = '[R]un [B]uild' })
@@ -652,31 +652,6 @@ return {
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
-  -- 'spf13/vim-autoclose',
-  -- {
-  --   'MunifTanjim/prettier.nvim',
-  --   config = function() -- This is the function that runs, AFTER loading
-  --     local prettier = require 'prettier'
-  --
-  --     prettier.setup {
-  --       bin = 'prettier', -- or `'prettierd'` (v0.23.3+)
-  --       filetypes = {
-  --         'css',
-  --         'graphql',
-  --         'html',
-  --         'javascript',
-  --         'javascriptreact',
-  --         'json',
-  --         'less',
-  --         'markdown',
-  --         'scss',
-  --         'typescript',
-  --         'typescriptreact',
-  --         'yaml',
-  --       },
-  --     }
-  --   end,
-  -- },
   {
     'rcarriga/nvim-notify',
     config = function() -- This is the function that runs, AFTER loading
