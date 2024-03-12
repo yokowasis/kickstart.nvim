@@ -611,7 +611,6 @@ return {
     config = function()
       require('chatgpt').setup()
     end,
-    --create ENV VARIABLE OPENAI_API_KEY=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
     dependencies = {
       'MunifTanjim/nui.nvim',
       'nvim-lua/plenary.nvim',
