@@ -149,15 +149,10 @@ vim.keymap.set('n', '<leader>ww', ':set wrap!<CR><CTR>', { desc = '[W]ord [W]rap
 vim.keymap.set(
   'n',
   '<leader>``',
-  '<C-w>v<C-w><C-w>:terminal ' .. TerminalShell .. '<CR><C-w>J<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-',
+  ':horizontal terminal ' .. TerminalShell .. '<CR><C-w>J<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-',
   { desc = 'Open Terminal', noremap = false, silent = true }
 )
-vim.keymap.set(
-  'n',
-  '<leader>`v',
-  '<C-w>v<C-w><C-w>:terminal ' .. TerminalShell .. '<CR>',
-  { desc = 'Open Terminal [V]ertical', noremap = false, silent = true }
-)
+vim.keymap.set('n', '<leader>`v', '<C-w>v:terminal ' .. TerminalShell .. '<CR>', { desc = 'Open Terminal [V]ertical', noremap = false, silent = true })
 vim.keymap.set('t', '<leader>`', '<C-\\><C-n>:q<CR>', { desc = '', noremap = true, silent = true })
 vim.keymap.set('t', '<C-w><C-w>', '<C-\\><C-n><C-w><C-w>', { desc = '', noremap = true, silent = true })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
@@ -271,6 +266,7 @@ vim.keymap.set('n', '<leader>gs', function()
   end
   vim.cmd [[NvimTreeClose | vertical Git]]
   vim.cmd [[vertical resize -30]]
+  vim.cmd [[wincmd H]]
 end, { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>gc', ':execute "Git add . \\| Git commit -m \'\'"<left><left>', { desc = '[G]it [C]ommit', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>gc', ':execute "Git add . \\| Git commit -m \'\'"<left><left>', { desc = '[G]it [C]ommit', noremap = true, silent = false })
@@ -391,7 +387,7 @@ vim.keymap.set('n', '<leader>jr', '/# ---<cr>VN:JupyterSendRange<CR><C-o><C-o>',
 vim.keymap.set(
   'n',
   '<leader>js',
-  '<C-w>v<C-w><C-w>:terminal<CR>ijupyter console<cr><C-\\><C-N>:norm G<CR><C-w><C-w>:sleep 1000m<CR>:JupyterConnect<CR>',
+  ':vertical terminal ' .. TerminalShell .. '<CR>ijupyter console<cr><C-\\><C-N>:norm G<CR><C-w><C-w>:sleep 1000m<CR>:JupyterConnect<CR>',
   { desc = '[J]upyter Con[s]ole', noremap = false, silent = true }
 )
 
