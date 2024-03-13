@@ -78,6 +78,22 @@ function CompileAndRun()
   -- })
 end
 
+TerminalShell = ''
+
+if vim.fn.has 'win32' == 1 then
+  vim.cmd [[command! SaveInitVim :tabnew | exe ':te git -C '. stdpath("config") .' add . & git -C ' . stdpath("config")  . ' commit -m save & git -C ' . stdpath("config")  . ' push']]
+  vim.cmd [[command! SaveGlobalSnippets :tabnew | exe ':te git -C '. stdpath("config") .'/../../../git/friendly-snippets add . & git -C '. stdpath("config") .'/../../../git/friendly-snippets commit -m save & git -C '. stdpath("config") .'/../../../git/friendly-snippets push']]
+  vim.cmd [[command! LoadGlobalSnippets :tabnew | exe ':te git -C '. stdpath("config") .'/../../../git/friendly-snippets pull']]
+
+  TerminalShell = 'powershell'
+else
+  vim.cmd [[command! SaveInitVim :tabnew | exe ':te git -C '. stdpath("config") .' add . && git -C ' . stdpath("config")  . ' commit -m save && git -C ' . stdpath("config")  . ' push']]
+  vim.cmd [[command! SaveGlobalSnippets :tabnew | exe ':te git -C ~/git/friendly-snippets add . && git -C ~/git/friendly-snippets commit -m save && git -C ~/git/friendly-snippets push']]
+  vim.cmd [[command! LoadGlobalSnippets :tabnew | exe ':te git -C ~/git/friendly-snippets pull']]
+
+  TerminalShell = 'bash'
+end
+
 -- Create a mapping for compiling and running code
 vim.api.nvim_set_keymap('n', '<leader>cr', "[[:execute luaeval('CompileAndRun()')<cr>]]", { noremap = true, silent = false, desc = '[C]ompile and [R]un' })
 
@@ -92,13 +108,6 @@ vim.o.expandtab = true
 vim.api.nvim_set_keymap('n', 'n', 'nzzzv', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', { noremap = true, silent = true })
 vim.o.hlsearch = true
-
--- set default sheel depending on OS
-if vim.fn.has 'win32' == 1 then
-  vim.o.shell = 'powershell'
-else
-  vim.o.shell = 'bash'
-end
 
 -- "Remap Multi Cursor VIM ----------------------------
 vim.api.nvim_set_keymap('x', '<C-d>', '<Plug>(VM-Find-Subword-Under)', {})
@@ -140,10 +149,15 @@ vim.keymap.set('n', '<leader>ww', ':set wrap!<CR><CTR>', { desc = '[W]ord [W]rap
 vim.keymap.set(
   'n',
   '<leader>``',
-  '<C-w>v<C-w><C-w>:terminal<CR><C-w>J<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-',
+  '<C-w>v<C-w><C-w>:terminal ' .. TerminalShell .. '<CR><C-w>J<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-',
   { desc = 'Open Terminal', noremap = false, silent = true }
 )
-vim.keymap.set('n', '<leader>`v', '<C-w>v<C-w><C-w>:terminal<CR>', { desc = 'Open Terminal [V]ertical', noremap = false, silent = true })
+vim.keymap.set(
+  'n',
+  '<leader>`v',
+  '<C-w>v<C-w><C-w>:terminal ' .. TerminalShell .. '<CR>',
+  { desc = 'Open Terminal [V]ertical', noremap = false, silent = true }
+)
 vim.keymap.set('t', '<leader>`', '<C-\\><C-n>:q<CR>', { desc = '', noremap = true, silent = true })
 vim.keymap.set('t', '<C-w><C-w>', '<C-\\><C-n><C-w><C-w>', { desc = '', noremap = true, silent = true })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
@@ -363,16 +377,6 @@ vim.api.nvim_set_keymap('n', '<Leader>lg', [[:lua InsertConsoleLog()<CR>]], { no
 vim.cmd [[command! EditInitVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/init.lua']]
 vim.cmd [[command! LoadInitVim :tabnew | exe ':te git -C '. stdpath("config") .' pull' ]]
 vim.cmd [[command! EditGlobalSnippets :tabnew | exe 'edit ~/git/friendly-snippets/snippets/global.json']]
-
-if vim.fn.has 'win32' == 1 then
-  vim.cmd [[command! SaveInitVim :tabnew | exe ':te git -C '. stdpath("config") .' add . & git -C ' . stdpath("config")  . ' commit -m save & git -C ' . stdpath("config")  . ' push']]
-  vim.cmd [[command! SaveGlobalSnippets :tabnew | exe ':te git -C '. stdpath("config") .'/../../../git/friendly-snippets add . & git -C '. stdpath("config") .'/../../../git/friendly-snippets commit -m save & git -C '. stdpath("config") .'/../../../git/friendly-snippets push']]
-  vim.cmd [[command! LoadGlobalSnippets :tabnew | exe ':te git -C '. stdpath("config") .'/../../../git/friendly-snippets pull']]
-else
-  vim.cmd [[command! SaveInitVim :tabnew | exe ':te git -C '. stdpath("config") .' add . && git -C ' . stdpath("config")  . ' commit -m save && git -C ' . stdpath("config")  . ' push']]
-  vim.cmd [[command! SaveGlobalSnippets :tabnew | exe ':te git -C ~/git/friendly-snippets add . && git -C ~/git/friendly-snippets commit -m save && git -C ~/git/friendly-snippets push']]
-  vim.cmd [[command! LoadGlobalSnippets :tabnew | exe ':te git -C ~/git/friendly-snippets pull']]
-end
 
 vim.g.jupyter_mapkeys = 0
 vim.g.jupyter_highlight_cells = 1
