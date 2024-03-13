@@ -4,6 +4,13 @@
 -- See the kickstart.nvim README for more information
 --
 
+require('tokyonight').setup {
+  styles = {
+    comments = { italic = false },
+    keywords = { italic = false },
+  },
+}
+
 function GetFileType()
   local filename = vim.fn.expand '%:t'
   local extension = vim.fn.fnamemodify(filename, ':e')
@@ -729,5 +736,22 @@ return {
         require('logsitter').log()
       end)
     end,
+  },
+  {
+    'smoka7/multicursors.nvim',
+    event = 'VeryLazy',
+    dependencies = {
+      'smoka7/hydra.nvim',
+    },
+    opts = {},
+    cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
+    keys = {
+      {
+        mode = { 'v', 'n' },
+        '<Leader>m',
+        '<cmd>MCstart<cr>',
+        desc = 'Create a selection for selected text or word under the cursor',
+      },
+    },
   },
 }
