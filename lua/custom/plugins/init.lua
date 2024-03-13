@@ -281,7 +281,7 @@ vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
   desc = 'Toggle Spectre. Search and Replace text in multiple files',
 })
 
--- copilot
+-- copilot asdasd
 vim.api.nvim_set_keymap('n', '<leader>cp', ':Copilot panel<cr>', { noremap = true, silent = false, desc = '[C]opilot [P]anel' })
 
 -- save Cursor
