@@ -95,7 +95,7 @@ vim.o.hlsearch = true
 
 -- set default sheel depending on OS
 if vim.fn.has 'win32' == 1 then
-  vim.o.shell = 'cmd'
+  vim.o.shell = 'powershell'
 else
   vim.o.shell = 'bash'
 end
