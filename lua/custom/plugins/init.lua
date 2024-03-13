@@ -273,6 +273,7 @@ vim.keymap.set('n', '<leader>gc', ':execute "Git add . \\| Git commit -m \'\'"<l
 vim.keymap.set('n', '<leader>gp', [[:lua GitPushAndNotify()<CR>]], { desc = '[G]it [P]ush', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gu', [[:lua GitPullAndNotify()<CR>]], { desc = '[G]it P[u]ll', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gd', ':vertical Git diff<CR>', { desc = '[G]it [D]iff', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gv', ':Gvdiffsplit<CR>', { desc = '[G]it [V]ertical Diff Current File', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gl', ':vertical Git log<CR>', { desc = '[G]it [L]og', noremap = true, silent = true })
 
 -- Toggle Spectre
