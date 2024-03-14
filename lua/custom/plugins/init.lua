@@ -2,7 +2,8 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
---
+
+vim.o.swapfile = false
 
 require('tokyonight').setup {
   styles = {
@@ -614,6 +615,12 @@ ls.config.set_config {
 
 return {
   {
+    'm4xshen/autoclose.nvim',
+    config = function()
+      require('autoclose').setup()
+    end,
+  },
+  {
     'jackMort/ChatGPT.nvim',
     event = 'VeryLazy',
     config = function()
@@ -726,7 +733,16 @@ return {
       }
     end,
   },
-  'windwp/nvim-ts-autotag',
+  {
+    'windwp/nvim-ts-autotag',
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        autotag = {
+          enable = true,
+        },
+      }
+    end,
+  },
   'mattn/emmet-vim',
   'tpope/vim-fugitive',
   {
