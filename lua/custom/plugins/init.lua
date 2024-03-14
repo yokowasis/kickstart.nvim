@@ -3,7 +3,11 @@
 --
 -- See the kickstart.nvim README for more information
 
+-- noswap
 vim.o.swapfile = false
+
+-- independent clipboard
+vim.opt.clipboard = ''
 
 require('tokyonight').setup {
   styles = {
