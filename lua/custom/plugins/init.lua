@@ -121,10 +121,6 @@ vim.api.nvim_set_keymap('n', 'n', 'nzzzv', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', { noremap = true, silent = true })
 vim.o.hlsearch = true
 
--- "Remap Multi Cursor VIM ----------------------------
-vim.api.nvim_set_keymap('x', '<C-d>', '<Plug>(VM-Find-Subword-Under)', {})
-vim.api.nvim_set_keymap('n', '<C-d>', '<Plug>(VM-Find-Under)', {})
-
 -- emmet
 vim.api.nvim_set_keymap('i', '<C-A>', '<Plug>(emmet-expand-abbr)', { noremap = true, silent = true })
 
