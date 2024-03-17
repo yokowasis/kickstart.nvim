@@ -651,10 +651,11 @@ require('lazy').setup({
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
           -- {
+          'yokowasis/friendly-snippets',
           --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
+          config = function()
+            require('luasnip.loaders.from_vscode').lazy_load()
+          end,
           -- },
         },
       },
@@ -670,7 +671,6 @@ require('lazy').setup({
       --    for various frameworks/libraries/etc. but you will have to
       --    set up the ones that are useful for you.
       -- 'rafamadriz/friendly-snippets',
-      'yokowasis/friendly-snippets',
     },
     config = function()
       -- See `:help cmp`
@@ -734,8 +734,8 @@ require('lazy').setup({
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
-          { name = 'nvim_lsp' },
           { name = 'luasnip' },
+          { name = 'nvim_lsp' },
           { name = 'path' },
           { name = 'copilot' },
         },
