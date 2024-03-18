@@ -589,6 +589,20 @@ vim.keymap.set(
   { noremap = true, silent = false, desc = '[F]ramework [S]veltekit New [G]et Route' }
 )
 
+function SearchAndReplace(search, replace)
+  local command = ':%s/' .. search .. '/' .. replace .. '/g'
+  local termcodes = vim.api.nvim_replace_termcodes(command, true, true, true)
+  vim.api.nvim_feedkeys(termcodes, 'n', true)
+end
+
+vim.keymap.set(
+  'n',
+  '<leader>sr',
+  ":lua SearchAndReplace(vim.fn.input('Enter Search Term: '),vim.fn.input('Enter Replace Term: '))<CR>",
+  -- ":%s/vim.fn.input('Enter Search Term: ')/vim.fn.input('Enter Replace Term: ')/g",
+  { noremap = true, silent = false, desc = '[S]earch and [R]eplace' }
+)
+
 -- nvimtree setup
 
 local function my_on_attach(bufnr)
