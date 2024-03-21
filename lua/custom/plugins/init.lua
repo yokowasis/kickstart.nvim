@@ -590,6 +590,11 @@ vim.keymap.set(
 )
 
 function SearchAndReplace(search, replace)
+  -- make sure search is not empty
+  if search == '' then
+    return
+  end
+
   local command = ':%s/' .. search .. '/' .. replace .. '/g'
   local termcodes = vim.api.nvim_replace_termcodes(command, true, true, true)
   vim.api.nvim_feedkeys(termcodes, 'n', true)
@@ -597,7 +602,7 @@ end
 
 vim.keymap.set(
   'n',
-  '<leader>sr',
+  '<c-h>',
   ":lua SearchAndReplace(vim.fn.input('Enter Search Term: '),vim.fn.input('Enter Replace Term: '))<CR>",
   -- ":%s/vim.fn.input('Enter Search Term: ')/vim.fn.input('Enter Replace Term: ')/g",
   { noremap = true, silent = false, desc = '[S]earch and [R]eplace' }
