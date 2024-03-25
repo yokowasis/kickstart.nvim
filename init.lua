@@ -586,6 +586,7 @@ require('lazy').setup({
         'svelte',
         'stylua', -- Used to format lua code
         'html',
+        'clang-format',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -616,6 +617,7 @@ require('lazy').setup({
         return {
           timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+          async = true,
         }
       end,
       formatters_by_ft = {
@@ -625,6 +627,7 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
+        cpp = { { 'clang_format' } },
         javascript = { { 'prettierd', 'prettier' } },
       },
     },
