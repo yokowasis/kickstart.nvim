@@ -59,7 +59,7 @@ function CompileAndRun()
         .. '/'
         .. filename_without_extension
         .. '.out'
-        .. ' && ./'
+        .. ' && '
         .. folder_path
         .. '/'
         .. filename_without_extension
