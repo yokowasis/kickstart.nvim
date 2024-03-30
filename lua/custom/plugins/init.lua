@@ -125,10 +125,10 @@ vim.o.hlsearch = true
 vim.api.nvim_set_keymap('i', '<C-A>', '<Plug>(emmet-expand-abbr)', { noremap = true, silent = true })
 
 -- "Copy Paste from OS Clipboard
-vim.keymap.set('n', '<C-v>', '"+P:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
+vim.keymap.set('n', '<C-v>', '"+p:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
 vim.keymap.set('i', '<C-v>', '<C-r>*<C-o>:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
 
-vim.keymap.set('n', '<S-insert>', '"+P:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
+vim.keymap.set('n', '<S-insert>', '"+p:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
 vim.keymap.set('i', '<S-insert>', '<C-r>*<C-o>:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
 
 vim.keymap.set('x', '<C-c>', '"+y', { desc = '[Y]ank to system clipboard', noremap = true, silent = true })
