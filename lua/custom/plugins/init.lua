@@ -138,6 +138,8 @@ vim.keymap.set('x', '<C-insert>', '"+y', { desc = '[Y]ank to system clipboard', 
 vim.keymap.set('n', '<leader>db', ':DBUIToggle<cr>', { desc = '[D]ata[b]ase', noremap = true, silent = true })
 
 -- Map Ctrl+S to save
+vim.keymap.set('n', '<D-s>', ':w<cr>:mksession! session.vim<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<D-s>', '<Esc>:w<cr>:mksession! session.vim<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
 vim.keymap.set('n', '<C-S>', ':w<cr>:mksession! session.vim<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
 vim.keymap.set('i', '<C-S>', '<Esc>:w<cr>:mksession! session.vim<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
 
@@ -329,9 +331,6 @@ vim.api.nvim_set_keymap('x', '<M-left>', 'b', { noremap = true, silent = false }
 vim.api.nvim_set_keymap('x', '<M-right>', 'w', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<M-left>', 'b', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<M-right>', 'w', { noremap = true, silent = false })
-
-vim.api.nvim_set_keymap('n', '<D-s>', ':w<CR>mksession! session.vim<cr>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('i', '<D-s>', '<esc>:w<CR>mksession! session.vim<cr>i', { noremap = true, silent = false })
 
 -- npm / yarn operation
 vim.api.nvim_set_keymap('n', '<leader>rb', ':lua RunCommandAndNotify("npm run build")<CR>', { noremap = true, silent = false, desc = '[R]un [B]uild' })
