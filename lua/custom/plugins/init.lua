@@ -5,6 +5,7 @@
 
 -- noswap
 vim.o.swapfile = false
+vim.o.guifont = 'JetBrainsMono NFM:h18'
 
 -- independent clipboard
 vim.opt.clipboard = ''
@@ -305,25 +306,8 @@ vim.cmd [[
 ]]
 
 -- macos arrow navigation
-vim.api.nvim_set_keymap('x', '<M-up>', '<PageUp>', { noremap = true })
-vim.api.nvim_set_keymap('x', '<M-down>', '<PageDown>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-up>', '<PageUp>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-down>', '<PageDown>', { noremap = true })
-vim.api.nvim_set_keymap('i', '<M-up>', '<esc><PageUp>i', { noremap = true })
-vim.api.nvim_set_keymap('i', '<M-down>', '<esc><PageDown>i', { noremap = true })
-
-vim.api.nvim_set_keymap('x', '<M-j>', '<Home>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('x', '<M-k>', '<End>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('i', '<M-j>', '<Home>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('i', '<M-k>', '<End>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('n', '<M-j>', '<Home>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('n', '<M-k>', '<End>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('n', '<M-i>', 'gg0', { noremap = true, silent = false, desc = 'Go to Top Page' })
-vim.api.nvim_set_keymap('n', '<M-u>', 'G', { noremap = true, silent = false, desc = 'Go to End Page' })
-vim.api.nvim_set_keymap('i', '<M-i>', '<esc>gg0i', { noremap = true, silent = false, desc = 'Go to Top Page' })
-vim.api.nvim_set_keymap('i', '<M-u>', '<C-o>G', { noremap = true, silent = false, desc = 'Go to End Page' })
-vim.api.nvim_set_keymap('x', '<M-i>', 'gg0', { noremap = true, silent = false, desc = 'Go to Top Page' })
-vim.api.nvim_set_keymap('x', '<M-u>', 'G', { noremap = true, silent = false, desc = 'Go to End Page' })
+vim.api.nvim_set_keymap('', '<M-up>', '<PageUp>', { noremap = true })
+vim.api.nvim_set_keymap('', '<M-down>', '<PageDown>', { noremap = true })
 
 vim.api.nvim_set_keymap('i', '<M-left>', '<c-o>b', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('i', '<M-right>', '<c-o>w', { noremap = true, silent = false })
@@ -331,6 +315,19 @@ vim.api.nvim_set_keymap('x', '<M-left>', 'b', { noremap = true, silent = false }
 vim.api.nvim_set_keymap('x', '<M-right>', 'w', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<M-left>', 'b', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<M-right>', 'w', { noremap = true, silent = false })
+
+-- macos
+vim.api.nvim_set_keymap('n', '<D-Left>', '<Home>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<D-Right>', '<End>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<D-Up>', 'gg', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<D-Down>', 'G', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<D-v>', '"*p', { noremap = true, silent = false })
+
+vim.api.nvim_set_keymap('i', '<D-Left>', '<Home>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('i', '<D-Right>', '<End>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('i', '<D-Up>', '<C-o>gg', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('i', '<D-Down>', '<C-o>G', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('i', '<D-v>', '<C-r>*', { noremap = true, silent = false })
 
 -- npm / yarn operation
 vim.api.nvim_set_keymap('n', '<leader>rb', ':lua RunCommandAndNotify("npm run build")<CR>', { noremap = true, silent = false, desc = '[R]un [B]uild' })
