@@ -279,8 +279,20 @@ vim.keymap.set('n', '<leader>gs', function()
   vim.cmd [[vertical resize -30]]
   vim.cmd [[wincmd H]]
 end, { desc = '[G]it [S]tatus' })
-vim.keymap.set('n', '<leader>gc', ':execute "Git add . \\| Git commit -m \'\'"<left><left>', { desc = '[G]it [C]ommit', noremap = true, silent = false })
-vim.keymap.set('n', '<leader>gc', ':execute "Git add . \\| Git commit -m \'\'"<left><left>', { desc = '[G]it [C]ommit', noremap = true, silent = false })
+
+function GitCommit(commitMessage)
+  vim.fn.system('git add . && git commit -m "' .. commitMessage .. '"')
+end
+
+vim.keymap.set('n', '<leader>gc', function()
+  local commitMessage = vim.fn.input 'Enter commit message: '
+  if commitMessage == '' then
+    return
+  end
+
+  GitCommit(commitMessage)
+end, { desc = '[G]it [C]ommit', noremap = true, silent = false })
+
 vim.keymap.set('n', '<leader>gp', [[:lua GitPushAndNotify()<CR>]], { desc = '[G]it [P]ush', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gu', [[:lua GitPullAndNotify()<CR>]], { desc = '[G]it P[u]ll', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gd', ':vertical Git diff<CR>', { desc = '[G]it [D]iff', noremap = true, silent = true })
