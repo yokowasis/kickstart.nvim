@@ -281,7 +281,7 @@ vim.keymap.set('n', '<leader>gs', function()
 end, { desc = '[G]it [S]tatus' })
 
 function GitCommit(commitMessage)
-  vim.fn.system('git add . && git commit -m "' .. commitMessage .. '"')
+  RunCommandAndNotify('git add . && git commit -m "' .. commitMessage .. '"')
 end
 
 vim.keymap.set('n', '<leader>gc', function()
