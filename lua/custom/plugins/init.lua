@@ -325,6 +325,9 @@ vim.api.nvim_set_keymap('', '<D-Left>', '<Home>', { noremap = true, silent = fal
 vim.api.nvim_set_keymap('', '<D-Right>', '<End>', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('i', '<D-Up>', '<C-o>gg', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('i', '<D-Down>', '<C-o>G', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('x', '<D-Up>', 'gg', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('x', '<D-Down>', 'G', { noremap = true, silent = false })
+
 vim.api.nvim_set_keymap('i', '<D-v>', '<C-r>*', { noremap = true, silent = false })
 
 -- npm / yarn operation
