@@ -329,14 +329,16 @@ vim.api.nvim_set_keymap('n', '<M-left>', 'b', { noremap = true, silent = false }
 vim.api.nvim_set_keymap('n', '<M-right>', 'w', { noremap = true, silent = false })
 
 -- macos
-vim.api.nvim_set_keymap('n', '<D-Up>', 'gg', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('n', '<D-Down>', 'G', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<D-v>', '"*p', { noremap = true, silent = false })
 
 vim.api.nvim_set_keymap('n', '<D-Left>', '<Home>', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<D-Right>', '<End>', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('i', '<D-Left>', '<Home>', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('i', '<D-Right>', '<End>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('x', '<D-Left>', '<Home>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('x', '<D-Right>', '<End>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<D-Up>', 'gg', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<D-Down>', 'G', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('i', '<D-Up>', '<C-o>gg', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('i', '<D-Down>', '<C-o>G', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('x', '<D-Up>', 'gg', { noremap = true, silent = false })
