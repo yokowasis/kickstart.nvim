@@ -384,7 +384,7 @@ vim.keymap.set('n', '<leader>ce', ':ChatGPTRun explain_code<cr>', { noremap = tr
 vim.keymap.set('n', '<leader>cf', ':ChatGPTRun fix_bugs<cr>', { noremap = true, silent = false, desc = '[C]hatGPT [F]ix Bugs' })
 
 -- vim signature help
-vim.api.nvim_set_keymap('n', 'gk', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap = true, silent = true })
 
 function InsertConsoleLog()
   local line_number = vim.fn.line '.'
