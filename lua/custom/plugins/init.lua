@@ -55,6 +55,10 @@ function CompileAndRun()
   -- Get the file extension of the current buffer
   local file_extension = vim.fn.fnamemodify(filename_with_extension, ':e')
 
+  if file_extension == 'cjs' or file_extension == 'mjs' then
+    filetype = 'javascript'
+  end
+
   if filetype == 'cpp' then
     vim.cmd(
       ':tabnew | te g++ '
