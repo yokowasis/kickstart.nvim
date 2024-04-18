@@ -5,7 +5,8 @@
 
 -- noswap
 vim.o.swapfile = false
-vim.o.guifont = 'JetBrainsMono NFM:h14'
+vim.o.guifont = 'JetBrainsMono NFM:h13'
+vim.o.list = false
 
 -- independent clipboard
 vim.opt.clipboard = ''
