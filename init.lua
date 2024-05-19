@@ -578,20 +578,20 @@ require('lazy').setup({
         -- tsserver = {},
         --
 
-        lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
+        -- lua_ls = {
+        --   -- cmd = {...},
+        --   -- filetypes = { ...},
+        --   -- capabilities = {},
+        --   settings = {
+        --     Lua = {
+        --       completion = {
+        --         callSnippet = 'Replace',
+        --       },
+        --       -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+        --       -- diagnostics = { disable = { 'missing-fields' } },
+        --     },
+        --   },
+        -- },
       }
 
       -- Ensure the servers and tools above are installed
@@ -852,7 +852,23 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'cpp', 'lua', 'python', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'php', 'html', 'svelte', 'markdown', 'json' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'cpp',
+        'lua',
+        'python',
+        'tsx',
+        'javascript',
+        'typescript',
+        'vimdoc',
+        'vim',
+        'php',
+        'html',
+        'svelte',
+        'markdown',
+        'json',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
