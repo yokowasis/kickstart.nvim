@@ -150,10 +150,10 @@ vim.keymap.set('x', '<C-insert>', '"+y', { desc = '[Y]ank to system clipboard', 
 vim.keymap.set('n', '<leader>db', ':DBUIToggle<cr>', { desc = '[D]ata[b]ase', noremap = true, silent = true })
 
 -- Map Ctrl+S to save
-vim.keymap.set('n', '<D-s>', ':w<cr>:mksession! session.vim<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
-vim.keymap.set('i', '<D-s>', '<Esc>:w<cr>:mksession! session.vim<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
-vim.keymap.set('n', '<C-S>', ':w<cr>:mksession! session.vim<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
-vim.keymap.set('i', '<C-S>', '<Esc>:w<cr>:mksession! session.vim<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<D-s>', ':w<cr><cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<D-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<C-S>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<C-S>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
 
 -- "Tab Navigation
 vim.keymap.set('n', '<leader><up>', ':tabnew<CR>', { desc = 'New Tab', noremap = true, silent = true })
@@ -388,7 +388,8 @@ function Npm_install()
 end
 
 -- Session
-vim.api.nvim_set_keymap('n', '<leader>sl', ':source session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [L]oad' })
+vim.api.nvim_set_keymap('n', '<leader>ssl', ':source session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [L]oad' })
+vim.api.nvim_set_keymap('n', '<leader>sss', ':mksession! session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [S]ave' })
 vim.api.nvim_set_keymap('n', '<leader>nq', ':qa!<cr>', { noremap = true, silent = false, desc = '[N]vim [Q]uit' })
 
 -- ChatGPT
@@ -409,6 +410,7 @@ end
 
 vim.api.nvim_set_keymap('n', '<Leader>lg', [[:lua InsertConsoleLog()<CR>]], { noremap = true, silent = true, desc = 'console.log file and line' })
 
+vim.cmd [[command! EditBaseVim :tabnew | exe 'edit '. stdpath('config').'/init.lua']]
 vim.cmd [[command! EditInitVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/init.lua']]
 vim.cmd [[command! LoadInitVim :tabnew | exe ':te git -C '. stdpath("config") .' pull' ]]
 vim.cmd [[command! EditGlobalSnippets :tabnew | exe 'edit ~/git/friendly-snippets/snippets/global.json']]
