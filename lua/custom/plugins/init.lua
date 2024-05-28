@@ -640,6 +640,28 @@ vim.keymap.set(
   { noremap = true, silent = false, desc = '[S]earch and [R]eplace' }
 )
 
+-- livegrep search
+function customSearchGrep()
+  local extension = vim.fn.input 'Enter File Extension (*): '
+  local dirs = vim.fn.input 'Enter Search Directories (.): '
+
+  -- if escape is pressed, return
+  if extension == '' and dirs == '' then
+    return
+  end
+
+  if extension == '' then
+    extension = '*'
+  end
+  if dirs == '' then
+    dirs = '.'
+  end
+
+  vim.cmd('Telescope live_grep glob_pattern=*.{' .. extension .. '} search_dirs=' .. dirs)
+end
+
+vim.keymap.set('n', '<leader>sgc', ':lua customSearchGrep()<CR>', { desc = '[S]earch by [G]rep [C]ustom', noremap = true, silent = false })
+
 -- nvimtree setup
 
 local function my_on_attach(bufnr)
