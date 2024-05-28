@@ -277,7 +277,7 @@ function GitPushAndNotify()
   })
 end
 
-vim.keymap.set('n', '<leader>gs', function()
+function OpenGitStatus()
   local windows = vim.api.nvim_list_wins()
   for _, v in pairs(windows) do
     local status, _ = pcall(vim.api.nvim_win_get_var, v, 'fugitive_status')
@@ -289,7 +289,10 @@ vim.keymap.set('n', '<leader>gs', function()
   vim.cmd [[NvimTreeClose | vertical Git]]
   vim.cmd [[vertical resize -30]]
   vim.cmd [[wincmd H]]
-end, { desc = '[G]it [S]tatus' })
+end
+
+vim.keymap.set('n', '<c-q>', [[:lua OpenGitStatus()<cr>]], { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<leader>gs', [[:lua OpenGitStatus()<cr>]], { desc = '[G]it [S]tatus' })
 
 function GitCommit(commitMessage)
   RunCommandAndNotify('git add . && git commit -m "' .. commitMessage .. '"')
