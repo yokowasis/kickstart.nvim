@@ -6,3 +6,4 @@ nvim
 spell/
 lazy-lock.json
 session.vim
+./lua/custom/plugins/fontsize.lua
