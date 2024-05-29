@@ -6,4 +6,4 @@ nvim
 spell/
 lazy-lock.json
 session.vim
-./lua/custom/plugins/fs.lua
+lua/custom/plugins/fs.lua
