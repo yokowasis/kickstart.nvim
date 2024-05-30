@@ -1,7 +1,9 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
--- See the kickstart.nvim README for more information
+--[[ 
+  TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
+
+  NOTE: SNIPPET : Trigger with <c-x>. For TM_SELECTED_TEXT, block the text and then <tab>.
+  NOTE: <leader>sgc : Search wth grep with custom extension / folder
+--]]
 
 -- noswap
 vim.o.swapfile = false
