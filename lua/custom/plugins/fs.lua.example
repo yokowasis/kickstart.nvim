@@ -1,2 +1,4 @@
 vim.o.guifont = 'JetBrainsMono NFM:h18'
 
+return {}
+
