@@ -665,11 +665,15 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
+        html = { 'djlint' },
         php = { 'pretty-php' },
-        cpp = { { 'clang_format' } },
+        cpp = { 'clang_format' },
         -- javascript = { { 'prettierd', 'prettier' } },
       },
       formatters = {
+        ['djlint'] = {
+          prepend_args = { '--indent', '2' },
+        },
         ['pretty-php'] = {
           prepend_args = { '-s2' },
         },
@@ -870,7 +874,6 @@ require('lazy').setup({
         'vim',
         'lua',
         'php',
-        'html',
         'svelte',
         'markdown',
         'json',
