@@ -695,6 +695,8 @@ ls.config.set_config {
   store_selection_keys = '<tab>',
 }
 
+
+require 'nvim-treesitter.install'.compilers = { "zig" }
 return {
   {
     'm4xshen/autoclose.nvim',
