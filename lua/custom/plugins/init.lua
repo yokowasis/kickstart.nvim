@@ -126,9 +126,6 @@ vim.api.nvim_set_keymap('n', '<leader>cr', "[[:execute luaeval('CompileAndRun()'
 -- Enable line numbers (both absolute and relative)
 vim.wo.relativenumber = true
 
--- Use spaces for indentation
-vim.o.expandtab = true
-
 -- "Keep it Centered
 -- Create nnoremap mappings
 vim.api.nvim_set_keymap('n', 'n', 'nzzzv', { noremap = true, silent = true })
@@ -586,41 +583,26 @@ function SvelteKitNewAPIGet(pagename)
   vim.cmd('e ' .. page_path)
 end
 
-vim.keymap.set(
-  'n',
-  '<leader>fnp',
-  ":lua NextJSNewPage(vim.fn.input('Enter Page Name: '))<CR>",
-  { noremap = true, silent = false, desc = '[F]ramework [N]extJS New [P]age' }
-)
+vim.keymap.set('n', '<leader>fnp', ":lua NextJSNewPage(vim.fn.input('Enter Page Name: '))<CR>", { noremap = true, silent = false, desc = 'New [P]age' })
 vim.keymap.set(
   'n',
   '<leader>fnr',
   ":lua NextJSNewApiPost(vim.fn.input('Enter Route Name: '))<CR>",
-  { noremap = true, silent = false, desc = '[F]ramework [N]extJS New Post [R]oute' }
+  { noremap = true, silent = false, desc = 'New Post [R]oute' }
 )
-vim.keymap.set(
-  'n',
-  '<leader>fng',
-  ":lua NextJSNewApiGet(vim.fn.input('Enter Route Name: '))<CR>",
-  { noremap = true, silent = false, desc = '[F]ramework [N]extJS New [G]et Route' }
-)
-vim.keymap.set(
-  'n',
-  '<leader>fsp',
-  ":lua SvelteKitNewPage(vim.fn.input('Enter Page Name: '))<CR>",
-  { noremap = true, silent = false, desc = '[F]ramework [S]veltekit New [P]age' }
-)
+vim.keymap.set('n', '<leader>fng', ":lua NextJSNewApiGet(vim.fn.input('Enter Route Name: '))<CR>", { noremap = true, silent = false, desc = 'New [G]et Route' })
+vim.keymap.set('n', '<leader>fsp', ":lua SvelteKitNewPage(vim.fn.input('Enter Page Name: '))<CR>", { noremap = true, silent = false, desc = 'New [P]age' })
 vim.keymap.set(
   'n',
   '<leader>fsr',
   ":lua SvelteKitNewAPIPost(vim.fn.input('Enter Route Name: '))<CR>",
-  { noremap = true, silent = false, desc = '[F]ramework [S]veltekit New Post [R]oute' }
+  { noremap = true, silent = false, desc = 'New Post [R]oute' }
 )
 vim.keymap.set(
   'n',
   '<leader>fsg',
   ":lua SvelteKitNewAPIGet(vim.fn.input('Enter Route Name: '))<CR>",
-  { noremap = true, silent = false, desc = '[F]ramework [S]veltekit New [G]et Route' }
+  { noremap = true, silent = false, desc = 'New [G]et Route' }
 )
 
 function SearchAndReplace(search, replace)
@@ -672,6 +654,12 @@ vim.keymap.set('n', '<leader>b4', ':e ~/git/couch-cbt/<cr>', { desc = '[B] 4. Co
 vim.keymap.set('n', '<leader>b5', ':e ~/git/resta/<cr>', { desc = '[B] 5. Resta Cloudflare and Bunny Domain Register', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b6', ':e ~/git/cbtadmin/<cr>', { desc = '[B] 6. CBTAdmin Cloudflare Workers ', noremap = true, silent = false })
 
+-- change language
+vim.keymap.set('n', '<leader>lcj', ':set ft=javascript', { desc = 'Javascript', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>lco', ':set ft=json', { desc = 'JSON', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>lcp', ':set ft=php', { desc = 'PHP', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>lcy', ':set ft=python', { desc = 'Python', noremap = true, silent = false })
+
 -- nvimtree setup
 local function my_on_attach(bufnr)
   local api = require 'nvim-tree.api'
@@ -696,6 +684,18 @@ ls.config.set_config {
 }
 
 require('nvim-treesitter.install').compilers = { 'zig' }
+
+require('which-key').register {
+  ['<leader>l'] = { name = '[L]anguage / [L]og', _ = 'which_key_ignore' },
+  ['<leader>n'] = { name = '[N]eovim', _ = 'which_key_ignore' },
+  ['<leader>f'] = { name = '[F]ormat/[F]ramework', _ = 'which_key_ignore' },
+  ['<leader>fn'] = { name = '[F]ramework [N]extJS', _ = 'which_key_ignore' },
+  ['<leader>fs'] = { name = '[F]ramework [S]velte', _ = 'which_key_ignore' },
+  ['<leader>b'] = { name = '[B]ookmarks', _ = 'which_key_ignore' },
+  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+  ['<leader>j'] = { name = '[J]upyter', _ = 'which_key_ignore' },
+  ['<leader>lc'] = { name = '[L]anguage [C]hange', _ = 'which_key_ignore' },
+}
 return {
   {
     'm4xshen/autoclose.nvim',
@@ -739,7 +739,11 @@ return {
     'folke/flash.nvim',
     event = 'VeryLazy',
     ---@type Flash.Config
-    opts = {},
+    opts = {
+      modes = {
+        search = { enable = false },
+      },
+    },
     -- stylua: ignore
     keys = {
       { "s",     mode = { "n", "o", "x" }, function() require("flash").jump() end,              desc = "Flash" },
@@ -820,6 +824,11 @@ return {
     'windwp/nvim-ts-autotag',
     config = function()
       require('nvim-treesitter.configs').setup {
+        sync_install = false,
+        ensure_installed = '',
+        ignore_install = {},
+        auto_install = false,
+        modules = {},
         autotag = {
           enable = true,
         },
