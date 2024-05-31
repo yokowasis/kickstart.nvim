@@ -669,6 +669,7 @@ vim.keymap.set('n', '<leader>b1', ':e ~/git/react-mandiri<cr>', { desc = '[B] 1.
 vim.keymap.set('n', '<leader>b2', ':e ~/git/svelte-cbtadmin/<cr>', { desc = '[B] 2. Svelte CBTAdmin', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b3', ':e ~/git/cbt-semioffline-nextjs/<cr>', { desc = '[B] 3. CBT Semioffline Nextjs', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b4', ':e ~/git/couch-cbt/<cr>', { desc = '[B] 4. Couch CBT', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>b5', ':e ~/git/resta/<cr>', { desc = '[B] 5. Resta Cloudflare and Bunny Domain Register', noremap = true, silent = false })
 
 -- nvimtree setup
 local function my_on_attach(bufnr)
