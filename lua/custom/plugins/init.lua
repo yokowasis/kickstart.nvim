@@ -433,7 +433,7 @@ vim.keymap.set(
 )
 
 -- auto format
-vim.keymap.set('n', '<leader>ff', 'gg=G<c-o>', { noremap = true, silent = false, desc = '[F]ormat' })
+-- vim.keymap.set('n', '<leader>ff', 'gg=G<c-o>', { noremap = true, silent = false, desc = '[F]ormat' })
 
 -- Search and Replace
 vim.keymap.set('n', '<leader>sr', ':%s///g<left><left><left>', { noremap = true, silent = false, desc = '[S]earch and [R]eplace' })

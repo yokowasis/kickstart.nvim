@@ -613,6 +613,7 @@ require('lazy').setup({
         'pylsp',
         'stylua',
         'svelte',
+        'djlint',
         'tsserver',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -637,7 +638,7 @@ require('lazy').setup({
     lazy = false,
     keys = {
       {
-        '<leader>f',
+        '<leader>ff',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
