@@ -435,7 +435,7 @@ vim.keymap.set(
 )
 
 -- auto format
-vim.keymap.set('n', '<leader>ff', ':Format<CR>', { noremap = true, silent = false, desc = '[F]ormat' })
+vim.keymap.set('n', '<leader>ff', 'gg=G<c-o>', { noremap = true, silent = false, desc = '[F]ormat' })
 
 -- Search and Replace
 vim.keymap.set('n', '<leader>sr', ':%s///g<left><left><left>', { noremap = true, silent = false, desc = '[S]earch and [R]eplace' })
@@ -695,8 +695,7 @@ ls.config.set_config {
   store_selection_keys = '<tab>',
 }
 
-
-require 'nvim-treesitter.install'.compilers = { "zig" }
+require('nvim-treesitter.install').compilers = { 'zig' }
 return {
   {
     'm4xshen/autoclose.nvim',
