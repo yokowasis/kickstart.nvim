@@ -875,6 +875,7 @@ require('lazy').setup({
         'vim',
         'lua',
         'php',
+        'html',
         'svelte',
         'markdown',
         'json',
