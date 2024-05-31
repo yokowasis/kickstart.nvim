@@ -741,7 +741,7 @@ return {
     ---@type Flash.Config
     opts = {
       modes = {
-        search = { enable = false },
+        search = { enabled = false },
       },
     },
     -- stylua: ignore
