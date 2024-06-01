@@ -655,6 +655,7 @@ vim.keymap.set('n', '<leader>b3', ':e ~/git/cbt-semioffline-nextjs/<cr>', { desc
 vim.keymap.set('n', '<leader>b4', ':e ~/git/couch-cbt/<cr>', { desc = '[B] 4. Couch CBT', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b5', ':e ~/git/resta/<cr>', { desc = '[B] 5. Resta Cloudflare and Bunny Domain Register', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b6', ':e ~/git/cbtadmin/<cr>', { desc = '[B] 6. CBTAdmin Cloudflare Workers ', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>b7', ':e ~/git/labs<cr>', { desc = '[B] 7. LABS ', noremap = true, silent = false })
 
 -- change language
 vim.keymap.set('n', '<leader>lcj', ':set ft=javascript', { desc = 'Javascript', noremap = true, silent = false })
