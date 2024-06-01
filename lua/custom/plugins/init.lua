@@ -687,6 +687,8 @@ ls.config.set_config {
 require('nvim-treesitter.install').compilers = { 'zig' }
 
 require('which-key').register {
+  ['<leader>c'] = { name = '[C]opilot', _ = 'which_key_ignore' },
+  ['<leader>d'] = { name = '[D]atabase', _ = 'which_key_ignore' },
   ['<leader>l'] = { name = '[L]anguage / [L]og', _ = 'which_key_ignore' },
   ['<leader>n'] = { name = '[N]eovim', _ = 'which_key_ignore' },
   ['<leader>f'] = { name = '[F]ormat/[F]ramework', _ = 'which_key_ignore' },
