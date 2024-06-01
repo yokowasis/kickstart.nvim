@@ -2,7 +2,6 @@
   TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
 
   NOTE: SNIPPET : Trigger with <c-x>. For TM_SELECTED_TEXT, block the text and then <tab>.
-  NOTE: <leader>sgc : Search wth grep with custom extension / folder
 --]]
 
 -- noswap
@@ -150,7 +149,7 @@ vim.keymap.set('x', '<C-insert>', '"+y', { desc = '[Y]ank to system clipboard', 
 vim.keymap.set('n', '<leader>db', ':DBUIToggle<cr>', { desc = '[D]ata[b]ase', noremap = true, silent = true })
 
 -- Map Ctrl+S to save
-vim.keymap.set('n', '<D-s>', ':w<cr><cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<D-s>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
 vim.keymap.set('i', '<D-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
 vim.keymap.set('n', '<C-S>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
 vim.keymap.set('i', '<C-S>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
@@ -644,6 +643,8 @@ function customSearchGrep()
 
   vim.cmd('Telescope live_grep glob_pattern=*.{' .. extension .. '} search_dirs=' .. dirs)
 end
+
+vim.keymap.set('n', '<leader>sgg', ':Telescope live_grep<CR>', { desc = '[S]earch by [G]rep', noremap = true, silent = false })
 
 vim.keymap.set('n', '<leader>sgc', ':lua customSearchGrep()<CR>', { desc = '[S]earch by [G]rep [C]ustom', noremap = true, silent = false })
 
