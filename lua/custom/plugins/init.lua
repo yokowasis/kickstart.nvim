@@ -105,7 +105,7 @@ function CompileAndRun()
       .. '.docx --reference-doc '
       .. labs_fullfolder
       .. '/template/base.docx'
-    RunCommandAndNotify(pandocCommand, 100)
+    RunCommandAndNotify(pandocCommand, 100, 'Markdown Compiled')
   else
     vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
     return
@@ -250,12 +250,15 @@ function RunCommandInNewTab(command)
   vim.cmd(':tabnew | te  ' .. command)
 end
 
-function RunCommandAndNotify(command, timeout)
+function RunCommandAndNotify(command, timeout, title)
   if timeout == nil then
     timeout = 36000000
   end
-  vim.notify('Run Command...', vim.log.levels.INFO, {
-    title = 'Run Command',
+  if title == nil then
+    title = 'Run Command'
+  end
+  vim.notify(title, vim.log.levels.INFO, {
+    title = title,
     timeout = timeout,
   })
 
