@@ -67,6 +67,8 @@ function CompileAndRun()
     filetype = 'markdown'
   end
 
+  local iste = true
+
   if filetype == 'cpp' then
     vim.cmd(
       ':tabnew | te g++ '
@@ -93,32 +95,25 @@ function CompileAndRun()
   elseif filetype == 'shell' then
     vim.cmd(':tabnew | te bash ' .. folder_path .. '/' .. filename_with_extension)
   elseif filetype == 'markdown' then
-    vim.cmd(
-      ':tabnew | te pandoc '
-        .. folder_path
-        .. '/'
-        .. filename_with_extension
-        .. ' -o '
-        .. filename_without_extension
-        .. '.docx --reference-doc '
-        .. labs_fullfolder
-        .. '/template/base.docx'
-    )
+    iste = false
+    local pandocCommand = 'pandoc '
+      .. folder_path
+      .. '/'
+      .. filename_with_extension
+      .. ' -o '
+      .. filename_without_extension
+      .. '.docx --reference-doc '
+      .. labs_fullfolder
+      .. '/template/base.docx'
+    RunCommandAndNotify(pandocCommand, 100)
   else
     vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
     return
   end
 
-  vim.api.nvim_feedkeys('i', 'n', true)
-
-  -- local term_buf = vim.fn.termopen(command, { cwd = vim.fn.getcwd() })
-  -- vim.fn.termstart(term_buf, {
-  --     on_exit = function(_, code)
-  --         if code ~= 0 then
-  --           vim.notify("Command failed with exit code " .. code)
-  --         end
-  --     end,
-  -- })
+  if iste then
+    vim.api.nvim_feedkeys('i', 'n', true)
+  end
 end
 
 TerminalShell = ''
@@ -138,7 +133,7 @@ else
 end
 
 -- Create a mapping for compiling and running code
-vim.api.nvim_set_keymap('n', '<leader>cr', "[[:execute luaeval('CompileAndRun()')<cr>]]", { noremap = true, silent = false, desc = '[C]ompile and [R]un' })
+vim.api.nvim_set_keymap('n', '<leader>cr', ':lua CompileAndRun()<cr>', { noremap = true, silent = false, desc = '[C]ompile and [R]un' })
 
 -- Enable line numbers (both absolute and relative)
 vim.wo.relativenumber = true
@@ -255,10 +250,13 @@ function RunCommandInNewTab(command)
   vim.cmd(':tabnew | te  ' .. command)
 end
 
-function RunCommandAndNotify(command)
+function RunCommandAndNotify(command, timeout)
+  if timeout == nil then
+    timeout = 36000000
+  end
   vim.notify('Run Command...', vim.log.levels.INFO, {
     title = 'Run Command',
-    timeout = 36000000,
+    timeout = timeout,
   })
 
   vim.fn.jobstart(command, {
