@@ -686,7 +686,7 @@ ls.config.set_config {
   store_selection_keys = '<tab>',
 }
 
-require('nvim-treesitter.install').compilers = { 'zig' }
+require('nvim-treesitter.install').compilers = { 'clang', 'zig' }
 
 require('which-key').register {
   ['<leader>c'] = { name = '[C]opilot', _ = 'which_key_ignore' },
@@ -850,6 +850,61 @@ return {
       end)
     end,
   },
+  { -- Autoformat
+    'stevearc/conform.nvim',
+    lazy = false,
+    keys = {
+      {
+        '<leader>ff',
+        function()
+          require('conform').format { async = true, lsp_fallback = true }
+        end,
+        mode = '',
+        desc = '[F]ormat buffer',
+      },
+    },
+    opts = {
+      notify_on_error = false,
+      format_on_save = function(bufnr)
+        -- Disable "format_on_save lsp_fallback" for languages that don't
+        -- have a well standardized coding style. You can add additional
+        -- languages here or re-enable it for the disabled ones.
+        local disable_filetypes = { c = true, cpp = true }
+        return {
+          timeout_ms = 500,
+          lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+          async = true,
+        }
+      end,
+      formatters_by_ft = {
+        lua = { 'stylua' },
+        -- Conform can also run multiple formatters sequentially
+        -- python = { "isort", "black" },
+        --
+        -- You can use a sub-list to tell conform to run *until* a formatter
+        -- is found.
+        markdown = { 'prettierd' },
+        javascript = { 'prettierd' },
+        typescript = { 'prettierd' },
+        javascriptreact = { 'prettierd' },
+        typescriptreact = { 'prettierd' },
+        css = { 'prettierd' },
+        yml = { 'prettierd' },
+        html = { 'prettierd' },
+        php = { 'pretty-php' },
+        cpp = { 'clang_format' },
+        -- javascript = { { 'prettierd', 'prettier' } },
+      },
+      formatters = {
+        ['djlint'] = {
+          prepend_args = { '--indent', '2' },
+        },
+        ['pretty-php'] = {
+          prepend_args = { '-s2' },
+        },
+      },
+    },
+  },
   {
     'smoka7/multicursors.nvim',
     event = 'VeryLazy',
@@ -866,5 +921,8 @@ return {
         desc = 'Create a selection for selected text or word under the cursor',
       },
     },
+  },
+  {
+    'dhruvasagar/vim-table-mode',
   },
 }

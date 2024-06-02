@@ -606,6 +606,7 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
+        'prettierd',
         'clang-format',
         'html',
         'intelephense',
@@ -632,56 +633,6 @@ require('lazy').setup({
       }
     end,
   },
-
-  { -- Autoformat
-    'stevearc/conform.nvim',
-    lazy = false,
-    keys = {
-      {
-        '<leader>ff',
-        function()
-          require('conform').format { async = true, lsp_fallback = true }
-        end,
-        mode = '',
-        desc = '[F]ormat buffer',
-      },
-    },
-    opts = {
-      notify_on_error = false,
-      format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        return {
-          timeout_ms = 500,
-          lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-          async = true,
-        }
-      end,
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use a sub-list to tell conform to run *until* a formatter
-        -- is found.
-        html = { 'djlint' },
-        php = { 'pretty-php' },
-        cpp = { 'clang_format' },
-        -- javascript = { { 'prettierd', 'prettier' } },
-      },
-      formatters = {
-        ['djlint'] = {
-          prepend_args = { '--indent', '2' },
-        },
-        ['pretty-php'] = {
-          prepend_args = { '-s2' },
-        },
-      },
-    },
-  },
-
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
