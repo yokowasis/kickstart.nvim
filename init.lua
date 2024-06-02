@@ -614,7 +614,6 @@ require('lazy').setup({
         'pylsp',
         'stylua',
         'svelte',
-        'djlint',
         'tsserver',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
