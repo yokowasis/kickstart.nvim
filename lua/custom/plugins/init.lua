@@ -49,6 +49,9 @@ function CompileAndRun()
   -- Get full folder path of the current buffer
   local folder_path = vim.fn.expand '%:p:h'
 
+  -- get full path up to "labs" folder
+  local labs_fullfolder = folder_path:match '(.+labs)'
+
   -- Get the filename (with extension) of the current buffer
   local filename_with_extension = vim.fn.expand '%:t'
 
@@ -60,6 +63,8 @@ function CompileAndRun()
 
   if file_extension == 'cjs' or file_extension == 'mjs' then
     filetype = 'javascript'
+  elseif file_extension == 'md' then
+    filetype = 'markdown'
   end
 
   if filetype == 'cpp' then
@@ -93,9 +98,11 @@ function CompileAndRun()
         .. folder_path
         .. '/'
         .. filename_with_extension
-        .. '-o '
+        .. ' -o '
         .. filename_without_extension
-        .. '.docx --reference-doc=~/git/labs/template/base.docx'
+        .. '.docx --reference-doc '
+        .. labs_fullfolder
+        .. '/template/base.docx'
     )
   else
     vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
