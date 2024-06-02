@@ -105,7 +105,27 @@ function CompileAndRun()
       .. '.docx --reference-doc '
       .. labs_fullfolder
       .. '/template/base.docx'
-    RunCommandAndNotify(pandocCommand, 100, 'Markdown Compiled')
+    -- 7z x may.docx -o"may"
+    local extractCommand = '7z x ' .. filename_without_extension .. '.docx -o"' .. filename_without_extension .. '"'
+
+    local xmlpath = folder_path .. '/' .. filename_without_extension .. '/word/document.xml'
+    print(xmlpath)
+    local fixCommand = 'sed -i "s/' .. '<w:tblStyle w:val=\\"Table\\" \\/>' .. '/' .. '<w:tblStyle w:val=\\"Table\\" \\/>' .. '/g" ' .. xmlpath
+
+    local zipCommand = '7z a -tzip ' .. filename_without_extension .. '.docx .\\' .. filename_without_extension .. '\\*'
+
+    local mergeCommand = pandocCommand .. ' ; ' .. extractCommand .. ' ; ' .. fixCommand .. ' ; ' .. zipCommand
+
+    fixCommand = 'sed -i \'s/w:tblStyle w:val="Table"/w:tblStyle w:val="simpletable"/g\' ' .. xmlpath
+    deleteCommand = 'rm -rf ' .. filename_without_extension
+
+    -- print(fixCommand)
+
+    vim.cmd('!' .. pandocCommand)
+    vim.cmd('!' .. extractCommand)
+    vim.cmd('!' .. fixCommand)
+    vim.cmd('!' .. zipCommand)
+    vim.cmd('!' .. deleteCommand)
   else
     vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
     return
