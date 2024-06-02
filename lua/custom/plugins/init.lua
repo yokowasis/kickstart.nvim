@@ -87,6 +87,16 @@ function CompileAndRun()
     vim.cmd(':tabnew | te ts-node ' .. folder_path .. '/' .. filename_with_extension)
   elseif filetype == 'shell' then
     vim.cmd(':tabnew | te bash ' .. folder_path .. '/' .. filename_with_extension)
+  elseif filetype == 'markdown' then
+    vim.cmd(
+      ':tabnew | te pandoc '
+        .. folder_path
+        .. '/'
+        .. filename_with_extension
+        .. '-o '
+        .. filename_without_extension
+        .. '.docx --reference-doc=~/git/labs/template/base.docx'
+    )
   else
     vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
     return
@@ -883,7 +893,7 @@ return {
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        markdown = { 'prettierd' },
+        -- markdown = { 'prettierd' },
         javascript = { 'prettierd' },
         typescript = { 'prettierd' },
         javascriptreact = { 'prettierd' },
