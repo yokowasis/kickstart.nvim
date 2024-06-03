@@ -698,14 +698,14 @@ vim.keymap.set('n', '<leader>b7', ':e ~/git/labs<cr>', { desc = '[B] 7. LABS ', 
 vim.keymap.set('n', '<leader>b8', ':e ~/git/wiki-bimasoft<cr>', { desc = '[B] 8. Wiki Bimasoft ', noremap = true, silent = false })
 
 -- change language
-vim.keymap.set('n', '<leader>lcj', ':set ft=javascript', { desc = 'Javascript', noremap = true, silent = false })
-vim.keymap.set('n', '<leader>lco', ':set ft=json', { desc = 'JSON', noremap = true, silent = false })
-vim.keymap.set('n', '<leader>lcp', ':set ft=php', { desc = 'PHP', noremap = true, silent = false })
-vim.keymap.set('n', '<leader>lcy', ':set ft=python', { desc = 'Python', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>lcj', ':set ft=javascript<cr>', { desc = 'Javascript', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>lco', ':set ft=json<cr>', { desc = 'JSON', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>lcp', ':set ft=php<cr>', { desc = 'PHP', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>lcy', ':set ft=python<cr>', { desc = 'Python', noremap = true, silent = false })
 
 -- new neovide window in MACOS
-vim.keymap.set('n', '<D-n>', ':!neovide<cr>', { desc = 'Python', noremap = true, silent = false })
-vim.keymap.set('i', '<D-n>', ':!neovide<cr>', { desc = 'Python', noremap = true, silent = false })
+vim.keymap.set('n', '<D-n>', ':!neovide<cr>', { desc = 'Python', noremap = true, silent = true })
+vim.keymap.set('i', '<D-n>', ':!neovide<cr>', { desc = 'Python', noremap = true, silent = true })
 
 -- nvimtree setup
 local function my_on_attach(bufnr)
