@@ -694,6 +694,7 @@ vim.keymap.set('n', '<leader>b4', ':e ~/git/couch-cbt/<cr>', { desc = '[B] 4. Co
 vim.keymap.set('n', '<leader>b5', ':e ~/git/resta/<cr>', { desc = '[B] 5. Resta Cloudflare and Bunny Domain Register', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b6', ':e ~/git/cbtadmin/<cr>', { desc = '[B] 6. CBTAdmin Cloudflare Workers ', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b7', ':e ~/git/labs<cr>', { desc = '[B] 7. LABS ', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>b8', ':e ~/git/wiki-bimasoft<cr>', { desc = '[B] 8. Wiki Bimasoft ', noremap = true, silent = false })
 
 -- change language
 vim.keymap.set('n', '<leader>lcj', ':set ft=javascript', { desc = 'Javascript', noremap = true, silent = false })
