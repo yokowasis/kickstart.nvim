@@ -888,6 +888,7 @@ return {
         typescript = { 'prettierd' },
         javascriptreact = { 'prettierd' },
         typescriptreact = { 'prettierd' },
+        json = { 'prettierd' },
         css = { 'prettierd' },
         yml = { 'prettierd' },
         html = { 'prettierd' },
