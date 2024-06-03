@@ -704,8 +704,8 @@ vim.keymap.set('n', '<leader>lcp', ':set ft=php<cr>', { desc = 'PHP', noremap = 
 vim.keymap.set('n', '<leader>lcy', ':set ft=python<cr>', { desc = 'Python', noremap = true, silent = false })
 
 -- new neovide window in MACOS
-vim.keymap.set('n', '<D-n>', ':!neovide<cr>', { desc = 'Python', noremap = true, silent = true })
-vim.keymap.set('i', '<D-n>', ':!neovide<cr>', { desc = 'Python', noremap = true, silent = true })
+vim.keymap.set('n', '<D-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
+vim.keymap.set('i', '<D-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
 
 -- nvimtree setup
 local function my_on_attach(bufnr)
