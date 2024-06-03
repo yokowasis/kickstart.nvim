@@ -49,6 +49,9 @@ function CompileAndRun()
   -- Get full folder path of the current buffer
   local folder_path = vim.fn.expand '%:p:h'
 
+  -- get full path up to "labs" folder
+  local labs_fullfolder = folder_path:match '(.+labs)'
+
   -- Get the filename (with extension) of the current buffer
   local filename_with_extension = vim.fn.expand '%:t'
 
@@ -60,7 +63,11 @@ function CompileAndRun()
 
   if file_extension == 'cjs' or file_extension == 'mjs' then
     filetype = 'javascript'
+  elseif file_extension == 'md' then
+    filetype = 'markdown'
   end
+
+  local iste = true
 
   if filetype == 'cpp' then
     vim.cmd(
@@ -87,21 +94,46 @@ function CompileAndRun()
     vim.cmd(':tabnew | te ts-node ' .. folder_path .. '/' .. filename_with_extension)
   elseif filetype == 'shell' then
     vim.cmd(':tabnew | te bash ' .. folder_path .. '/' .. filename_with_extension)
+  elseif filetype == 'markdown' then
+    iste = false
+    local pandocCommand = 'pandoc '
+      .. folder_path
+      .. '/'
+      .. filename_with_extension
+      .. ' -o '
+      .. filename_without_extension
+      .. '.docx --reference-doc '
+      .. labs_fullfolder
+      .. '/template/base.docx'
+    -- 7z x may.docx -o"may"
+    local extractCommand = '7z x ' .. filename_without_extension .. '.docx -o"' .. filename_without_extension .. '"'
+
+    local xmlpath = folder_path .. '/' .. filename_without_extension .. '/word/document.xml'
+    print(xmlpath)
+    local fixCommand = 'sed -i "s/' .. '<w:tblStyle w:val=\\"Table\\" \\/>' .. '/' .. '<w:tblStyle w:val=\\"Table\\" \\/>' .. '/g" ' .. xmlpath
+
+    local zipCommand = '7z a -tzip ' .. filename_without_extension .. '.docx .\\' .. filename_without_extension .. '\\*'
+
+    local mergeCommand = pandocCommand .. ' ; ' .. extractCommand .. ' ; ' .. fixCommand .. ' ; ' .. zipCommand
+
+    fixCommand = 'sed -i \'s/w:tblStyle w:val="Table"/w:tblStyle w:val="simpletable"/g\' ' .. xmlpath
+    deleteCommand = 'rm -rf ' .. filename_without_extension
+
+    -- print(fixCommand)
+
+    vim.cmd('!' .. pandocCommand)
+    vim.cmd('!' .. extractCommand)
+    vim.cmd('!' .. fixCommand)
+    vim.cmd('!' .. zipCommand)
+    vim.cmd('!' .. deleteCommand)
   else
     vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
     return
   end
 
-  vim.api.nvim_feedkeys('i', 'n', true)
-
-  -- local term_buf = vim.fn.termopen(command, { cwd = vim.fn.getcwd() })
-  -- vim.fn.termstart(term_buf, {
-  --     on_exit = function(_, code)
-  --         if code ~= 0 then
-  --           vim.notify("Command failed with exit code " .. code)
-  --         end
-  --     end,
-  -- })
+  if iste then
+    vim.api.nvim_feedkeys('i', 'n', true)
+  end
 end
 
 TerminalShell = ''
@@ -121,7 +153,7 @@ else
 end
 
 -- Create a mapping for compiling and running code
-vim.api.nvim_set_keymap('n', '<leader>cr', "[[:execute luaeval('CompileAndRun()')<cr>]]", { noremap = true, silent = false, desc = '[C]ompile and [R]un' })
+vim.api.nvim_set_keymap('n', '<leader>cr', ':lua CompileAndRun()<cr>', { noremap = true, silent = false, desc = '[C]ompile and [R]un' })
 
 -- Enable line numbers (both absolute and relative)
 vim.wo.relativenumber = true
@@ -238,10 +270,16 @@ function RunCommandInNewTab(command)
   vim.cmd(':tabnew | te  ' .. command)
 end
 
-function RunCommandAndNotify(command)
-  vim.notify('Run Command...', vim.log.levels.INFO, {
-    title = 'Run Command',
-    timeout = 36000000,
+function RunCommandAndNotify(command, timeout, title)
+  if timeout == nil then
+    timeout = 36000000
+  end
+  if title == nil then
+    title = 'Run Command'
+  end
+  vim.notify(title, vim.log.levels.INFO, {
+    title = title,
+    timeout = timeout,
   })
 
   vim.fn.jobstart(command, {
@@ -644,9 +682,9 @@ function customSearchGrep()
   vim.cmd('Telescope live_grep glob_pattern=*.{' .. extension .. '} search_dirs=' .. dirs)
 end
 
-vim.keymap.set('n', '<leader>sgg', ':Telescope live_grep<CR>', { desc = '[S]earch by [G]rep', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>sg', ':Telescope live_grep<CR>', { desc = '[S]earch by [G]rep', noremap = true, silent = false })
 
-vim.keymap.set('n', '<leader>sgc', ':lua customSearchGrep()<CR>', { desc = '[S]earch by [G]rep [C]ustom', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>sc', ':lua customSearchGrep()<CR>', { desc = '[S]earch by [G]rep [C]ustom', noremap = true, silent = false })
 
 -- bookmarks <leader>b
 vim.keymap.set('n', '<leader>b1', ':e ~/git/react-mandiri<cr>', { desc = '[B] 1. React Mandiri', noremap = true, silent = false })
@@ -656,6 +694,7 @@ vim.keymap.set('n', '<leader>b4', ':e ~/git/couch-cbt/<cr>', { desc = '[B] 4. Co
 vim.keymap.set('n', '<leader>b5', ':e ~/git/resta/<cr>', { desc = '[B] 5. Resta Cloudflare and Bunny Domain Register', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b6', ':e ~/git/cbtadmin/<cr>', { desc = '[B] 6. CBTAdmin Cloudflare Workers ', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b7', ':e ~/git/labs<cr>', { desc = '[B] 7. LABS ', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>b8', ':e ~/git/wiki-bimasoft<cr>', { desc = '[B] 8. Wiki Bimasoft ', noremap = true, silent = false })
 
 -- change language
 vim.keymap.set('n', '<leader>lcj', ':set ft=javascript', { desc = 'Javascript', noremap = true, silent = false })
@@ -883,7 +922,7 @@ return {
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        markdown = { 'prettierd' },
+        -- markdown = { 'prettierd' },
         javascript = { 'prettierd' },
         typescript = { 'prettierd' },
         javascriptreact = { 'prettierd' },
