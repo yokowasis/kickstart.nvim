@@ -112,7 +112,13 @@ function CompileAndRun()
     print(xmlpath)
     local fixCommand = 'sed -i "s/' .. '<w:tblStyle w:val=\\"Table\\" \\/>' .. '/' .. '<w:tblStyle w:val=\\"Table\\" \\/>' .. '/g" ' .. xmlpath
 
-    local zipCommand = '7z a -tzip ' .. filename_without_extension .. '.docx .\\' .. filename_without_extension .. '\\*'
+    local zipCommand = 'rm '
+      .. filename_without_extension
+      .. '.docx;7z a -tzip '
+      .. filename_without_extension
+      .. '.docx ./'
+      .. filename_without_extension
+      .. '/*'
 
     local mergeCommand = pandocCommand .. ' ; ' .. extractCommand .. ' ; ' .. fixCommand .. ' ; ' .. zipCommand
 
