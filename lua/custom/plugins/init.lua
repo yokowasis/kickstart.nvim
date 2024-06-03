@@ -682,9 +682,9 @@ function customSearchGrep()
   vim.cmd('Telescope live_grep glob_pattern=*.{' .. extension .. '} search_dirs=' .. dirs)
 end
 
-vim.keymap.set('n', '<leader>sgg', ':Telescope live_grep<CR>', { desc = '[S]earch by [G]rep', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>sg', ':Telescope live_grep<CR>', { desc = '[S]earch by [G]rep', noremap = true, silent = false })
 
-vim.keymap.set('n', '<leader>sgc', ':lua customSearchGrep()<CR>', { desc = '[S]earch by [G]rep [C]ustom', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>sc', ':lua customSearchGrep()<CR>', { desc = '[S]earch by [G]rep [C]ustom', noremap = true, silent = false })
 
 -- bookmarks <leader>b
 vim.keymap.set('n', '<leader>b1', ':e ~/git/react-mandiri<cr>', { desc = '[B] 1. React Mandiri', noremap = true, silent = false })
