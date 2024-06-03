@@ -703,6 +703,10 @@ vim.keymap.set('n', '<leader>lco', ':set ft=json', { desc = 'JSON', noremap = tr
 vim.keymap.set('n', '<leader>lcp', ':set ft=php', { desc = 'PHP', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>lcy', ':set ft=python', { desc = 'Python', noremap = true, silent = false })
 
+-- new neovide window in MACOS
+vim.keymap.set('n', '<D-n>', ':!neovide<cr>', { desc = 'Python', noremap = true, silent = false })
+vim.keymap.set('i', '<D-n>', ':!neovide<cr>', { desc = 'Python', noremap = true, silent = false })
+
 -- nvimtree setup
 local function my_on_attach(bufnr)
   local api = require 'nvim-tree.api'
