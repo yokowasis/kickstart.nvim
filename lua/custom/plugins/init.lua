@@ -9,6 +9,9 @@ vim.o.swapfile = false
 vim.o.guifont = 'JetBrainsMono NFM:h13'
 vim.o.list = false
 
+-- markdown indent
+vim.o.breakindentopt = 'list:-1'
+
 -- independent clipboard
 vim.opt.clipboard = ''
 
