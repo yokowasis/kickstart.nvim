@@ -9,8 +9,15 @@ vim.o.swapfile = false
 vim.o.guifont = 'JetBrainsMono NFM:h13'
 vim.o.list = false
 
--- markdown indent
+-- markdown bullet and numbering indent
 vim.o.breakindentopt = 'list:-1'
+
+-- neovide auto focus
+if vim.g.neovide then
+  vim.defer_fn(function()
+    vim.cmd 'NeovideFocus'
+  end, 200)
+end
 
 -- independent clipboard
 vim.opt.clipboard = ''
