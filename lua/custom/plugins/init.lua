@@ -17,6 +17,19 @@ if vim.g.neovide then
   vim.defer_fn(function()
     vim.cmd 'NeovideFocus'
   end, 200)
+
+  if vim.fn.has 'win32' == 1 then
+    -- new neovide window in Windows
+    vim.keymap.set('n', '<C-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
+    vim.keymap.set('i', '<C-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
+  else
+    -- new neovide window in MACOS
+    vim.keymap.set('n', '<D-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
+    vim.keymap.set('i', '<D-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
+  end
+else
+  -- new nvim-qt window in Android
+  vim.keymap.set('n', '<M-n>', ':silent !nvim-qt<cr>', { desc = 'Python', noremap = true, silent = true })
 end
 
 -- independent clipboard
@@ -719,13 +732,6 @@ vim.keymap.set('n', '<leader>lcj', ':set ft=javascript<cr>', { desc = 'Javascrip
 vim.keymap.set('n', '<leader>lco', ':set ft=json<cr>', { desc = 'JSON', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>lcp', ':set ft=php<cr>', { desc = 'PHP', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>lcy', ':set ft=python<cr>', { desc = 'Python', noremap = true, silent = false })
-
--- new neovide window in MACOS
-vim.keymap.set('n', '<D-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
-vim.keymap.set('i', '<D-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
-
--- new nvim-qt window in Android
-vim.keymap.set('n', '<M-n>', ':silent !nvim-qt<cr>', { desc = 'Python', noremap = true, silent = true })
 
 -- nvimtree setup
 local function my_on_attach(bufnr)
