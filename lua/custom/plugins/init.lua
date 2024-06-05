@@ -723,6 +723,9 @@ vim.keymap.set('n', '<leader>lcy', ':set ft=python<cr>', { desc = 'Python', nore
 vim.keymap.set('n', '<D-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
 vim.keymap.set('i', '<D-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
 
+-- new nvim-qt window in Android
+vim.keymap.set('n', '<M-n>', ':silent !nvim-qt<cr>', { desc = 'Python', noremap = true, silent = true })
+
 -- nvimtree setup
 local function my_on_attach(bufnr)
   local api = require 'nvim-tree.api'
