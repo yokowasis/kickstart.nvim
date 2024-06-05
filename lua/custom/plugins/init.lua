@@ -771,6 +771,15 @@ require('which-key').register {
   ['<leader>j'] = { name = '[J]upyter', _ = 'which_key_ignore' },
   ['<leader>lc'] = { name = '[L]anguage [C]hange', _ = 'which_key_ignore' },
 }
+
+require('mini.surround').setup {
+  mappings = {
+    add = 'ra', -- Add surrounding in Normal and Visual modes
+    delete = 'rd', -- Delete surrounding
+    replace = 'rr', -- Replace surrounding
+  },
+}
+
 return {
   {
     'm4xshen/autoclose.nvim',
