@@ -1012,6 +1012,8 @@ return {
   },
   {
     'axelvc/template-string.nvim',
-    require('template-string').setup(),
+    config = function()
+      require('template-string').setup()
+    end,
   },
 }
