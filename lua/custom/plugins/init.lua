@@ -1010,4 +1010,8 @@ return {
   {
     'dhruvasagar/vim-table-mode',
   },
+  {
+    'axelvc/template-string.nvim',
+    require('template-string').setup(),
+  },
 }
