@@ -211,6 +211,7 @@ vim.keymap.set('n', '<leader><down>', ':tabclose<CR>', { desc = 'Close Tab', nor
 
 -- nerdtree
 vim.keymap.set('n', '<c-z>', ':NvimTreeToggle<cr>', { desc = 'Show File Explorer', noremap = true, silent = true })
+vim.keymap.set('i', '<c-z>', ':NvimTreeToggle<cr>', { desc = 'Show File Explorer', noremap = true, silent = true })
 
 -- "Toggle Wrap
 vim.keymap.set('n', '<leader>ww', ':set wrap!<CR><CTR>', { desc = '[W]ord [W]rap', noremap = true, silent = true })
