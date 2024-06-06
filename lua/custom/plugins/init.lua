@@ -794,7 +794,7 @@ ls.config.set_config {
   store_selection_keys = '<tab>',
 }
 
-require('nvim-treesitter.install').compilers = { 'clang', 'zig' }
+require('nvim-treesitter.install').compilers = { 'clang', 'zig', 'gcc' }
 
 require('which-key').register {
   ['<leader>c'] = { name = '[C]opilot', _ = 'which_key_ignore' },
