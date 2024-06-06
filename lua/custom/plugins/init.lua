@@ -795,6 +795,8 @@ local function my_on_attach(bufnr)
   vim.keymap.set('n', 'm', api.fs.rename_full, opts 'Rename: Full Path')
 end
 
+vim.keymap.set('n', '<leader>pi', ':Pastify<cr>', { desc = '[P]aste [I]mage', noremap = true, silent = false })
+
 local ls = require 'luasnip'
 ls.config.set_config {
   store_selection_keys = '<tab>',
@@ -808,6 +810,7 @@ require('which-key').register {
   ['<leader>l'] = { name = '[L]anguage / [L]og', _ = 'which_key_ignore' },
   ['<leader>n'] = { name = '[N]eovim', _ = 'which_key_ignore' },
   ['<leader>f'] = { name = '[F]ormat/[F]ramework', _ = 'which_key_ignore' },
+  ['<leader>p'] = { name = '[P]aste', _ = 'which_key_ignore' },
   ['<leader>fn'] = { name = '[F]ramework [N]extJS', _ = 'which_key_ignore' },
   ['<leader>fs'] = { name = '[F]ramework [S]velte', _ = 'which_key_ignore' },
   ['<leader>b'] = { name = '[B]ookmarks', _ = 'which_key_ignore' },
@@ -820,7 +823,11 @@ require('mini.surround').setup {
   mappings = {
     add = 'ra', -- Add surrounding in Normal and Visual modes
     delete = 'rd', -- Delete surrounding
+    find = 'rf', -- Find surrounding (to the right)
+    find_left = 'rF', -- Find surrounding (to the left)
+    highlight = 'rh', -- Highlight surrounding
     replace = 'rr', -- Replace surrounding
+    update_n_lines = 'rn', -- Update `n_lines`
   },
 }
 
