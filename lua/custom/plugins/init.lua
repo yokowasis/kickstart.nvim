@@ -53,22 +53,23 @@ else
 
   -- nvim keybinding for iterm2 macos
   if sysname == 'Darwin' then
-    vim.keymap.set('n', '<M-s>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('i', '<M-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('n', '<M-i>', 'gg', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('i', '<M-i>', '<C-o>gg', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('n', '<M-K>', '<PageDown>', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('i', '<M-K>', '<PageDown>', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('i', '<M-I>', '<PageUp>', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('n', '<M-I>', '<PageUp>', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('n', '<M-k>', 'G', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('i', '<M-k>', '<C-o>G', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('n', '<M-l>', '$', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('i', '<M-l>', '<C-o>$', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('n', '<M-j>', '0', { desc = '[^s] Save Current File', noremap = true, silent = true })
-    vim.keymap.set('i', '<M-j>', '<C-o>0', { desc = '[^s] Save Current File', noremap = true, silent = true })
   end
 end
+
+vim.keymap.set('n', '<M-s>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-i>', 'gg', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-i>', '<C-o>gg', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-K>', '<PageDown>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-K>', '<PageDown>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-I>', '<PageUp>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-I>', '<PageUp>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-k>', 'G', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-k>', '<C-o>G', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-l>', '$', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-l>', '<C-o>$', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-j>', '0', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-j>', '<C-o>0', { desc = '[^s] Save Current File', noremap = true, silent = true })
 
 -- independent clipboard
 vim.opt.clipboard = ''
