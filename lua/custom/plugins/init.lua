@@ -11,6 +11,15 @@
   - pip install neovim jupyter
   - jupyter console --generate-config
   - sed -i 's/c.ZMQTerminalInteractiveShell.include_other_output = False/c.ZMQTerminalInteractiveShell.include_other_output = True/' ~/.jupyter/jupyter_console_config.py
+
+  NOTE: iterm2 setup
+  #s -> <C-s>
+  !Up -> <M-I> 
+  #Up -> <M-i> 
+  !Down -> <M-K> 
+  #Down -> <M-k> 
+  #Left -> <M-j> 
+  #Right -> <M-l>
 --]]
 
 -- noswap
@@ -20,6 +29,8 @@ vim.o.list = false
 
 -- markdown bullet and numbering indent
 vim.o.breakindentopt = 'list:-1'
+
+local sysname = vim.loop.os_uname().sysname
 
 -- neovide auto focus
 if vim.g.neovide then
@@ -39,6 +50,24 @@ if vim.g.neovide then
 else
   -- new nvim-qt window in Android
   vim.keymap.set('n', '<M-n>', ':silent !nvim-qt<cr>', { desc = 'Python', noremap = true, silent = true })
+
+  -- nvim keybinding for iterm2 macos
+  if sysname == 'Darwin' then
+    vim.keymap.set('n', '<M-s>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('i', '<M-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('n', '<M-i>', 'gg', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('i', '<M-i>', '<C-o>gg', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('n', '<M-K>', '<PageDown>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('i', '<M-K>', '<PageDown>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('i', '<M-I>', '<PageUp>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('n', '<M-I>', '<PageUp>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('n', '<M-k>', 'G', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('i', '<M-k>', '<C-o>G', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('n', '<M-l>', '$', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('i', '<M-l>', '<C-o>$', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('n', '<M-j>', '0', { desc = '[^s] Save Current File', noremap = true, silent = true })
+    vim.keymap.set('i', '<M-j>', '<C-o>0', { desc = '[^s] Save Current File', noremap = true, silent = true })
+  end
 end
 
 -- independent clipboard
@@ -222,8 +251,8 @@ vim.keymap.set('n', '<leader>db', ':DBUIToggle<cr>', { desc = '[D]ata[b]ase', no
 -- Map Ctrl+S to save
 vim.keymap.set('n', '<D-s>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
 vim.keymap.set('i', '<D-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
-vim.keymap.set('n', '<C-S>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
-vim.keymap.set('i', '<C-S>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<C-s>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<C-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
 
 -- "Tab Navigation
 vim.keymap.set('n', '<leader><up>', ':tabnew<CR>', { desc = 'New Tab', noremap = true, silent = true })
