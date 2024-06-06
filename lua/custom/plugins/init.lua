@@ -2,6 +2,9 @@
   TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
 
   NOTE: SNIPPET : Trigger with <c-x>. For TM_SELECTED_TEXT, block the text and then <tab>.
+
+  NOTE: Setup : 
+  - pip install neovim pillow
 --]]
 
 -- noswap
@@ -1014,6 +1017,18 @@ return {
     'axelvc/template-string.nvim',
     config = function()
       require('template-string').setup()
+    end,
+  },
+  {
+    'TobinPalmer/pastify.nvim',
+    cmd = { 'Pastify' },
+    config = function()
+      require('pastify').setup {
+        opts = {
+          apikey = '84a38c7ae5a0328615015c0213030d1c', -- Needed if you want to save online.
+          save = 'local',
+        },
+      }
     end,
   },
 }
