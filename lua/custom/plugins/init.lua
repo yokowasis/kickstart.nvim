@@ -20,6 +20,11 @@
   #Down -> <M-k> 
   #Left -> <M-j> 
   #Right -> <M-l>
+
+  NOTE: setup lemonade
+  > go install github.com/lemonade-command/lemonade@latest
+  > ~/go/bin/lemonade serer
+
 --]]
 
 -- noswap
