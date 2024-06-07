@@ -1073,7 +1073,6 @@ return {
     config = function()
       require('pastify').setup {
         opts = {
-          apikey = '84a38c7ae5a0328615015c0213030d1c', -- Needed if you want to save online.
           save = 'local',
         },
       }
