@@ -4,11 +4,13 @@
   NOTE: SNIPPET : Trigger with <c-x>. For TM_SELECTED_TEXT, block the text and then <tab>.
 
   NOTE: 
+  # All
+  - pip install pynvim neovim
   # Setup Paste Image: 
-  - pip install neovim pillow
+  - pip install pillow
   # Setup Jupyter
   - setup conda environment
-  - pip install neovim jupyter
+  - pip install jupyter
   - jupyter console --generate-config
   - sed -i 's/c.ZMQTerminalInteractiveShell.include_other_output = False/c.ZMQTerminalInteractiveShell.include_other_output = True/' ~/.jupyter/jupyter_console_config.py
 
