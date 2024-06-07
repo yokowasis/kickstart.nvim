@@ -2,6 +2,29 @@
   TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
 
   NOTE: SNIPPET : Trigger with <c-x>. For TM_SELECTED_TEXT, block the text and then <tab>.
+
+  NOTE: 
+  # Setup Paste Image: 
+  - pip install neovim pillow
+  # Setup Jupyter
+  - setup conda environment
+  - pip install neovim jupyter
+  - jupyter console --generate-config
+  - sed -i 's/c.ZMQTerminalInteractiveShell.include_other_output = False/c.ZMQTerminalInteractiveShell.include_other_output = True/' ~/.jupyter/jupyter_console_config.py
+
+  NOTE: iterm2 setup
+  #s -> <C-s>
+  !Up -> <M-I> 
+  #Up -> <M-i> 
+  !Down -> <M-K> 
+  #Down -> <M-k> 
+  #Left -> <M-j> 
+  #Right -> <M-l>
+
+  NOTE: setup lemonade
+  > go install github.com/lemonade-command/lemonade@latest
+  > ~/go/bin/lemonade serer
+
 --]]
 
 -- noswap
@@ -11,6 +34,8 @@ vim.o.list = false
 
 -- markdown bullet and numbering indent
 vim.o.breakindentopt = 'list:-1'
+
+local sysname = vim.loop.os_uname().sysname
 
 -- neovide auto focus
 if vim.g.neovide then
@@ -30,7 +55,26 @@ if vim.g.neovide then
 else
   -- new nvim-qt window in Android
   vim.keymap.set('n', '<M-n>', ':silent !nvim-qt<cr>', { desc = 'Python', noremap = true, silent = true })
+
+  -- nvim keybinding for iterm2 macos
+  if sysname == 'Darwin' then
+  end
 end
+
+vim.keymap.set('n', '<M-s>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-i>', 'gg', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-i>', '<C-o>gg', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-K>', '<PageDown>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-K>', '<PageDown>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-I>', '<PageUp>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-I>', '<PageUp>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-k>', 'G', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-k>', '<C-o>G', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-l>', '$', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-l>', '<C-o>$', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<M-j>', '0', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<M-j>', '<C-o>0', { desc = '[^s] Save Current File', noremap = true, silent = true })
 
 -- independent clipboard
 vim.opt.clipboard = ''
@@ -213,8 +257,8 @@ vim.keymap.set('n', '<leader>db', ':DBUIToggle<cr>', { desc = '[D]ata[b]ase', no
 -- Map Ctrl+S to save
 vim.keymap.set('n', '<D-s>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
 vim.keymap.set('i', '<D-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
-vim.keymap.set('n', '<C-S>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
-vim.keymap.set('i', '<C-S>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('n', '<C-s>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
+vim.keymap.set('i', '<C-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
 
 -- "Tab Navigation
 vim.keymap.set('n', '<leader><up>', ':tabnew<CR>', { desc = 'New Tab', noremap = true, silent = true })
@@ -751,12 +795,14 @@ local function my_on_attach(bufnr)
   vim.keymap.set('n', 'm', api.fs.rename_full, opts 'Rename: Full Path')
 end
 
+vim.keymap.set('n', '<leader>pi', ':Pastify<cr>', { desc = '[P]aste [I]mage', noremap = true, silent = false })
+
 local ls = require 'luasnip'
 ls.config.set_config {
   store_selection_keys = '<tab>',
 }
 
-require('nvim-treesitter.install').compilers = { 'clang', 'zig' }
+require('nvim-treesitter.install').compilers = { 'clang', 'zig', 'gcc' }
 
 require('which-key').register {
   ['<leader>c'] = { name = '[C]opilot', _ = 'which_key_ignore' },
@@ -764,6 +810,7 @@ require('which-key').register {
   ['<leader>l'] = { name = '[L]anguage / [L]og', _ = 'which_key_ignore' },
   ['<leader>n'] = { name = '[N]eovim', _ = 'which_key_ignore' },
   ['<leader>f'] = { name = '[F]ormat/[F]ramework', _ = 'which_key_ignore' },
+  ['<leader>p'] = { name = '[P]aste', _ = 'which_key_ignore' },
   ['<leader>fn'] = { name = '[F]ramework [N]extJS', _ = 'which_key_ignore' },
   ['<leader>fs'] = { name = '[F]ramework [S]velte', _ = 'which_key_ignore' },
   ['<leader>b'] = { name = '[B]ookmarks', _ = 'which_key_ignore' },
@@ -776,7 +823,11 @@ require('mini.surround').setup {
   mappings = {
     add = 'ra', -- Add surrounding in Normal and Visual modes
     delete = 'rd', -- Delete surrounding
+    find = 'rf', -- Find surrounding (to the right)
+    find_left = 'rF', -- Find surrounding (to the left)
+    highlight = 'rh', -- Highlight surrounding
     replace = 'rr', -- Replace surrounding
+    update_n_lines = 'rn', -- Update `n_lines`
   },
 }
 
@@ -1014,6 +1065,18 @@ return {
     'axelvc/template-string.nvim',
     config = function()
       require('template-string').setup()
+    end,
+  },
+  {
+    'TobinPalmer/pastify.nvim',
+    cmd = { 'Pastify' },
+    config = function()
+      require('pastify').setup {
+        opts = {
+          apikey = '84a38c7ae5a0328615015c0213030d1c', -- Needed if you want to save online.
+          save = 'local',
+        },
+      }
     end,
   },
 }
