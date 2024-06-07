@@ -86,13 +86,6 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.smartindent = true
 
-require('tokyonight').setup {
-  styles = {
-    comments = { italic = false },
-    keywords = { italic = false },
-  },
-}
-
 function GetFileType()
   local filename = vim.fn.expand '%:t'
   local extension = vim.fn.fnamemodify(filename, ':e')
@@ -1076,6 +1069,17 @@ return {
           save = 'local',
         },
       }
+    end,
+  },
+  {
+    'ribru17/bamboo.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('bamboo').setup {
+        -- optional configuration here
+      }
+      require('bamboo').load()
     end,
   },
 }
