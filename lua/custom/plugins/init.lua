@@ -236,7 +236,7 @@ vim.api.nvim_set_keymap('i', '<C-A>', '<Plug>(emmet-expand-abbr)', { noremap = t
 
 -- "Copy Paste from OS Clipboard
 vim.keymap.set('n', '<C-v>', '"+p:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
-vim.keymap.set('i', '<C-v>', '<C-r>*<C-o>:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
+vim.keymap.set('i', '<C-v>', '<esc>"+p:silent! %s/\\r//g<cr>a', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
 
 vim.keymap.set('n', '<S-insert>', '"+p:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
 vim.keymap.set('i', '<S-insert>', '<C-r>*<C-o>:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
@@ -448,6 +448,7 @@ vim.api.nvim_set_keymap('n', '<M-left>', 'b', { noremap = true, silent = false }
 vim.api.nvim_set_keymap('n', '<M-right>', 'w', { noremap = true, silent = false })
 
 -- macos
+vim.api.nvim_set_keymap('i', '<D-v>', '<esc>"*pa', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<D-v>', '"*p', { noremap = true, silent = false })
 
 vim.api.nvim_set_keymap('n', '<D-Left>', '<Home>', { noremap = true, silent = false })
@@ -462,8 +463,6 @@ vim.api.nvim_set_keymap('i', '<D-Up>', '<C-o>gg', { noremap = true, silent = fal
 vim.api.nvim_set_keymap('i', '<D-Down>', '<C-o>G', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('x', '<D-Up>', 'gg', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('x', '<D-Down>', 'G', { noremap = true, silent = false })
-
-vim.api.nvim_set_keymap('i', '<D-v>', '<C-r>*', { noremap = true, silent = false })
 
 -- npm / yarn operation
 vim.api.nvim_set_keymap('n', '<leader>rb', ':lua RunCommandAndNotify("npm run build")<CR>', { noremap = true, silent = false, desc = '[R]un [B]uild' })
