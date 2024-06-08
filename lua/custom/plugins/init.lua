@@ -833,6 +833,9 @@ require('mini.surround').setup {
   },
 }
 
+-- close other windows except this one
+vim.keymap.set('n', 'q', ':on<cr>', { desc = 'Close all other windows', noremap = true, silent = true })
+
 return {
   {
     'm4xshen/autoclose.nvim',
