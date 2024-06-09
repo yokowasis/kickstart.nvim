@@ -1,7 +1,8 @@
 --[[ 
   TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
 
-  NOTE: SNIPPET : Trigger with <c-x>. For TM_SELECTED_TEXT, block the text and then <tab>.
+  NOTE: SNIPPET/LSP : Trigger with <c-x>. For TM_SELECTED_TEXT, block the text and then <tab>. Move left and right with <c-h> and <c-l>
+  NOTE: Copilot : Trigger with <c-d>.
 
   NOTE: 
   # All
