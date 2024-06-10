@@ -834,6 +834,24 @@ require('mini.surround').setup {
   },
 }
 
+-- close window with q if it's not a mai window
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {
+    'checkhealth',
+    'fugitive*',
+    'git',
+    'help',
+    'lspinfo',
+    'netrw',
+    'notify',
+    'qf',
+    'query',
+  },
+  callback = function()
+    vim.keymap.set('n', 'q', vim.cmd.close, { desc = 'Close the current buffer', buffer = true })
+  end,
+})
+
 -- close other windows except this one
 vim.keymap.set('n', 'q', ':on<cr>', { desc = 'Close all other windows', noremap = true, silent = true })
 
