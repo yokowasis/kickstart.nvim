@@ -66,7 +66,7 @@ else
 end
 
 if sysname == 'Windows_NT' then
-  vim.g.python3_host_prog = 'C:\\Users\\yokow\\git\\labs\\python.exe'
+  vim.g.python3_host_prog = 'C:\\Users\\yokow\\miniforge3\\envs\\labs\\python.exe'
 end
 
 -- iterm 2 keybinding
