@@ -13,7 +13,8 @@
   - setup conda environment
   - pip install jupyter
   - jupyter console --generate-config
-  - sed -i 's/c.ZMQTerminalInteractiveShell.include_other_output = False/c.ZMQTerminalInteractiveShell.include_other_output = True/' ~/.jupyter/jupyter_console_config.py
+  - POWERSHELL: (Get-Content -Path "$env:USERPROFILE\.jupyter\jupyter_console_config.py") -replace 'c.ZMQTerminalInteractiveShell.include_other_output = False', 'c.ZMQTerminalInteractiveShell.include_other_output = True' | Set-Content -Path "$env:USERPROFILE\.jupyter\jupyter_console_config.py"
+  - BASH: sed -i 's/c.ZMQTerminalInteractiveShell.include_other_output = False/c.ZMQTerminalInteractiveShell.include_other_output = True/' ~/.jupyter/jupyter_console_config.py
 
   NOTE: iterm2 setup
   #s -> <C-s>
