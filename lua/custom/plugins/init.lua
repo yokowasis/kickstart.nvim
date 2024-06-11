@@ -539,12 +539,25 @@ vim.keymap.set('n', '<leader>jc', ':JupyterConnect<CR>', { noremap = true, silen
 vim.keymap.set('n', '<leader>jf', ':JupyterRunFile<CR>', { noremap = true, silent = false, desc = '[J]upyter Run [F]ile' })
 vim.keymap.set('n', '<leader>jb', 'i# ---<cr><esc>', { noremap = true, silent = false, desc = '[J]upyter [B]lock' })
 vim.keymap.set('n', '<leader>jr', '/# ---<cr>VN:JupyterSendRange<CR><C-o><C-o>', { noremap = true, silent = false, desc = '[J]upyter [R]un Selected' })
-vim.keymap.set(
-  'n',
-  '<leader>js',
-  ':vertical terminal ' .. TerminalShell .. '<CR>ijupyter console<cr><C-\\><C-N>:norm G<CR><C-w><C-w>:sleep 1000m<CR>:JupyterConnect<CR>',
-  { desc = '[J]upyter Con[s]ole', noremap = false, silent = true }
-)
+
+vim.keymap.set('n', '<leader>js', function()
+  local pythonenv = vim.fn.input 'Python Environment: '
+  if pythonenv == '' then
+    return
+  end
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes(
+      ':vertical terminal powershell <cr>iconda activate '
+        .. pythonenv
+        .. '<cr>jupyter console<cr><C-\\><C-N>:norm G<CR><C-w><C-w>:sleep 3000m<CR>:JupyterConnect<CR>',
+      true,
+      true,
+      true
+    ),
+    'n',
+    true
+  )
+end, { desc = '[J]upyter Con[s]ole', noremap = false, silent = true })
 
 -- auto format
 -- vim.keymap.set('n', '<leader>ff', 'gg=G<c-o>', { noremap = true, silent = false, desc = '[F]ormat' })
