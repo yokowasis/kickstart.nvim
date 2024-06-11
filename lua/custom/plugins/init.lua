@@ -547,9 +547,7 @@ vim.keymap.set('n', '<leader>js', function()
   end
   vim.api.nvim_feedkeys(
     vim.api.nvim_replace_termcodes(
-      ':vertical terminal powershell <cr>iconda activate '
-        .. pythonenv
-        .. '<cr>jupyter console<cr><C-\\><C-N>:norm G<CR><C-w><C-w>:sleep 3000m<CR>:JupyterConnect<CR>',
+      ':vertical terminal powershell <cr>iconda activate ' .. pythonenv .. '<cr>jupyter console<cr><C-\\><C-N>:norm G<CR><C-w><C-w>',
       true,
       true,
       true
