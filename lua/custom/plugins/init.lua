@@ -64,6 +64,10 @@ else
   end
 end
 
+if sysname == 'Windows_NT' then
+  vim.g.python3_host_prog = 'C:\\Users\\yokow\\.conda\\envs\\test\\python.exe'
+end
+
 -- iterm 2 keybinding
 -- vim.keymap.set('n', '<M-s>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
 -- vim.keymap.set('i', '<M-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
