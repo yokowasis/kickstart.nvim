@@ -540,6 +540,14 @@ vim.keymap.set('n', '<leader>jf', ':JupyterRunFile<CR>', { noremap = true, silen
 vim.keymap.set('n', '<leader>jb', 'i# ---<cr><esc>', { noremap = true, silent = false, desc = '[J]upyter [B]lock' })
 vim.keymap.set('n', '<leader>jr', '/# ---<cr>VN:JupyterSendRange<CR><C-o><C-o>', { noremap = true, silent = false, desc = '[J]upyter [R]un Selected' })
 
+-- molten
+vim.keymap.set(
+  'n',
+  '<leader>mc',
+  '/```<cr><up>VN<down>:<C-u>MoltenEvaluateVisual<CR><C-o><C-o>',
+  { noremap = true, silent = false, desc = '[M]olten Run [C]ell' }
+)
+
 vim.keymap.set('n', '<leader>js', function()
   local pythonenv = vim.fn.input 'Python Environment: '
   if pythonenv == '' then
