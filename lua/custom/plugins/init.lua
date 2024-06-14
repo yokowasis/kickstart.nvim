@@ -5,16 +5,20 @@
   NOTE: Copilot : Trigger with <c-d>.
 
   NOTE: 
+
   # All
   - pip install pynvim neovim
+
   # Setup Paste Image: 
   - pip install pillow
+
   # Setup Jupyter
   - setup conda environment
-  - pip install jupyter
-  - jupyter console --generate-config
-  - POWERSHELL: (Get-Content -Path "$env:USERPROFILE\.jupyter\jupyter_console_config.py") -replace '# c.ZMQTerminalInteractiveShell.include_other_output = False', 'c.ZMQTerminalInteractiveShell.include_other_output = True' | Set-Content -Path "$env:USERPROFILE\.jupyter\jupyter_console_config.py"
-  - BASH: sed -i 's/# c.ZMQTerminalInteractiveShell.include_other_output = False/c.ZMQTerminalInteractiveShell.include_other_output = True/' ~/.jupyter/jupyter_console_config.py
+  - pip install ipykernel jupytext pynvim jupyter_client cairosvg plotly kaleido pyperclip nbformat
+
+  # Windows
+  - copy ./rplugin.vim to C:\Users\yokow\AppData\Local\nvim-data/rplugin.vim
+
 
   NOTE: iterm2 setup
   #s -> <C-s>
