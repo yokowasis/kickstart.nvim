@@ -23,6 +23,10 @@
   # Windows
   - cp ./rplugin.vim C:\Users\yokow\AppData\Local\nvim-data/rplugin.vim
 
+  # Initialize
+  - add environment to molten e.g. labs : python -m ipykernel install --user --name labs --display-name labs
+  - initialize jupyter labs : jupyter kernel --kernel=labs
+
 
   NOTE: iterm2 setup
   #s -> <C-s>
