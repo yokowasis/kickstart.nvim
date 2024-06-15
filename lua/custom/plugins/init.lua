@@ -541,39 +541,14 @@ vim.cmd [[command! EditInitVim :tabnew | exe 'edit '. stdpath('config').'/lua/cu
 vim.cmd [[command! LoadInitVim :tabnew | exe ':te git -C '. stdpath("config") .' pull' ]]
 vim.cmd [[command! EditGlobalSnippets :tabnew | exe 'edit ~/git/friendly-snippets/snippets/global.json']]
 
-vim.g.jupyter_mapkeys = 0
-vim.g.jupyter_highlight_cells = 1
-vim.g.jupyter_cell_separators = { '# %%', '# <codecell>' }
 vim.o.encoding = 'utf-8'
 
 -- jupyter
-vim.keymap.set('n', '<leader>jc', ':JupyterConnect<CR>', { noremap = true, silent = false, desc = '[J]upyter [C]onnect' })
-vim.keymap.set('n', '<leader>jf', ':JupyterRunFile<CR>', { noremap = true, silent = false, desc = '[J]upyter Run [F]ile' })
-vim.keymap.set('n', '<leader>jb', 'i# ---<cr><esc>', { noremap = true, silent = false, desc = '[J]upyter [B]lock' })
-vim.keymap.set('n', '<leader>jr', '/# ---<cr>VN:JupyterSendRange<CR><C-o><C-o>', { noremap = true, silent = false, desc = '[J]upyter [R]un Selected' })
-
--- molten
-vim.keymap.set('n', '<leader>mc', '/```<cr><up>VN<down>:<C-u>MoltenEvaluateVisual<CR><C-o>', { noremap = true, silent = false, desc = '[M]olten Run [C]ell' })
-
-vim.keymap.set('n', '<leader>js', function()
-  local pythonenv = vim.fn.input 'Python Environment: '
-  if pythonenv == '' then
-    return
-  end
-  vim.api.nvim_feedkeys(
-    vim.api.nvim_replace_termcodes(
-      ':vertical terminal powershell <cr>iconda activate ' .. pythonenv .. '<cr>jupyter console<cr><C-\\><C-N>:norm G<CR><C-w><C-w>',
-      true,
-      true,
-      true
-    ),
-    'n',
-    true
-  )
-end, { desc = '[J]upyter Con[s]ole', noremap = false, silent = true })
+vim.keymap.set('n', '<leader>ji', ':MoltenInit<cr>', { noremap = true, silent = false, desc = '[J]upyter [I]nnit' })
+vim.keymap.set('n', '<leader>jr', '/```<cr><up>VN<down>:<C-u>MoltenEvaluateVisual<CR>``', { noremap = true, silent = false, desc = '[J]upyter [R]un' })
 
 -- auto format
--- vim.keymap.set('n', '<leader>ff', 'gg=G<c-o>', { noremap = true, silent = false, desc = '[F]ormat' })
+vim.keymap.set('n', '<leader>fmf', 'gg=G<c-o>', { noremap = true, silent = false, desc = '[F]ormat [M]anual [F]ormat' })
 
 -- Search and Replace
 vim.keymap.set('n', '<leader>sr', ':%s///g<left><left><left>', { noremap = true, silent = false, desc = '[S]earch and [R]eplace' })
@@ -921,9 +896,6 @@ return {
       -- Your DBUI configuration
       vim.g.db_ui_use_nerd_fonts = 1
     end,
-  },
-  {
-    'jupyter-vim/jupyter-vim',
   },
   {
     'folke/flash.nvim',
