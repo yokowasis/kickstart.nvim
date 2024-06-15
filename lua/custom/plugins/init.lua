@@ -16,6 +16,9 @@
   - setup conda environment
   - pip install ipykernel jupytext pynvim jupyter_client cairosvg plotly kaleido pyperclip nbformat
 
+  # Install ALL
+  - pip install pynvim neovim pillow ipykernel jupytext pynvim jupyter_client cairosvg plotly kaleido pyperclip nbformat
+
   # Windows
   - copy ./rplugin.vim to C:\Users\yokow\AppData\Local\nvim-data/rplugin.vim
 
