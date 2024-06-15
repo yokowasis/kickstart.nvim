@@ -18,9 +18,10 @@
 
   # Install ALL
   - pip install pynvim neovim pillow ipykernel jupytext pynvim jupyter_client cairosvg plotly kaleido pyperclip nbformat
+  :UpdateRemotePlugins
 
   # Windows
-  - copy ./rplugin.vim to C:\Users\yokow\AppData\Local\nvim-data/rplugin.vim
+  - cp ./rplugin.vim C:\Users\yokow\AppData\Local\nvim-data/rplugin.vim
 
 
   NOTE: iterm2 setup
