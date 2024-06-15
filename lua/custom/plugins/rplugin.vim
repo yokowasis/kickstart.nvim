@@ -1,5 +1,5 @@
 "                                            \/ --- This file path
-call remote#host#RegisterPlugin('python3', 'C:\\\\Users\\\\yokowasis\\\\AppData\\\\Local\\\\nvim-data\\\\lazy\\\\molten-nvim\\\\rplugin\\\\python3\\\\molten', [
+call remote#host#RegisterPlugin('python3', 'C:\\\\Users\\\\yokow\\\\AppData\\\\Local\\\\nvim-data\\\\lazy\\\\molten-nvim\\\\rplugin\\\\python3\\\\molten', [
       \ {'sync': v:true, 'name': 'MoltenDeinit', 'type': 'command', 'opts': {}},
       \ {'sync': v:true, 'name': 'MoltenDelete', 'type': 'command', 'opts': {}},
       \ {'sync': v:true, 'name': 'MoltenEnterOutput', 'type': 'command', 'opts': {}},
