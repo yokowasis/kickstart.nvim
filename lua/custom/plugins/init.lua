@@ -921,6 +921,9 @@ return {
     'rcarriga/nvim-notify',
     config = function() -- This is the function that runs, AFTER loading
       -- Notification Setup
+      require('notify').setup {
+        stages = 'static',
+      }
       vim.notify = require 'notify'
       function notif(jobid, data, event, timeout, notifid)
         local output = table.concat(data, '\n')
