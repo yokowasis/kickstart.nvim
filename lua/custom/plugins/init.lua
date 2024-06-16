@@ -1067,6 +1067,7 @@ return {
         typescript = { 'prettierd' },
         javascriptreact = { 'prettierd' },
         typescriptreact = { 'prettierd' },
+        markdown = { 'prettierd' },
         json = { 'prettierd' },
         css = { 'prettierd' },
         yml = { 'prettierd' },
