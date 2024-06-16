@@ -546,6 +546,8 @@ vim.o.encoding = 'utf-8'
 -- jupyter
 vim.keymap.set('n', '<leader>ji', ':MoltenInit<cr>', { noremap = true, silent = false, desc = '[J]upyter [I]nnit' })
 vim.keymap.set('n', '<leader>jr', '/```<cr><up>VN<down>:<C-u>MoltenEvaluateVisual<CR>``', { noremap = true, silent = false, desc = '[J]upyter [R]un' })
+vim.keymap.set('n', '<leader>jo', ':noautocmd MoltenEnterOutput<CR>', { noremap = true, silent = false, desc = '[J]upyter Enter [O]utput' })
+vim.keymap.set('n', '<leader>jh', ':MoltenHideOutput<CR>', { noremap = true, silent = false, desc = '[J]upyter [H]ide Output' })
 
 -- auto format
 vim.keymap.set('n', '<leader>fmf', 'gg=G<c-o>', { noremap = true, silent = false, desc = '[F]ormat [M]anual [F]ormat' })
