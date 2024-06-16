@@ -10,10 +10,10 @@ return {
     vim.g.molten_virt_lines_off_by_1 = true
     vim.g.molten_virt_text_max_lines = 30
     vim.g.molten_output_show_more = false
-    vim.keymap.set('n', '<leader>mi', ':MoltenInit<CR>', { silent = true, desc = 'Molten Init Kernel' })
-    vim.keymap.set('n', '<leader>ml', ':MoltenEvaluateLine<CR>', { silent = true, desc = 'Molten Evaluate Line' })
-    vim.keymap.set('v', '<leader>mv', ':<C-u>MoltenEvaluateVisual<CR>gv<ESC>', { silent = true, desc = 'Molten Evaluate Visual' })
-    vim.keymap.set('n', '<leader>mh', ':MoltenHideOutput<CR>', { silent = true, desc = 'Molten Hide Output' })
-    vim.keymap.set('n', '<leader>mo', ':noautocmd MoltenEnterOutput<CR>', { silent = true, desc = 'Molten Enter Output' })
+    -- vim.keymap.set('n', '<leader>mi', ':MoltenInit<CR>', { silent = true, desc = 'Molten Init Kernel' })
+    -- vim.keymap.set('n', '<leader>ml', ':MoltenEvaluateLine<CR>', { silent = true, desc = 'Molten Evaluate Line' })
+    -- vim.keymap.set('v', '<leader>mv', ':<C-u>MoltenEvaluateVisual<CR>gv<ESC>', { silent = true, desc = 'Molten Evaluate Visual' })
+    -- vim.keymap.set('n', '<leader>mh', ':MoltenHideOutput<CR>', { silent = true, desc = 'Molten Hide Output' })
+    -- vim.keymap.set('n', '<leader>mo', ':noautocmd MoltenEnterOutput<CR>', { silent = true, desc = 'Molten Enter Output' })
   end,
 }
