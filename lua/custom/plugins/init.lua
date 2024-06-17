@@ -45,7 +45,7 @@
 
 -- jj to esc
 vim.keymap.set('i', 'jj', '<ESC>', { silent = true })
-vim.keymap.set('t', 'jj', '<ESC>', { silent = true })
+vim.keymap.set('t', 'jj', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
 
 -- noswap
 vim.o.swapfile = false
