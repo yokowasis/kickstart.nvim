@@ -43,6 +43,9 @@
 
 --]]
 
+-- jj to esc
+vim.keymap.set('i', 'jj', '<ESC>', { silent = true })
+
 -- noswap
 vim.o.swapfile = false
 vim.o.guifont = 'JetBrainsMono NFM:h13'
