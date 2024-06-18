@@ -44,9 +44,9 @@
 --]]
 
 -- jj to esc
-vim.keymap.set('i', 'qq', '<ESC>', { silent = true, desc = 'escape' })
-vim.keymap.set('t', 'qq', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
-vim.keymap.set('v', 'qq', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
+vim.keymap.set('i', 'zz', '<ESC>', { silent = true, desc = 'escape' })
+vim.keymap.set('t', 'zz', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
+vim.keymap.set('v', 'zz', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
 
 -- noswap
 vim.o.swapfile = false
