@@ -39,14 +39,14 @@
 
   NOTE: setup lemonade
   > go install github.com/lemonade-command/lemonade@latest
-  > ~/go/bin/lemonade serer
+  > ~/go/bin/lemonade server
 
 --]]
 
 -- jj to esc
-vim.keymap.set('i', 'jj', '<ESC>', { silent = true, desc = 'escape' })
-vim.keymap.set('t', 'jj', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
-vim.keymap.set('v', 'jj', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
+vim.keymap.set('i', 'qq', '<ESC>', { silent = true, desc = 'escape' })
+vim.keymap.set('t', 'qq', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
+vim.keymap.set('v', 'qq', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
 
 -- noswap
 vim.o.swapfile = false
@@ -953,13 +953,14 @@ return {
       require('copilot').setup {
         filetypes = {
           markdown = true,
+          lua = true,
         },
         suggestion = {
           enabled = true,
           auto_trigger = true,
           debounce = 75,
           keymap = {
-            accept = '<tab>',
+            accept = '<c-\\>',
             accept_word = false,
             accept_line = false,
             next = '<M-]>',
