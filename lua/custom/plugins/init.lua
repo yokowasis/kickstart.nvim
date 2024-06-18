@@ -1102,7 +1102,7 @@ return {
     'yokowasis/multicursors.nvim',
     event = 'VeryLazy',
     dependencies = {
-      'smoka7/hydra.nvim',
+      'yokowasis/hydra.nvim',
     },
     opts = {},
     cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
