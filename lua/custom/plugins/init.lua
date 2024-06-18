@@ -43,8 +43,9 @@
 
 --]]
 
--- jj to esc
-vim.keymap.set('i', 'zz', '<ESC>', { silent = true, desc = 'escape' })
+-- zz to esc
+
+vim.keymap.set('i', 'zz', '<esc>', { silent = true, desc = 'escape' })
 vim.keymap.set('t', 'zz', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
 vim.keymap.set('v', 'zz', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
 
@@ -960,12 +961,12 @@ return {
           auto_trigger = true,
           debounce = 75,
           keymap = {
-            accept = '<c-\\>',
+            accept = '<c-\\>a',
             accept_word = false,
             accept_line = false,
             next = '<M-]>',
             prev = '<M-[>',
-            dismiss = '<esc>',
+            dismiss = '<c-\\>d',
           },
         },
       }
@@ -1098,7 +1099,7 @@ return {
     },
   },
   {
-    'smoka7/multicursors.nvim',
+    'yokowasis/multicursors.nvim',
     event = 'VeryLazy',
     dependencies = {
       'smoka7/hydra.nvim',
