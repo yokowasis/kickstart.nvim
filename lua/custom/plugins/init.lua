@@ -46,6 +46,7 @@
 -- jj to esc
 vim.keymap.set('i', 'jj', '<ESC>', { silent = true, desc = 'escape' })
 vim.keymap.set('t', 'jj', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
+vim.keymap.set('v', 'jj', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
 
 -- noswap
 vim.o.swapfile = false
@@ -1139,6 +1140,16 @@ return {
     config = function()
       require('bamboo').setup {
         -- optional configuration here
+        code_style = {
+          comments = { italic = false },
+          conditionals = { italic = false },
+          keywords = {},
+          functions = {},
+          namespaces = { italic = false },
+          parameters = { italic = false },
+          strings = {},
+          variables = {},
+        },
       }
       require('bamboo').load()
     end,
