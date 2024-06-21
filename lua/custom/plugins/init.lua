@@ -189,8 +189,6 @@ function CompileAndRun()
       .. filename_without_extension
       .. '/*'
 
-    local mergeCommand = pandocCommand .. ' ; ' .. extractCommand .. ' ; ' .. fixCommand .. ' ; ' .. zipCommand
-
     local fixCommand = 'sed -i \'s/w:tblStyle w:val="Table"/w:tblStyle w:val="simpletable"/g\' ' .. xmlpath
     deleteCommand = 'rm -rf ' .. filename_without_extension
 
