@@ -198,6 +198,10 @@ function CompileAndRun()
 
     refCommand =
       "awk '{while(match($0, /\\#REFTABLE/)) {sub(/\\#REFTABLE/, ++count);} print}' uas/word/document.xml > temp.xml && mv temp.xml uas/word/document.xml"
+    refCommand = refcommand
+      .. "&& awk '{while(match($0, /\\#REFFIGURE/)) {sub(/\\#REFFIGURE/, ++count);} print}' uas/word/document.xml > temp.xml && mv temp.xml uas/word/document.xml"
+    refCommand = refcommand
+      .. "&& awk '{while(match($0, /\\#REFIMAGE/)) {sub(/\\#REFIMAGE/, ++count);} print}' uas/word/document.xml > temp.xml && mv temp.xml uas/word/document.xml"
 
     -- print(fixCommand)
 
