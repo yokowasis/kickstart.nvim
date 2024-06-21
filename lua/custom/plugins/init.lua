@@ -180,8 +180,6 @@ function CompileAndRun()
 
     local xmlpath = folder_path .. '/' .. filename_without_extension .. '/word/document.xml'
     print(xmlpath)
-    local fixCommand = 'sed -i "s/' .. '<w:tblStyle w:val=\\"Table\\" \\/>' .. '/' .. '<w:tblStyle w:val=\\"Table\\" \\/>' .. '/g" ' .. xmlpath
-    fixCommand = fixCommand .. '&& sed -i "s/' .. '<w:pStyle w:val=\\"Compact\\" />' .. '/' .. '<w:pStyle w:val=\\"single\\"/>' .. '/g" ' .. xmlpath
 
     local zipCommand = 'rm '
       .. filename_without_extension
@@ -193,22 +191,22 @@ function CompileAndRun()
 
     local mergeCommand = pandocCommand .. ' ; ' .. extractCommand .. ' ; ' .. fixCommand .. ' ; ' .. zipCommand
 
-    fixCommand = 'sed -i \'s/w:tblStyle w:val="Table"/w:tblStyle w:val="simpletable"/g\' ' .. xmlpath
+    local fixCommand = 'sed -i \'s/w:tblStyle w:val="Table"/w:tblStyle w:val="simpletable"/g\' ' .. xmlpath
     deleteCommand = 'rm -rf ' .. filename_without_extension
 
-    refCommand = "awk '{while(match($0, /\\#REFTABLE/)) {sub(/\\#REFTABLE/, ++count);} print}'  "
+    local refCommand = "awk '{while(match($0, /\\#REFTABLE/)) {sub(/\\#REFTABLE/, ++count);} print}'  "
       .. filename_without_extension
       .. '/word/document.xml > temp.xml && mv temp.xml  '
       .. filename_without_extension
       .. '/word/document.xml'
-    refCommand = refcommand
-      .. "&& awk '{while(match($0, /\\#REFFIGURE/)) {sub(/\\#REFFIGURE/, ++count);} print}'  "
+    refCommand = refCommand
+      .. " && awk '{while(match($0, /\\#REFFIGURE/)) {sub(/\\#REFFIGURE/, ++count);} print}'  "
       .. filename_without_extension
       .. '/word/document.xml > temp.xml && mv temp.xml  '
       .. filename_without_extension
       .. '/word/document.xml'
-    refCommand = refcommand
-      .. "&& awk '{while(match($0, /\\#REFIMAGE/)) {sub(/\\#REFIMAGE/, ++count);} print}'  "
+    refCommand = refCommand
+      .. " && awk '{while(match($0, /\\#REFIMAGE/)) {sub(/\\#REFIMAGE/, ++count);} print}'  "
       .. filename_without_extension
       .. '/word/document.xml > temp.xml && mv temp.xml  '
       .. filename_without_extension
