@@ -166,7 +166,7 @@ function CompileAndRun()
     vim.cmd(':tabnew | te bash ' .. folder_path .. '/' .. filename_with_extension)
   elseif filetype == 'markdown' then
     iste = false
-    local pandocCommand = 'pandoc --citeproc '
+    local pandocCommand = 'pandoc -F pandoc-crossref --citeproc '
       .. folder_path
       .. '/'
       .. filename_with_extension
@@ -179,7 +179,6 @@ function CompileAndRun()
     local extractCommand = '7z x ' .. filename_without_extension .. '.docx -o"' .. filename_without_extension .. '"'
 
     local xmlpath = folder_path .. '/' .. filename_without_extension .. '/word/document.xml'
-    print(xmlpath)
 
     local zipCommand = 'rm '
       .. filename_without_extension
@@ -191,25 +190,16 @@ function CompileAndRun()
 
     local fixCommand = 'sed -i \'s/w:tblStyle w:val="Table"/w:tblStyle w:val="simpletable"/g\' ' .. xmlpath
     fixCommand = fixCommand .. ' && sed -i \'s/w:pStyle w:val="Bibliography"/w:pStyle w:val="DaftarPustaka"/g\' ' .. xmlpath
+    fixCommand = fixCommand .. ' && sed -i \'s/w:pStyle w:val="TableCaption"/w:pStyle w:val="figure"/g\' ' .. xmlpath
+    fixCommand = fixCommand .. ' && sed -i \'s/w:pStyle w:val="ImageCaption"/w:pStyle w:val="figure"/g\' ' .. xmlpath
+    fixCommand = fixCommand .. ' && sed -i \'s/w:pStyle w:val="CaptionedFigure"/w:pStyle w:val="figure"/g\' ' .. xmlpath
     deleteCommand = 'rm -rf ' .. filename_without_extension
 
-    local refCommand = "awk '{while(match($0, /\\#REFTABLE/)) {sub(/\\#REFTABLE/, ++count);} print}'  "
-      .. filename_without_extension
-      .. '/word/document.xml > temp.xml && mv temp.xml  '
-      .. filename_without_extension
-      .. '/word/document.xml'
-    refCommand = refCommand
-      .. " && awk '{while(match($0, /\\#REFFIGURE/)) {sub(/\\#REFFIGURE/, ++count);} print}'  "
-      .. filename_without_extension
-      .. '/word/document.xml > temp.xml && mv temp.xml  '
-      .. filename_without_extension
-      .. '/word/document.xml'
-    refCommand = refCommand
-      .. " && awk '{while(match($0, /\\#REFIMAGE/)) {sub(/\\#REFIMAGE/, ++count);} print}'  "
-      .. filename_without_extension
-      .. '/word/document.xml > temp.xml && mv temp.xml  '
-      .. filename_without_extension
-      .. '/word/document.xml'
+    -- local refCommand = "awk '{while(match($0, /\\#REFTABLE/)) {sub(/\\#REFTABLE/, ++count);} print}'  "
+    --   .. filename_without_extension
+    --   .. '/word/document.xml > temp.xml && mv temp.xml  '
+    --   .. filename_without_extension
+    --   .. '/word/document.xml'
 
     -- print(fixCommand)
 
