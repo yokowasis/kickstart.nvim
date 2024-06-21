@@ -184,7 +184,7 @@ function CompileAndRun()
 
     local zipCommand = 'rm '
       .. filename_without_extension
-      .. '.docx;7z a -tzip '
+      .. '.docx && 7z a -tzip '
       .. filename_without_extension
       .. '.docx ./'
       .. filename_without_extension
