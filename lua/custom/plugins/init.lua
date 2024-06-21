@@ -196,12 +196,17 @@ function CompileAndRun()
     fixCommand = 'sed -i \'s/w:tblStyle w:val="Table"/w:tblStyle w:val="simpletable"/g\' ' .. xmlpath
     deleteCommand = 'rm -rf ' .. filename_without_extension
 
+    refCommand =
+      "awk '{while(match($0, /\\#REFTABLE/)) {sub(/\\#REFTABLE/, ++count);} print}' uas/word/document.xml > temp.xml && mv temp.xml uas/word/document.xml"
+
     -- print(fixCommand)
 
     vim.cmd 'cd %:p:h'
+    vim.cmd('!' .. deleteCommand)
     vim.cmd('!' .. pandocCommand)
     vim.cmd('!' .. extractCommand)
     vim.cmd('!' .. fixCommand)
+    vim.cmd('!' .. refCommand)
     vim.cmd('!' .. zipCommand)
     vim.cmd('!' .. deleteCommand)
   else
