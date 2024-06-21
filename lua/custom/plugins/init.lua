@@ -57,7 +57,10 @@ vim.o.list = false
 -- markdown bullet and numbering indent
 vim.o.breakindentopt = 'list:-1'
 
-local sysname = vim.loop.os_uname().sysname
+sysname = vim.loop.os_uname().sysname
+isWindows = sysname == 'Windows_NT'
+isMac = sysname == 'Darwin'
+isLinux = sysname == 'Linux'
 
 -- neovide auto focus
 if vim.g.neovide then
@@ -65,7 +68,7 @@ if vim.g.neovide then
     vim.cmd 'NeovideFocus'
   end, 200)
 
-  if vim.fn.has 'win32' == 1 then
+  if isWindows then
     -- new neovide window in Windows
     vim.keymap.set('n', '<C-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
     vim.keymap.set('i', '<C-n>', ':silent !neovide<cr>', { desc = 'Python', noremap = true, silent = true })
@@ -77,31 +80,11 @@ if vim.g.neovide then
 else
   -- new nvim-qt window in Android
   vim.keymap.set('n', '<M-n>', ':silent !nvim-qt<cr>', { desc = 'Python', noremap = true, silent = true })
-
-  -- nvim keybinding for iterm2 macos
-  if sysname == 'Darwin' then
-  end
 end
 
-if sysname == 'Windows_NT' then
+if isWindows then
   vim.g.python3_host_prog = 'C:\\Users\\yokow\\miniforge3\\envs\\labs\\python.exe'
 end
-
--- iterm 2 keybinding
--- vim.keymap.set('n', '<M-s>', ':w<cr>', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('i', '<M-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('n', '<M-i>', 'gg', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('i', '<M-i>', '<C-o>gg', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('n', '<M-K>', '<PageDown>', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('i', '<M-K>', '<PageDown>', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('i', '<M-I>', '<PageUp>', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('n', '<M-I>', '<PageUp>', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('n', '<M-k>', 'G', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('i', '<M-k>', '<C-o>G', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('n', '<M-l>', '$', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('i', '<M-l>', '<C-o>$', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('n', '<M-j>', '0', { desc = '[^s] Save Current File', noremap = true, silent = true })
--- vim.keymap.set('i', '<M-j>', '<C-o>0', { desc = '[^s] Save Current File', noremap = true, silent = true })
 
 -- independent clipboard
 vim.opt.clipboard = ''
@@ -232,7 +215,7 @@ end
 
 TerminalShell = ''
 
-if vim.fn.has 'win32' == 1 then
+if isWindows then
   vim.cmd [[command! SaveInitVim :tabnew | exe ':te git -C '. stdpath("config") .' add . & git -C ' . stdpath("config")  . ' commit -m save & git -C ' . stdpath("config")  . ' push']]
   vim.cmd [[command! SaveGlobalSnippets :tabnew | exe ':te git -C '. stdpath("config") .'/../../../git/friendly-snippets add . & git -C '. stdpath("config") .'/../../../git/friendly-snippets commit -m save & git -C '. stdpath("config") .'/../../../git/friendly-snippets push']]
   vim.cmd [[command! LoadGlobalSnippets :tabnew | exe ':te git -C '. stdpath("config") .'/../../../git/friendly-snippets pull']]
