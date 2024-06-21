@@ -181,6 +181,7 @@ function CompileAndRun()
     local xmlpath = folder_path .. '/' .. filename_without_extension .. '/word/document.xml'
     print(xmlpath)
     local fixCommand = 'sed -i "s/' .. '<w:tblStyle w:val=\\"Table\\" \\/>' .. '/' .. '<w:tblStyle w:val=\\"Table\\" \\/>' .. '/g" ' .. xmlpath
+    fixCommand = fixCommand .. '&& sed -i "s/' .. '<w:pStyle w:val=\\"Compact\\" />' .. '/' .. '<w:pStyle w:val=\\"single\\"/>' .. '/g" ' .. xmlpath
 
     local zipCommand = 'rm '
       .. filename_without_extension
