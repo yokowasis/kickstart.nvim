@@ -196,12 +196,23 @@ function CompileAndRun()
     fixCommand = 'sed -i \'s/w:tblStyle w:val="Table"/w:tblStyle w:val="simpletable"/g\' ' .. xmlpath
     deleteCommand = 'rm -rf ' .. filename_without_extension
 
-    refCommand =
-      "awk '{while(match($0, /\\#REFTABLE/)) {sub(/\\#REFTABLE/, ++count);} print}' uas/word/document.xml > temp.xml && mv temp.xml uas/word/document.xml"
+    refCommand = "awk '{while(match($0, /\\#REFTABLE/)) {sub(/\\#REFTABLE/, ++count);} print}'  "
+      .. filename_without_extension
+      .. '/word/document.xml > temp.xml && mv temp.xml  '
+      .. filename_without_extension
+      .. '/word/document.xml'
     refCommand = refcommand
-      .. "&& awk '{while(match($0, /\\#REFFIGURE/)) {sub(/\\#REFFIGURE/, ++count);} print}' uas/word/document.xml > temp.xml && mv temp.xml uas/word/document.xml"
+      .. "&& awk '{while(match($0, /\\#REFFIGURE/)) {sub(/\\#REFFIGURE/, ++count);} print}'  "
+      .. filename_without_extension
+      .. '/word/document.xml > temp.xml && mv temp.xml  '
+      .. filename_without_extension
+      .. '/word/document.xml'
     refCommand = refcommand
-      .. "&& awk '{while(match($0, /\\#REFIMAGE/)) {sub(/\\#REFIMAGE/, ++count);} print}' uas/word/document.xml > temp.xml && mv temp.xml uas/word/document.xml"
+      .. "&& awk '{while(match($0, /\\#REFIMAGE/)) {sub(/\\#REFIMAGE/, ++count);} print}'  "
+      .. filename_without_extension
+      .. '/word/document.xml > temp.xml && mv temp.xml  '
+      .. filename_without_extension
+      .. '/word/document.xml'
 
     -- print(fixCommand)
 
