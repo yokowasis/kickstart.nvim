@@ -195,7 +195,8 @@ function CompileAndRun()
     fixCommand = fixCommand .. ' && sed -i \'s/w:pStyle w:val="CaptionedFigure"/w:pStyle w:val="figure"/g\' ' .. xmlpath
     deleteCommand = 'rm -rf ' .. filename_without_extension
 
-    -- local refCommand = "awk '{while(match($0, /\\#REFTABLE/)) {sub(/\\#REFTABLE/, ++count);} print}'  "
+    local refCommand = ''
+    -- refCommand = "awk '{while(match($0, /\\#REFTABLE/)) {sub(/\\#REFTABLE/, ++count);} print}'  "
     --   .. filename_without_extension
     --   .. '/word/document.xml > temp.xml && mv temp.xml  '
     --   .. filename_without_extension
