@@ -202,7 +202,7 @@ function CompileAndRun()
     -- print(fixCommand)
 
     vim.cmd 'cd %:p:h'
-    vim.cmd('!' .. deleteCommand)
+    -- vim.cmd('!' .. deleteCommand)
     vim.cmd('!' .. pandocCommand)
     vim.cmd('!' .. extractCommand)
     vim.cmd('!' .. fixCommand)
