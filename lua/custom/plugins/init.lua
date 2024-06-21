@@ -166,7 +166,7 @@ function CompileAndRun()
     vim.cmd(':tabnew | te bash ' .. folder_path .. '/' .. filename_with_extension)
   elseif filetype == 'markdown' then
     iste = false
-    local pandocCommand = 'pandoc '
+    local pandocCommand = 'pandoc --citeproc'
       .. folder_path
       .. '/'
       .. filename_with_extension
