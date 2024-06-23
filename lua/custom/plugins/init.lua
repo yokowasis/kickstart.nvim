@@ -62,6 +62,16 @@ isWindows = sysname == 'Windows_NT'
 isMac = sysname == 'Darwin'
 isLinux = sysname == 'Linux'
 
+local function fileExists(fileName)
+  local file = io.open(fileName, 'r')
+  if file then
+    file:close()
+    return true
+  else
+    return false
+  end
+end
+
 -- neovide auto focus
 if vim.g.neovide then
   vim.defer_fn(function()
@@ -166,16 +176,21 @@ function CompileAndRun()
     vim.cmd(':tabnew | te bash ' .. folder_path .. '/' .. filename_with_extension)
   elseif filetype == 'markdown' then
     iste = false
+
     local pandocCommand = 'pandoc -F pandoc-crossref --citeproc '
       .. folder_path
       .. '/'
       .. filename_with_extension
       .. ' -o '
       .. filename_without_extension
-      .. '.docx --reference-doc '
-      .. labs_fullfolder
-      .. '/template/base.docx'
-    -- 7z x may.docx -o"may"
+      .. '.docx '
+
+    if fileExists 'template.docx' then
+      pandocCommand = pandocCommand .. '--reference-doc ./template.docx'
+    else
+      pandocCommand = pandocCommand .. '--reference-doc ' .. labs_fullfolder .. '/template/base.docx'
+    end
+
     local extractCommand = '7z x ' .. filename_without_extension .. '.docx -o"' .. filename_without_extension .. '"'
 
     local xmlpath = folder_path .. '/' .. filename_without_extension .. '/word/document.xml'
