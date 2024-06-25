@@ -54,7 +54,12 @@ vim.o.swapfile = false
 vim.o.guifont = 'JetBrainsMono NFM:h13'
 vim.o.list = false
 
+-- disable spell for pandoc
 vim.api.nvim_set_var('pandoc#spell#enabled', 0)
+
+-- markdown multi table format
+vim.g.table_mode_corner_corner = '+'
+vim.g.table_mode_header_fillchar = '='
 
 -- markdown bullet and numbering indent
 vim.o.breakindentopt = 'list:-1'
@@ -1126,7 +1131,7 @@ return {
     },
   },
   {
-    'dhruvasagar/vim-table-mode',
+    'yokowasis/vim-table-mode',
   },
   {
     'axelvc/template-string.nvim',
