@@ -54,6 +54,8 @@ vim.o.swapfile = false
 vim.o.guifont = 'JetBrainsMono NFM:h13'
 vim.o.list = false
 
+vim.api.nvim_set_var('pandoc#spell#enabled', 0)
+
 -- markdown bullet and numbering indent
 vim.o.breakindentopt = 'list:-1'
 
@@ -1171,4 +1173,6 @@ return {
       require('ibl').setup()
     end,
   },
+  'vim-pandoc/vim-pandoc',
+  'vim-pandoc/vim-pandoc-syntax',
 }
