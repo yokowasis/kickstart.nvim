@@ -1088,6 +1088,7 @@ return {
         typescript = { 'prettierd' },
         javascriptreact = { 'prettierd' },
         typescriptreact = { 'prettierd' },
+        pandoc = { 'prettierd' },
         markdown = { 'prettierd' },
         json = { 'prettierd' },
         css = { 'prettierd' },
