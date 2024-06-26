@@ -1158,12 +1158,12 @@ return {
       require('bamboo').setup {
         -- optional configuration here
         code_style = {
-          comments = { italic = false },
-          conditionals = { italic = false },
+          comments = { italic = true },
+          conditionals = { italic = true },
           keywords = {},
           functions = {},
-          namespaces = { italic = false },
-          parameters = { italic = false },
+          namespaces = { italic = true },
+          parameters = { italic = true },
           strings = {},
           variables = {},
         },
