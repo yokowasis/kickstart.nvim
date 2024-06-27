@@ -878,7 +878,7 @@ vim.api.nvim_create_autocmd('FileType', {
 -- close other windows except this one
 vim.keymap.set('n', 'x', ':on<cr>', { desc = 'Close all other windows', noremap = true, silent = true })
 
-chatagent = 'chatgpt'
+chatagent = 'haiku'
 -- code companion
 vim.keymap.set('n', '<leader>cgc', function()
   chatagent = 'chatgpt'
@@ -890,9 +890,23 @@ vim.keymap.set('n', '<leader>cgh', function()
   vim.notify 'Chat Agent : Claude 3 Haiku'
 end, { desc = 'Claude Haiku', noremap = true, silent = false })
 
+vim.keymap.set('n', '<leader>cgo', function()
+  chatagent = 'opus'
+  vim.notify 'Chat Agent : Claude 3 Opus'
+end, { desc = 'Claude Opus', noremap = true, silent = false })
+
+vim.keymap.set('n', '<leader>cgs', function()
+  chatagent = 'sonet'
+  vim.notify 'Chat Agent : Claude 3.5 Sonet'
+end, { desc = 'Claude Sonet', noremap = true, silent = false })
+
 vim.keymap.set('n', '<leader>ct', function()
   vim.cmd('CodeCompanionChat ' .. chatagent)
 end, { noremap = true, silent = false, desc = 'New [C]hat AI Bo[t]' })
+
+vim.keymap.set('n', '<leader>cc', function()
+  vim.cmd 'CodeCompanion'
+end, { noremap = true, silent = false, desc = '[C]ode [C]ompanion' })
 
 return {
   {
@@ -908,7 +922,26 @@ return {
     },
     config = function()
       require('codecompanion').setup {
+        strategies = {
+          chat = 'haiku',
+          inline = 'opus',
+          tool = 'opus',
+        },
         adapters = {
+          sonet = require('codecompanion.adapters').use('anthropic', {
+            schema = {
+              model = {
+                default = 'claude-3-5-sonnet-20240620',
+              },
+            },
+          }),
+          opus = require('codecompanion.adapters').use('anthropic', {
+            schema = {
+              model = {
+                default = 'claude-3-opus-20240229',
+              },
+            },
+          }),
           haiku = require('codecompanion.adapters').use('anthropic', {
             schema = {
               model = {
@@ -924,6 +957,9 @@ return {
             },
           }),
         },
+        plugin_system_prompt = string.format [[
+        You are a helpful ai assistant named Aria.
+        ]],
       }
     end,
   },
