@@ -552,6 +552,7 @@ vim.api.nvim_set_keymap('n', '<Leader>lg', [[:lua InsertConsoleLog()<CR>]], { no
 
 vim.cmd [[command! EditBaseVim :tabnew | exe 'edit '. stdpath('config').'/init.lua']]
 vim.cmd [[command! EditInitVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/init.lua']]
+vim.cmd [[command! EditFSVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/fs.lua']]
 vim.cmd [[command! LoadInitVim :tabnew | exe ':te git -C '. stdpath("config") .' pull' ]]
 vim.cmd [[command! EditGlobalSnippets :tabnew | exe 'edit ~/git/friendly-snippets/snippets/global.json']]
 
