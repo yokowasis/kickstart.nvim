@@ -538,12 +538,6 @@ vim.api.nvim_set_keymap('n', '<leader>ssl', ':source session.vim<cr>', { noremap
 vim.api.nvim_set_keymap('n', '<leader>sss', ':mksession! session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [S]ave' })
 vim.api.nvim_set_keymap('n', '<leader>nq', ':qa!<cr>', { noremap = true, silent = false, desc = '[N]vim [Q]uit' })
 
--- ChatGPT
-vim.keymap.set('n', '<leader>ct', ':ChatGPT<cr>', { noremap = true, silent = false, desc = '[C]hatGP[T]' })
-vim.keymap.set('n', '<leader>cc', ':ChatGPTCompleteCode<cr>', { noremap = true, silent = false, desc = '[C]hatGPT [C]ode Completion' })
-vim.keymap.set('n', '<leader>ce', ':ChatGPTRun explain_code<cr>', { noremap = true, silent = false, desc = '[C]hatGPT [E]xplain Code' })
-vim.keymap.set('n', '<leader>cf', ':ChatGPTRun fix_bugs<cr>', { noremap = true, silent = false, desc = '[C]hatGPT [F]ix Bugs' })
-
 -- vim signature help
 vim.api.nvim_set_keymap('n', 'k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap = true, silent = true })
 
@@ -558,6 +552,7 @@ vim.api.nvim_set_keymap('n', '<Leader>lg', [[:lua InsertConsoleLog()<CR>]], { no
 
 vim.cmd [[command! EditBaseVim :tabnew | exe 'edit '. stdpath('config').'/init.lua']]
 vim.cmd [[command! EditInitVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/init.lua']]
+vim.cmd [[command! EditFSVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/fs.lua']]
 vim.cmd [[command! LoadInitVim :tabnew | exe ':te git -C '. stdpath("config") .' pull' ]]
 vim.cmd [[command! EditGlobalSnippets :tabnew | exe 'edit ~/git/friendly-snippets/snippets/global.json']]
 
@@ -836,7 +831,8 @@ ls.config.set_config {
 require('nvim-treesitter.install').compilers = { 'clang', 'gcc', 'zig' }
 
 require('which-key').register {
-  ['<leader>c'] = { name = '[C]opilot', _ = 'which_key_ignore' },
+  ['<leader>c'] = { name = '[C]hat', _ = 'which_key_ignore' },
+  ['<leader>cg'] = { name = '[C]hat a[G]ent', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]atabase', _ = 'which_key_ignore' },
   ['<leader>l'] = { name = '[L]anguage / [L]og', _ = 'which_key_ignore' },
   ['<leader>n'] = { name = '[N]eovim', _ = 'which_key_ignore' },
@@ -862,7 +858,7 @@ require('mini.surround').setup {
   },
 }
 
--- close window with q if it's not a main window
+-- close window with x if it's not a main window
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {
     'checkhealth',
@@ -883,7 +879,94 @@ vim.api.nvim_create_autocmd('FileType', {
 -- close other windows except this one
 vim.keymap.set('n', 'x', ':on<cr>', { desc = 'Close all other windows', noremap = true, silent = true })
 
+chatagent = 'haiku'
+-- code companion
+vim.keymap.set('n', '<leader>cgc', function()
+  chatagent = 'chatgpt'
+  vim.notify 'Chat Agent : chatgpt 3.5 turbo'
+end, { desc = 'ChatGPT', noremap = true, silent = false })
+
+vim.keymap.set('n', '<leader>cgh', function()
+  chatagent = 'haiku'
+  vim.notify 'Chat Agent : Claude 3 Haiku'
+end, { desc = 'Claude Haiku', noremap = true, silent = false })
+
+vim.keymap.set('n', '<leader>cgo', function()
+  chatagent = 'opus'
+  vim.notify 'Chat Agent : Claude 3 Opus'
+end, { desc = 'Claude Opus', noremap = true, silent = false })
+
+vim.keymap.set('n', '<leader>cgs', function()
+  chatagent = 'sonet'
+  vim.notify 'Chat Agent : Claude 3.5 Sonet'
+end, { desc = 'Claude Sonet', noremap = true, silent = false })
+
+vim.keymap.set('n', '<leader>ct', function()
+  vim.cmd('CodeCompanionChat ' .. chatagent)
+end, { noremap = true, silent = false, desc = 'New [C]hat AI Bo[t]' })
+
+vim.keymap.set('n', '<leader>cc', function()
+  vim.cmd 'CodeCompanion'
+end, { noremap = true, silent = false, desc = '[C]ode [C]ompanion' })
+
 return {
+  {
+    'olimorris/codecompanion.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-telescope/telescope.nvim', -- Optional
+      {
+        'stevearc/dressing.nvim', -- Optional: Improves the default Neovim UI
+        opts = {},
+      },
+    },
+    config = function()
+      require('codecompanion').setup {
+        strategies = {
+          chat = 'haiku',
+          inline = 'opus',
+          tool = 'opus',
+        },
+        adapters = {
+          sonet = require('codecompanion.adapters').use('anthropic', {
+            schema = {
+              model = {
+                default = 'claude-3-5-sonnet-20240620',
+              },
+            },
+          }),
+          opus = require('codecompanion.adapters').use('anthropic', {
+            schema = {
+              model = {
+                default = 'claude-3-opus-20240229',
+              },
+            },
+          }),
+          haiku = require('codecompanion.adapters').use('anthropic', {
+            schema = {
+              model = {
+                default = 'claude-3-haiku-20240307',
+              },
+              max_token = {
+                default = 10000,
+              },
+            },
+          }),
+          chatgpt = require('codecompanion.adapters').use('openai', {
+            schema = {
+              model = {
+                default = 'gpt-3.5-turbo',
+              },
+            },
+          }),
+        },
+        plugin_system_prompt = string.format [[
+        You are a helpful ai assistant named Aria.
+        ]],
+      }
+    end,
+  },
   {
     'm4xshen/autoclose.nvim',
     config = function()
@@ -1158,12 +1241,12 @@ return {
       require('bamboo').setup {
         -- optional configuration here
         code_style = {
-          comments = { italic = false },
-          conditionals = { italic = false },
+          comments = { italic = true },
+          conditionals = { italic = true },
           keywords = {},
           functions = {},
-          namespaces = { italic = false },
-          parameters = { italic = false },
+          namespaces = { italic = true },
+          parameters = { italic = true },
           strings = {},
           variables = {},
         },
