@@ -948,6 +948,9 @@ return {
               model = {
                 default = 'claude-3-haiku-20240307',
               },
+              max_token = {
+                default = 10000,
+              },
             },
           }),
           chatgpt = require('codecompanion.adapters').use('openai', {
