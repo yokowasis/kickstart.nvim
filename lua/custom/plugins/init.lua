@@ -231,13 +231,13 @@ function CompileAndRun()
     -- print(fixCommand)
 
     vim.cmd 'cd %:p:h'
-    vim.cmd('!' .. deleteCommand)
+    -- vim.cmd('!' .. deleteCommand)
     vim.cmd('!' .. pandocCommand)
     vim.cmd('!' .. extractCommand)
     vim.cmd('!' .. fixCommand)
     vim.cmd('!' .. refCommand)
     vim.cmd('!' .. zipCommand)
-    -- vim.cmd('!' .. deleteCommand)
+    vim.cmd('!' .. deleteCommand)
   else
     vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
     return
