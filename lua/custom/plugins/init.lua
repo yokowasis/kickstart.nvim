@@ -216,7 +216,7 @@ function CompileAndRun()
     fixCommand = fixCommand .. ' && sed -i \'s/w:pStyle w:val="ImageCaption"/w:pStyle w:val="figure"/g\' ' .. xmlpath
     fixCommand = fixCommand .. ' && sed -i \'s/w:pStyle w:val="CaptionedFigure"/w:pStyle w:val="figure"/g\' ' .. xmlpath
     fixCommand = fixCommand
-      .. '&& sed -i "s|<w:p><w:pPr><w:pStyle w:val=\\"tableStyle\\" /></w:pPr><w:r><w:t xml:space=\\"preserve\\">noborder</w:t></w:r></w:p><w:tbl><w:tblPr><w:tblStyle w:val=\\"simpletable\\" />|<w:tbl><w:tblPr><w:tblStyle w:val=\\"noborder\\" />|" '
+      .. '&& sed -i "s|<w:p><w:pPr><w:pStyle w:val=\\"tableStyle\\" /></w:pPr><w:r><w:t xml:space=\\"preserve\\">noborder</w:t></w:r></w:p><w:tbl><w:tblPr><w:tblStyle w:val=\\"simpletable\\" />|<w:tbl><w:tblPr><w:tblStyle w:val=\\"noborder\\" />|g" '
       .. xmlpath
 
     deleteCommand = 'rm -rf ' .. filename_without_extension
@@ -231,13 +231,13 @@ function CompileAndRun()
     -- print(fixCommand)
 
     vim.cmd 'cd %:p:h'
-    -- vim.cmd('!' .. deleteCommand)
+    vim.cmd('!' .. deleteCommand)
     vim.cmd('!' .. pandocCommand)
     vim.cmd('!' .. extractCommand)
     vim.cmd('!' .. fixCommand)
     vim.cmd('!' .. refCommand)
     vim.cmd('!' .. zipCommand)
-    vim.cmd('!' .. deleteCommand)
+    -- vim.cmd('!' .. deleteCommand)
   else
     vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
     return
