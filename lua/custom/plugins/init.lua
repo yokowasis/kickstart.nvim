@@ -837,20 +837,22 @@ ls.config.set_config {
 
 require('nvim-treesitter.install').compilers = { 'clang', 'gcc', 'zig' }
 
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]hat', _ = 'which_key_ignore' },
-  ['<leader>cg'] = { name = '[C]hat a[G]ent', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]atabase', _ = 'which_key_ignore' },
-  ['<leader>l'] = { name = '[L]anguage / [L]og', _ = 'which_key_ignore' },
-  ['<leader>n'] = { name = '[N]eovim', _ = 'which_key_ignore' },
-  ['<leader>f'] = { name = '[F]ormat/[F]ramework', _ = 'which_key_ignore' },
-  ['<leader>p'] = { name = '[P]aste', _ = 'which_key_ignore' },
-  ['<leader>fn'] = { name = '[F]ramework [N]extJS', _ = 'which_key_ignore' },
-  ['<leader>fs'] = { name = '[F]ramework [S]velte', _ = 'which_key_ignore' },
-  ['<leader>b'] = { name = '[B]ookmarks', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>j'] = { name = '[J]upyter', _ = 'which_key_ignore' },
-  ['<leader>lc'] = { name = '[L]anguage [C]hange', _ = 'which_key_ignore' },
+require('which-key').add {
+  {
+    { '<leader>b', group = '[B]ookmarks' },
+    { '<leader>c', group = '[C]hat' },
+    { '<leader>cg', group = '[C]hat a[G]ent' },
+    { '<leader>d', group = '[D]atabase' },
+    { '<leader>f', group = '[F]ormat/[F]ramework' },
+    { '<leader>fn', group = '[F]ramework [N]extJS' },
+    { '<leader>fs', group = '[F]ramework [S]velte' },
+    { '<leader>g', group = '[G]it' },
+    { '<leader>j', group = '[J]upyter' },
+    { '<leader>l', group = '[L]anguage / [L]og' },
+    { '<leader>lc', group = '[L]anguage [C]hange' },
+    { '<leader>n', group = '[N]eovim' },
+    { '<leader>p', group = '[P]aste' },
+  },
 }
 
 require('mini.surround').setup {
