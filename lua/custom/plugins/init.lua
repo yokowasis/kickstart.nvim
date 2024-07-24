@@ -518,7 +518,7 @@ vim.api.nvim_set_keymap('n', '<leader>rd', ':lua RunCommandInNewTab("npm run dev
 vim.api.nvim_set_keymap('n', '<leader>ri', ':lua Npm_install()<CR>', { noremap = true, silent = false, desc = '[R]un npm [I]nstall' })
 
 -- clear highlight after search by pressing return
-vim.api.nvim_set_keymap('n', '<leader>cl', ':noh<CR>:%s/\r//g<CR>', { noremap = true, silent = true, desc = '[C][l]ear Search' })
+vim.api.nvim_set_keymap('n', '<leader>cl', ':noh<CR>:%s/\r//g<CR>', { noremap = true, silent = true, desc = '[C][l]ear Search and NewLine Character' })
 
 -- cd to current directory
 vim.api.nvim_set_keymap('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', { noremap = true, silent = false, desc = '[C]hange [D]irectory to current file' })
