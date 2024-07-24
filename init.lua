@@ -838,6 +838,7 @@ require('lazy').setup({
         'html',
         'svelte',
         'markdown',
+        'yaml',
         'json',
       },
       -- Autoinstall languages that are not installed
