@@ -918,6 +918,8 @@ vim.keymap.set('n', '<leader>cc', function()
   vim.cmd 'CodeCompanion'
 end, { noremap = true, silent = false, desc = '[C]ode [C]ompanion' })
 
+vim.g.markdown_fenced_languages = { 'html', 'python', 'lua', 'vim', 'typescript', 'javascript' }
+
 return {
   {
     'olimorris/codecompanion.nvim',
@@ -1271,6 +1273,4 @@ return {
       require('ibl').setup()
     end,
   },
-  'vim-pandoc/vim-pandoc',
-  'vim-pandoc/vim-pandoc-syntax',
 }
