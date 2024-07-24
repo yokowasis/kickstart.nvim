@@ -1271,4 +1271,6 @@ return {
       require('ibl').setup()
     end,
   },
+  'vim-pandoc/vim-pandoc',
+  'vim-pandoc/vim-pandoc-syntax',
 }
