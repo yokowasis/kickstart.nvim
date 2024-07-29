@@ -972,9 +972,6 @@ return {
             },
           }),
         },
-        plugin_system_prompt = string.format [[
-        You are a helpful ai assistant named Aria.
-        ]],
       }
     end,
   },
