@@ -935,9 +935,9 @@ return {
     config = function()
       require('codecompanion').setup {
         strategies = {
-          chat = 'haiku',
-          inline = 'opus',
-          tool = 'opus',
+          chat = { adapter = 'haiku' },
+          inline = { adapter = 'opus' },
+          tool = { adapter = 'opus' },
         },
         adapters = {
           sonet = require('codecompanion.adapters').use('anthropic', {
