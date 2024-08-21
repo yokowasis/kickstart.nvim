@@ -839,6 +839,7 @@ require('nvim-treesitter.install').compilers = { 'clang', 'gcc', 'zig' }
 
 require('which-key').add {
   {
+    { "'", hidden = true },
     { '<leader>b', group = '[B]ookmarks' },
     { '<leader>c', group = '[C]hat' },
     { '<leader>cg', group = '[C]hat a[G]ent' },
