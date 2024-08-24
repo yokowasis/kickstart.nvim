@@ -948,6 +948,9 @@ return {
               model = {
                 default = 'claude-3-5-sonnet-20240620',
               },
+              max_tokens = {
+                default = 8192,
+              },
             },
           }),
           opus = require('codecompanion.adapters').use('anthropic', {
@@ -962,7 +965,7 @@ return {
               model = {
                 default = 'claude-3-haiku-20240307',
               },
-              max_token = {
+              max_tokens = {
                 default = 4096,
               },
             },
