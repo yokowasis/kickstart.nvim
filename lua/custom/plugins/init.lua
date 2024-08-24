@@ -1108,6 +1108,9 @@ return {
         update_focused_file = {
           enable = true,
         },
+        git = {
+          enable = false,
+        },
         sort = {
           sorter = 'case_sensitive',
         },
