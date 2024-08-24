@@ -891,7 +891,7 @@ vim.api.nvim_create_autocmd('FileType', {
 -- close other windows except this one
 vim.keymap.set('n', 'x', ':on<cr>', { desc = 'Close all other windows', noremap = true, silent = true })
 
-chatagent = 'haiku'
+chatagent = 'chatgpt'
 -- code companion
 vim.keymap.set('n', '<leader>cgc', function()
   chatagent = 'chatgpt'
@@ -976,7 +976,7 @@ return {
                 default = 'gpt-4o-mini',
               },
               max_tokens = {
-                default = 4096,
+                default = 16384,
               },
             },
           }),
