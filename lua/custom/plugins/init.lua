@@ -540,9 +540,9 @@ function Npm_install()
 end
 
 -- Session
-vim.api.nvim_set_keymap('n', '<leader>ssl', ':source session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [L]oad' })
-vim.api.nvim_set_keymap('n', '<leader>sss', ':mksession! session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [S]ave' })
-vim.api.nvim_set_keymap('n', '<leader>nq', ':qa!<cr>', { noremap = true, silent = false, desc = '[N]vim [Q]uit' })
+vim.api.nvim_set_keymap('n', '<leader>ssl', ':source ~/session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [L]oad' })
+vim.api.nvim_set_keymap('n', '<leader>sss', ':mksession! ~/session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [S]ave' })
+vim.api.nvim_set_keymap('n', '<leader>nq', ':mksession! ~/session.vim<cr>:qa!<cr>', { noremap = true, silent = false, desc = '[N]vim [Q]uit' })
 
 -- vim signature help
 vim.api.nvim_set_keymap('n', 'k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap = true, silent = true })
@@ -797,6 +797,8 @@ vim.keymap.set('n', '<leader>b6', ':e ~/git/cbtadmin/<cr>', { desc = '[B] 6. CBT
 vim.keymap.set('n', '<leader>b7', ':e ~/git/labs<cr>', { desc = '[B] 7. LABS ', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b8', ':e ~/git/wiki-bimasoft<cr>', { desc = '[B] 8. Wiki Bimasoft ', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b9', ':e ~/git/labs/kuliah/s2/beasiswa/paper/paper.md<cr>', { desc = '[B] 9. Paper Beasiswa ', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>ba0', ':e ~/git/adminlte/<cr>', { desc = '[B] 10. MMS (AdminLTE)', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>ba1', ':e d:/xampp/htdocs/adminlte/<cr>', { desc = '[B] 10. MMS (AdminLTE)', noremap = true, silent = false })
 
 -- change language
 vim.keymap.set('n', '<leader>lcj', ':set ft=javascript<cr>', { desc = 'Javascript', noremap = true, silent = false })
@@ -1106,6 +1108,9 @@ return {
         update_focused_file = {
           enable = true,
         },
+        git = {
+          enable = false,
+        },
         sort = {
           sorter = 'case_sensitive',
         },
@@ -1168,9 +1173,7 @@ return {
         -- languages here or re-enable it for the disabled ones.
         local disable_filetypes = { c = true, cpp = true }
         return {
-          timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-          async = true,
         }
       end,
       formatters_by_ft = {
@@ -1180,7 +1183,6 @@ return {
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- markdown = { 'prettierd' },
         javascript = { 'prettierd' },
         typescript = { 'prettierd' },
         javascriptreact = { 'prettierd' },
@@ -1196,6 +1198,14 @@ return {
         -- javascript = { { 'prettierd', 'prettier' } },
       },
       formatters = {
+        ['php-cs-fixer'] = {
+          command = 'php-cs-fixer',
+          args = {
+            'fix',
+            '$FILENAME',
+          },
+          stdin = false,
+        },
         ['djlint'] = {
           prepend_args = { '--indent', '2' },
         },
