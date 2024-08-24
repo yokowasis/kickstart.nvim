@@ -540,9 +540,9 @@ function Npm_install()
 end
 
 -- Session
-vim.api.nvim_set_keymap('n', '<leader>ssl', ':source session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [L]oad' })
-vim.api.nvim_set_keymap('n', '<leader>sss', ':mksession! session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [S]ave' })
-vim.api.nvim_set_keymap('n', '<leader>nq', ':qa!<cr>', { noremap = true, silent = false, desc = '[N]vim [Q]uit' })
+vim.api.nvim_set_keymap('n', '<leader>ssl', ':source ~/session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [L]oad' })
+vim.api.nvim_set_keymap('n', '<leader>sss', ':mksession! ~/session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [S]ave' })
+vim.api.nvim_set_keymap('n', '<leader>nq', ':mksession! ~/session.vim<cr>:qa!<cr>', { noremap = true, silent = false, desc = '[N]vim [Q]uit' })
 
 -- vim signature help
 vim.api.nvim_set_keymap('n', 'k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap = true, silent = true })
@@ -1170,9 +1170,7 @@ return {
         -- languages here or re-enable it for the disabled ones.
         local disable_filetypes = { c = true, cpp = true }
         return {
-          timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-          async = true,
         }
       end,
       formatters_by_ft = {
@@ -1182,7 +1180,6 @@ return {
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- markdown = { 'prettierd' },
         javascript = { 'prettierd' },
         typescript = { 'prettierd' },
         javascriptreact = { 'prettierd' },
@@ -1198,6 +1195,14 @@ return {
         -- javascript = { { 'prettierd', 'prettier' } },
       },
       formatters = {
+        ['php-cs-fixer'] = {
+          command = 'php-cs-fixer',
+          args = {
+            'fix',
+            '$FILENAME',
+          },
+          stdin = false,
+        },
         ['djlint'] = {
           prepend_args = { '--indent', '2' },
         },
