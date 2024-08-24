@@ -938,7 +938,7 @@ return {
     config = function()
       require('codecompanion').setup {
         strategies = {
-          chat = { adapter = 'haiku' },
+          chat = { adapter = 'chatgpt' },
           inline = { adapter = 'opus' },
           tool = { adapter = 'opus' },
         },
@@ -973,7 +973,10 @@ return {
           chatgpt = require('codecompanion.adapters').use('openai', {
             schema = {
               model = {
-                default = 'gpt-3.5-turbo',
+                default = 'gpt-4o-mini',
+              },
+              max_tokens = {
+                default = 4096,
               },
             },
           }),
