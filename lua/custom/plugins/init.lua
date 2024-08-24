@@ -797,6 +797,7 @@ vim.keymap.set('n', '<leader>b6', ':e ~/git/cbtadmin/<cr>', { desc = '[B] 6. CBT
 vim.keymap.set('n', '<leader>b7', ':e ~/git/labs<cr>', { desc = '[B] 7. LABS ', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b8', ':e ~/git/wiki-bimasoft<cr>', { desc = '[B] 8. Wiki Bimasoft ', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>b9', ':e ~/git/labs/kuliah/s2/beasiswa/paper/paper.md<cr>', { desc = '[B] 9. Paper Beasiswa ', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>ba0', ':e ~/git/adminlte/<cr>', { desc = '[B] 10. MMS (AdminLTE)', noremap = true, silent = false })
 
 -- change language
 vim.keymap.set('n', '<leader>lcj', ':set ft=javascript<cr>', { desc = 'Javascript', noremap = true, silent = false })
