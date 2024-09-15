@@ -946,7 +946,7 @@ return {
           tool = { adapter = 'opus' },
         },
         adapters = {
-          sonet = require('codecompanion.adapters').use('anthropic', {
+          sonet = require('codecompanion.adapters').extend('anthropic', {
             schema = {
               model = {
                 default = 'claude-3-5-sonnet-20240620',
@@ -956,14 +956,14 @@ return {
               },
             },
           }),
-          opus = require('codecompanion.adapters').use('anthropic', {
+          opus = require('codecompanion.adapters').extend('anthropic', {
             schema = {
               model = {
                 default = 'claude-3-opus-20240229',
               },
             },
           }),
-          haiku = require('codecompanion.adapters').use('anthropic', {
+          haiku = require('codecompanion.adapters').extend('anthropic', {
             schema = {
               model = {
                 default = 'claude-3-haiku-20240307',
@@ -973,7 +973,7 @@ return {
               },
             },
           }),
-          chatgpt = require('codecompanion.adapters').use('openai', {
+          chatgpt = require('codecompanion.adapters').extend('openai', {
             schema = {
               model = {
                 default = 'gpt-4o-mini',
