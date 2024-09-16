@@ -1061,44 +1061,6 @@ return {
       end
     end,
   },
-  -- copilot
-  {
-    'zbirenbaum/copilot.lua',
-    enabled = true,
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    config = function()
-      require('copilot').setup {
-        filetypes = {
-          markdown = true,
-          lua = true,
-        },
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          debounce = 75,
-          keymap = {
-            accept = '<c-\\>a',
-            accept_word = false,
-            accept_line = false,
-            next = '<M-]>',
-            prev = '<M-[>',
-            dismiss = '<c-\\>d',
-          },
-        },
-      }
-    end,
-    opts = {
-      suggestion = { enabled = true, auto_trigger = true },
-      panel = { enabled = false },
-    },
-  },
-  {
-    'zbirenbaum/copilot-cmp',
-    config = function()
-      require('copilot_cmp').setup()
-    end,
-  },
   'nvim-pack/nvim-spectre',
   {
     'nvim-tree/nvim-tree.lua',
