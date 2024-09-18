@@ -113,6 +113,8 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.smartindent = true
 
+vim.o.foldlevel = 20
+
 function GetFileType()
   local filename = vim.fn.expand '%:t'
   local extension = vim.fn.fnamemodify(filename, ':e')
