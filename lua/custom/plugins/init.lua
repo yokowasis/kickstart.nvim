@@ -284,6 +284,7 @@ vim.o.hlsearch = true
 vim.api.nvim_set_keymap('i', '<C-A>', '<Plug>(emmet-expand-abbr)', { noremap = true, silent = true })
 
 -- "Copy Paste from OS Clipboard
+vim.keymap.set('v', '<C-v>', '"+p:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
 vim.keymap.set('n', '<C-v>', '"+p:silent! %s/\\r//g<cr>', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
 vim.keymap.set('i', '<C-v>', '<esc>"+p:silent! %s/\\r//g<cr>a', { desc = '[P]aste from system clipboard', noremap = true, silent = true })
 
