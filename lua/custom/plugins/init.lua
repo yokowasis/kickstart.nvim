@@ -542,8 +542,8 @@ function Npm_install()
 end
 
 -- Session
-vim.api.nvim_set_keymap('n', '<leader>ssl', ':source ~/session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [L]oad' })
-vim.api.nvim_set_keymap('n', '<leader>sss', ':mksession! ~/session.vim<cr>', { noremap = true, silent = false, desc = '[S]ession [S]ave' })
+vim.api.nvim_set_keymap('n', '<leader>sel', ':source ~/session.vim<cr>', { noremap = true, silent = false, desc = '[Se]ssion [L]oad' })
+vim.api.nvim_set_keymap('n', '<leader>ses', ':mksession! ~/session.vim<cr>', { noremap = true, silent = false, desc = '[Se]ssion [S]ave' })
 vim.api.nvim_set_keymap('n', '<leader>nq', ':mksession! ~/session.vim<cr>:qa!<cr>', { noremap = true, silent = false, desc = '[N]vim [Q]uit' })
 
 -- vim signature help
@@ -562,7 +562,7 @@ vim.cmd [[command! EditBaseVim :tabnew | exe 'edit '. stdpath('config').'/init.l
 vim.cmd [[command! EditInitVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/init.lua']]
 vim.cmd [[command! EditFSVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/fs.lua']]
 vim.cmd [[command! LoadInitVim :tabnew | exe ':te git -C '. stdpath("config") .' pull' ]]
-vim.cmd [[command! EditGlobalSnippets :tabnew | exe 'edit ~/git/friendly-snippets/snippets/global.json']]
+vim.cmd [[command! EditSnippets :lua require("luasnip.loaders").edit_snippet_files()]]
 
 vim.o.encoding = 'utf-8'
 
