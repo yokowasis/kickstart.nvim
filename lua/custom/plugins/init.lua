@@ -944,7 +944,7 @@ return {
       require('codecompanion').setup {
         strategies = {
           chat = { adapter = 'chatgpt' },
-          inline = { adapter = 'opus' },
+          inline = { adapter = 'chatgpt' },
           tool = { adapter = 'opus' },
         },
         adapters = {
