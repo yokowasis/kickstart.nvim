@@ -576,7 +576,7 @@ vim.keymap.set('n', '<leader>jh', ':MoltenHideOutput<CR>', { noremap = true, sil
 vim.keymap.set('n', '<leader>fmf', 'gg=G<c-o>', { noremap = true, silent = false, desc = '[F]ormat [M]anual [F]ormat' })
 
 -- Search and Replace
-vim.keymap.set('n', '<leader>sr', ':%s///g<left><left><left>', { noremap = true, silent = false, desc = '[S]earch and [R]eplace' })
+vim.keymap.set('n', '<leader>sar', ':%s///g<left><left><left>', { noremap = true, silent = false, desc = '[S]earch [A]nd [R]eplace' })
 
 function NextJSNewPage(pagename)
   local page_path = 'src/app/pages/' .. pagename .. '/page.tsx'
