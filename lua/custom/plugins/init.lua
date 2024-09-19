@@ -928,6 +928,8 @@ end, { noremap = true, silent = false, desc = '[C]ode [C]ompanion' })
 
 vim.g.markdown_fenced_languages = { 'html', 'python', 'lua', 'vim', 'typescript', 'javascript' }
 
+require('luasnip.loaders.from_vscode').lazy_load { paths = { '~/git/friendly-snippets' } }
+
 return {
   {
     'olimorris/codecompanion.nvim',
