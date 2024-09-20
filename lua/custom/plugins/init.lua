@@ -519,6 +519,7 @@ vim.keymap.set('i', '<D-s>', '<Esc>:w<cr>a', { desc = '[^s] Save Current File', 
 vim.api.nvim_set_keymap('n', '<leader>rb', ':lua RunCommandAndNotify("npm run build")<CR>', { noremap = true, silent = false, desc = '[R]un [B]uild' })
 vim.api.nvim_set_keymap('n', '<leader>rd', ':lua RunCommandInNewTab("npm run dev")<CR>', { noremap = true, silent = false, desc = '[R]un [D]ev' })
 vim.api.nvim_set_keymap('n', '<leader>ri', ':lua Npm_install()<CR>', { noremap = true, silent = false, desc = '[R]un npm [I]nstall' })
+vim.api.nvim_set_keymap('n', '<leader>rl', ':tabnew | te five-server<CR>', { noremap = true, silent = false, desc = '[R]un npm [L]ive Server' })
 
 -- clear highlight after search by pressing return
 vim.api.nvim_set_keymap('n', '<leader>cl', ':noh<CR>:%s/\r//g<CR>', { noremap = true, silent = true, desc = '[C][l]ear Search and NewLine Character' })
