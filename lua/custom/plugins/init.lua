@@ -851,7 +851,7 @@ require('which-key').add {
     { '<leader>b', group = '[B]ookmarks' },
     { '<leader>c', group = '[C]hat' },
     { '<leader>cg', group = '[C]hat a[G]ent' },
-    { '<leader>d', group = '[D]atabase' },
+    -- { '<leader>d', group = '[D]atabase' },
     { '<leader>f', group = '[F]ormat/[F]ramework' },
     { '<leader>fn', group = '[F]ramework [N]extJS' },
     { '<leader>fs', group = '[F]ramework [S]velte' },
