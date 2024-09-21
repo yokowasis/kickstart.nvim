@@ -813,6 +813,7 @@ vim.keymap.set('n', '<leader>lcj', ':set ft=javascript<cr>', { desc = 'Javascrip
 vim.keymap.set('n', '<leader>lco', ':set ft=json<cr>', { desc = 'JSON', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>lcp', ':set ft=php<cr>', { desc = 'PHP', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>lcy', ':set ft=python<cr>', { desc = 'Python', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>lcc', ':set ft=c<cr>', { desc = 'C', noremap = true, silent = false })
 
 -- nvimtree setup
 local function my_on_attach(bufnr)
