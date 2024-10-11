@@ -43,8 +43,10 @@
 
 --]]
 
--- zz to esc
+-- no mouse
+vim.o.mouse = ''
 
+-- zz to esc
 vim.keymap.set('i', 'zz', '<esc>', { silent = true, desc = 'escape' })
 vim.keymap.set('t', 'zz', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
 vim.keymap.set('v', 'zz', '<C-\\><C-n>', { desc = '', noremap = true, silent = true })
