@@ -569,7 +569,7 @@ vim.cmd [[command! EditFSVim :tabnew | exe 'edit '. stdpath('config').'/lua/cust
 vim.cmd [[command! LoadInitVim :tabnew | exe ':te git -C '. stdpath("config") .' pull' ]]
 vim.cmd [[command! EditSnippets :lua require("luasnip.loaders").edit_snippet_files()]]
 
-vim.keymap.set('n', '<leader>sne', ':EditSnippets', { noremap = true, silent = false, desc = '[Sn]ippets [E]dit' })
+vim.keymap.set('n', '<leader>sne', ':EditSnippets<cr>', { noremap = true, silent = false, desc = '[Sn]ippets [E]dit' })
 
 vim.o.encoding = 'utf-8'
 
