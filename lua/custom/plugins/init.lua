@@ -1232,14 +1232,14 @@ return {
       require('bamboo').setup {
         -- optional configuration here
         code_style = {
-          comments = { italic = true },
-          conditionals = { italic = true },
-          keywords = {},
-          functions = {},
-          namespaces = { italic = true },
-          parameters = { italic = true },
-          strings = {},
-          variables = {},
+          comments = { italic = false },
+          conditionals = { italic = false },
+          keywords = { italic = false },
+          functions = { italic = false },
+          namespaces = { italic = false },
+          parameters = { italic = false },
+          strings = { italic = false },
+          variables = { italic = false },
         },
       }
       require('bamboo').load()
