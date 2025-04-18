@@ -1,3 +1,112 @@
+-- "Database Toggle UI"
+vim.keymap.set('n', '<leader>db', ':DBUIToggle<cr>', {
+    desc = '[D]ata[b]ase',
+    noremap = true,
+    silent = true
+})
+
+function CompileAndRun()
+    local filetype = GetFileType()
+
+    -- Get full folder path of the current buffer
+    local folder_path = vim.fn.expand '%:p:h'
+
+    -- get full path up to "labs" folder
+    local labs_fullfolder = folder_path:match '(.+labs)'
+
+    -- Get the filename (with extension) of the current buffer
+    local filename_with_extension = vim.fn.expand '%:t'
+
+    -- Get the filename without the extension
+    local filename_without_extension = vim.fn.expand '%:t:r'
+
+    -- Get the file extension of the current buffer
+    local file_extension = vim.fn.fnamemodify(filename_with_extension, ':e')
+
+    if file_extension == 'cjs' or file_extension == 'mjs' then
+        filetype = 'javascript'
+    elseif file_extension == 'md' then
+        filetype = 'markdown'
+    end
+
+    local iste = true
+
+    if filetype == 'cpp' then
+        vim.cmd(':tabnew | te g++ ' .. folder_path .. '/' .. filename_with_extension .. ' -o ' .. folder_path .. '/' ..
+                    filename_without_extension .. '.out' .. ' && ' .. folder_path .. '/' .. filename_without_extension ..
+                    '.out')
+    elseif filetype == 'javascript' then
+        vim.cmd(':tabnew | te node ' .. folder_path .. '/' .. filename_with_extension)
+    elseif file_extension == 'py' then
+        vim.cmd(':tabnew | te python ' .. folder_path .. '/' .. filename_with_extension)
+    elseif filetype == 'typescript' then
+        vim.cmd(':tabnew | te ts-node ' .. folder_path .. '/' .. filename_with_extension)
+    elseif filetype == 'shell' then
+        vim.cmd(':tabnew | te bash ' .. folder_path .. '/' .. filename_with_extension)
+    elseif filetype == 'markdown' then
+        iste = false
+
+        local pandocCommand =
+            'pandoc -F pandoc-crossref --citeproc ' .. folder_path .. '/' .. filename_with_extension .. ' -o ' ..
+                filename_without_extension .. '.docx '
+
+        if fileExists 'template.docx' then
+            pandocCommand = pandocCommand .. '--reference-doc ./template.docx'
+        else
+            pandocCommand = pandocCommand .. '--reference-doc ' .. labs_fullfolder .. '/template/base.docx'
+        end
+
+        local extractCommand = '7z x ' .. filename_without_extension .. '.docx -o"' .. filename_without_extension .. '"'
+
+        local xmlpath = folder_path .. '/' .. filename_without_extension .. '/word/document.xml'
+
+        local zipCommand =
+            'rm ' .. filename_without_extension .. '.docx && 7z a -tzip ' .. filename_without_extension .. '.docx ./' ..
+                filename_without_extension .. '/*'
+
+        local fixCommand = 'sed -i \'s/w:tblStyle w:val="Table"/w:tblStyle w:val="simpletable"/g\' ' .. xmlpath
+        fixCommand = fixCommand .. ' && sed -i \'s/w:pStyle w:val="Bibliography"/w:pStyle w:val="DaftarPustaka"/g\' ' ..
+                         xmlpath
+        fixCommand = fixCommand .. ' && sed -i \'s/w:pStyle w:val="TableCaption"/w:pStyle w:val="figure"/g\' ' ..
+                         xmlpath
+        fixCommand = fixCommand .. ' && sed -i \'s/w:pStyle w:val="ImageCaption"/w:pStyle w:val="figure"/g\' ' ..
+                         xmlpath
+        fixCommand = fixCommand .. ' && sed -i \'s/w:pStyle w:val="CaptionedFigure"/w:pStyle w:val="figure"/g\' ' ..
+                         xmlpath
+        fixCommand = fixCommand ..
+                         '&& sed -i "s|<w:p><w:pPr><w:pStyle w:val=\\"tableStyle\\" /></w:pPr><w:r><w:t xml:space=\\"preserve\\">' ..
+                         'noborder</w:t></w:r></w:p><w:tbl><w:tblPr><w:tblStyle w:val=\\"simpletable\\" />|<w:tbl><w:tblPr>' ..
+                         '<w:tblStyle w:val=\\"noborder\\" />|g" ' .. xmlpath
+
+        deleteCommand = 'rm -rf ' .. filename_without_extension
+
+        local refCommand = ''
+        -- refCommand = "awk '{while(match($0, /\\#REFTABLE/)) {sub(/\\#REFTABLE/, ++count);} print}'  "
+        --   .. filename_without_extension
+        --   .. '/word/document.xml > temp.xml && mv temp.xml  '
+        --   .. filename_without_extension
+        --   .. '/word/document.xml'
+
+        -- print(fixCommand)
+
+        vim.cmd 'cd %:p:h'
+        -- vim.cmd('!' .. deleteCommand)
+        vim.cmd('!' .. pandocCommand)
+        vim.cmd('!' .. extractCommand)
+        vim.cmd('!' .. fixCommand)
+        vim.cmd('!' .. refCommand)
+        vim.cmd('!' .. zipCommand)
+        vim.cmd('!' .. deleteCommand)
+    else
+        vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
+        return
+    end
+
+    if iste then
+        vim.api.nvim_feedkeys('i', 'n', true)
+    end
+end
+
 return {{
     'windwp/nvim-ts-autotag',
     config = function()
@@ -98,3 +207,4 @@ return {{
         }
     end
 }}
+
