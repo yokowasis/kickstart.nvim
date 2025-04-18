@@ -1,3 +1,140 @@
+vim.keymap.set('n', '<leader>pi', ':Pastify<cr>', {
+    desc = '[P]aste [I]mage',
+    noremap = true,
+    silent = false
+})
+
+require('which-key').add {{{
+    "'",
+    hidden = true
+}, {
+    '<leader>b',
+    group = '[B]ookmarks'
+}, {
+    '<leader>c',
+    group = '[C]hat'
+}, {
+    '<leader>cg',
+    group = '[C]hat a[G]ent'
+}, -- { '<leader>d', group = '[D]atabase' },
+{
+    '<leader>f',
+    group = '[F]ormat/[F]ramework'
+}, {
+    '<leader>fn',
+    group = '[F]ramework [N]extJS'
+}, {
+    '<leader>fs',
+    group = '[F]ramework [S]velte'
+}, {
+    '<leader>g',
+    group = '[G]it'
+}, {
+    '<leader>j',
+    group = '[J]upyter'
+}, {
+    '<leader>l',
+    group = '[L]anguage / [L]og'
+}, {
+    '<leader>lc',
+    group = '[L]anguage [C]hange'
+}, {
+    '<leader>n',
+    group = '[N]eovim'
+}, {
+    '<leader>p',
+    group = '[P]aste'
+}}}
+
+-- change language
+vim.keymap.set('n', '<leader>lcj', ':set ft=javascript<cr>', {
+    desc = 'Javascript',
+    noremap = true,
+    silent = false
+})
+vim.keymap.set('n', '<leader>lco', ':set ft=json<cr>', {
+    desc = 'JSON',
+    noremap = true,
+    silent = false
+})
+vim.keymap.set('n', '<leader>lcp', ':set ft=php<cr>', {
+    desc = 'PHP',
+    noremap = true,
+    silent = false
+})
+vim.keymap.set('n', '<leader>lch', ':set ft=html<cr>', {
+    desc = 'HTML',
+    noremap = true,
+    silent = false
+})
+vim.keymap.set('n', '<leader>lcy', ':set ft=python<cr>', {
+    desc = 'Python',
+    noremap = true,
+    silent = false
+})
+vim.keymap.set('n', '<leader>lcc', ':set ft=c<cr>', {
+    desc = 'C',
+    noremap = true,
+    silent = false
+})
+
+-- jupyter
+vim.keymap.set('n', '<leader>ji', ':MoltenInit<cr>', {
+    noremap = true,
+    silent = false,
+    desc = '[J]upyter [I]nnit'
+})
+vim.keymap.set('n', '<leader>jr', '/```<cr><up>VN<down>:<C-u>MoltenEvaluateVisual<CR>``:noh<cr>', {
+    noremap = true,
+    silent = false,
+    desc = '[J]upyter [R]un'
+})
+vim.keymap.set('n', '<leader>jo', ':noautocmd MoltenEnterOutput<CR>', {
+    noremap = true,
+    silent = false,
+    desc = '[J]upyter Enter [O]utput'
+})
+vim.keymap.set('n', '<leader>jh', ':MoltenHideOutput<CR>', {
+    noremap = true,
+    silent = false,
+    desc = '[J]upyter [H]ide Output'
+})
+
+vim.cmd [[command! EditBaseVim :tabnew | exe 'edit '. stdpath('config').'/init.lua']]
+vim.cmd [[command! EditInitVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/init.lua']]
+vim.cmd [[command! EditFSVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/fs.lua']]
+vim.cmd [[command! LoadInitVim :tabnew | exe ':te git -C '. stdpath("config") .' pull' ]]
+vim.cmd [[command! EditSnippets :lua require("luasnip.loaders").edit_snippet_files()]]
+
+function InsertConsoleLog()
+    local line_number = vim.fn.line '.'
+    local current_file = '🚀 : ' .. vim.fn.expand '%:t'
+    local log_statement = string.format("console.log('%s:%d');", current_file, line_number + 1)
+    vim.fn.append(line_number, log_statement)
+end
+
+vim.api.nvim_set_keymap('n', '<Leader>lg', [[:lua InsertConsoleLog()<CR>]], {
+    noremap = true,
+    silent = true,
+    desc = 'console.log file and line'
+})
+
+-- zz to esc
+vim.keymap.set('i', 'zz', '<esc>', {
+    silent = true,
+    desc = 'escape'
+})
+vim.keymap.set('t', 'zz', '<C-\\><C-n>', {
+    desc = '',
+    noremap = true,
+    silent = true
+})
+vim.keymap.set('v', 'zz', '<C-\\><C-n>', {
+    desc = '',
+    noremap = true,
+    silent = true
+})
+
 -- "Database Toggle UI"
 vim.keymap.set('n', '<leader>db', ':DBUIToggle<cr>', {
     desc = '[D]ata[b]ase',
