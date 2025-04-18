@@ -4,7 +4,6 @@ ls.config.set_config {
 }
 ls.filetype_extend('svelte', {'typescript'})
 
-require('nvim-treesitter.install').compilers = {'clang', 'gcc', 'zig'}
 
 require('mini.surround').setup {
     mappings = {
@@ -32,6 +31,11 @@ vim.api.nvim_create_autocmd('FileType', {
 require('luasnip.loaders.from_vscode').lazy_load {
     paths = {'~/git/friendly-snippets'}
 }
+
+-- Folding settings
+vim.opt.foldmethod = "indent"
+
+require('nvim-treesitter.install').compilers = {'clang', 'gcc', 'zig'}
 
 return {}
 
