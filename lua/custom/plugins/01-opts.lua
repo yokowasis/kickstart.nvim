@@ -77,7 +77,6 @@ vim.o.smartindent = true
 vim.o.foldlevel = 20
 
 vim.opt.confirm = true
-vim.opt.clipboard = 'unnamedplus'
 vim.g.have_nerd_font = false
 
 -- Enable line numbers (both absolute and relative)
