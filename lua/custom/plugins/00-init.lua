@@ -141,7 +141,7 @@ return {
     end
 }, 
 {'mattn/emmet-vim'}, 
-{'taoae/vim-fugitive'}, 
+{'tpope/vim-fugitive'}, 
 {
   "jake-stewart/multicursor.nvim",
   branch = "1.0",
