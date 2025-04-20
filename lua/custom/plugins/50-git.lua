@@ -1,104 +1,104 @@
 -- "Git Mapping
 function GitPullAndNotify()
-    vim.notify('Pull Processing...', vim.log.levels.INFO, {
-        title = 'Git',
-        timeout = 36000000
-    })
+  vim.notify('Pull Processing...', vim.log.levels.INFO, {
+    title = 'Git',
+    timeout = 36000000,
+  })
 
-    vim.fn.jobstart('git pull', {
-        on_stdout = function(id, data, e)
-            notif(id, data, e, 4000)
-        end,
-        on_stderr = function(id, data, e)
-            notif(id, data, e, 4000)
-        end,
-        on_exit = function(id, data, e)
-            notif(id, data, e, 4000)
-        end
-    })
+  vim.fn.jobstart('git pull', {
+    on_stdout = function(id, data, e)
+      notif(id, data, e, 4000)
+    end,
+    on_stderr = function(id, data, e)
+      notif(id, data, e, 4000)
+    end,
+    on_exit = function(id, data, e)
+      notif(id, data, e, 4000)
+    end,
+  })
 end
 
 function GitPushAndNotify()
-    vim.notify('Push Processing...', vim.log.levels.INFO, {
-        title = 'Git',
-        timeout = 36000000
-    })
+  vim.notify('Push Processing...', vim.log.levels.INFO, {
+    title = 'Git',
+    timeout = 36000000,
+  })
 
-    vim.fn.jobstart('git push', {
-        on_stdout = function(id, data, e)
-            notif(id, data, e, 4000)
-        end,
-        on_stderr = function(id, data, e)
-            notif(id, data, e, 4000)
-        end,
-        on_exit = function(id, data, e)
-            notif(id, data, e, 4000)
-        end
-    })
+  vim.fn.jobstart('git push', {
+    on_stdout = function(id, data, e)
+      notif(id, data, e, 4000)
+    end,
+    on_stderr = function(id, data, e)
+      notif(id, data, e, 4000)
+    end,
+    on_exit = function(id, data, e)
+      notif(id, data, e, 4000)
+    end,
+  })
 end
 
 function OpenGitStatus()
-    local windows = vim.api.nvim_list_wins()
-    for _, v in pairs(windows) do
-        local status, _ = pcall(vim.api.nvim_win_get_var, v, 'fugitive_status')
-        if status then
-            vim.api.nvim_win_close(v, false)
-            return
-        end
+  local windows = vim.api.nvim_list_wins()
+  for _, v in pairs(windows) do
+    local status, _ = pcall(vim.api.nvim_win_get_var, v, 'fugitive_status')
+    if status then
+      vim.api.nvim_win_close(v, false)
+      return
     end
-    vim.cmd [[NvimTreeClose | vertical Git]]
-    vim.cmd [[vertical resize -30]]
-    vim.cmd [[wincmd H]]
+  end
+  vim.cmd [[NvimTreeClose | vertical Git]]
+  vim.cmd [[vertical resize -30]]
+  vim.cmd [[wincmd H]]
 end
 
 vim.keymap.set('n', '<c-q>', [[:lua OpenGitStatus()<cr>]], {
-    desc = '[G]it [S]tatus'
+  desc = '[G]it [S]tatus',
 })
 vim.keymap.set('n', '<leader>gs', [[:lua OpenGitStatus()<cr>]], {
-    desc = '[G]it [S]tatus'
+  desc = '[G]it [S]tatus',
 })
 
 function GitCommit(commitMessage)
-    RunCommandAndNotify('git add . && git commit -m "' .. commitMessage .. '"')
+  RunCommandAndNotify('git add . && git commit -m "' .. commitMessage .. '"')
 end
 
 vim.keymap.set('n', '<leader>gc', function()
-    local commitMessage = vim.fn.input 'Enter commit message: '
-    if commitMessage == '' then
-        return
-    end
+  local commitMessage = vim.fn.input 'Enter commit message: '
+  if commitMessage == '' then
+    return
+  end
 
-    GitCommit(commitMessage)
+  GitCommit(commitMessage)
 end, {
-    desc = '[G]it [C]ommit',
-    noremap = true,
-    silent = false
+  desc = '[G]it [C]ommit',
+  noremap = true,
+  silent = false,
 })
 
 vim.keymap.set('n', '<leader>gp', [[:lua GitPushAndNotify()<CR>]], {
-    desc = '[G]it [P]ush',
-    noremap = true,
-    silent = true
+  desc = '[G]it [P]ush',
+  noremap = true,
+  silent = true,
 })
 vim.keymap.set('n', '<leader>gu', [[:lua GitPullAndNotify()<CR>]], {
-    desc = '[G]it P[u]ll',
-    noremap = true,
-    silent = true
+  desc = '[G]it P[u]ll',
+  noremap = true,
+  silent = true,
 })
 vim.keymap.set('n', '<leader>gd', ':vertical Git diff<CR>', {
-    desc = '[G]it [D]iff',
-    noremap = true,
-    silent = true
+  desc = '[G]it [D]iff',
+  noremap = true,
+  silent = true,
 })
 vim.keymap.set('n', '<leader>gv', ':Gvdiffsplit<CR>', {
-    desc = '[G]it [V]ertical Diff Current File',
-    noremap = true,
-    silent = true
+  desc = '[G]it [V]ertical Diff Current File',
+  noremap = true,
+  silent = true,
 })
 vim.keymap.set('n', '<leader>gl', ':vertical Git log<CR>', {
-    desc = '[G]it [L]og',
-    noremap = true,
-    silent = true
+  desc = '[G]it [L]og',
+  noremap = true,
+  silent = true,
 })
 
 return {}
