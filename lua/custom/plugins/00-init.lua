@@ -158,14 +158,14 @@ return {
 
       -- Add or skip cursor above/below the main cursor.
       -- set({"n", "x"}, "<c-d>", function() mc.lineAddCursor(-1) end)
-      set({ 'n', 'x' }, '<c-d>', function()
-        mc.lineAddCursor(1)
-      end)
+      -- set({ 'n', 'x' }, '<c-d>', function()
+      --   mc.lineAddCursor(1)
+      -- end)
       -- set({"n", "x"}, "<leader><up>", function() mc.lineSkipCursor(-1) end)
       -- set({"n", "x"}, "<leader><down>", function() mc.lineSkipCursor(1) end)
 
       -- Add or skip adding a new cursor by matching word/selection
-      set({ 'n', 'x' }, '<leader>n', function()
+      set({ 'n', 'x' }, '<c-d>', function()
         mc.matchAddCursor(1)
       end)
       set({ 'n', 'x' }, '<leader>s', function()
