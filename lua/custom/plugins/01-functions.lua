@@ -255,7 +255,7 @@ function RunCommandAndNotify(command, timeout, title)
 
   vim.fn.jobstart(command, {
     on_stdout = function(id, data, e)
-      notif(id, data, e, 4000)
+      -- notif(id, data, e, 4000)
     end,
     on_stderr = function(id, data, e)
       notif(id, data, e, 4000)
