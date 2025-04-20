@@ -74,7 +74,8 @@ return {
       }
       vim.notify = require 'notify'
       function notif(jobid, data, event, timeout, notifid)
-        local output = table.concat(data, '\n')
+        -- local output = table.concat(data, '\n')
+        local output = data
         if output == '' then
         else
           vim.notify.dismiss()
