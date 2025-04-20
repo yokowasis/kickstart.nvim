@@ -258,7 +258,7 @@ function RunCommandAndNotify(command, timeout, title)
       -- notif(id, data, e, 4000)
     end,
     on_stderr = function(id, data, e)
-      notif(id, data, e, 4000)
+      -- notif(id, data, e, 4000)
     end,
     on_exit = function(id, data, e)
       notif(id, data, e, 4000)
