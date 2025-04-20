@@ -168,15 +168,15 @@ return {
       set({ 'n', 'x' }, '<c-d>', function()
         mc.matchAddCursor(1)
       end)
-      set({ 'n', 'x' }, '<leader>s', function()
-        mc.matchSkipCursor(1)
-      end)
-      set({ 'n', 'x' }, '<leader>N', function()
-        mc.matchAddCursor(-1)
-      end)
-      set({ 'n', 'x' }, '<leader>S', function()
-        mc.matchSkipCursor(-1)
-      end)
+      -- set({ 'n', 'x' }, '<leader>s', function()
+      --   mc.matchSkipCursor(1)
+      -- end)
+      -- set({ 'n', 'x' }, '<leader>N', function()
+      --   mc.matchAddCursor(-1)
+      -- end)
+      -- set({ 'n', 'x' }, '<leader>S', function()
+      --   mc.matchSkipCursor(-1)
+      -- end)
 
       -- Add and remove cursors with control + left click.
       set('n', '<c-leftmouse>', mc.handleMouse)
@@ -190,8 +190,8 @@ return {
       -- multiple cursors. This lets you have overlapping mappings.
       mc.addKeymapLayer(function(layerSet)
         -- Select a different cursor as the main one.
-        layerSet({ 'n', 'x' }, '<left>', mc.prevCursor)
-        layerSet({ 'n', 'x' }, '<right>', mc.nextCursor)
+        -- layerSet({ 'n', 'x' }, '<left>', mc.prevCursor)
+        -- layerSet({ 'n', 'x' }, '<right>', mc.nextCursor)
 
         -- Delete the main cursor.
         layerSet({ 'n', 'x' }, '<leader>x', mc.deleteCursor)
