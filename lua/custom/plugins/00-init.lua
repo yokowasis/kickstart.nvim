@@ -62,8 +62,7 @@ return {
             require("flash").toggle()
         end,
         desc = "Toggle Flash Search"
-    }}
-,
+    }},
   },
   {
     'rcarriga/nvim-notify',
