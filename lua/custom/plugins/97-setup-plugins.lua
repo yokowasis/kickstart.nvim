@@ -8,18 +8,6 @@ require('luasnip.loaders.from_vscode').lazy_load {
   paths = { '~/git/friendly-snippets' },
 }
 
-require('mini.surround').setup {
-  mappings = {
-    add = 'ra', -- Add surrounding in Normal and Visual modes
-    delete = 'rd', -- Delete surrounding
-    find = 'rf', -- Find surrounding (to the right)
-    find_left = 'rF', -- Find surrounding (to the left)
-    highlight = 'rh', -- Highlight surrounding
-    replace = 'rr', -- Replace surrounding
-    update_n_lines = 'rn', -- Update `n_lines`
-  },
-}
-
 -- close window with x if it's not a main window
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'checkhealth', 'fugitive*', 'git', 'help', 'lspinfo', 'netrw', 'notify', 'qf', 'query' },
@@ -35,5 +23,31 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.opt.foldmethod = 'indent'
 
 require('nvim-treesitter.install').compilers = { 'clang', 'gcc', 'zig' }
+
+-- save folded state
+local viewdir = vim.fn.stdpath("state") .. "/view"
+
+vim.o.viewdir = viewdir
+vim.o.viewoptions = "cursor,folds" -- only save cursor + folds (not options, etc.)
+
+-- Create the view directory if it doesn't exist
+vim.fn.mkdir(viewdir, "p")
+
+vim.api.nvim_create_augroup("remember_folds", { clear = true })
+vim.api.nvim_create_autocmd("BufWinLeave", {
+  group = "remember_folds",
+  pattern = "*",
+  callback = function()
+    vim.cmd("silent! mkview")
+  end,
+})
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  group = "remember_folds",
+  pattern = "*",
+  callback = function()
+    vim.cmd("silent! loadview")
+  end,
+})
+
 
 return {}
