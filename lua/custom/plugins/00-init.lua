@@ -4,6 +4,17 @@
 -- See the kickstart.nvim README for more information
 return {
   {
+    'nvim-treesitter/nvim-treesitter-context',
+    event = 'VeryLazy',
+    config = function()
+      require('treesitter-context').setup {
+        enable = true, -- Enable this plugin (Can be enabled/disabled later)
+        max_lines = 3, -- How many lines the window should span
+        trim_scope = 'outer', -- Which context lines to discard if max_lines is exceeded
+      }
+    end,
+  },
+  {
     'CopilotC-Nvim/CopilotChat.nvim',
     dependencies = {
       { 'github/copilot.vim' }, -- or zbirenbaum/copilot.lua
