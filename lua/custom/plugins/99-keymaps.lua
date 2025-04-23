@@ -345,4 +345,13 @@ vim.keymap.set('n', 'x', ':on<cr>', {
   silent = true,
 })
 
+-- Copilot
+vim.keymap.set('n', '<leader>ct', ':CopilotChat<cr>', {
+  noremap = true,
+  silent = false,
+  desc = '[C]opilot [C]hat',
+})
+
+--
+
 return {}
