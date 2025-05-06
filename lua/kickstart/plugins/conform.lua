@@ -49,6 +49,7 @@ return {
         html = { 'prettierd' },
         php = { 'pretty-php' },
         cpp = { 'clang_format' },
+        sh = { 'shfmt' },
       },
     },
   },
