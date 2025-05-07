@@ -242,24 +242,22 @@ vim.api.nvim_set_keymap('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', {
 })
 
 -- Session
-vim.api.nvim_set_keymap('n', '<leader>sel',
-  ":execute 'source ' . fnameescape(expand('~/' . fnamemodify(getcwd(), ':t') . '.vim'))<cr>", {
-    noremap = true,
-    silent = false,
-    desc = '[Se]ssion [L]oad',
-  })
+vim.api.nvim_set_keymap('n', '<leader>sel', ":execute 'source ' . fnameescape(expand('~/' . fnamemodify(getcwd(), ':t') . '.vim'))<cr>", {
+  noremap = true,
+  silent = false,
+  desc = '[Se]ssion [L]oad',
+})
 vim.api.nvim_set_keymap('n', '<leader>ses', ':mksession! ~/session.vim<cr>', {
   noremap = true,
   silent = false,
   desc = '[Se]ssion [S]ave',
 })
 
-vim.api.nvim_set_keymap('n', '<leader>nq',
-  ":execute 'mksession! ' . fnameescape(expand('~/' . fnamemodify(getcwd(), ':t') . '.vim'))<cr>:qa!<cr>", {
-    noremap = true,
-    silent = false,
-    desc = '[N]vim [Q]uit',
-  })
+vim.api.nvim_set_keymap('n', '<leader>nq', ":execute 'mksession! ' . fnameescape(expand('~/' . fnamemodify(getcwd(), ':t') . '.vim'))<cr>:qa!<cr>", {
+  noremap = true,
+  silent = false,
+  desc = '[N]vim [Q]uit',
+})
 
 -- vim signature help
 vim.api.nvim_set_keymap('n', 'k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {
@@ -357,6 +355,7 @@ vim.keymap.set('n', '<leader>ct', ':CopilotChat<cr>', {
 })
 
 vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
---
+
+vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { noremap = true, silent = true })
 
 return {}
