@@ -157,7 +157,18 @@ return {
       }
     end,
   },
-  { 'mattn/emmet-vim' },
+  {
+    'mattn/emmet-vim',
+    init = function()
+      vim.g.user_emmet_settings = {
+        typescriptreact = {
+          attribute_name = {
+            ['class'] = 'class', -- override className -> class
+          },
+        },
+      }
+    end,
+  },
   { 'tpope/vim-fugitive' },
   {
     'jake-stewart/multicursor.nvim',
