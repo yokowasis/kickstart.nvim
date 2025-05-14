@@ -46,7 +46,8 @@ function OpenGitStatus()
       return
     end
   end
-  vim.cmd [[NvimTreeClose | vertical Git]]
+  vim.cmd [[Neotree close]]
+  vim.cmd [[vertical Git]]
   vim.cmd [[vertical resize -30]]
   vim.cmd [[wincmd H]]
 end
