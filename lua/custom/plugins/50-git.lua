@@ -91,6 +91,11 @@ vim.keymap.set('n', '<leader>gd', ':vertical Git diff<CR>', {
   noremap = true,
   silent = true,
 })
+vim.keymap.set('n', '<leader>gb', ':vertical Git branch -a<CR>', {
+  desc = '[G]it [D]iff',
+  noremap = true,
+  silent = true,
+})
 vim.keymap.set('n', '<leader>gv', ':Gvdiffsplit<CR>', {
   desc = '[G]it [V]ertical Diff Current File',
   noremap = true,
