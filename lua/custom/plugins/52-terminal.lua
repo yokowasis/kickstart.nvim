@@ -46,8 +46,8 @@ vim.keymap.set('t', '<C-w><C-w>', '<C-\\><C-n><C-w><C-w>', {
   silent = true,
 })
 
--- c-z to normal mode in terminal
-vim.keymap.set('t', '<c-z>', '<C-\\><C-n>', {
+-- esc to normal mode in terminal
+vim.keymap.set('t', '<esc>', '<C-\\><C-n>', {
   desc = '',
   noremap = true,
   silent = true,
