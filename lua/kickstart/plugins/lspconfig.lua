@@ -244,7 +244,7 @@ return {
         'pretty-php',
         'pylsp',
         'svelte',
-        'ts_ls',
+        'vtsls',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
