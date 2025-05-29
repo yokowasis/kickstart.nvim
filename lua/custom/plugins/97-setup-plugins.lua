@@ -50,5 +50,12 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 })
 
 require('guess-indent').setup {}
+require("conform").setup({
+  formatters = {
+    [ "pretty-php" ] = {
+      prepend_args = { "-s2" },
+    },
+  },
+})
 
 return {}
