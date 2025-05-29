@@ -19,7 +19,7 @@ return {
       filesystem = {
         window = {
           mappings = {
-            ['\\'] = 'close_window',
+            ['<c-z>'] = 'close_window',
           },
         },
       },
