@@ -5,6 +5,7 @@ if vim.fn.argc() == 0 then
     if vim.fn.filereadable(session_path) == 1 then
       vim.cmd("silent! source " .. vim.fn.fnameescape(session_path))
       vim.notify("Session loaded: " .. session_name, vim.log.levels.INFO)
+      vim.cmd("silent! GuessIndent")
     end
   end, 300) -- Delay the session load by 100ms
 end
