@@ -57,5 +57,6 @@ require("conform").setup({
     },
   },
 })
+require("ibl").setup()
 
 return {}
