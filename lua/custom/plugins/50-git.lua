@@ -107,4 +107,22 @@ vim.keymap.set('n', '<leader>gl', ':vertical Git log<CR>', {
   silent = true,
 })
 
+vim.api.nvim_create_user_command("GitInitPush", function()
+  local username = "yokowasis"
+  local repo = vim.fn.fnamemodify(vim.loop.cwd(), ":t")
+  if repo == "" then
+    print("Could not determine repository name from current directory")
+    return
+  end
+  local remote = "https://github.com/" .. username .. "/" .. repo .. ".git"
+  local cmd = "git init && git add . && git commit -m \"Initial commit\" && git branch -M main && gh repo create " .. repo .. " --private --source=. --remote=origin --push"
+  vim.cmd("terminal " .. cmd)
+end, {})
+
+vim.keymap.set('n', '<leader>gi', ':GitInitPush<CR>', {
+  desc = '[G]it [I]nit and Push',
+  noremap = true,
+  silent = true,
+})
+
 return {}
