@@ -51,6 +51,7 @@ return {
         php = { 'pretty-php' },
         cpp = { 'clang_format' },
         sh = { 'shfmt' },
+        go = { "gofumpt" },
       },
     },
   },
