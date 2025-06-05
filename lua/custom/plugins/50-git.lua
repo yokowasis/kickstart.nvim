@@ -81,26 +81,31 @@ vim.keymap.set('n', '<leader>gp', [[:lua GitPushAndNotify()<CR>]], {
   noremap = true,
   silent = true,
 })
+
 vim.keymap.set('n', '<leader>gu', [[:lua GitPullAndNotify()<CR>]], {
   desc = '[G]it P[u]ll',
   noremap = true,
   silent = true,
 })
+
 vim.keymap.set('n', '<leader>gd', ':vertical Git diff<CR>', {
   desc = '[G]it [D]iff',
   noremap = true,
   silent = true,
 })
+
 vim.keymap.set('n', '<leader>gb', ':vertical Git branch -a<CR>', {
   desc = '[G]it [D]iff',
   noremap = true,
   silent = true,
 })
+
 vim.keymap.set('n', '<leader>gv', ':Gvdiffsplit<CR>', {
   desc = '[G]it [V]ertical Diff Current File',
   noremap = true,
   silent = true,
 })
+
 vim.keymap.set('n', '<leader>gl', ':vertical Git log<CR>', {
   desc = '[G]it [L]og',
   noremap = true,
@@ -121,6 +126,12 @@ end, {})
 
 vim.keymap.set('n', '<leader>gi', ':GitInitPush<CR>', {
   desc = '[G]it [I]nit and Push',
+  noremap = true,
+  silent = true,
+})
+
+vim.keymap.set('n', '<leader>coo', '04e<right>v$<left>y:Git checkout <c-r>"<cr>', {
+  desc = 'Checkout Origin Branch',
   noremap = true,
   silent = true,
 })
