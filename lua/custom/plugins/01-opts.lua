@@ -118,4 +118,13 @@ vim.o.encoding = 'utf-8'
 
 vim.g.markdown_fenced_languages = { 'html', 'python', 'lua', 'vim', 'typescript', 'javascript' }
 
+-- session options
+vim.opt.sessionoptions = {
+  "buffers",  -- save all loaded buffers
+  "curdir",   -- save current directory
+  "tabpages", -- save tab pages
+  "winsize",  -- save window sizes
+}
+
+
 return {}

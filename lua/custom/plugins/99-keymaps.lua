@@ -247,11 +247,6 @@ vim.api.nvim_set_keymap('n', '<leader>sel', ":execute 'source ' . fnameescape(ex
   silent = false,
   desc = '[Se]ssion [L]oad',
 })
-vim.api.nvim_set_keymap('n', '<leader>ses', ':mksession! ~/session.vim<cr>', {
-  noremap = true,
-  silent = false,
-  desc = '[Se]ssion [S]ave',
-})
 
 vim.api.nvim_set_keymap('n', '<leader>nq', ":execute 'mksession! ' . fnameescape(expand('~/' . fnamemodify(getcwd(), ':t') . '.vim'))<cr>:qa!<cr>", {
   noremap = true,
