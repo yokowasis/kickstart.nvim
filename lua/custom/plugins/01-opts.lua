@@ -124,6 +124,7 @@ vim.opt.sessionoptions = {
   "curdir",   -- save current directory
   "tabpages", -- save tab pages
   "winsize",  -- save window sizes
+  "terminal", -- save terminal state
 }
 
 
