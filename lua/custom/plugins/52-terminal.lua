@@ -15,7 +15,7 @@ else
 end
 
 vim.cmd [[command! LoadInitVim :tabnew | exe ':te git -C '. stdpath("config") .' pull' ]]
-vim.cmd [[command! EditInitVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/init.lua']]
+vim.cmd [[command! EditInitVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/00-init.lua']]
 vim.cmd [[command! EditSnippets :lua require("luasnip.loaders").edit_snippet_files()]]
 
 -- open terminal

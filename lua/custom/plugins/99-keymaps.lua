@@ -350,6 +350,13 @@ vim.keymap.set('n', 'x', ':on<cr>', {
 })
 
 -- Copilot
+vim.keymap.set('n', '<leader>rr', ':e!', {
+  noremap = true,
+  silent = false,
+  desc = '[R]eload [R]esource',
+})
+
+-- Copilot
 vim.keymap.set('n', '<leader>ct', ':CopilotChat<cr>', {
   noremap = true,
   silent = false,
