@@ -363,6 +363,12 @@ vim.keymap.set('n', '<leader>ct', ':CopilotChat<cr>', {
   desc = '[C]opilot [C]hat',
 })
 
+vim.keymap.set('n', '<leader>cm', ':CopilotChatModels<cr>', {
+  noremap = true,
+  silent = false,
+  desc = '[C]opilot [M]odels',
+})
+
 vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { noremap = true, silent = true })
