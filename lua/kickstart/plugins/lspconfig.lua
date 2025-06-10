@@ -248,6 +248,7 @@ return {
         'gofumpt',
         'gopls',
         'shfmt',
+        'rust-analyzer',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
