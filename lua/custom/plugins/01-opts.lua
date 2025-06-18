@@ -120,12 +120,11 @@ vim.g.markdown_fenced_languages = { 'html', 'python', 'lua', 'vim', 'typescript'
 
 -- session options
 vim.opt.sessionoptions = {
-  "buffers",  -- save all loaded buffers
-  "curdir",   -- save current directory
-  "tabpages", -- save tab pages
-  "winsize",  -- save window sizes
-  "terminal", -- save terminal state
+  'buffers', -- save all loaded buffers
+  'curdir', -- save current directory
+  'tabpages', -- save tab pages
+  'winsize', -- save window sizes
+  'terminal', -- save terminal state
 }
-
 
 return {}

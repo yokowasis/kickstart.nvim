@@ -220,11 +220,40 @@ return {
     end,
   },
   {
-    'morhetz/gruvbox',
+    'ribru17/bamboo.nvim',
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'gruvbox'
+      require('bamboo').setup {
+        -- optional configuration here
+        code_style = {
+          comments = {
+            italic = false,
+          },
+          conditionals = {
+            italic = false,
+          },
+          keywords = {
+            italic = false,
+          },
+          functions = {
+            italic = false,
+          },
+          namespaces = {
+            italic = false,
+          },
+          parameters = {
+            italic = false,
+          },
+          strings = {
+            italic = false,
+          },
+          variables = {
+            italic = false,
+          },
+        },
+      }
+      require('bamboo').load()
     end,
   },
   {
