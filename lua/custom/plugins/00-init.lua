@@ -219,42 +219,13 @@ return {
       hl(0, 'MultiCursorDisabledSign', { link = 'SignColumn' })
     end,
   },
-  {
-    'ribru17/bamboo.nvim',
-    lazy = false,
-    priority = 1000,
+  { 
+    "ellisonleao/gruvbox.nvim", 
+    lazy=false,  
+    priority = 1000, 
     config = function()
-      require('bamboo').setup {
-        -- optional configuration here
-        code_style = {
-          comments = {
-            italic = false,
-          },
-          conditionals = {
-            italic = false,
-          },
-          keywords = {
-            italic = false,
-          },
-          functions = {
-            italic = false,
-          },
-          namespaces = {
-            italic = false,
-          },
-          parameters = {
-            italic = false,
-          },
-          strings = {
-            italic = false,
-          },
-          variables = {
-            italic = false,
-          },
-        },
-      }
-      require('bamboo').load()
-    end,
+      vim.cmd.colorscheme 'gruvbox'
+    end
   },
   {
     'rachartier/tiny-inline-diagnostic.nvim',
