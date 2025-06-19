@@ -8,6 +8,18 @@ require('luasnip.loaders.from_vscode').lazy_load {
   paths = { '~/git/friendly-snippets' },
 }
 
+vim.keymap.set({ "i", "s" }, "<C-l>", function()
+  if require("luasnip").choice_active() then
+    require("luasnip").change_choice(1)
+  end
+end, { desc = "LuaSnip: next choice" })
+
+vim.keymap.set({ "i", "s" }, "<C-h>", function()
+  if require("luasnip").choice_active() then
+    require("luasnip").change_choice(-1)
+  end
+end, { desc = "LuaSnip: previous choice" })
+
 -- close window with x if it's not a main window
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'checkhealth', 'fugitive*', 'git', 'help', 'lspinfo', 'netrw', 'notify', 'qf', 'query' },
