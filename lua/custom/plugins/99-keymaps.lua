@@ -287,6 +287,13 @@ vim.keymap.set('v', '<leader>sar', '"zy:%s/<c-r>z//g<left><left>', {
   desc = '[S]earch [A]nd [R]eplace',
 })
 
+-- Search and Visual Replace
+vim.keymap.set('v', '<leader>svr', ':s/<c-r>"//g<left><left>', {
+  noremap = true,
+  silent = false,
+  desc = '[S]earch And [V]isual [R]eplace',
+})
+
 vim.keymap.set('n', '<leader>fnp', ":lua NextJSNewPage(vim.fn.input('Enter Page Name: '))<CR>", {
   noremap = true,
   silent = false,
