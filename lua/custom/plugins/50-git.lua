@@ -24,7 +24,7 @@ function GitPushAndNotify()
     timeout = 36000000,
   })
 
-  vim.fn.jobstart('git push', {
+  vim.fn.jobstart('git pull && git push', {
     on_stdout = function(id, data, e)
       notif(id, data, e, 4000)
     end,
