@@ -356,11 +356,16 @@ vim.keymap.set('n', 'x', ':on<cr>', {
   silent = true,
 })
 
--- Copilot
 vim.keymap.set('n', '<leader>rr', ':e!<cr>', {
   noremap = true,
   silent = false,
   desc = '[R]eload [R]esource',
+})
+
+vim.keymap.set('n', '<leader>rp', ':LspRestart<cr>', {
+  noremap = true,
+  silent = false,
+  desc = '[R]eload LS[P]',
 })
 
 -- Copilot
@@ -376,7 +381,7 @@ vim.keymap.set('n', '<leader>cm', ':CopilotChatModels<cr>', {
   desc = '[C]opilot [M]odels',
 })
 
--- vim.api.nvim_set_keymap('i', '<c-j>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
+-e vim.api.nvim_set_keymap('i', '<c-j>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { noremap = true, silent = true })
 
