@@ -381,7 +381,7 @@ vim.keymap.set('n', '<leader>cm', ':CopilotChatModels<cr>', {
   desc = '[C]opilot [M]odels',
 })
 
--e vim.api.nvim_set_keymap('i', '<c-j>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.api.nvim_set_keymap('i', '<c-j>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { noremap = true, silent = true })
 
