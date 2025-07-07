@@ -52,6 +52,10 @@ function OpenGitStatus()
   vim.cmd [[wincmd H]]
 end
 
+function CreateBranchAndPush(branchName)
+  RunCommandAndNotify('git checkout -b ' .. branchName .. ' && git push -u origin ' .. branchName)
+end
+
 vim.keymap.set('n', '<c-q>', [[:lua OpenGitStatus()<cr>]], {
   desc = '[G]it [S]tatus',
 })
@@ -62,6 +66,21 @@ vim.keymap.set('n', '<leader>gs', [[:lua OpenGitStatus()<cr>]], {
 function GitCommit(commitMessage)
   RunCommandAndNotify('git add . && git commit -m "' .. commitMessage .. '"')
 end
+
+vim.keymap.set('n', '<leader>ga', function()
+  local branchName = vim.fn.input 'Enter commit message: '
+  if branchName == '' then
+    return
+  end
+
+  CreateBranchAndPush(branchName)
+
+end, {
+  desc = '[G]it [A]dd Branch',
+  noremap = true,
+  silent = false,
+})
+
 
 vim.keymap.set('n', '<leader>gc', function()
   local commitMessage = vim.fn.input 'Enter commit message: '
@@ -74,6 +93,12 @@ end, {
   desc = '[G]it [C]ommit',
   noremap = true,
   silent = false,
+})
+
+vim.keymap.set('n', '<leader>gh', ':0Gclog<CR>', {
+  desc = '[G]it File [H]istory',
+  noremap = true,
+  silent = true,
 })
 
 vim.keymap.set('n', '<leader>gp', [[:lua GitPushAndNotify()<CR>]], {
@@ -95,7 +120,7 @@ vim.keymap.set('n', '<leader>gd', ':vertical Git diff<CR>', {
 })
 
 vim.keymap.set('n', '<leader>gb', ':vertical Git branch -a<CR>', {
-  desc = '[G]it [D]iff',
+  desc = '[G]it [B]ranch',
   noremap = true,
   silent = true,
 })
