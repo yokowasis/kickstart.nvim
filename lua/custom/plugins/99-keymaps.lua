@@ -266,6 +266,13 @@ vim.keymap.set('n', '<leader>sne', ':EditSnippets<cr>', {
   desc = '[Sn]ippets [E]dit',
 })
 
+vim.keymap.set('n', '<leader>snf', ':%s/"/\\\\"/g<cr>ggVG10>gg0v_<left>y:%s/<c-r>0/\\"<cr>:%s/\\n/\\",\\r<cr>:%s/\\n\\",/\\r\\"\\",<cr>', {
+  noremap = true,
+  silent = false,
+  desc = '[Sn]ippets [F]ormat',
+})
+
+
 -- auto format
 vim.keymap.set('n', '<leader>fmf', 'gg=G<c-o>', {
   noremap = true,
