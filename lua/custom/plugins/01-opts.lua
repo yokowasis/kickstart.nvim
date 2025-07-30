@@ -13,6 +13,9 @@ vim.g.table_mode_header_fillchar = '='
 -- markdown bullet and numbering indent
 vim.o.breakindentopt = 'list:-1'
 
+-- lsp border
+vim.o.winborder = 'rounded'
+
 sysname = vim.loop.os_uname().sysname
 isWindows = sysname == 'Windows_NT'
 isMac = sysname == 'Darwin'

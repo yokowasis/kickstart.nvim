@@ -71,4 +71,8 @@ require("conform").setup({
 })
 require("ibl").setup()
 
+require('lspconfig').clangd.setup {
+  cmd = { "clangd", "--background-index" },
+}
+
 return {}
