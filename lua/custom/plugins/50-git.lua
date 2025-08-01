@@ -62,6 +62,11 @@ vim.keymap.set('n', '<c-q>', [[:lua OpenGitStatus()<cr>]], {
 vim.keymap.set('n', '<leader>gs', [[:lua OpenGitStatus()<cr>]], {
   desc = '[G]it [S]tatus',
 })
+vim.keymap.set('n', '<c-e>', [[:lua OpenGitStatus()<cr>]], {
+  desc = '[G]it [S]tatus',
+})
+
+
 
 function GitCommit(commitMessage)
   RunCommandAndNotify('git add . && git commit -m "' .. commitMessage .. '"')
