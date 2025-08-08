@@ -287,4 +287,7 @@ return {
     main = 'ibl',
     opts = {},
   },
+  {
+    "p00f/cphelper.nvim",
+  }
 }
