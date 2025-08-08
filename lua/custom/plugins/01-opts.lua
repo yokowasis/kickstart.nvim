@@ -100,13 +100,13 @@ vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
   desc = 'Toggle Spectre. Search and Replace text in multiple files',
 })
 
-vim.api.nvim_set_keymap('n', '<leader>cpr', ':CphReceive', {
+vim.api.nvim_set_keymap('n', '<leader>cpr', ':CphReceive<cr>', {
   noremap = true,
   silent = false,
   desc = '[C]ompetitive [P]rogramming [R]eceive',
 })
 
-vim.api.nvim_set_keymap('n', '<leader>cpt', ':CphTest', {
+vim.api.nvim_set_keymap('n', '<leader>cpt', ':CphTest<cr>', {
   noremap = true,
   silent = false,
   desc = '[C]ompetitive [P]rogramming [T]est',
