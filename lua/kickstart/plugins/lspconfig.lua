@@ -239,6 +239,7 @@ return {
       vim.list_extend(ensure_installed, {
         'prettierd',
         'clang-format',
+        'clangd',
         'html',
         'intelephense',
         'pretty-php',
