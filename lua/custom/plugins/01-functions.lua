@@ -1,51 +1,63 @@
 function CompileAndRun()
-    local filetype = GetFileType()
+  local filetype = GetFileType()
 
-    -- Get full folder path of the current buffer
-    local folder_path = vim.fn.expand '%:p:h'
+  -- Get full folder path of the current buffer
+  local folder_path = vim.fn.expand '%:p:h'
 
-    -- get full path up to "labs" folder
-    local labs_fullfolder = folder_path:match '(.+labs)'
+  -- get full path up to "labs" folder
+  local labs_fullfolder = folder_path:match '(.+labs)'
 
-    -- Get the filename (with extension) of the current buffer
-    local filename_with_extension = vim.fn.expand '%:t'
+  -- Get the filename (with extension) of the current buffer
+  local filename_with_extension = vim.fn.expand '%:t'
 
-    -- Get the filename without the extension
-    local filename_without_extension = vim.fn.expand '%:t:r'
+  -- Get the filename without the extension
+  local filename_without_extension = vim.fn.expand '%:t:r'
 
-    -- Get the file extension of the current buffer
-    local file_extension = vim.fn.fnamemodify(filename_with_extension, ':e')
+  -- Get the file extension of the current buffer
+  local file_extension = vim.fn.fnamemodify(filename_with_extension, ':e')
 
-    if file_extension == 'cjs' or file_extension == 'mjs' then
-        filetype = 'javascript'
-    elseif file_extension == 'md' then
-        filetype = 'markdown'
-    end
+  if file_extension == 'cjs' or file_extension == 'mjs' then
+    filetype = 'javascript'
+  elseif file_extension == 'md' then
+    filetype = 'markdown'
+  end
 
-    local iste = true
+  local iste = true
 
-    if filetype == 'cpp' then
-        vim.cmd(':tabnew | te g++ ' .. folder_path .. '/' .. filename_with_extension .. ' -o ' .. folder_path .. '/' ..
-                    filename_without_extension .. '.out' .. ' && ' .. folder_path .. '/' .. filename_without_extension ..
-                    '.out')
-    elseif filetype == 'javascript' then
-        vim.cmd(':tabnew | te node ' .. folder_path .. '/' .. filename_with_extension)
-    elseif file_extension == 'py' then
-        vim.cmd(':tabnew | te python ' .. folder_path .. '/' .. filename_with_extension)
-    elseif filetype == 'typescript' then
-        vim.cmd(':tabnew | te ts-node ' .. folder_path .. '/' .. filename_with_extension)
-    elseif filetype == 'shell' then
-        vim.cmd(':tabnew | te bash ' .. folder_path .. '/' .. filename_with_extension)
-    else
-        vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
-        return
-    end
+  if filetype == 'cpp' then
+    vim.cmd(
+      ':tabnew | te g++ '
+        .. folder_path
+        .. '/'
+        .. filename_with_extension
+        .. ' -o '
+        .. folder_path
+        .. '/'
+        .. filename_without_extension
+        .. '.out'
+        .. ' && '
+        .. folder_path
+        .. '/'
+        .. filename_without_extension
+        .. '.out'
+    )
+  elseif filetype == 'javascript' then
+    vim.cmd(':tabnew | te node ' .. folder_path .. '/' .. filename_with_extension)
+  elseif file_extension == 'py' then
+    vim.cmd(':tabnew | te python ' .. folder_path .. '/' .. filename_with_extension)
+  elseif filetype == 'typescript' then
+    vim.cmd(':tabnew | te ts-node ' .. folder_path .. '/' .. filename_with_extension)
+  elseif filetype == 'shell' then
+    vim.cmd(':tabnew | te bash ' .. folder_path .. '/' .. filename_with_extension)
+  else
+    vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
+    return
+  end
 
-    if iste then
-        vim.api.nvim_feedkeys('i', 'n', true)
-    end
+  if iste then
+    vim.api.nvim_feedkeys('i', 'n', true)
+  end
 end
-
 
 -- livegrep search
 function customSearchGrep()

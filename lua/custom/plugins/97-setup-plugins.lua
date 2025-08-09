@@ -8,17 +8,17 @@ require('luasnip.loaders.from_vscode').lazy_load {
   paths = { '~/git/friendly-snippets' },
 }
 
-vim.keymap.set({ "i", "s" }, "<C-l>", function()
-  if require("luasnip").choice_active() then
-    require("luasnip").change_choice(1)
+vim.keymap.set({ 'i', 's' }, '<C-l>', function()
+  if require('luasnip').choice_active() then
+    require('luasnip').change_choice(1)
   end
-end, { desc = "LuaSnip: next choice" })
+end, { desc = 'LuaSnip: next choice' })
 
-vim.keymap.set({ "i", "s" }, "<C-h>", function()
-  if require("luasnip").choice_active() then
-    require("luasnip").change_choice(-1)
+vim.keymap.set({ 'i', 's' }, '<C-h>', function()
+  if require('luasnip').choice_active() then
+    require('luasnip').change_choice(-1)
   end
-end, { desc = "LuaSnip: previous choice" })
+end, { desc = 'LuaSnip: previous choice' })
 
 -- close window with x if it's not a main window
 vim.api.nvim_create_autocmd('FileType', {
@@ -62,17 +62,17 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 })
 
 require('guess-indent').setup {}
-require("conform").setup({
+require('conform').setup {
   formatters = {
-    [ "pretty-php" ] = {
-      prepend_args = { "-s2" },
+    ['pretty-php'] = {
+      prepend_args = { '-s2' },
     },
   },
-})
-require("ibl").setup()
+}
+require('ibl').setup()
 
 require('lspconfig').clangd.setup {
-  cmd = { "clangd", "--background-index" },
+  cmd = { 'clangd', '--background-index' },
 }
 
 return {}

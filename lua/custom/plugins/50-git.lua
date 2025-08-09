@@ -66,8 +66,6 @@ vim.keymap.set('n', '<c-e>', [[:lua OpenGitStatus()<cr>]], {
   desc = '[G]it [S]tatus',
 })
 
-
-
 function GitCommit(commitMessage)
   RunCommandAndNotify('git add . && git commit -m "' .. commitMessage .. '"')
 end
@@ -79,13 +77,11 @@ vim.keymap.set('n', '<leader>ga', function()
   end
 
   CreateBranchAndPush(branchName)
-
 end, {
   desc = '[G]it [A]dd Branch',
   noremap = true,
   silent = false,
 })
-
 
 vim.keymap.set('n', '<leader>gc', function()
   local commitMessage = vim.fn.input 'Enter commit message: '
@@ -142,16 +138,18 @@ vim.keymap.set('n', '<leader>gl', ':vertical Git log<CR>', {
   silent = true,
 })
 
-vim.api.nvim_create_user_command("GitInitPush", function()
-  local username = "yokowasis"
-  local repo = vim.fn.fnamemodify(vim.loop.cwd(), ":t")
-  if repo == "" then
-    print("Could not determine repository name from current directory")
+vim.api.nvim_create_user_command('GitInitPush', function()
+  local username = 'yokowasis'
+  local repo = vim.fn.fnamemodify(vim.loop.cwd(), ':t')
+  if repo == '' then
+    print 'Could not determine repository name from current directory'
     return
   end
-  local remote = "https://github.com/" .. username .. "/" .. repo .. ".git"
-  local cmd = "git init && git add . && git commit -m \"Initial commit\" && git branch -M main && gh repo create " .. repo .. " --private --source=. --remote=origin --push"
-  vim.cmd("terminal " .. cmd)
+  local remote = 'https://github.com/' .. username .. '/' .. repo .. '.git'
+  local cmd = 'git init && git add . && git commit -m "Initial commit" && git branch -M main && gh repo create '
+    .. repo
+    .. ' --private --source=. --remote=origin --push'
+  vim.cmd('terminal ' .. cmd)
 end, {})
 
 vim.keymap.set('n', '<leader>gi', ':GitInitPush<CR>', {

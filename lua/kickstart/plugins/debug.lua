@@ -95,6 +95,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'codelldb', -- C++ debugger
       },
     }
 
@@ -144,5 +145,95 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+
+    -- C++ configuration
+    dap.adapters.codelldb = {
+      type = 'server',
+      port = '${port}',
+      executable = {
+        -- CHANGE THIS to your path!
+        command = vim.fn.exepath 'codelldb',
+        args = { '--port', '${port}' },
+      },
+    }
+
+    dap.configurations.cpp = {
+      {
+        name = 'Launch file',
+        type = 'codelldb',
+        request = 'launch',
+        program = function()
+          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+      },
+      {
+        name = 'Auto compile and launch',
+        type = 'codelldb',
+        request = 'launch',
+        program = function()
+          local current_file = vim.fn.expand '%:p'
+          local file_ext = vim.fn.expand '%:e'
+
+          if file_ext ~= 'cpp' and file_ext ~= 'cc' and file_ext ~= 'cxx' then
+            vim.notify('Not a C++ file', vim.log.levels.ERROR)
+            return nil
+          end
+
+          local output_name = vim.fn.expand '%:t:r' -- filename without extension
+          local output_path = vim.fn.expand '%:p:h' .. '/' .. output_name
+
+          -- Check for Makefile/CMake first
+          local makefile_exists = vim.fn.filereadable(vim.fn.getcwd() .. '/Makefile') == 1
+          local cmake_exists = vim.fn.filereadable(vim.fn.getcwd() .. '/CMakeLists.txt') == 1
+
+          local compile_cmd
+          if makefile_exists then
+            compile_cmd = 'make'
+          elseif cmake_exists then
+            compile_cmd = 'cmake --build build || (mkdir -p build && cd build && cmake .. && make)'
+          else
+            -- Simple g++ compilation
+            compile_cmd = string.format('g++ -g -std=c++17 -o "%s" "%s"', output_path, current_file)
+          end
+
+          vim.notify('Compiling: ' .. compile_cmd, vim.log.levels.INFO)
+          local result = vim.fn.system(compile_cmd)
+
+          if vim.v.shell_error ~= 0 then
+            vim.notify('Compilation failed:\n' .. result, vim.log.levels.ERROR)
+            return nil
+          end
+
+          vim.notify('Compilation successful!', vim.log.levels.INFO)
+
+          if makefile_exists or cmake_exists then
+            -- For Makefile/CMake, try to find the executable
+            local possible_paths = {
+              vim.fn.getcwd() .. '/' .. output_name,
+              vim.fn.getcwd() .. '/build/' .. output_name,
+              vim.fn.getcwd() .. '/bin/' .. output_name,
+            }
+
+            for _, path in ipairs(possible_paths) do
+              if vim.fn.filereadable(path) == 1 then
+                return path
+              end
+            end
+
+            -- Fallback: ask user
+            return vim.fn.input('Executable path: ', vim.fn.getcwd() .. '/', 'file')
+          else
+            return output_path
+          end
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+      },
+    }
+
+    -- Same configuration for C
+    dap.configurations.c = dap.configurations.cpp
   end,
 }

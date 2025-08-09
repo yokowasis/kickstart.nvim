@@ -272,7 +272,6 @@ vim.keymap.set('n', '<leader>snf', ':%s/"/\\\\"/g<cr>ggVG10>gg0v_<left>y:%s/<c-r
   desc = '[Sn]ippets [F]ormat',
 })
 
-
 -- auto format
 vim.keymap.set('n', '<leader>fmf', 'gg=G<c-o>', {
   noremap = true,
