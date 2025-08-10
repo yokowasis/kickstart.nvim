@@ -71,6 +71,13 @@ return {
       end,
       desc = 'Debug: Set Breakpoint',
     },
+    {
+      '<F6>',
+      function()
+        require('dap').terminate()
+      end,
+      desc = 'Debug: Stop/Terminate',
+    },
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     {
       '<F7>',
@@ -185,16 +192,6 @@ return {
 
     dap.configurations.cpp = {
       {
-        name = 'Launch file',
-        type = 'codelldb',
-        request = 'launch',
-        program = function()
-          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-        end,
-        cwd = '${workspaceFolder}',
-        stopOnEntry = false,
-      },
-      {
         name = 'Auto compile and launch',
         type = 'codelldb',
         request = 'launch',
@@ -224,15 +221,12 @@ return {
             compile_cmd = string.format('g++ -g -std=c++17 -o "%s" "%s"', output_path, current_file)
           end
 
-          vim.notify('Compiling: ' .. compile_cmd, vim.log.levels.INFO)
           local result = vim.fn.system(compile_cmd)
 
           if vim.v.shell_error ~= 0 then
             vim.notify('Compilation failed:\n' .. result, vim.log.levels.ERROR)
             return nil
           end
-
-          vim.notify('Compilation successful!', vim.log.levels.INFO)
 
           if makefile_exists or cmake_exists then
             -- For Makefile/CMake, try to find the executable
