@@ -26,7 +26,7 @@ function CompileAndRun()
 
   if filetype == 'cpp' then
     vim.cmd(
-      ':tabnew | te g++ '
+      ':tabnew | te g++ --std=c++17 '
         .. folder_path
         .. '/'
         .. filename_with_extension
