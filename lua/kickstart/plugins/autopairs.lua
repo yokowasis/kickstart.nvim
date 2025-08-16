@@ -1,8 +1,10 @@
--- autopairs
--- https://github.com/windwp/nvim-autopairs
+-- mini.pairs - part of mini.nvim
+-- More lightweight and consistent with existing mini plugins
 
 return {
-  'windwp/nvim-autopairs',
+  'echasnovski/mini.pairs',
   event = 'InsertEnter',
-  opts = {},
+  config = function()
+    require('mini.pairs').setup()
+  end,
 }

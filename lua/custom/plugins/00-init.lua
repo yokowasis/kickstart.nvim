@@ -6,12 +6,8 @@ return {
   {
     'HakonHarnes/img-clip.nvim',
     event = 'VeryLazy',
-    opts = {
-      -- add options here
-      -- or leave it empty to use the default settings
-    },
+    opts = {},
     keys = {
-      -- suggested keymap
       { '<leader>p', '<cmd>PasteImage<cr>', desc = 'Paste image from system clipboard' },
     },
   },
@@ -42,9 +38,9 @@ return {
     event = 'VeryLazy',
     config = function()
       require('treesitter-context').setup {
-        enable = true, -- Enable this plugin (Can be enabled/disabled later)
-        max_lines = 3, -- How many lines the window should span
-        trim_scope = 'outer', -- Which context lines to discard if max_lines is exceeded
+        enable = true,
+        max_lines = 3,
+        trim_scope = 'outer',
       }
     end,
   },
@@ -64,55 +60,37 @@ return {
     end,
   },
   {
-    'folke/flash.nvim',
+    'ggandor/leap.nvim',
     event = 'VeryLazy',
-    ---@type Flash.Config
-    opts = {
-      modes = {
-        search = {
-          enabled = false,
-        },
+    config = function()
+      require('leap').add_default_mappings()
+    end,
+    keys = {
+      {
+        's',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('leap').leap { target_windows = { vim.fn.win_getid() } }
+        end,
+        desc = 'Leap forward',
+      },
+      {
+        'S',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('leap').leap { target_windows = { vim.fn.win_getid() }, backward = true }
+        end,
+        desc = 'Leap backward',
       },
     },
-    -- stylua: ignore
-    keys = {{
-        "s",
-        mode = {"n", "o", "x"},
-        function()
-            require("flash").jump()
-        end,
-        desc = "Flash"
-    }, {
-        "S",
-        mode = {"n", "o", "x"},
-        function()
-            require("flash").treesitter()
-        end,
-        desc = "Flash Treesitter"
-    }, {
-        "r",
-        mode = "o",
-        function()
-            require("flash").remote()
-        end,
-        desc = "Remote Flash"
-    }, {
-        "R",
-        mode = {"o", "x"},
-        function()
-            require("flash").treesitter_search()
-        end,
-        desc = "Treesitter Search"
-    }, {
-        "<c-s>",
-        mode = {"c"},
-        function()
-            require("flash").toggle()
-        end,
-        desc = "Toggle Flash Search"
-    }},
   },
-  { 'nvim-pack/nvim-spectre' },
+  {
+    'echasnovski/mini.statusline',
+    event = 'VeryLazy',
+    config = function()
+      require('mini.statusline').setup { use_icons = vim.g.have_nerd_font }
+    end,
+  },
   {
     'mattn/emmet-vim',
     init = function()
@@ -242,16 +220,17 @@ return {
       vim.diagnostic.config { virtual_text = false } -- Only if needed in your configuration, if you already have native LSP diagnostics
     end,
   },
-  { -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
-    main = 'ibl',
-    opts = {},
-  },
   {
-    'p00f/cphelper.nvim',
+    'echasnovski/mini.indentscope',
+    event = 'VeryLazy',
+    config = function()
+      require('mini.indentscope').setup {
+        symbol = '│',
+        options = { try_as_border = true },
+      }
+    end,
   },
+
   {
     'NickvanDyke/opencode.nvim',
     dependencies = { 'folke/snacks.nvim' },
@@ -290,10 +269,32 @@ return {
     config = function()
       local diff = require 'mini.diff'
       diff.setup {
-        -- Disabled by default
-        source = diff.gen_source.none(),
+        -- Enable git source
+        source = diff.gen_source.git(),
+        view = {
+          style = 'sign', -- Show git changes in sign column
+          signs = { add = '+', change = '~', delete = '-' },
+        },
       }
     end,
+  },
+  {
+    'MagicDuck/grug-far.nvim',
+    config = function()
+      require('grug-far').setup({
+        headerMaxWidth = 80,
+      })
+    end,
+    cmd = 'GrugFar',
+    keys = {
+      { '<leader>S', '<cmd>GrugFar<cr>', desc = 'Search and Replace (grug-far)' },
+      { '<leader>sw', function() 
+        require('grug-far').grug_far({ prefills = { search = vim.fn.expand('<cword>') } }) 
+      end, desc = 'Search current word' },
+      { '<leader>sf', function() 
+        require('grug-far').grug_far({ prefills = { paths = vim.fn.expand('%') } }) 
+      end, desc = 'Search in current file' },
+    },
   },
   {
     'folke/noice.nvim',
@@ -319,14 +320,14 @@ return {
         mini = {
           position = {
             row = 0,
-            col = "100%",
+            col = '100%',
           },
           size = {
-            width = "auto",
-            height = "auto",
+            width = 'auto',
+            height = 'auto',
           },
           border = {
-            style = "rounded",
+            style = 'rounded',
           },
           win_options = {
             winblend = 10,

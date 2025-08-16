@@ -95,10 +95,6 @@ vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', {
 })
 vim.o.hlsearch = true
 
--- Toggle Spectre
-vim.keymap.set('n', '<leader>S', function() require("spectre").toggle() end, {
-  desc = 'Toggle Spectre. Search and Replace text in multiple files',
-})
 
 vim.api.nvim_set_keymap('n', '<leader>cpr', ':CphReceive<cr>', {
   noremap = true,
