@@ -60,28 +60,15 @@ return {
     end,
   },
   {
-    'ggandor/leap.nvim',
+    'folke/flash.nvim',
     event = 'VeryLazy',
-    config = function()
-      require('leap').add_default_mappings()
-    end,
+    opts = {},
     keys = {
-      {
-        's',
-        mode = { 'n', 'x', 'o' },
-        function()
-          require('leap').leap { target_windows = { vim.fn.win_getid() } }
-        end,
-        desc = 'Leap forward',
-      },
-      {
-        'S',
-        mode = { 'n', 'x', 'o' },
-        function()
-          require('leap').leap { target_windows = { vim.fn.win_getid() }, backward = true }
-        end,
-        desc = 'Leap backward',
-      },
+      { 's', mode = { 'n', 'x', 'o' }, function() require('flash').jump() end, desc = 'Flash' },
+      { 'S', mode = { 'n', 'x', 'o' }, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },
+      { 'r', mode = 'o', function() require('flash').remote() end, desc = 'Remote Flash' },
+      { 'R', mode = { 'o', 'x' }, function() require('flash').treesitter_search() end, desc = 'Treesitter Search' },
+      { '<c-s>', mode = { 'c' }, function() require('flash').toggle() end, desc = 'Toggle Flash Search' },
     },
   },
   {
@@ -92,15 +79,11 @@ return {
     end,
   },
   {
-    'mattn/emmet-vim',
-    init = function()
-      vim.g.user_emmet_settings = {
-        typescriptreact = {
-          attribute_name = {
-            ['class'] = 'class', -- override className -> class
-          },
-        },
-      }
+    'olrtg/nvim-emmet',
+    event = 'InsertEnter',
+    ft = { 'html', 'css', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'vue', 'svelte' },
+    config = function()
+      vim.keymap.set({ 'n', 'v', 'i' }, '<C-y>,', require('nvim-emmet').wrap_with_abbreviation, { desc = 'Emmet expand' })
     end,
   },
 

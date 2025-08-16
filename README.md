@@ -49,6 +49,8 @@ When syncing with upstream `dam9000/kickstart-modular.nvim`:
 
 Always test config loads after merge: `nvim --headless -c "qa"`
 
+**See SUMMARY.md for a compact overview of current configuration state.**
+
 ## Installation
 
 ### Install Neovim
