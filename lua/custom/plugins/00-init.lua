@@ -318,7 +318,7 @@ return {
       views = {
         mini = {
           position = {
-            row = 2,
+            row = 0,
             col = "100%",
           },
           size = {
