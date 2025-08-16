@@ -315,6 +315,24 @@ return {
         inc_rename = false, -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = false, -- add a border to hover docs and signature help
       },
+      views = {
+        mini = {
+          position = {
+            row = 2,
+            col = "100%",
+          },
+          size = {
+            width = "auto",
+            height = "auto",
+          },
+          border = {
+            style = "rounded",
+          },
+          win_options = {
+            winblend = 10,
+          },
+        },
+      },
     },
     dependencies = {
       'MunifTanjim/nui.nvim',
