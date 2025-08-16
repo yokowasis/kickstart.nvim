@@ -12,6 +12,43 @@ A starting point for Neovim that is:
 
 **NOT** a Neovim distribution, but instead a starting point for your configuration.
 
+## LLM Merge Rules
+
+**For AI assistants working with this configuration:**
+
+When syncing with upstream `dam9000/kickstart-modular.nvim`:
+
+1. **Always preserve custom configurations** in `lua/custom/` - these are user customizations
+2. **Merge conflicts priority:**
+   - Keep user's plugin choices (e.g., neogit over gitsigns if user removed gitsigns)
+   - Accept upstream syntax changes (e.g., dot notation `kickstart.plugins.x`)
+   - Accept upstream bug fixes and improvements
+   - Preserve user's commented-out plugins with reasons (e.g., "-- Removed: redundant with neogit")
+
+3. **Sync process:**
+   ```bash
+   git fetch upstream
+   git merge upstream/master --no-edit
+   # Resolve conflicts favoring user customizations
+   git commit
+   git push
+   ```
+
+4. **Files to be careful with:**
+   - `lua/lazy-plugins.lua` - often has conflicts due to plugin choices
+   - `lua/custom/plugins/*.lua` - never override, these are user customizations
+   - `init.lua` - preserve any user modifications
+
+5. **Key customizations in this fork:**
+   - Uses neogit instead of gitsigns
+   - Custom git workflow with `<C-e>` keymap
+   - Mini.nvim ecosystem integration
+   - Grug-far for search/replace
+   - Custom notification system with noice
+   - Bamboo theme with no italics
+
+Always test config loads after merge: `nvim --headless -c "qa"`
+
 ## Installation
 
 ### Install Neovim
