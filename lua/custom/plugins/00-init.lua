@@ -112,31 +112,6 @@ return {
         desc = "Toggle Flash Search"
     }},
   },
-  {
-    'rcarriga/nvim-notify',
-    config = function() -- This is the function that runs, AFTER loading
-      -- Notification Setup
-      require('notify').setup {
-        stages = 'static',
-      }
-      vim.notify = require 'notify'
-      function notif(jobid, data, event, timeout, notifid)
-        if type(data) == 'number' then
-          return
-        end
-
-        local output = table.concat(data, '\n')
-        if output == '' then
-        else
-          -- Fix: vim.notify is a function, not a table with dismiss method
-          vim.notify(output, vim.log.levels.WARN, {
-            title = 'Notification',
-            timeout = timeout,
-          })
-        end
-      end
-    end,
-  },
   { 'nvim-pack/nvim-spectre' },
   {
     'mattn/emmet-vim',
@@ -279,7 +254,7 @@ return {
   },
   {
     'NickvanDyke/opencode.nvim',
-    dependencies = { 'folke/snacks.nvim', },
+    dependencies = { 'folke/snacks.nvim' },
     ---@type opencode.Config
     opts = {
       -- Your configuration, if any
@@ -297,19 +272,19 @@ return {
     },
   },
   {
-    "olimorris/codecompanion.nvim",
+    'olimorris/codecompanion.nvim',
     opts = {},
     dependencies = {
-      "ravitemer/mcphub.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
+      'ravitemer/mcphub.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
     },
   },
   {
-    "MeanderingProgrammer/render-markdown.nvim",
+    'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
-    ft = { "markdown", "codecompanion" }
-  },  
+    ft = { 'markdown', 'codecompanion' },
+  },
   -- {
   --   "OXY2DEV/markview.nvim",
   --   lazy = false,
@@ -319,35 +294,40 @@ return {
   --       ignore_buftypes = {},
   --     },
   --   },
-  -- },  
+  -- },
   {
-    "echasnovski/mini.diff",
+    'echasnovski/mini.diff',
     config = function()
-      local diff = require("mini.diff")
-      diff.setup({
+      local diff = require 'mini.diff'
+      diff.setup {
         -- Disabled by default
         source = diff.gen_source.none(),
-      })
+      }
     end,
   },
   {
-    "folke/noice.nvim",
-    event = "VeryLazy",
+    'folke/noice.nvim',
+    event = 'VeryLazy',
     opts = {
-      cmdline = {
-        enabled = true,
-        view = "cmdline_popup",
-        opts = {
-          position = {
-            row = "10%", -- Near the top
-            col = "50%",
-          },
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+          ['vim.lsp.util.stylize_markdown'] = true,
+          ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
         },
+      },
+      -- you can enable a preset for easier configuration
+      presets = {
+        bottom_search = true, -- use a classic bottom cmdline for search
+        command_palette = true, -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false, -- add a border to hover docs and signature help
       },
     },
     dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    }
+      'MunifTanjim/nui.nvim',
+    },
   },
 }

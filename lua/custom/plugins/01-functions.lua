@@ -1,3 +1,18 @@
+-- Notification function for job output
+function notif(jobid, data, event, timeout, notifid)
+  if type(data) == 'number' then
+    return
+  end
+
+  local output = table.concat(data, '\n')
+  if output ~= '' then
+    vim.notify(output, vim.log.levels.WARN, {
+      title = 'Notification',
+      timeout = timeout or 5000,
+    })
+  end
+end
+
 function CompileAndRun()
   local filetype = GetFileType()
 
