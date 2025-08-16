@@ -304,7 +304,7 @@ end
 
 function RunCommandAndNotify(command, timeout, title)
   if timeout == nil then
-    timeout = 36000000
+    timeout = 5000  -- 5 seconds instead of 10 hours!
   end
   if title == nil then
     title = 'Run Command'
