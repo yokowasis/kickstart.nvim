@@ -3,6 +3,9 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    dependencies = {
+      "OXY2DEV/markview.nvim",
+    },
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       ensure_installed = {
@@ -20,6 +23,7 @@ return {
         'html',
         'svelte',
         'markdown',
+        'markdown_inline',
         'yaml',
         'json',
       },

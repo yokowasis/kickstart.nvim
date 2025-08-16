@@ -75,4 +75,37 @@ require('lspconfig').clangd.setup {
   cmd = { 'clangd', '--background-index' },
 }
 
+require("codecompanion").setup({
+  strategies = {
+    chat = {
+      adapter = {
+        name = "copilot",
+        model = "gpt-4.1",
+      },
+    },
+    inline = {
+      adapter = {
+        name = "copilot",
+        model = "gpt-4.1",
+      },
+    },
+    cmd = {
+      adapter = {
+        name = "copilot",
+        model = "gpt-4.1",
+      },
+    },
+  },
+  extensions = {
+    mcphub = {
+      callback = "mcphub.extensions.codecompanion",
+      opts = {
+        make_vars = true,
+        make_slash_commands = true,
+        show_result_in_chat = true
+      }
+    }
+  }
+})
+
 return {}
