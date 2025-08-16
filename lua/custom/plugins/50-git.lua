@@ -2,7 +2,7 @@
 function GitPullAndNotify()
   vim.notify('Pull Processing...', vim.log.levels.INFO, {
     title = 'Git',
-    timeout = 36000000,
+    timeout = 5000,  -- 5 seconds instead of 10 hours
   })
 
   vim.fn.jobstart('git pull --rebase', {
@@ -21,7 +21,7 @@ end
 function GitPushAndNotify()
   vim.notify('Push Processing...', vim.log.levels.INFO, {
     title = 'Git',
-    timeout = 36000000,
+    timeout = 5000,  -- 5 seconds instead of 10 hours
   })
 
   vim.fn.jobstart('git pull --rebase && git push', {

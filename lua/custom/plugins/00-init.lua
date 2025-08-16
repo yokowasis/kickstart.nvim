@@ -128,7 +128,7 @@ return {
         local output = table.concat(data, '\n')
         if output == '' then
         else
-          vim.notify.dismiss()
+          -- Fix: vim.notify is a function, not a table with dismiss method
           vim.notify(output, vim.log.levels.WARN, {
             title = 'Notification',
             timeout = timeout,
