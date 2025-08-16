@@ -262,6 +262,16 @@ return {
     end,
   },
   {
+    "echasnovski/mini.tabline",
+    config = function()
+      require("mini.tabline").setup({
+        show_icons = true,
+        set_vim_settings = true,
+        tabpage_section = 'right', -- Show tab info on right
+      })
+    end,
+  },
+  {
     'MagicDuck/grug-far.nvim',
     config = function()
       require('grug-far').setup({
