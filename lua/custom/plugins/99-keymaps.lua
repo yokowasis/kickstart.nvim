@@ -374,6 +374,26 @@ vim.keymap.set('n', '<leader>rp', ':LspRestart<cr>', {
   desc = '[R]eload LS[P]',
 })
 
+
+-- code companion
+vim.keymap.set('n', '<leader>ct', ':CodeCompanionChat<cr>', {
+  noremap = true,
+  silent = false,
+  desc = '[C]odeCompanion [T]alk',
+})
+vim.keymap.set('n', '<leader>cc', ':CodeCompanion #{buffer} ', {
+  noremap = true,
+  silent = false,
+  desc = '[C]ode [C]ompanion',
+})
+vim.keymap.set('v', '<leader>cc', ':CodeCompanion ', {
+  noremap = true,
+  silent = false,
+  desc = '[C]ode [C]ompanion',
+})
+
+
+
 vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { noremap = true, silent = true })
 
 return {}

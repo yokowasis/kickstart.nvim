@@ -82,6 +82,74 @@ require("codecompanion").setup({
         name = "copilot",
         model = "gpt-4.1",
       },
+      tools = {
+        ["cmd_runner"] = {
+          opts = {
+            requires_approval = false,
+          },
+        },
+        ["create_file"] = {
+          opts = {
+            requires_approval = false,
+          },
+        },
+        ["insert_edit_into_file"] = {
+          opts = {
+            requires_approval = false,
+            user_confirmation = false,
+            patching_algorithm = "strategies.chat.tools.catalog.helpers.patch",
+          },
+        },
+        ["fetch_webpage"] = {
+          opts = {
+            requires_approval = false,
+          },
+        },
+        ["file_search"] = {
+          opts = {
+            requires_approval = false,
+          },
+        },
+        ["get_changed_files"] = {
+          opts = {
+            requires_approval = false,
+          },
+        },
+        ["grep_search"] = {
+          opts = {
+            requires_approval = false,
+          },
+        },
+        ["list_code_usages"] = {
+          opts = {
+            requires_approval = false,
+          },
+        },
+        ["next_edit_suggestion"] = {
+          opts = {
+            requires_approval = false,
+          },
+        },
+        ["read_file"] = {
+          opts = {
+            requires_approval = false,
+          },
+        },
+        ["search_web"] = {
+          opts = {
+            requires_approval = false,
+          },
+        },
+        opts = {
+          default_tools = { "full_stack_dev" },
+          auto_submit_errors = true,
+          auto_submit_success = true,
+          folds = {
+            enabled = false,
+          },
+          show_tools_processing = true,
+        }
+      }
     },
     inline = {
       adapter = {
