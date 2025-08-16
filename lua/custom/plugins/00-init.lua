@@ -336,7 +336,13 @@ return {
     opts = {
       cmdline = {
         enabled = true,
-        view = "cmdline_popup", -- This creates the center popup
+        view = "cmdline_popup",
+        opts = {
+          position = {
+            row = "10%", -- Near the top
+            col = "50%",
+          },
+        },
       },
     },
     dependencies = {

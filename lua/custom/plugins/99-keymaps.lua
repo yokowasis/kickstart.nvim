@@ -1,5 +1,5 @@
 -- Create a mapping for compiling and running code
-vim.api.nvim_set_keymap('n', '<leader>cr', ':lua CompileAndRun()<cr>', {
+vim.keymap.set('n', '<leader>cr', CompileAndRun, {
   noremap = true,
   silent = false,
   desc = '[C]ompile and [R]un',
@@ -206,22 +206,22 @@ vim.keymap.set('i', '<D-s>', '<Esc>:w<cr>a', {
 })
 
 -- npm / yarn operation
-vim.api.nvim_set_keymap('n', '<leader>rb', ':lua RunCommandAndNotify("npm run build")<CR>', {
+vim.keymap.set('n', '<leader>rb', function() RunCommandAndNotify("npm run build") end, {
   noremap = true,
   silent = false,
   desc = '[R]un [B]uild',
 })
-vim.api.nvim_set_keymap('n', '<leader>rd', ':lua RunCommandInNewTab("npm run dev")<CR>', {
+vim.keymap.set('n', '<leader>rd', function() RunCommandInNewTab("npm run dev") end, {
   noremap = true,
   silent = false,
   desc = '[R]un [D]ev',
 })
-vim.api.nvim_set_keymap('n', '<leader>ri', ':lua Npm_install()<CR>', {
+vim.keymap.set('n', '<leader>ri', Npm_install, {
   noremap = true,
   silent = false,
   desc = '[R]un npm [I]nstall',
 })
-vim.api.nvim_set_keymap('n', '<leader>rl', ':lua RunCommandInNewTab("five-server")<CR>', {
+vim.keymap.set('n', '<leader>rl', function() RunCommandInNewTab("five-server") end, {
   noremap = true,
   silent = false,
   desc = '[R]un npm [L]ive Server',
@@ -255,7 +255,7 @@ vim.api.nvim_set_keymap('n', '<leader>nq', ":execute 'mksession! ' . fnameescape
 })
 
 -- vim signature help
-vim.api.nvim_set_keymap('n', 'k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {
+vim.keymap.set('n', 'k', vim.lsp.buf.signature_help, {
   noremap = true,
   silent = true,
 })
@@ -300,32 +300,34 @@ vim.keymap.set('v', '<leader>svr', ':s/<c-r>"//g<left><left>', {
   desc = '[S]earch And [V]isual [R]eplace',
 })
 
-vim.keymap.set('n', '<leader>fnp', ":lua NextJSNewPage(vim.fn.input('Enter Page Name: '))<CR>", {
+vim.keymap.set('n', '<leader>fnp', function() NextJSNewPage(vim.fn.input('Enter Page Name: ')) end, {
   noremap = true,
   silent = false,
   desc = 'New [P]age',
 })
-vim.keymap.set('n', '<leader>fnr', ":lua NextJSNewApiPost(vim.fn.input('Enter Route Name: '))<CR>", {
+vim.keymap.set('n', '<leader>fnr', function() NextJSNewApiPost(vim.fn.input('Enter Route Name: ')) end, {
   noremap = true,
   silent = false,
-  desc = 'New Post [R]oute',
+  desc = 'New API [R]oute POST',
 })
-vim.keymap.set('n', '<leader>fng', ":lua NextJSNewApiGet(vim.fn.input('Enter Route Name: '))<CR>", {
+vim.keymap.set('n', '<leader>fng', function() NextJSNewApiGet(vim.fn.input('Enter Route Name: ')) end, {
   noremap = true,
   silent = false,
   desc = 'New [G]et Route',
 })
-vim.keymap.set('n', '<leader>fsp', ":lua SvelteKitNewPage(vim.fn.input('Enter Page Name: '))<CR>", {
+vim.keymap.set('n', '<leader>fsp', function() SvelteKitNewPage(vim.fn.input('Enter Page Name: ')) end, {
+  noremap = true,
+  silent = false,
   noremap = true,
   silent = false,
   desc = 'New [P]age',
 })
-vim.keymap.set('n', '<leader>fsr', ":lua SvelteKitNewAPIPost(vim.fn.input('Enter Route Name: '))<CR>", {
+vim.keymap.set('n', '<leader>fsr', function() SvelteKitNewAPIPost(vim.fn.input('Enter Route Name: ')) end, {
   noremap = true,
   silent = false,
   desc = 'New Post [R]oute',
 })
-vim.keymap.set('n', '<leader>fsg', ":lua SvelteKitNewAPIGet(vim.fn.input('Enter Route Name: '))<CR>", {
+vim.keymap.set('n', '<leader>fsg', function() SvelteKitNewAPIGet(vim.fn.input('Enter Route Name: ')) end, {
   noremap = true,
   silent = false,
   desc = 'New [G]et Route',
@@ -334,7 +336,7 @@ vim.keymap.set('n', '<leader>fsg', ":lua SvelteKitNewAPIGet(vim.fn.input('Enter 
 vim.keymap.set(
   'n',
   '<c-h>',
-  ":lua SearchAndReplace(vim.fn.input('Enter Search Term: '),vim.fn.input('Enter Replace Term: '))<CR>",
+  function() SearchAndReplace(vim.fn.input('Enter Search Term: '), vim.fn.input('Enter Replace Term: ')) end,
   -- ":%s/vim.fn.input('Enter Search Term: ')/vim.fn.input('Enter Replace Term: ')/g",
   {
     noremap = true,
@@ -349,7 +351,7 @@ vim.keymap.set('n', '<leader>sg', ':Telescope live_grep<CR>', {
   silent = false,
 })
 
-vim.keymap.set('n', '<leader>sc', ':lua customSearchGrep()<CR>', {
+vim.keymap.set('n', '<leader>sc', customSearchGrep, {
   desc = '[S]earch by [G]rep [C]ustom',
   noremap = true,
   silent = false,
