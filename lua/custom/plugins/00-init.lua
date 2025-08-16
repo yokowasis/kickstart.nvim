@@ -125,7 +125,7 @@ return {
       }
     end,
   },
-  { 'tpope/vim-fugitive' },
+
   {
     'jake-stewart/multicursor.nvim',
     branch = '1.0',

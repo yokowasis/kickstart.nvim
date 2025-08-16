@@ -38,18 +38,21 @@ function GitPushAndNotify()
 end
 
 function OpenGitStatus()
-  local windows = vim.api.nvim_list_wins()
-  for _, v in pairs(windows) do
-    local status, _ = pcall(vim.api.nvim_win_get_var, v, 'fugitive_status')
-    if status then
-      vim.api.nvim_win_close(v, false)
-      return
+  -- Check if neogit is already open
+  local neogit_open = false
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    local name = vim.api.nvim_buf_get_name(buf)
+    if name:match("NeogitStatus") then
+      neogit_open = true
+      vim.api.nvim_buf_delete(buf, { force = true })
+      break
     end
   end
-  vim.cmd [[Neotree close]]
-  vim.cmd [[vertical Git]]
-  vim.cmd [[vertical resize -30]]
-  vim.cmd [[wincmd H]]
+  
+  if not neogit_open then
+    vim.cmd [[Neotree close]]
+    vim.cmd [[Neogit]]
+  end
 end
 
 function CreateBranchAndPush(branchName)
@@ -108,25 +111,25 @@ vim.keymap.set('n', '<leader>gu', GitPullAndNotify, {
   silent = true,
 })
 
-vim.keymap.set('n', '<leader>gd', ':vertical Git diff<CR>', {
+vim.keymap.set('n', '<leader>gd', '<cmd>Neogit diff<CR>', {
   desc = '[G]it [D]iff',
   noremap = true,
   silent = true,
 })
 
-vim.keymap.set('n', '<leader>gb', ':vertical Git branch -a<CR>', {
+vim.keymap.set('n', '<leader>gb', '<cmd>Neogit branch<CR>', {
   desc = '[G]it [B]ranch',
   noremap = true,
   silent = true,
 })
 
-vim.keymap.set('n', '<leader>gv', ':Gvdiffsplit<CR>', {
-  desc = '[G]it [V]ertical Diff Current File',
+vim.keymap.set('n', '<leader>gv', '<cmd>DiffviewOpen<CR>', {
+  desc = '[G]it [V]iew Diff (current file)',
   noremap = true,
   silent = true,
 })
 
-vim.keymap.set('n', '<leader>gl', ':vertical Git log<CR>', {
+vim.keymap.set('n', '<leader>gl', '<cmd>Neogit log<CR>', {
   desc = '[G]it [L]og',
   noremap = true,
   silent = true,
@@ -152,10 +155,104 @@ vim.keymap.set('n', '<leader>gi', ':GitInitPush<CR>', {
   silent = true,
 })
 
-vim.keymap.set('n', '<leader>coo', '04e<right>v$<left>y:Git checkout <c-r>"<cr>', {
+vim.keymap.set('n', '<leader>coo', function()
+  -- Get current line and extract branch name, then checkout with neogit
+  local line = vim.api.nvim_get_current_line()
+  local branch = line:match("origin/(.+)")
+  if branch then
+    vim.cmd('Neogit branch checkout ' .. branch)
+  else
+    vim.notify('No origin branch found on current line', vim.log.levels.WARN)
+  end
+end, {
   desc = 'Checkout Origin Branch',
   noremap = true,
   silent = true,
 })
 
-return {}
+return {
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "sindrets/diffview.nvim",        -- optional - for diff view
+      "nvim-telescope/telescope.nvim", -- optional - for telescope integration
+    },
+    config = function()
+      require("neogit").setup({
+        -- Neogit configuration
+        integrations = {
+          telescope = true,
+          diffview = true,
+        },
+        sections = {
+          untracked = {
+            folded = false,
+          },
+          unstaged = {
+            folded = false,
+          },
+          staged = {
+            folded = false,
+          },
+        },
+      })
+      
+      -- Add keymap to open neogit
+      vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<cr>', {
+        desc = 'Open Neo[g]it',
+        noremap = true,
+        silent = true,
+      })
+      
+      -- Branch-specific keymaps
+      vim.keymap.set('n', '<leader>gbb', '<cmd>Neogit branch<cr>', {
+        desc = '[G]it [B]ranch menu',
+        noremap = true,
+        silent = true,
+      })
+      
+      vim.keymap.set('n', '<leader>gbc', function()
+        local branch = vim.fn.input('New branch name: ')
+        if branch ~= '' then
+          vim.cmd('Neogit branch create ' .. branch)
+        end
+      end, {
+        desc = '[G]it [B]ranch [C]reate',
+        noremap = true,
+        silent = true,
+      })
+      
+      vim.keymap.set('n', '<leader>gbs', '<cmd>Neogit branch switch<cr>', {
+        desc = '[G]it [B]ranch [S]witch',
+        noremap = true,
+        silent = true,
+      })
+      
+      vim.keymap.set('n', '<leader>gbm', '<cmd>Neogit branch merge<cr>', {
+        desc = '[G]it [B]ranch [M]erge',
+        noremap = true,
+        silent = true,
+      })
+      
+      vim.keymap.set('n', '<leader>gbd', '<cmd>Neogit branch delete<cr>', {
+        desc = '[G]it [B]ranch [D]elete',
+        noremap = true,
+        silent = true,
+      })
+      
+      vim.keymap.set('n', '<leader>gbr', function()
+        local branch = vim.fn.input('Remote branch to checkout: ')
+        if branch ~= '' then
+          -- This will checkout and track the remote branch
+          vim.cmd('!git checkout -b ' .. branch .. ' origin/' .. branch)
+          vim.cmd('Neogit refresh')
+        end
+      end, {
+        desc = '[G]it [B]ranch checkout [R]emote',
+        noremap = true,
+        silent = true,
+      })
+    end,
+  }
+}
