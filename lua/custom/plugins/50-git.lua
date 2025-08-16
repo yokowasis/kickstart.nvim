@@ -56,12 +56,6 @@ function CreateBranchAndPush(branchName)
   RunCommandAndNotify('git checkout -b ' .. branchName .. ' && git push -u origin ' .. branchName)
 end
 
-vim.keymap.set('n', '<c-q>', [[:lua OpenGitStatus()<cr>]], {
-  desc = '[G]it [S]tatus',
-})
-vim.keymap.set('n', '<leader>gs', [[:lua OpenGitStatus()<cr>]], {
-  desc = '[G]it [S]tatus',
-})
 vim.keymap.set('n', '<c-e>', [[:lua OpenGitStatus()<cr>]], {
   desc = '[G]it [S]tatus',
 })
