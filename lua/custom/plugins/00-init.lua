@@ -330,4 +330,18 @@ return {
       })
     end,
   },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      cmdline = {
+        enabled = true,
+        view = "cmdline_popup", -- This creates the center popup
+      },
+    },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
+  },
 }
