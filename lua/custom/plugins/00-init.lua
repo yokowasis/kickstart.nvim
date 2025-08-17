@@ -348,10 +348,6 @@ return {
       },
       views = {
         mini = {
-          position = {
-            row = 0,
-            col = '100%',
-          },
           size = {
             width = 'auto',
             height = 'auto',
