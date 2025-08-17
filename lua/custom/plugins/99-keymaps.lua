@@ -402,4 +402,11 @@ vim.keymap.set('v', '<leader>cc', ':CodeCompanion ', {
 
 vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { noremap = true, silent = true })
 
+-- Close all hidden/background buffers
+vim.keymap.set('n', '<leader>bo', CloseHiddenBuffers, {
+  noremap = true,
+  silent = false,
+  desc = '[B]uffer [O]nly - Close all hidden buffers',
+})
+
 return {}

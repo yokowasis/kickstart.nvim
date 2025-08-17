@@ -342,4 +342,34 @@ function RunCommandAndNotify(command, timeout, title)
   })
 end
 
+function CloseHiddenBuffers()
+  local all_buffers = vim.api.nvim_list_bufs()
+  local visible_buffers = {}
+  local closed_count = 0
+  
+  -- Get all visible buffers from all tabs and windows
+  for _, tabpage in ipairs(vim.api.nvim_list_tabpages()) do
+    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tabpage)) do
+      local buf = vim.api.nvim_win_get_buf(win)
+      visible_buffers[buf] = true
+    end
+  end
+  
+  -- Close buffers that are not visible in any window
+  for _, buf in ipairs(all_buffers) do
+    if not visible_buffers[buf] and vim.api.nvim_buf_is_loaded(buf) then
+      local buf_name = vim.api.nvim_buf_get_name(buf)
+      if buf_name ~= '' and not vim.api.nvim_buf_get_option(buf, 'modified') then
+        vim.api.nvim_buf_delete(buf, { force = false })
+        closed_count = closed_count + 1
+      end
+    end
+  end
+  
+  vim.notify('Closed ' .. closed_count .. ' hidden buffers', vim.log.levels.INFO, {
+    title = 'Buffer Cleanup',
+    timeout = 2000,
+  })
+end
+
 return {}
