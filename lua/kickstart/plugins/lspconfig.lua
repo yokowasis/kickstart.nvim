@@ -238,6 +238,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Lua formatter
+        'tailwindcss', -- Tailwind CSS LSP
         'prettierd',
         'clang-format',
         'clangd',
