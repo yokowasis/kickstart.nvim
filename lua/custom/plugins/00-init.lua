@@ -269,6 +269,11 @@ return {
         set_vim_settings = true,
         tabpage_section = 'right', -- Show tab info on right
       })
+      
+      -- Custom highlight for active buffer
+      vim.api.nvim_set_hl(0, 'MiniTablineCurrent', { fg = '#1d2021', bg = '#d79921', bold = true }) -- Yellow background
+      vim.api.nvim_set_hl(0, 'MiniTablineVisible', { fg = '#ebdbb2', bg = '#504945' }) -- Inactive visible
+      vim.api.nvim_set_hl(0, 'MiniTablineHidden', { fg = '#a89984', bg = '#3c3836' }) -- Hidden buffers
     end,
   },
   {
