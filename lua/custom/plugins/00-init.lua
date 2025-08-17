@@ -79,11 +79,15 @@ return {
     end,
   },
   {
-    'olrtg/nvim-emmet',
-    event = 'InsertEnter',
-    ft = { 'html', 'css', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'vue', 'svelte' },
-    config = function()
-      vim.keymap.set({ 'n', 'v', 'i' }, '<C-y>,', require('nvim-emmet').wrap_with_abbreviation, { desc = 'Emmet expand' })
+    'mattn/emmet-vim',
+    init = function()
+      vim.g.user_emmet_settings = {
+        typescriptreact = {
+          attribute_name = {
+            ['class'] = 'class', -- override className -> class
+          },
+        },
+      }
     end,
   },
 
