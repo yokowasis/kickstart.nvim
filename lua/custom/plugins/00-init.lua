@@ -64,11 +64,46 @@ return {
     event = 'VeryLazy',
     opts = {},
     keys = {
-      { 's', mode = { 'n', 'x', 'o' }, function() require('flash').jump() end, desc = 'Flash' },
-      { 'S', mode = { 'n', 'x', 'o' }, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },
-      { 'r', mode = 'o', function() require('flash').remote() end, desc = 'Remote Flash' },
-      { 'R', mode = { 'o', 'x' }, function() require('flash').treesitter_search() end, desc = 'Treesitter Search' },
-      { '<c-s>', mode = { 'c' }, function() require('flash').toggle() end, desc = 'Toggle Flash Search' },
+      {
+        's',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').jump()
+        end,
+        desc = 'Flash',
+      },
+      {
+        'S',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').treesitter()
+        end,
+        desc = 'Flash Treesitter',
+      },
+      {
+        'r',
+        mode = 'o',
+        function()
+          require('flash').remote()
+        end,
+        desc = 'Remote Flash',
+      },
+      {
+        'R',
+        mode = { 'o', 'x' },
+        function()
+          require('flash').treesitter_search()
+        end,
+        desc = 'Treesitter Search',
+      },
+      {
+        '<c-s>',
+        mode = { 'c' },
+        function()
+          require('flash').toggle()
+        end,
+        desc = 'Toggle Flash Search',
+      },
     },
   },
   {
@@ -266,14 +301,14 @@ return {
     end,
   },
   {
-    "echasnovski/mini.tabline",
+    'echasnovski/mini.tabline',
     config = function()
-      require("mini.tabline").setup({
+      require('mini.tabline').setup {
         show_icons = true,
         set_vim_settings = true,
         tabpage_section = 'right', -- Show tab info on right
-      })
-      
+      }
+
       -- Custom highlight for active buffer
       vim.api.nvim_set_hl(0, 'MiniTablineCurrent', { fg = '#1d2021', bg = '#d79921', bold = true }) -- Yellow background
       vim.api.nvim_set_hl(0, 'MiniTablineVisible', { fg = '#ebdbb2', bg = '#504945' }) -- Inactive visible
@@ -283,19 +318,27 @@ return {
   {
     'MagicDuck/grug-far.nvim',
     config = function()
-      require('grug-far').setup({
+      require('grug-far').setup {
         headerMaxWidth = 80,
-      })
+      }
     end,
     cmd = 'GrugFar',
     keys = {
       { '<leader>S', '<cmd>GrugFar<cr>', desc = 'Search and Replace (grug-far)' },
-      { '<leader>sw', function() 
-        require('grug-far').grug_far({ prefills = { search = vim.fn.expand('<cword>') } }) 
-      end, desc = 'Search current word' },
-      { '<leader>sf', function() 
-        require('grug-far').grug_far({ prefills = { paths = vim.fn.expand('%') } }) 
-      end, desc = 'Search in current file' },
+      {
+        '<leader>sw',
+        function()
+          require('grug-far').grug_far { prefills = { search = vim.fn.expand '<cword>' } }
+        end,
+        desc = 'Search current word',
+      },
+      {
+        '<leader>sf',
+        function()
+          require('grug-far').grug_far { prefills = { paths = vim.fn.expand '%' } }
+        end,
+        desc = 'Search in current file',
+      },
     },
   },
   {
@@ -340,5 +383,16 @@ return {
     dependencies = {
       'MunifTanjim/nui.nvim',
     },
+  },
+  {
+    'luckasRanarison/tailwind-tools.nvim',
+    name = 'tailwind-tools',
+    build = ':UpdateRemotePlugins',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-telescope/telescope.nvim', -- optional
+      'neovim/nvim-lspconfig', -- optional
+    },
+    opts = {}, -- your configuration
   },
 }
