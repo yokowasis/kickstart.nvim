@@ -2,7 +2,7 @@
 function GitPullAndNotify()
   vim.notify('Pull Processing...', vim.log.levels.INFO, {
     title = 'Git',
-    timeout = 5000,  -- 5 seconds instead of 10 hours
+    timeout = 5000, -- 5 seconds instead of 10 hours
   })
 
   vim.fn.jobstart('git pull --rebase', {
@@ -21,7 +21,7 @@ end
 function GitPushAndNotify()
   vim.notify('Push Processing...', vim.log.levels.INFO, {
     title = 'Git',
-    timeout = 5000,  -- 5 seconds instead of 10 hours
+    timeout = 5000, -- 5 seconds instead of 10 hours
   })
 
   vim.fn.jobstart('git pull --rebase && git push', {
@@ -42,13 +42,13 @@ function OpenGitStatus()
   local neogit_open = false
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     local name = vim.api.nvim_buf_get_name(buf)
-    if name:match("NeogitStatus") then
+    if name:match 'NeogitStatus' then
       neogit_open = true
       vim.api.nvim_buf_delete(buf, { force = true })
       break
     end
   end
-  
+
   if not neogit_open then
     vim.cmd [[Neotree close]]
     vim.cmd [[Neogit]]
@@ -158,7 +158,7 @@ vim.keymap.set('n', '<leader>gi', ':GitInitPush<CR>', {
 vim.keymap.set('n', '<leader>coo', function()
   -- Get current line and extract branch name, then checkout with neogit
   local line = vim.api.nvim_get_current_line()
-  local branch = line:match("origin/(.+)")
+  local branch = line:match 'origin/(.+)'
   if branch then
     vim.cmd('Neogit branch checkout ' .. branch)
   else
@@ -172,14 +172,14 @@ end, {
 
 return {
   {
-    "NeogitOrg/neogit",
+    'NeogitOrg/neogit',
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "sindrets/diffview.nvim",        -- optional - for diff view
-      "nvim-telescope/telescope.nvim", -- optional - for telescope integration
+      'nvim-lua/plenary.nvim', -- required
+      'sindrets/diffview.nvim', -- optional - for diff view
+      'nvim-telescope/telescope.nvim', -- optional - for telescope integration
     },
     config = function()
-      require("neogit").setup({
+      require('neogit').setup {
         -- Neogit configuration
         integrations = {
           telescope = true,
@@ -196,24 +196,24 @@ return {
             folded = false,
           },
         },
-      })
-      
+      }
+
       -- Add keymap to open neogit
       vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<cr>', {
         desc = 'Open Neo[g]it',
         noremap = true,
         silent = true,
       })
-      
+
       -- Branch-specific keymaps
       vim.keymap.set('n', '<leader>gbb', '<cmd>Neogit branch<cr>', {
         desc = '[G]it [B]ranch menu',
         noremap = true,
         silent = true,
       })
-      
+
       vim.keymap.set('n', '<leader>gbc', function()
-        local branch = vim.fn.input('New branch name: ')
+        local branch = vim.fn.input 'New branch name: '
         if branch ~= '' then
           vim.cmd('Neogit branch create ' .. branch)
         end
@@ -222,31 +222,31 @@ return {
         noremap = true,
         silent = true,
       })
-      
+
       vim.keymap.set('n', '<leader>gbs', '<cmd>Neogit branch switch<cr>', {
         desc = '[G]it [B]ranch [S]witch',
         noremap = true,
         silent = true,
       })
-      
+
       vim.keymap.set('n', '<leader>gbm', '<cmd>Neogit branch merge<cr>', {
         desc = '[G]it [B]ranch [M]erge',
         noremap = true,
         silent = true,
       })
-      
+
       vim.keymap.set('n', '<leader>gbd', '<cmd>Neogit branch delete<cr>', {
         desc = '[G]it [B]ranch [D]elete',
         noremap = true,
         silent = true,
       })
-      
+
       vim.keymap.set('n', '<leader>gbr', function()
-        local branch = vim.fn.input('Remote branch to checkout: ')
+        local branch = vim.fn.input 'Remote branch to checkout: '
         if branch ~= '' then
           -- This will checkout and track the remote branch
           vim.cmd('!git checkout -b ' .. branch .. ' origin/' .. branch)
-          vim.cmd('Neogit refresh')
+          vim.cmd 'Neogit refresh'
         end
       end, {
         desc = '[G]it [B]ranch checkout [R]emote',
@@ -254,5 +254,5 @@ return {
         silent = true,
       })
     end,
-  }
+  },
 }

@@ -206,12 +206,16 @@ vim.keymap.set('i', '<D-s>', '<Esc>:w<cr>a', {
 })
 
 -- npm / yarn operation
-vim.keymap.set('n', '<leader>rb', function() RunCommandAndNotify("npm run build") end, {
+vim.keymap.set('n', '<leader>rb', function()
+  RunCommandAndNotify 'npm run build'
+end, {
   noremap = true,
   silent = false,
   desc = '[R]un [B]uild',
 })
-vim.keymap.set('n', '<leader>rd', function() RunCommandInNewTab("npm run dev") end, {
+vim.keymap.set('n', '<leader>rd', function()
+  RunCommandInNewTab 'npm run dev'
+end, {
   noremap = true,
   silent = false,
   desc = '[R]un [D]ev',
@@ -221,7 +225,9 @@ vim.keymap.set('n', '<leader>ri', Npm_install, {
   silent = false,
   desc = '[R]un npm [I]nstall',
 })
-vim.keymap.set('n', '<leader>rl', function() RunCommandInNewTab("five-server") end, {
+vim.keymap.set('n', '<leader>rl', function()
+  RunCommandInNewTab 'five-server'
+end, {
   noremap = true,
   silent = false,
   desc = '[R]un npm [L]ive Server',
@@ -293,6 +299,32 @@ vim.keymap.set('v', '<leader>sar', '"zy:%s/<c-r>z//g<left><left>', {
   desc = '[S]earch [A]nd [R]eplace',
 })
 
+-- Search and Replace with Number of rows
+vim.keymap.set('v', '<leader>san', function()
+  -- Get the selected text
+  vim.cmd 'normal! "zy'
+  local selected = vim.fn.getreg 'z'
+
+  -- Ask for number of rows
+  local rows = vim.fn.input 'Number of rows to affect: '
+  if rows == '' then
+    print 'Operation cancelled'
+    return
+  end
+
+  -- Get current line number
+  local current_line = vim.fn.line '.'
+  local end_line = current_line + tonumber(rows) - 1
+
+  -- Generate the command but don't execute it
+  local cmd = ':' .. current_line .. ',' .. end_line .. 's/' .. vim.fn.escape(selected, '/') .. '//g'
+  vim.fn.feedkeys(cmd .. vim.api.nvim_replace_termcodes('<Left><Left>', true, false, true))
+end, {
+  noremap = true,
+  silent = false,
+  desc = '[S]earch [A]nd Replace with [N]umber of rows starting from current line',
+})
+
 -- Search and Visual Replace
 vim.keymap.set('v', '<leader>svr', ':s/<c-r>"//g<left><left>', {
   noremap = true,
@@ -300,34 +332,46 @@ vim.keymap.set('v', '<leader>svr', ':s/<c-r>"//g<left><left>', {
   desc = '[S]earch And [V]isual [R]eplace',
 })
 
-vim.keymap.set('n', '<leader>fnp', function() NextJSNewPage(vim.fn.input('Enter Page Name: ')) end, {
+vim.keymap.set('n', '<leader>fnp', function()
+  NextJSNewPage(vim.fn.input 'Enter Page Name: ')
+end, {
   noremap = true,
   silent = false,
   desc = 'New [P]age',
 })
-vim.keymap.set('n', '<leader>fnr', function() NextJSNewApiPost(vim.fn.input('Enter Route Name: ')) end, {
+vim.keymap.set('n', '<leader>fnr', function()
+  NextJSNewApiPost(vim.fn.input 'Enter Route Name: ')
+end, {
   noremap = true,
   silent = false,
   desc = 'New API [R]oute POST',
 })
-vim.keymap.set('n', '<leader>fng', function() NextJSNewApiGet(vim.fn.input('Enter Route Name: ')) end, {
+vim.keymap.set('n', '<leader>fng', function()
+  NextJSNewApiGet(vim.fn.input 'Enter Route Name: ')
+end, {
   noremap = true,
   silent = false,
   desc = 'New [G]et Route',
 })
-vim.keymap.set('n', '<leader>fsp', function() SvelteKitNewPage(vim.fn.input('Enter Page Name: ')) end, {
+vim.keymap.set('n', '<leader>fsp', function()
+  SvelteKitNewPage(vim.fn.input 'Enter Page Name: ')
+end, {
   noremap = true,
   silent = false,
   noremap = true,
   silent = false,
   desc = 'New [P]age',
 })
-vim.keymap.set('n', '<leader>fsr', function() SvelteKitNewAPIPost(vim.fn.input('Enter Route Name: ')) end, {
+vim.keymap.set('n', '<leader>fsr', function()
+  SvelteKitNewAPIPost(vim.fn.input 'Enter Route Name: ')
+end, {
   noremap = true,
   silent = false,
   desc = 'New Post [R]oute',
 })
-vim.keymap.set('n', '<leader>fsg', function() SvelteKitNewAPIGet(vim.fn.input('Enter Route Name: ')) end, {
+vim.keymap.set('n', '<leader>fsg', function()
+  SvelteKitNewAPIGet(vim.fn.input 'Enter Route Name: ')
+end, {
   noremap = true,
   silent = false,
   desc = 'New [G]et Route',
@@ -336,7 +380,9 @@ vim.keymap.set('n', '<leader>fsg', function() SvelteKitNewAPIGet(vim.fn.input('E
 vim.keymap.set(
   'n',
   '<c-h>',
-  function() SearchAndReplace(vim.fn.input('Enter Search Term: '), vim.fn.input('Enter Replace Term: ')) end,
+  function()
+    SearchAndReplace(vim.fn.input 'Enter Search Term: ', vim.fn.input 'Enter Replace Term: ')
+  end,
   -- ":%s/vim.fn.input('Enter Search Term: ')/vim.fn.input('Enter Replace Term: ')/g",
   {
     noremap = true,
@@ -381,7 +427,6 @@ vim.keymap.set('n', '<leader>rp', ':LspRestart<cr>', {
   silent = false,
   desc = '[R]eload LS[P]',
 })
-
 
 -- code companion
 vim.keymap.set('n', '<leader>ct', ':CodeCompanionChat Toggle<cr>', {

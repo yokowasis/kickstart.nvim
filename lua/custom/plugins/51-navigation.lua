@@ -1,20 +1,20 @@
 -- Smart buffer delete function (for <leader><down>)
 local function smart_buffer_delete()
-  local buffers = vim.fn.getbufinfo({buflisted = 1})
+  local buffers = vim.fn.getbufinfo { buflisted = 1 }
   local listed_buffers = {}
-  
+
   -- Count only listed buffers (exclude help, quickfix, etc.)
   for _, buf in ipairs(buffers) do
     if buf.listed == 1 then
       table.insert(listed_buffers, buf)
     end
   end
-  
+
   -- If this is the last buffer, quit Neovim
   if #listed_buffers <= 1 then
-    vim.cmd('quit')
+    vim.cmd 'quit'
   else
-    vim.cmd('bdelete')
+    vim.cmd 'bdelete'
   end
 end
 

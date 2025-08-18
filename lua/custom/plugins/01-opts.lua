@@ -95,7 +95,6 @@ vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', {
 })
 vim.o.hlsearch = true
 
-
 vim.api.nvim_set_keymap('n', '<leader>cpr', ':CphReceive<cr>', {
   noremap = true,
   silent = false,
