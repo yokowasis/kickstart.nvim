@@ -198,61 +198,13 @@ return {
         },
       }
 
-      -- Add keymap to open neogit
-      vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<cr>', {
-        desc = 'Open Neo[g]it',
-        noremap = true,
-        silent = true,
-      })
-
       -- Branch-specific keymaps
-      vim.keymap.set('n', '<leader>gbb', '<cmd>Neogit branch<cr>', {
+      vim.keymap.set('n', '<leader>gb', '<cmd>Neogit branch<cr>', {
         desc = '[G]it [B]ranch menu',
         noremap = true,
         silent = true,
       })
 
-      vim.keymap.set('n', '<leader>gbc', function()
-        local branch = vim.fn.input 'New branch name: '
-        if branch ~= '' then
-          vim.cmd('Neogit branch create ' .. branch)
-        end
-      end, {
-        desc = '[G]it [B]ranch [C]reate',
-        noremap = true,
-        silent = true,
-      })
-
-      vim.keymap.set('n', '<leader>gbs', '<cmd>Neogit branch switch<cr>', {
-        desc = '[G]it [B]ranch [S]witch',
-        noremap = true,
-        silent = true,
-      })
-
-      vim.keymap.set('n', '<leader>gbm', '<cmd>Neogit branch merge<cr>', {
-        desc = '[G]it [B]ranch [M]erge',
-        noremap = true,
-        silent = true,
-      })
-
-      vim.keymap.set('n', '<leader>gbd', '<cmd>Neogit branch delete<cr>', {
-        desc = '[G]it [B]ranch [D]elete',
-        noremap = true,
-        silent = true,
-      })
-
-      vim.keymap.set('n', '<leader>gbr', function()
-        local branch = vim.fn.input 'Remote branch to checkout: '
-        if branch ~= '' then
-          -- This will checkout and track the remote branch
-          vim.cmd('!git checkout -b ' .. branch .. ' origin/' .. branch)
-          vim.cmd 'Neogit refresh'
-        end
-      end, {
-        desc = '[G]it [B]ranch checkout [R]emote',
-        noremap = true,
-        silent = true,
-      })
     end,
   },
 }
