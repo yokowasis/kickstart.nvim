@@ -79,7 +79,7 @@ require('codecompanion').setup {
     chat = {
       adapter = {
         name = 'copilot',
-        model = 'gpt-5-mini',
+        model = 'gpt-4.1',
       },
       tools = {
         ['cmd_runner'] = {
@@ -153,13 +153,13 @@ require('codecompanion').setup {
     inline = {
       adapter = {
         name = 'copilot',
-        model = 'gpt-5-mini',
+        model = 'gpt-4o',
       },
     },
     cmd = {
       adapter = {
         name = 'copilot',
-        model = 'gpt-5-mini',
+        model = 'gpt-4.1',
       },
     },
   },
