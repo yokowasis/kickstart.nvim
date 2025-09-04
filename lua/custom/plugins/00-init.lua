@@ -281,11 +281,11 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
   },
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
-    ft = { 'markdown', 'codecompanion' },
-  },
+  -- {
+  --   'MeanderingProgrammer/render-markdown.nvim',
+  --   dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+  --   ft = { 'markdown', 'codecompanion' },
+  -- },
   {
     'echasnovski/mini.diff',
     config = function()
@@ -339,9 +339,9 @@ return {
         },
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
-          ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-          ['vim.lsp.util.stylize_markdown'] = true,
-          ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
+          -- ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+          -- ['vim.lsp.util.stylize_markdown'] = true,
+          -- ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
         },
       },
       -- you can enable a preset for easier configuration
