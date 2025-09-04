@@ -445,6 +445,15 @@ vim.keymap.set('v', '<leader>cc', ':CodeCompanion ', {
   desc = '[C]ode [C]ompanion',
 })
 
+vim.keymap.set('n', '<leader>cf', function()
+  vim.fn.setreg('+', vim.fn.expand('%:p'))
+  print('Copied filename to clipboard: ' .. vim.fn.expand('%:p'))
+end, {
+  noremap = true,
+  silent = true,
+  desc = '[C]opy [F]ilename to clipboard',
+})
+
 vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { noremap = true, silent = true })
 
 -- Close all hidden/background buffers
