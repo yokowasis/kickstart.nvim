@@ -75,102 +75,38 @@ require('lspconfig').clangd.setup {
 }
 
 require('codecompanion').setup {
-  strategies = {
-    chat = {
-      adapter = {
-        name = 'copilot',
-        model = 'gpt-4.1',
-      },
-      tools = {
-        ['cmd_runner'] = {
-          opts = {
-            requires_approval = false,
+  adapters = {
+    http = {
+      my_custom_openai = function()
+        return require('codecompanion.adapters').extend('openai_compatible', {
+          name = 'my_custom_openai',
+          formatted_name = 'Custom OpenAI',
+          env = {
+            api_key = 'OPENAI_API_KEY',
+            url = 'https://chatgpt-api.sg.app.web.id',
+            chat_url = '/v1/chat/completions',
+            models_endpoint = '/v1/models',
           },
-        },
-        ['create_file'] = {
-          opts = {
-            requires_approval = false,
+          schema = {
+            model = {
+              order = 1,
+              mapping = 'parameters',
+              type = 'enum',
+              desc = 'ID of the model to use',
+              default = 'gpt-4o',
+              choices = { 'gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo' },
+            },
           },
-        },
-        ['insert_edit_into_file'] = {
-          opts = {
-            requires_approval = false,
-            user_confirmation = false,
-            patching_algorithm = 'strategies.chat.tools.catalog.helpers.patch',
-          },
-        },
-        ['fetch_webpage'] = {
-          opts = {
-            requires_approval = false,
-          },
-        },
-        ['file_search'] = {
-          opts = {
-            requires_approval = false,
-          },
-        },
-        ['get_changed_files'] = {
-          opts = {
-            requires_approval = false,
-          },
-        },
-        ['grep_search'] = {
-          opts = {
-            requires_approval = false,
-          },
-        },
-        ['list_code_usages'] = {
-          opts = {
-            requires_approval = false,
-          },
-        },
-        ['next_edit_suggestion'] = {
-          opts = {
-            requires_approval = false,
-          },
-        },
-        ['read_file'] = {
-          opts = {
-            requires_approval = false,
-          },
-        },
-        ['search_web'] = {
-          opts = {
-            requires_approval = false,
-          },
-        },
-        opts = {
-          default_tools = { 'full_stack_dev' },
-          auto_submit_errors = true,
-          auto_submit_success = true,
-          folds = {
-            enabled = false,
-          },
-          show_tools_processing = true,
-        },
-      },
-    },
-    inline = {
-      adapter = {
-        name = 'copilot',
-        model = 'gpt-4o',
-      },
-    },
-    cmd = {
-      adapter = {
-        name = 'copilot',
-        model = 'gpt-4.1',
-      },
+        })
+      end,
     },
   },
-  extensions = {
-    mcphub = {
-      callback = 'mcphub.extensions.codecompanion',
-      opts = {
-        make_vars = true,
-        make_slash_commands = true,
-        show_result_in_chat = true,
-      },
+  strategies = {
+    chat = {
+      adapter = 'my_custom_openai',
+    },
+    inline = {
+      adapter = 'my_custom_openai',
     },
   },
 }

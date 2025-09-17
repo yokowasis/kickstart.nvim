@@ -45,21 +45,6 @@ return {
     end,
   },
   {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    config = function()
-      require('copilot').setup {
-        suggestion = {
-          auto_trigger = true,
-          keymap = {
-            accept = '<c-j>',
-          },
-        },
-      }
-    end,
-  },
-  {
     'folke/flash.nvim',
     event = 'VeryLazy',
     opts = {},
@@ -273,7 +258,6 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
-    opts = {},
     dependencies = {
       'ravitemer/mcphub.nvim',
       'nvim-lua/plenary.nvim',
