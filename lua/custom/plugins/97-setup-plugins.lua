@@ -102,7 +102,7 @@ require('codecompanion').setup {
     },
     acp = {
       gemini_cli = function()
-        local adapter = require('codecompanion.adapters.acp.gemini_cli')
+        local adapter = require 'codecompanion.adapters.acp.gemini_cli'
         return require('codecompanion.adapters.acp').new(adapter)
       end,
     },
