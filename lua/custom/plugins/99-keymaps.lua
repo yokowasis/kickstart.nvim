@@ -429,7 +429,7 @@ vim.keymap.set('n', '<leader>rp', ':LspRestart<cr>', {
 })
 
 -- code companion
-vim.keymap.set('n', '<leader>ct', ':CodeCompanionChat Toggle<cr>', {
+vim.keymap.set('n', '<leader>ct', ':CodeCompanionChat<cr>', {
   noremap = true,
   silent = false,
   desc = '[C]odeCompanion [T]alk',
@@ -455,7 +455,7 @@ end, {
 })
 
 vim.keymap.set('n', '<leader>fe', function()
-  os.execute('explorer.exe .')
+  os.execute 'explorer.exe .'
 end, {
   noremap = true,
   silent = true,
