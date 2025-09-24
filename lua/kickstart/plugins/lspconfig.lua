@@ -236,12 +236,19 @@ return {
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
+
+      -- Detect Termux environment
+      local is_termux = vim.fn.has 'unix' == 1 and vim.fn.executable 'termux-info' == 1
+
+      -- List of tools to install via Mason
+      local ensure_installed = vim.tbl_keys(servers or {})
+
+      -- Extend with common tools
       vim.list_extend(ensure_installed, {
-        'stylua', -- Lua formatter
-        'tailwindcss', -- Tailwind CSS LSP
+        'stylua',
+        'tailwindcss',
         'prettierd',
         'clang-format',
-        'clangd',
         'html',
         'intelephense',
         'pretty-php',
@@ -253,7 +260,23 @@ return {
         'shfmt',
         'rust-analyzer',
       })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+      -- Only include clangd if not in Termux
+      if not is_termux then
+        table.insert(ensure_installed, 'clangd')
+      end
+
+      -- Setup Mason tool installer
+      require('mason-tool-installer').setup {
+        ensure_installed = ensure_installed,
+      }
+
+      -- Setup clangd LSP conditionally
+      local clangd_cmd = is_termux and { 'clangd' } or nil
+
+      require('lspconfig').clangd.setup {
+        cmd = clangd_cmd,
+      }
 
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
