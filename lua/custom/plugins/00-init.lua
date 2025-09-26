@@ -215,6 +215,12 @@ return {
             italic = false,
           },
         },
+        highlights = {
+          -- Remove underlines from tag-related groups
+          ['htmlLink'] = { fg = '$blue' },
+          ['@markup.link.label.html'] = { fg = '$blue' },
+          ['@string.special.url.html'] = { fg = '$orange' },
+        },
       }
       require('bamboo').load()
     end,
