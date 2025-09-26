@@ -248,7 +248,6 @@ return {
         'stylua',
         'tailwindcss',
         'prettierd',
-        'clang-format',
         'html',
         'intelephense',
         'pretty-php',
@@ -263,7 +262,7 @@ return {
 
       -- Only include clangd if not in Termux
       if not is_termux then
-        table.insert(ensure_installed, 'clangd')
+        table.insert(ensure_installed, 'clangd', 'clang-format')
       end
 
       -- Setup Mason tool installer
