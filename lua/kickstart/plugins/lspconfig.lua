@@ -262,7 +262,10 @@ return {
 
       -- Only include clangd if not in Termux
       if not is_termux then
-        table.insert(ensure_installed, 'clangd', 'clang-format')
+        vim.list_extend(ensure_installed, {
+          'clangd',
+          'clang-format',
+        })
       end
 
       -- Setup Mason tool installer
