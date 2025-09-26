@@ -220,6 +220,12 @@ return {
           ['htmlLink'] = { fg = '$blue' },
           ['@markup.link.label.html'] = { fg = '$blue' },
           ['@string.special.url.html'] = { fg = '$orange' },
+          -- TSX/JSX related
+          ['@_jsx_element.tsx'] = { fg = '$blue' },
+          ['@_jsx_element'] = { fg = '$blue' },
+          ['@none.tsx'] = { fg = '$blue' },
+          ['@spell.tsx'] = { fg = '$blue' },
+          ['@markup.link.label.tsx'] = { fg = '$blue' },
         },
       }
       require('bamboo').load()
