@@ -226,6 +226,11 @@ return {
           ['@none.tsx'] = { fg = '$blue' },
           ['@spell.tsx'] = { fg = '$blue' },
           ['@markup.link.label.tsx'] = { fg = '$blue' },
+          -- JavaScript/JSX related
+          ['@_jsx_element.javascript'] = { fg = '$blue' },
+          ['@none.javascript'] = { fg = '$blue' },
+          ['@spell.javascript'] = { fg = '$blue' },
+          ['@markup.link.label.javascript'] = { fg = '$blue' },
         },
       }
       require('bamboo').load()
