@@ -150,13 +150,6 @@ vim.keymap.set('v', 'zz', '<C-\\><C-n>', {
   silent = true,
 })
 
--- "Database Toggle UI"
-vim.keymap.set('n', '<leader>db', ':DBUIToggle<cr>', {
-  desc = '[D]ata[b]ase',
-  noremap = true,
-  silent = true,
-})
-
 return {
   {
     'windwp/nvim-ts-autotag',

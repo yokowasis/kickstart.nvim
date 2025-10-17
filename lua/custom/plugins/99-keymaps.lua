@@ -471,4 +471,11 @@ vim.keymap.set('n', '<leader>bo', CloseHiddenBuffers, {
   desc = '[B]uffer [O]nly - Close all hidden buffers',
 })
 
+-- "Database Toggle UI"
+vim.keymap.set('n', '<leader>db', ':DBUIToggle<cr>', {
+  desc = '[D]ata[b]ase',
+  noremap = true,
+  silent = true,
+})
+
 return {}
