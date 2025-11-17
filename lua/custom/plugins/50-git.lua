@@ -129,7 +129,7 @@ vim.keymap.set('n', '<leader>gv', '<cmd>DiffviewOpen<CR>', {
   silent = true,
 })
 
-vim.keymap.set('n', '<leader>gl', '<cmd>Neogit log<CR>', {
+vim.keymap.set('n', '<leader>gl', ':Telescope git_commits<CR>', {
   desc = '[G]it [L]og',
   noremap = true,
   silent = true,
