@@ -93,7 +93,7 @@ end, {
   silent = false,
 })
 
-vim.keymap.set('n', '<leader>gh', ':0Gclog<CR>', {
+vim.keymap.set('n', '<leader>gh', ':Telescope git_bcommits<CR>', {
   desc = '[G]it File [H]istory',
   noremap = true,
   silent = true,
@@ -204,7 +204,6 @@ return {
         noremap = true,
         silent = true,
       })
-
     end,
   },
 }
