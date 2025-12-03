@@ -277,6 +277,7 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
+    tag = 'v17.33.0', -- Pin to stable version to avoid breaking changes
     dependencies = {
       'ravitemer/mcphub.nvim',
       'nvim-lua/plenary.nvim',
