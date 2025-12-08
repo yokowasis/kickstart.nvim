@@ -5,7 +5,7 @@ function GitPullAndNotify()
     timeout = 5000, -- 5 seconds instead of 10 hours
   })
 
-  vim.fn.jobstart('git pull --rebase', {
+  vim.fn.jobstart('git fetch --all && git pull --rebase', {
     on_stdout = function(id, data, e)
       notif(id, data, e, 4000)
     end,
