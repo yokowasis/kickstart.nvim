@@ -332,6 +332,13 @@ vim.keymap.set('v', '<leader>svr', ':s/<c-r>"//g<left><left>', {
   desc = '[S]earch And [V]isual [R]eplace',
 })
 
+-- Search and Visual Replace
+vim.keymap.set('v', '<leader>sk', ':s/startText\\(.*\\)EndText.*/replace \\1/g<left><left>', {
+  noremap = true,
+  silent = false,
+  desc = '[S]earch [K]irby',
+})
+
 vim.keymap.set('n', '<leader>fnp', function()
   NextJSNewPage(vim.fn.input 'Enter Page Name: ')
 end, {
