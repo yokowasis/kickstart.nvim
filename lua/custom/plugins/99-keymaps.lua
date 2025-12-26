@@ -333,7 +333,7 @@ vim.keymap.set('v', '<leader>svr', ':s/<c-r>"//g<left><left>', {
 })
 
 -- Search and Visual Replace
-vim.keymap.set('v', '<leader>sk', ':s/startText\\(.*\\)EndText.*/replace \\1/g<left><left>', {
+vim.keymap.set('v', '<leader>sk', ':s/\\(.*\\)/\\1/g<left><left><left><left><left><left><left><left><left><left><left>', {
   noremap = true,
   silent = false,
   desc = '[S]earch [K]irby',
