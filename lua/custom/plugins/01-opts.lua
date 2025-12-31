@@ -1,6 +1,6 @@
 -- noswap
 vim.o.swapfile = false
-vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h16:sb'
+vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h17:sb'
 vim.o.list = false
 
 -- disable spell for pandoc
