@@ -30,6 +30,9 @@ return {
       'saghen/blink.cmp',
     },
     config = function()
+      -- Configuration: Set to true to prefer system clangd over Mason
+      local prefer_system_clangd = true
+      
       -- Brief aside: **What is LSP?**
       --
       -- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -237,8 +240,10 @@ return {
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
 
-      -- Detect Termux environment
+      -- Detect system capabilities
       local is_termux = vim.fn.has 'unix' == 1 and vim.fn.executable 'termux-info' == 1
+      local has_system_clangd = vim.fn.executable('clangd') == 1
+      local use_system_clangd = prefer_system_clangd and has_system_clangd
 
       -- List of tools to install via Mason
       local ensure_installed = vim.tbl_keys(servers or {})
@@ -260,10 +265,15 @@ return {
         'rust-analyzer',
       })
 
-      -- Only include clangd if not in Termux
-      if not is_termux then
+      -- Only include clangd if not in Termux and system clangd preference allows it
+      if not is_termux and not use_system_clangd then
         vim.list_extend(ensure_installed, {
           'clangd',
+          'clang-format',
+        })
+      elseif not is_termux then
+        -- Still install clang-format via Mason even when using system clangd
+        vim.list_extend(ensure_installed, {
           'clang-format',
         })
       end
@@ -273,8 +283,8 @@ return {
         ensure_installed = ensure_installed,
       }
 
-      -- Setup clangd LSP conditionally
-      local clangd_cmd = is_termux and { 'clangd' } or nil
+      -- Setup clangd LSP conditionally - prefer system clangd if configured and available
+      local clangd_cmd = (use_system_clangd or is_termux) and { 'clangd' } or nil
 
       require('lspconfig').clangd.setup {
         cmd = clangd_cmd,

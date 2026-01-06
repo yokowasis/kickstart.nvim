@@ -70,9 +70,16 @@ require('conform').setup {
   },
 }
 
-require('lspconfig').clangd.setup {
-  cmd = { 'clangd', '--background-index' },
-}
+-- Setup clangd with system preference (if system clangd is available and preferred)
+-- This will override the main lspconfig setup with additional arguments
+local has_system_clangd = vim.fn.executable('clangd') == 1
+local prefer_system_clangd = true -- Set to false if you want to use Mason's clangd
+
+if has_system_clangd and prefer_system_clangd then
+  require('lspconfig').clangd.setup {
+    cmd = { 'clangd', '--background-index' },
+  }
+end
 
 require('codecompanion').setup {
   adapters = {
