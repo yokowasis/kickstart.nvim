@@ -161,6 +161,59 @@ examples of adding popularly requested plugins.
 
 [The Only Video You Need to Get Started with Neovim](https://youtu.be/m8C0Cq9Uv9o)
 
+### Jupyter-style REPL Workflow
+
+This configuration includes Jupyter notebook-style functionality using [iron.nvim](https://github.com/Vigemus/iron.nvim). You can run Python code in an interactive REPL with cell-based execution.
+
+#### Features
+
+- **Cell Markers**: Use `# %%` to mark code cells (similar to Jupyter/VS Code)
+- **Interactive REPL**: Run Python code interactively with instant feedback
+- **Flexible Execution**: Send individual cells, lines, or selections to the REPL
+
+#### Key Bindings
+
+| Keymap | Description |
+|--------|-------------|
+| `<leader>ji` | Initialize REPL (opens Python REPL in vertical split) |
+| `<leader>jm` | Create new cell marker (`# %%`) |
+| `<space>jj` | Execute current cell |
+| `<space>ja` | Send entire file to REPL |
+| `<space>jr` | Restart REPL |
+| `<space>rr` | Toggle REPL window |
+| `<space>rf` | Focus REPL window |
+| `<space>rh` | Hide REPL window |
+| `<space>sl` | Send current line |
+| `<space>sc` | Send selection (visual mode) |
+| `<space>sp` | Send paragraph |
+| `<space>cl` | Clear REPL |
+
+#### Quick Start
+
+1. Open a Python file
+2. Press `<leader>ji` to initialize the REPL
+3. Add cell markers with `<leader>jm` or manually type `# %%`
+4. Press `<space>jj` to execute the current cell
+5. Navigate between cells and repeat
+
+#### Example Workflow
+
+```python
+# %%
+import numpy as np
+import pandas as pd
+
+# %%
+data = np.random.randn(100, 4)
+df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
+print(df.head())
+
+# %%
+print(df.describe())
+```
+
+Position your cursor in any cell and press `<space>jj` to execute it.
+
 ### FAQ
 
 * What should I do if I already have a pre-existing Neovim configuration?

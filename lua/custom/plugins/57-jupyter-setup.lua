@@ -141,3 +141,6 @@ vim.keymap.set('n', '<leader>ji', ':vsplit<cr>:IronReplHere<cr><c-w><c-w>', {
 })
 
 vim.keymap.set("n", "<space>jj", send_cell, { desc = "Iron: send current # %% cell" })
+
+return {}
+
