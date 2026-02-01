@@ -334,6 +334,9 @@ return {
     event = 'VeryLazy',
     opts = {
       lsp = {
+        progress = {
+          enabled = false,
+        },
         hover = {
           enabled = false,
         },
