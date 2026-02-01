@@ -24,7 +24,7 @@ return {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim', opts = {} },
+      -- { 'j-hui/fidget.nvim', opts = {} },
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
@@ -32,7 +32,7 @@ return {
     config = function()
       -- Configuration: Set to true to prefer system clangd over Mason
       local prefer_system_clangd = true
-      
+
       -- Brief aside: **What is LSP?**
       --
       -- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -242,7 +242,7 @@ return {
 
       -- Detect system capabilities
       local is_termux = vim.fn.has 'unix' == 1 and vim.fn.executable 'termux-info' == 1
-      local has_system_clangd = vim.fn.executable('clangd') == 1
+      local has_system_clangd = vim.fn.executable 'clangd' == 1
       local use_system_clangd = prefer_system_clangd and has_system_clangd
 
       -- List of tools to install via Mason
