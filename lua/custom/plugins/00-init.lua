@@ -101,7 +101,7 @@ return {
     end,
   },
   {
-    'mattn/emmet-vim',
+    'yokowasis/emmet-vim',
     init = function()
       vim.g.user_emmet_settings = {
         typescriptreact = {
