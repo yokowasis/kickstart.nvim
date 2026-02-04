@@ -5,16 +5,16 @@ return {
     build = ':TSUpdate',
     config = function()
       require('nvim-treesitter').install {
+        'jsx',
+        'tsx',
+        'javascript',
+        'typescript',
         'rust',
         'zig',
         'bash',
         'c',
         'cpp',
         'python',
-        'tsx',
-        'jsx',
-        'javascript',
-        'typescript',
         'vimdoc',
         'vim',
         'lua',
@@ -26,6 +26,35 @@ return {
         'yaml',
         'json',
       }
+
+      -- Enable treesitter highlighting for all installed languages
+      -- This is required in the new version of nvim-treesitter
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = {
+          'javascriptreact',
+          'typescriptreact',
+          'javascript',
+          'typescript',
+          'rust',
+          'zig',
+          'bash',
+          'c',
+          'cpp',
+          'python',
+          'vim',
+          'lua',
+          'php',
+          'html',
+          'svelte',
+          'markdown',
+          'yaml',
+          'json',
+        },
+        callback = function()
+          vim.treesitter.start()
+        end,
+        desc = 'Enable treesitter highlighting',
+      })
     end,
   },
 }
