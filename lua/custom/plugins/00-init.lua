@@ -363,61 +363,61 @@ return {
     end,
   },
   -- colorschemes
-  {
-    'ribru17/bamboo.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('bamboo').setup {
-        -- optional configuration here
-        code_style = {
-          comments = {
-            italic = false,
-          },
-          conditionals = {
-            italic = false,
-          },
-          keywords = {
-            italic = false,
-          },
-          functions = {
-            italic = false,
-          },
-          namespaces = {
-            italic = false,
-          },
-          parameters = {
-            italic = false,
-          },
-          strings = {
-            italic = false,
-          },
-          variables = {
-            italic = false,
-          },
-        },
-        highlights = {
-          -- Remove underlines from tag-related groups
-          ['htmlLink'] = { fg = '$blue' },
-          ['@markup.link.label.html'] = { fg = '$blue' },
-          ['@string.special.url.html'] = { fg = '$orange' },
-          -- TSX/JSX related
-          ['@_jsx_element.tsx'] = { fg = '$blue' },
-          ['@_jsx_element'] = { fg = '$blue' },
-          ['@none.tsx'] = { fg = '$blue' },
-          ['@spell.tsx'] = { fg = '$blue' },
-          ['@markup.link.label.tsx'] = { fg = '$blue' },
-          -- JavaScript/JSX related
-          ['@_jsx_element.javascript'] = { fg = '$blue' },
-          ['@none.javascript'] = { fg = '$blue' },
-          ['@spell.javascript'] = { fg = '$blue' },
-          ['@markup.link.label.javascript'] = { fg = '$blue' },
-        },
-      }
-      require('bamboo').load()
-    end,
-  },
-  { 'Mofiqul/dracula.nvim' },
+  -- {
+  --   'ribru17/bamboo.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require('bamboo').setup {
+  --       -- optional configuration here
+  --       code_style = {
+  --         comments = {
+  --           italic = false,
+  --         },
+  --         conditionals = {
+  --           italic = false,
+  --         },
+  --         keywords = {
+  --           italic = false,
+  --         },
+  --         functions = {
+  --           italic = false,
+  --         },
+  --         namespaces = {
+  --           italic = false,
+  --         },
+  --         parameters = {
+  --           italic = false,
+  --         },
+  --         strings = {
+  --           italic = false,
+  --         },
+  --         variables = {
+  --           italic = false,
+  --         },
+  --       },
+  --       highlights = {
+  --         -- Remove underlines from tag-related groups
+  --         ['htmlLink'] = { fg = '$blue' },
+  --         ['@markup.link.label.html'] = { fg = '$blue' },
+  --         ['@string.special.url.html'] = { fg = '$orange' },
+  --         -- TSX/JSX related
+  --         ['@_jsx_element.tsx'] = { fg = '$blue' },
+  --         ['@_jsx_element'] = { fg = '$blue' },
+  --         ['@none.tsx'] = { fg = '$blue' },
+  --         ['@spell.tsx'] = { fg = '$blue' },
+  --         ['@markup.link.label.tsx'] = { fg = '$blue' },
+  --         -- JavaScript/JSX related
+  --         ['@_jsx_element.javascript'] = { fg = '$blue' },
+  --         ['@none.javascript'] = { fg = '$blue' },
+  --         ['@spell.javascript'] = { fg = '$blue' },
+  --         ['@markup.link.label.javascript'] = { fg = '$blue' },
+  --       },
+  --     }
+  --     require('bamboo').load()
+  --   end,
+  -- },
+  -- { 'Mofiqul/dracula.nvim' },
   {
     'thesimonho/kanagawa-paper.nvim',
     lazy = false,
@@ -427,9 +427,9 @@ return {
       vim.cmd 'colorscheme kanagawa-paper-ink'
     end,
   },
-  {
-    'rose-pine/neovim',
-    name = 'rose-pine',
-    config = function() end,
-  },
+  -- {
+  --   'rose-pine/neovim',
+  --   name = 'rose-pine',
+  --   config = function() end,
+  -- },
 }
