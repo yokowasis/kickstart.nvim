@@ -278,6 +278,13 @@ vim.keymap.set('n', '<leader>snf', ':%s/"/\\\\"/g<cr>ggVG10>gg0v_<left>y:%s/<c-r
   desc = '[Sn]ippets [F]ormat',
 })
 
+-- Noice Notification
+vim.keymap.set('n', '<leader>snn', ':NoiceAll<cr>', {
+  noremap = true,
+  silent = false,
+  desc = '[S]how [N]oice [N]otification',
+})
+
 -- auto format
 vim.keymap.set('n', '<leader>fmf', 'gg=G<c-o>', {
   noremap = true,
