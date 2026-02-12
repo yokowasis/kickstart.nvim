@@ -68,27 +68,31 @@ function GitCommit(commitMessage)
 end
 
 function RevertToCommitUnderCursor()
-  local commit = vim.fn.expand("<cword>")
+  local commit = vim.fn.expand '<cword>'
 
-  if commit == nil or commit == "" then
-    print("No word under cursor.")
+  if commit == nil or commit == '' then
+    print 'No word under cursor.'
     return
   end
 
-  local answer = vim.fn.input(
-    "Reset to commit '" .. commit .. "' and force push? (yes/no): "
-  )
+  local answer = vim.fn.input("Reset to commit '" .. commit .. "' and force push? (yes/no): ")
 
-  if answer ~= "yes" then
-    print("Cancelled.")
+  if answer ~= 'yes' then
+    print 'Cancelled.'
     return
   end
 
-  local cmd = string.format("git reset --hard %s && git push --force", commit)
+  local cmd = string.format('git reset --hard %s && git push --force', commit)
   RunCommandInNewTab(cmd)
 end
 
-vim.keymap.set("n", "<leader>gr", RevertToCommitUnderCursor,{ desc = "Reset HEAD to commit under cursor + force push" })
+function UndoCommit()
+  local n = vim.fn.input 'Enter number of commits to undo: '
+  RunCommandAndNotify('git reset --soft HEAD~' .. n)
+end
+
+vim.keymap.set('n', '<leader>gx', UndoCommit, { desc = 'Discard changes in last commit' })
+vim.keymap.set('n', '<leader>gr', RevertToCommitUnderCursor, { desc = 'Reset HEAD to commit under cursor + force push' })
 
 vim.keymap.set('n', '<leader>ga', function()
   local branchName = vim.fn.input 'Enter commit message: '
