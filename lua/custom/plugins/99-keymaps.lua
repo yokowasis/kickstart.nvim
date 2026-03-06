@@ -372,8 +372,6 @@ vim.keymap.set('n', '<leader>fsp', function()
 end, {
   noremap = true,
   silent = false,
-  noremap = true,
-  silent = false,
   desc = 'New [P]age',
 })
 vim.keymap.set('n', '<leader>fsr', function()
