@@ -516,6 +516,9 @@ require('lazy').setup({
       'saghen/blink.cmp',
     },
     config = function()
+      -- Configuration: Set to true to prefer system clangd over Mason
+      local prefer_system_clangd = true
+
       -- Brief aside: **What is LSP?**
       --
       -- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -609,6 +612,22 @@ require('lazy').setup({
         end,
       })
 
+      -- Disable hover capability from Ruff if using with ty
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client == nil then
+            return
+          end
+          if client.name == 'ruff' then
+            -- Disable hover in favor of ty
+            client.server_capabilities.hoverProvider = false
+          end
+        end,
+        desc = 'LSP: Disable hover capability from Ruff',
+      })
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --  See `:help lsp-config` for information about keys and how to configure
@@ -616,7 +635,14 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        -- ty for Python type checking and hover documentation
+        ty = {
+          settings = {
+            ty = {
+              -- ty language server settings go here
+            },
+          },
+        },
         -- rust_analyzer = {},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -624,6 +650,9 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
+        --
+        -- Ruff LSP for Python linting and formatting
+        ruff = {},
 
         stylua = {}, -- Used to format Lua code
 
@@ -664,10 +693,48 @@ require('lazy').setup({
       --    :Mason
       --
       -- You can press `g?` for help in this menu.
+      --
+      -- You can add other tools here that you want Mason to install
+      -- for you, so that they are available from within Neovim.
+
+      -- Detect system capabilities
+      local is_termux = vim.fn.has 'unix' == 1 and vim.fn.executable 'termux-info' == 1
+      local has_system_clangd = vim.fn.executable 'clangd' == 1
+      local use_system_clangd = prefer_system_clangd and has_system_clangd
+
+      -- List of tools to install via Mason
       local ensure_installed = vim.tbl_keys(servers or {})
+
+      -- Extend with common tools
       vim.list_extend(ensure_installed, {
-        -- You can add other tools here that you want Mason to install
+        'stylua',
+        'tailwindcss',
+        'prettierd',
+        'html',
+        'intelephense',
+        'pretty-php',
+        -- 'pylsp',
+        'svelte',
+        'vtsls',
+        'gofumpt',
+        'gopls',
+        'shfmt',
+        'rust-analyzer',
+        'ruff',
       })
+
+      -- Only include clangd if not in Termux and system clangd preference allows it
+      if not is_termux and not use_system_clangd then
+        vim.list_extend(ensure_installed, {
+          'clangd',
+          'clang-format',
+        })
+      elseif not is_termux then
+        -- Still install clang-format via Mason even when using system clangd
+        vim.list_extend(ensure_installed, {
+          'clang-format',
+        })
+      end
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -675,6 +742,28 @@ require('lazy').setup({
         vim.lsp.config(name, server)
         vim.lsp.enable(name)
       end
+
+      -- Setup clangd LSP conditionally - prefer system clangd if configured and available
+      local clangd_cmd = (use_system_clangd or is_termux) and { 'clangd' } or nil
+
+      require('lspconfig').clangd.setup {
+        cmd = clangd_cmd,
+      }
+
+      require('mason-lspconfig').setup {
+        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+        automatic_installation = false,
+        handlers = {
+          function(server_name)
+            local server = servers[server_name] or {}
+            -- This handles overriding only values explicitly passed
+            -- by the server configuration above. Useful when disabling
+            -- certain features of an LSP (for example, turning off formatting for ts_ls)
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            require('lspconfig')[server_name].setup(server)
+          end,
+        },
+      }
     end,
   },
 
