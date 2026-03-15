@@ -206,16 +206,12 @@ vim.keymap.set('i', '<D-s>', '<Esc>:w<cr>a', {
 })
 
 -- npm / yarn operation
-vim.keymap.set('n', '<leader>rb', function()
-  RunCommandAndNotify 'npm run build'
-end, {
+vim.keymap.set('n', '<leader>rb', function() RunCommandAndNotify 'npm run build' end, {
   noremap = true,
   silent = false,
   desc = '[R]un [B]uild',
 })
-vim.keymap.set('n', '<leader>rd', function()
-  RunCommandInNewTab 'npm run dev'
-end, {
+vim.keymap.set('n', '<leader>rd', function() RunCommandInNewTab 'npm run dev' end, {
   noremap = true,
   silent = false,
   desc = '[R]un [D]ev',
@@ -225,9 +221,7 @@ vim.keymap.set('n', '<leader>ri', Npm_install, {
   silent = false,
   desc = '[R]un npm [I]nstall',
 })
-vim.keymap.set('n', '<leader>rl', function()
-  RunCommandInNewTab 'five-server'
-end, {
+vim.keymap.set('n', '<leader>rl', function() RunCommandInNewTab 'five-server' end, {
   noremap = true,
   silent = false,
   desc = '[R]un npm [L]ive Server',
@@ -272,10 +266,22 @@ vim.keymap.set('n', '<leader>sne', ':EditSnippets<cr>', {
   desc = '[Sn]ippets [E]dit',
 })
 
-vim.keymap.set('n', '<leader>snf', ':%s/"/\\\\"/g<cr>ggVG10>gg0v_<left>y:%s/<c-r>0/\\"<cr>:%s/\\n/\\",\\r<cr>:%s/\\n\\",/\\r\\"\\",<cr>', {
-  noremap = true,
-  silent = false,
-  desc = '[Sn]ippets [F]ormat',
+-- "Snippet Format"
+vim.keymap.set('n', '<leader>snf', function()
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+
+  for i, line in ipairs(lines) do
+    line = line:gsub('\\', '\\\\') -- escape backslashes
+    line = line:gsub('"', '\\"') -- escape quotes
+    line = line:gsub("%$", "\\\\$")
+    line = line:gsub("\\\\\\\\", "\\\\\\\\\\\\")
+
+    lines[i] = '"' .. line .. '",'
+  end
+
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+end, {
+  desc = '[Sn]ippet [F]ormat',
 })
 
 -- Noice Notification
@@ -346,44 +352,32 @@ vim.keymap.set('v', '<leader>sk', ':s/\\(.*\\)/\\1/g<left><left><left><left><lef
   desc = '[S]earch [K]irby',
 })
 
-vim.keymap.set('n', '<leader>fnp', function()
-  NextJSNewPage(vim.fn.input 'Enter Page Name: ')
-end, {
+vim.keymap.set('n', '<leader>fnp', function() NextJSNewPage(vim.fn.input 'Enter Page Name: ') end, {
   noremap = true,
   silent = false,
   desc = 'New [P]age',
 })
-vim.keymap.set('n', '<leader>fnr', function()
-  NextJSNewApiPost(vim.fn.input 'Enter Route Name: ')
-end, {
+vim.keymap.set('n', '<leader>fnr', function() NextJSNewApiPost(vim.fn.input 'Enter Route Name: ') end, {
   noremap = true,
   silent = false,
   desc = 'New API [R]oute POST',
 })
-vim.keymap.set('n', '<leader>fng', function()
-  NextJSNewApiGet(vim.fn.input 'Enter Route Name: ')
-end, {
+vim.keymap.set('n', '<leader>fng', function() NextJSNewApiGet(vim.fn.input 'Enter Route Name: ') end, {
   noremap = true,
   silent = false,
   desc = 'New [G]et Route',
 })
-vim.keymap.set('n', '<leader>fsp', function()
-  SvelteKitNewPage(vim.fn.input 'Enter Page Name: ')
-end, {
+vim.keymap.set('n', '<leader>fsp', function() SvelteKitNewPage(vim.fn.input 'Enter Page Name: ') end, {
   noremap = true,
   silent = false,
   desc = 'New [P]age',
 })
-vim.keymap.set('n', '<leader>fsr', function()
-  SvelteKitNewAPIPost(vim.fn.input 'Enter Route Name: ')
-end, {
+vim.keymap.set('n', '<leader>fsr', function() SvelteKitNewAPIPost(vim.fn.input 'Enter Route Name: ') end, {
   noremap = true,
   silent = false,
   desc = 'New Post [R]oute',
 })
-vim.keymap.set('n', '<leader>fsg', function()
-  SvelteKitNewAPIGet(vim.fn.input 'Enter Route Name: ')
-end, {
+vim.keymap.set('n', '<leader>fsg', function() SvelteKitNewAPIGet(vim.fn.input 'Enter Route Name: ') end, {
   noremap = true,
   silent = false,
   desc = 'New [G]et Route',
@@ -392,9 +386,7 @@ end, {
 vim.keymap.set(
   'n',
   '<c-h>',
-  function()
-    SearchAndReplace(vim.fn.input 'Enter Search Term: ', vim.fn.input 'Enter Replace Term: ')
-  end,
+  function() SearchAndReplace(vim.fn.input 'Enter Search Term: ', vim.fn.input 'Enter Replace Term: ') end,
   -- ":%s/vim.fn.input('Enter Search Term: ')/vim.fn.input('Enter Replace Term: ')/g",
   {
     noremap = true,
@@ -460,9 +452,7 @@ end, {
   desc = '[F]ile [C]opy current file path to clipboard',
 })
 
-vim.keymap.set('n', '<leader>fe', function()
-  os.execute 'explorer.exe .'
-end, {
+vim.keymap.set('n', '<leader>fe', function() os.execute 'explorer.exe .' end, {
   noremap = true,
   silent = true,
   desc = '[F]ile [E]xplorer on current file folder',
