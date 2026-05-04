@@ -37,31 +37,43 @@ return {
             },
             layouts = {{
                 elements = {{
-                    id = "scopes",
-                    size = 0.25
-                }, {
-                    id = "breakpoints",
-                    size = 0.25
-                }, {
-                    id = "stacks",
-                    size = 0.25
-                }, {
-                    id = "watches",
-                    size = 0.25
-                }},
-                position = "right",
-                size = 50
-            }, {
-                elements = {{
                     id = "repl",
                     size = 0.5
                 }, {
-                    id = "console",
+                    id = "watches",
                     size = 0.5
                 }},
-                position = "bottom",
-                size = 10
+                position = "right",
+                size = 0.25
             }},
+            -- Default Layout
+            -- layouts = {{
+            --     elements = {{
+            --         id = "scopes",
+            --         size = 0.25
+            --     }, {
+            --         id = "breakpoints",
+            --         size = 0.25
+            --     }, {
+            --         id = "stacks",
+            --         size = 0.25
+            --     }, {
+            --         id = "watches",
+            --         size = 0.25
+            --     }},
+            --     position = "right",
+            --     size = 50
+            -- }, {
+            --     elements = {{
+            --         id = "repl",
+            --         size = 0.5
+            --     }, {
+            --         id = "console",
+            --         size = 0.5
+            --     }},
+            --     position = "bottom",
+            --     size = 10
+            -- }},
             mappings = {
                 edit = "e",
                 expand = {"<CR>", "<2-LeftMouse>"},
