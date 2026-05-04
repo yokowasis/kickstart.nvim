@@ -121,7 +121,7 @@ return {
             end)
         end
 
-        for _, language in ipairs({"typescript", "javascript", "typescriptreact", "javascriptreact", "vue"}) do
+        for _, language in ipairs({"typescript", "javascript", "typescriptreact", "javascriptreact", "vue", "svelte"}) do
             dap.configurations[language] = {{
                 type = "pwa-node",
                 request = "launch",
@@ -324,7 +324,13 @@ return {
             dap.continue()
         end
 
-        vim.keymap.set("n", "<Leader>dc", continue, {
+        vim.keymap.set("n", "<F5>", continue, {
+            desc = "Continue"
+        })
+        vim.keymap.set("n", "<F8>", dap.step_over, {
+            desc = "Continue"
+        })
+        vim.keymap.set("n", "<F9>", dap.step_out, {
             desc = "Continue"
         })
     end
