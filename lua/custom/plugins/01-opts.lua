@@ -1,6 +1,6 @@
 -- noswap
 vim.o.swapfile = false
-vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h15:sb'
+vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h14:sb'
 vim.o.list = false
 
 -- disable spell for pandoc
@@ -23,9 +23,7 @@ isLinux = sysname == 'Linux'
 
 -- neovide auto focus
 if vim.g.neovide then
-  vim.defer_fn(function()
-    vim.cmd 'NeovideFocus'
-  end, 200)
+  vim.defer_fn(function() vim.cmd 'NeovideFocus' end, 200)
 
   if isWindows then
     -- new neovide window in Windows
@@ -61,9 +59,7 @@ else
   })
 end
 
-if isWindows then
-  vim.g.python3_host_prog = 'C:\\Users\\yokow\\miniforge3\\envs\\labs\\python.exe'
-end
+if isWindows then vim.g.python3_host_prog = 'C:\\Users\\yokow\\miniforge3\\envs\\labs\\python.exe' end
 
 -- independent clipboard
 vim.opt.clipboard = ''
