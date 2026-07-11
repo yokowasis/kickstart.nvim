@@ -701,7 +701,7 @@ do
     --    https://github.com/pmizio/typescript-tools.nvim
     --
     -- But for many setups, the LSP (`ts_ls`) will work just fine
-    -- ts_ls = {},
+    vtsls = {},
 
     stylua = {}, -- Used to format Lua code
 
@@ -762,7 +762,6 @@ do
     -- You can add other tools here that you want Mason to install
     'stylua',
     'tailwindcss',
-    'prettierd',
     'html',
     'intelephense',
     'pretty-php',
@@ -772,7 +771,9 @@ do
     'gopls',
     'shfmt',
     'rust-analyzer',
-    'ruff',    
+    'ruff',
+    'biome',
+    'clang-format',
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -797,6 +798,22 @@ do
       local enabled_filetypes = {
         -- lua = true,
         -- python = true,
+        javascript = true,
+        typescript = true,
+        javascriptreact = true,
+        typescriptreact = true,
+        scss = true,
+        pandoc = true,
+        markdown = true,
+        json = true,
+        css = true,
+        yml = true,
+        html = true,
+        php = true,
+        cpp = true,
+        sh = true,
+        go = true,
+        python = true,
       }
       if enabled_filetypes[vim.bo[bufnr].filetype] then
         return { timeout_ms = 500 }
@@ -814,9 +831,31 @@ do
       -- python = { "isort", "black" },
       --
       -- You can use 'stop_after_first' to run the first available formatter from the list
-      -- javascript = { "prettierd", "prettier", stop_after_first = true },
-    },
-  }
+        javascript = { 'biome' },
+        typescript = { 'biome' },
+        javascriptreact = { 'biome' },
+        typescriptreact = { 'biome' },
+        scss = { 'biome' },
+        pandoc = { 'biome' },
+        markdown = { 'biome' },
+        json = { 'biome' },
+        css = { 'biome' },
+        yml = { 'biome' },
+        html = { 'biome' },
+        php = { 'pretty-php' },
+        cpp = { 'clang_format' },
+        sh = { 'shfmt' },
+        go = { 'gofumpt' },
+        python = {
+          -- To fix auto-fixable lint errors
+          'ruff_fix',
+          -- To run the Ruff formatter
+          'ruff_format',
+          -- To organize the imports
+          'ruff_organize_imports',
+        },
+      },
+    }
 
   vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
 end
