@@ -760,6 +760,19 @@ do
   local ensure_installed = vim.tbl_keys(servers or {})
   vim.list_extend(ensure_installed, {
     -- You can add other tools here that you want Mason to install
+    'stylua',
+    'tailwindcss',
+    'prettierd',
+    'html',
+    'intelephense',
+    'pretty-php',
+    'svelte',
+    'vtsls',
+    'gofumpt',
+    'gopls',
+    'shfmt',
+    'rust-analyzer',
+    'ruff',    
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
