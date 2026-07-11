@@ -126,4 +126,42 @@ vim.opt.sessionoptions = {
   'terminal', -- save terminal state
 }
 
+
+-- Folding
+vim.o.foldmethod = 'indent'
+
+-- Save folds between sessions
+local viewdir = vim.fn.stdpath 'state' .. '/view'
+vim.o.viewdir = viewdir
+vim.o.viewoptions = 'cursor,folds'
+vim.fn.mkdir(viewdir, 'p')
+
+-- Close certain windows with x
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'checkhealth', 'fugitive*', 'git', 'help', 'lspinfo', 'netrw', 'notify', 'qf', 'query' },
+  callback = function()
+    vim.keymap.set('n', 'x', vim.cmd.close, {
+      desc = 'Close the current buffer',
+      buffer = true,
+    })
+  end,
+})
+
+-- Remember folds between sessions
+vim.api.nvim_create_augroup('remember_folds', { clear = true })
+vim.api.nvim_create_autocmd('BufWinLeave', {
+  group = 'remember_folds',
+  pattern = '*',
+  callback = function()
+    vim.cmd 'silent! mkview'
+  end,
+})
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  group = 'remember_folds',
+  pattern = '*',
+  callback = function()
+    pcall(vim.cmd, 'silent! loadview')
+  end,
+})
+
 return {}

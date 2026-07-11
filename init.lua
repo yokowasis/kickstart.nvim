@@ -692,7 +692,9 @@ do
   --  See `:help lsp-config` for information about keys and how to configure
   ---@type table<string, vim.lsp.Config>
   local servers = {
-    -- clangd = {},
+    clangd = {
+      cmd = { 'clangd', '--background-index' },
+    },
     -- gopls = {},
     -- pyright = {},
     -- rust_analyzer = {},
@@ -824,6 +826,11 @@ do
     default_format_opts = {
       lsp_format = 'fallback', -- Use external formatters if configured below, otherwise use LSP formatting. Set to `false` to disable LSP formatting entirely.
     },
+    formatters = {
+      ['pretty-php'] = {
+        prepend_args = { '-s2' },
+      },
+    },
     -- You can also specify external formatters in here.
     formatters_by_ft = {
       -- rust = { 'rustfmt' },
@@ -872,12 +879,20 @@ do
   vim.pack.add { { src = gh 'L3MON4D3/LuaSnip', version = vim.version.range '2.*' } }
   require('luasnip').setup {}
 
+  local ls = require 'luasnip'
+  ls.config.set_config {
+    store_selection_keys = '<tab>',
+  }
+  ls.filetype_extend('svelte', { 'typescript', 'html' })
+
   -- `friendly-snippets` contains a variety of premade snippets.
   --    See the README about individual language/framework/plugin snippets:
   --    https://github.com/rafamadriz/friendly-snippets
   --
   -- vim.pack.add { gh 'rafamadriz/friendly-snippets' }
-  -- require('luasnip.loaders.from_vscode').lazy_load()
+  require('luasnip.loaders.from_vscode').load {
+    paths = { '~/git/friendly-snippets' },
+  }
 
   -- [[ Autocomplete Engine ]]
   vim.pack.add { { src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' } }
@@ -940,6 +955,19 @@ do
     -- Shows a signature help window while you type arguments for a function
     signature = { enabled = true },
   }
+
+  -- Luasnip choice node navigation
+  vim.keymap.set({ 'i', 's' }, '<C-l>', function()
+    if require('luasnip').choice_active() then
+      require('luasnip').change_choice(1)
+    end
+  end, { desc = 'LuaSnip: next choice' })
+
+  vim.keymap.set({ 'i', 's' }, '<C-h>', function()
+    if require('luasnip').choice_active() then
+      require('luasnip').change_choice(-1)
+    end
+  end, { desc = 'LuaSnip: previous choice' })
 end
 
 -- ============================================================
@@ -954,6 +982,8 @@ do
 
   -- NOTE: You can also specify a branch or a specific commit
   vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
+
+  require('nvim-treesitter.install').compilers = { 'clang', 'gcc', 'zig' }
 
   -- Ensure basic parsers are installed
   local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
