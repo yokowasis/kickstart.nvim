@@ -93,3 +93,83 @@ require('dap-go').setup {
     detached = vim.fn.has 'win32' == 0,
   },
 }
+
+-- ==========================================
+-- JavaScript / TypeScript / Next.js Setup
+-- ==========================================
+
+-- 1. Define the adapters using the js-debug-adapter installed by Mason
+-- We use the direct path to dapDebugServer.js to avoid PATH/binary linking issues.
+local js_debug_adapter_path = vim.fs.joinpath(
+  vim.fn.stdpath('data'),
+  'mason',
+  'packages',
+  'js-debug-adapter',
+  'js-debug',
+  'src',
+  'dapDebugServer.js'
+)
+
+local node_terminal = {
+  type = 'server',
+  host = 'localhost',
+  port = '${port}',
+  executable = {
+    command = 'node',
+    args = {
+      js_debug_adapter_path,
+      '${port}',
+    },
+  },
+}
+
+local chrome = {
+  type = 'server',
+  host = 'localhost',
+  port = '${port}',
+  executable = {
+    command = 'node',
+    args = {
+      js_debug_adapter_path,
+      '${port}',
+    },
+  },
+}
+
+require('dap').adapters['pwa-node'] = node_terminal
+require('dap').adapters['node_terminal'] = node_terminal
+
+require('dap').adapters['pwa-chrome'] = chrome
+require('dap').adapters['chrome'] = chrome
+
+-- 2. Define configurations for TS/JS
+local js_based_languages = { 'typescript', 'javascript', 'typescriptreact' }
+
+for _, language in ipairs(js_based_languages) do
+  require('dap').configurations[language] = {
+    -- Server-side Next.js debugging
+    {
+      type = 'pwa-node',
+      request = 'launch',
+      name = 'Nvim: Debug JS Server',
+      runtimeExecutable = 'npm',
+      runtimeArgs = { 'run', 'dev' },
+      cwd = '${workspaceFolder}',
+      -- 'integratedTerminal' launches a Neovim terminal split and runs the command there
+      console = 'integratedTerminal',
+      -- sourceMaps = true, -- Uncomment if breakpoints in `.next` aren't mapping correctly
+    },
+    -- Client-side Next.js debugging
+    {
+      type = 'pwa-chrome',
+      request = 'launch',
+      name = 'Nvim: Debug JS Client',
+      url = 'http://localhost:3000',
+      webRoot = '${workspaceFolder}',
+      -- By default, pwa-chrome uses a clean, isolated Chrome profile.
+      -- Uncomment the line below if you want it to use your default Chrome profile (so you can use your extensions).
+      -- userDataDir = false,
+      -- sourceMaps = true,
+    },
+  }
+end
