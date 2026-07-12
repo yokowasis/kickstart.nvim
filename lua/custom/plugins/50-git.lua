@@ -1,3 +1,16 @@
+-- NEOGIT
+require('neogit').setup {
+  integrations = {
+    telescope = true,
+    diffview = true,
+  },
+  sections = {
+    untracked = { folded = false },
+    unstaged = { folded = false },
+    staged = { folded = false },
+  },
+}
+
 -- "Git Mapping
 function GitPullAndNotify()
   vim.notify('Pull Processing...', vim.log.levels.INFO, {
@@ -197,40 +210,4 @@ end, {
   silent = true,
 })
 
-return {
-  {
-    'NeogitOrg/neogit',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'sindrets/diffview.nvim', -- optional - for diff view
-      'nvim-telescope/telescope.nvim', -- optional - for telescope integration
-    },
-    config = function()
-      require('neogit').setup {
-        -- Neogit configuration
-        integrations = {
-          telescope = true,
-          diffview = true,
-        },
-        sections = {
-          untracked = {
-            folded = false,
-          },
-          unstaged = {
-            folded = false,
-          },
-          staged = {
-            folded = false,
-          },
-        },
-      }
-
-      -- Branch-specific keymaps
-      vim.keymap.set('n', '<leader>gb', '<cmd>Neogit branch<cr>', {
-        desc = '[G]it [B]ranch menu',
-        noremap = true,
-        silent = true,
-      })
-    end,
-  },
-}
+return {}
