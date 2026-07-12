@@ -63,13 +63,13 @@ vim.keymap.set('n', '<leader>sq', '<C-w>q', {
 })
 
 -- nerdtree
-vim.keymap.set('n', '<c-z>', ':Neotree reveal<cr>', {
-  desc = 'Show File Explorer',
+vim.keymap.set('n', '<c-z>', ':Neotree toggle<cr>', {
+  desc = 'Toggle File Explorer',
   noremap = true,
   silent = true,
 })
-vim.keymap.set('i', '<c-z>', '<c-o>:Neotree reveal<cr>', {
-  desc = 'Show File Explorer',
+vim.keymap.set('i', '<c-z>', '<c-o>:Neotree toggle<cr>', {
+  desc = 'Toggle File Explorer',
   noremap = true,
   silent = true,
 })
