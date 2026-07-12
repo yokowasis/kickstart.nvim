@@ -105,13 +105,13 @@ local set = vim.keymap.set
 
 set("n", "<leader>S", "<cmd>GrugFar<cr>", { desc = "Search and Replace (grug-far)" })
 
-set("n", "<leader>sw", function()
-  require("grug-far").grug_far({ prefills = { search = vim.fn.expand("<cword>") } })
-end, { desc = "Search current word" })
+-- set("n", "<leader>sw", function()
+--   require("grug-far").grug_far({ prefills = { search = vim.fn.expand("<cword>") } })
+-- end, { desc = "Search current word" })
 
-set("n", "<leader>sf", function()
-  require("grug-far").grug_far({ prefills = { paths = vim.fn.expand("%") } })
-end, { desc = "Search in current file" })
+-- set("n", "<leader>sf", function()
+--   require("grug-far").grug_far({ prefills = { paths = vim.fn.expand("%") } })
+-- end, { desc = "Search in current file" })
 
 -- =============================================================================
 -- DADBOD (DATABASE TOOLS)
