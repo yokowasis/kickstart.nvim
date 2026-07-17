@@ -1,6 +1,6 @@
 -- noswap
 vim.o.swapfile = false
-vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h14:sb'
+vim.o.guifont = 'JetBrainsMono NFM:h14:sb'
 vim.o.list = false
 
 -- disable spell for pandoc
@@ -58,6 +58,15 @@ else
     silent = true,
   })
 end
+
+-- auto cd to current directory
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.isdirectory(vim.fn.expand("%:p")) == 0 then
+      vim.cmd("cd %:p:h")
+    end
+  end,
+})
 
 if isWindows then vim.g.python3_host_prog = 'C:\\Users\\yokow\\miniforge3\\envs\\labs\\python.exe' end
 
