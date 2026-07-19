@@ -797,6 +797,7 @@ do
     'ruff',
     'biome',
     'clang-format',
+    'prettierd',
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -819,8 +820,7 @@ do
     format_on_save = function(bufnr)
       -- You can specify filetypes to autoformat on save here:
       local enabled_filetypes = {
-        -- lua = true,
-        -- python = true,
+        lua = true,
         javascript = true,
         typescript = true,
         javascriptreact = true,
@@ -865,7 +865,7 @@ do
       typescriptreact = { 'biome' },
       scss = { 'biome' },
       pandoc = { 'biome' },
-      markdown = { 'biome' },
+      markdown = { 'prettierd' },
       json = { 'biome' },
       css = { 'biome' },
       yml = { 'biome' },
@@ -885,7 +885,7 @@ do
     },
   }
 
-  vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
+  vim.keymap.set({ 'n', 'v' }, '<leader>ff', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
 end
 
 -- ============================================================
