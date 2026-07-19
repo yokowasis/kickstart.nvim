@@ -854,31 +854,31 @@ do
       -- python = { "isort", "black" },
       --
       -- You can use 'stop_after_first' to run the first available formatter from the list
-        javascript = { 'biome' },
-        typescript = { 'biome' },
-        javascriptreact = { 'biome' },
-        typescriptreact = { 'biome' },
-        scss = { 'biome' },
-        pandoc = { 'biome' },
-        markdown = { 'biome' },
-        json = { 'biome' },
-        css = { 'biome' },
-        yml = { 'biome' },
-        html = { 'biome' },
-        php = { 'pretty-php' },
-        cpp = { 'clang_format' },
-        sh = { 'shfmt' },
-        go = { 'gofumpt' },
-        python = {
-          -- To fix auto-fixable lint errors
-          'ruff_fix',
-          -- To run the Ruff formatter
-          'ruff_format',
-          -- To organize the imports
-          'ruff_organize_imports',
-        },
+      javascript = { 'biome' },
+      typescript = { 'biome' },
+      javascriptreact = { 'biome' },
+      typescriptreact = { 'biome' },
+      scss = { 'biome' },
+      pandoc = { 'biome' },
+      markdown = { 'biome' },
+      json = { 'biome' },
+      css = { 'biome' },
+      yml = { 'biome' },
+      html = { 'biome' },
+      php = { 'pretty-php' },
+      cpp = { 'clang_format' },
+      sh = { 'shfmt' },
+      go = { 'gofumpt' },
+      python = {
+        -- To fix auto-fixable lint errors
+        'ruff_fix',
+        -- To run the Ruff formatter
+        'ruff_format',
+        -- To organize the imports
+        'ruff_organize_imports',
       },
-    }
+    },
+  }
 
   vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
 end
@@ -936,6 +936,12 @@ do
       --
       -- See `:help blink-cmp-config-keymap` for defining your own keymap
       preset = 'enter',
+      ['<C-x>'] = {
+        function(cmp) cmp.show() end,
+        'show',
+        'show_documentation',
+        'hide_documentation',
+      },
 
       -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
       --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -974,15 +980,11 @@ do
 
   -- Luasnip choice node navigation
   vim.keymap.set({ 'i', 's' }, '<C-l>', function()
-    if require('luasnip').choice_active() then
-      require('luasnip').change_choice(1)
-    end
+    if require('luasnip').choice_active() then require('luasnip').change_choice(1) end
   end, { desc = 'LuaSnip: next choice' })
 
   vim.keymap.set({ 'i', 's' }, '<C-h>', function()
-    if require('luasnip').choice_active() then
-      require('luasnip').change_choice(-1)
-    end
+    if require('luasnip').choice_active() then require('luasnip').change_choice(-1) end
   end, { desc = 'LuaSnip: previous choice' })
 end
 
