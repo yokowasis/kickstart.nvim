@@ -273,8 +273,8 @@ vim.keymap.set('n', '<leader>snf', function()
   for i, line in ipairs(lines) do
     line = line:gsub('\\', '\\\\') -- escape backslashes
     line = line:gsub('"', '\\"') -- escape quotes
-    line = line:gsub("%$", "\\\\$")
-    line = line:gsub("\\\\\\\\", "\\\\\\\\\\\\")
+    line = line:gsub('%$', '\\\\$')
+    line = line:gsub('\\\\\\\\', '\\\\\\\\\\\\')
 
     lines[i] = '"' .. line .. '",'
   end
@@ -424,6 +424,26 @@ vim.keymap.set('n', '<leader>rp', ':LspRestart<cr>', {
   noremap = true,
   silent = false,
   desc = '[R]eload LS[P]',
+})
+
+vim.keymap.set('n', '<leader>rx', function()
+  local cmd
+
+  if vim.uv.fs_stat 'yarn.lock' then
+    cmd = { 'yarn', 'add', '-D', '@yokowasis/types-webcomponents@latest' }
+  elseif vim.uv.fs_stat 'pnpm-lock.yaml' then
+    cmd = { 'pnpm', 'install', '-D', '@yokowasis/types-webcomponents@latest' }
+  elseif vim.uv.fs_stat 'bun.lock' or vim.uv.fs_stat 'bun.lockb' then
+    cmd = { 'bun', 'install', '-D', '@yokowasis/types-webcomponents@latest' }
+  else
+    cmd = { 'npm', 'install', '-D', '@yokowasis/types-webcomponents@latest' }
+  end
+
+  RunCommandAndNotify(cmd, 5000, 'Install Webcomponent Types')
+end, {
+  noremap = true,
+  silent = false,
+  desc = 'Install Webcomponent Types',
 })
 
 -- code companion
