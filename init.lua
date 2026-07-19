@@ -721,6 +721,11 @@ do
     -- But for many setups, the LSP (`ts_ls`) will work just fine
     vtsls = {},
 
+    -- Tailwind CSS configuration for TSX support
+    tailwindcss = {
+      filetypes = { 'typescriptreact', 'javascriptreact', 'html', 'css' },
+    },
+
     stylua = {}, -- Used to format Lua code
 
     -- Special Lua Config, as recommended by neovim help docs
