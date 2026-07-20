@@ -147,6 +147,7 @@ require('dap').adapters['chrome'] = chrome
 
 -- 2. Define configurations for TS/JS
 local js_based_languages = { 'typescript', 'javascript', 'typescriptreact' }
+local chrome_runtime = vim.fn.has('win32') == 0 and '/usr/local/bin/chrome-dev' or nil
 
 for _, language in ipairs(js_based_languages) do
   require('dap').configurations[language] = {
@@ -169,6 +170,7 @@ for _, language in ipairs(js_based_languages) do
       name = 'Nvim: Debug JS Client',
       url = 'http://localhost:3000',
       webRoot = '${workspaceFolder}',
+      runtimeExecutable = chrome_runtime,
       -- By default, pwa-chrome uses a clean, isolated Chrome profile.
       -- Uncomment the line below if you want it to use your default Chrome profile (so you can use your extensions).
       -- userDataDir = false,
