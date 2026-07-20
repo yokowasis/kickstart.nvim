@@ -174,5 +174,13 @@ for _, language in ipairs(js_based_languages) do
       -- userDataDir = false,
       -- sourceMaps = true,
     },
+    -- Attach to an already-running Chrome instance (e.g. chrome-dev on :9222)
+    {
+      type = 'pwa-chrome',
+      request = 'attach',
+      name = 'Nvim: Attach to Chrome',
+      port = 9222,
+      webRoot = '${workspaceFolder}',
+    },
   }
 end
