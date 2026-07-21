@@ -46,9 +46,9 @@ vim.keymap.set('t', '<C-w><C-w>', '<C-\\><C-n><C-w><C-w>', {
   silent = true,
 })
 
--- esc to normal mode in terminal
-vim.keymap.set('t', '<esc>', '<C-\\><C-n>', {
-  desc = '',
+-- backslash twice to normal mode in terminal
+vim.keymap.set('t', '\\\\', '<C-\\><C-n>', {
+  desc = 'Exit terminal mode (\\\\ sequence)',
   noremap = true,
   silent = true,
 })
