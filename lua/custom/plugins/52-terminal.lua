@@ -53,4 +53,10 @@ vim.keymap.set('t', '\\\\', '<C-\\><C-n>', {
   silent = true,
 })
 
+vim.keymap.set('t', '<esc><esc><esc>', '<C-\\><C-n>', {
+  desc = 'Exit terminal mode (\\\\ sequence)',
+  noremap = true,
+  silent = true,
+})
+
 return {}
