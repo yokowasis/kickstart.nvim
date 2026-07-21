@@ -711,9 +711,9 @@ do
     clangd = {
       cmd = { 'clangd', '--background-index' },
     },
-    -- gopls = {},
-    -- pyright = {},
-    -- rust_analyzer = {},
+    gopls = {},
+    ty = {},
+    rust_analyzer = {},
     --
     -- Some languages (like typescript) have entire language plugins that can be useful:
     --    https://github.com/pmizio/typescript-tools.nvim
@@ -799,6 +799,7 @@ do
     'clang-format',
     'prettierd',
     'js-debug-adapter',
+    'ty',
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
