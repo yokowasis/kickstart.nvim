@@ -420,7 +420,7 @@ vim.keymap.set('n', '<leader>rr', ':e!<cr>', {
   desc = '[R]eload [R]esource',
 })
 
-vim.keymap.set('n', '<leader>rp', ':LspRestart<cr>', {
+vim.keymap.set('n', '<leader>rp', ':lsp restart<cr>', {
   noremap = true,
   silent = false,
   desc = '[R]eload LS[P]',
