@@ -1,5 +1,2 @@
-console.log("Hello World");
+// make a hello world
 
-for (i = 0; i <= 10; i++) {
-  console.log(i);
-}
