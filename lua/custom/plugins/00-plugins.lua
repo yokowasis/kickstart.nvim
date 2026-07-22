@@ -1,7 +1,7 @@
 -- =============================================================================
 -- PLUGIN REGISTRATIONS
 -- =============================================================================
-vim.pack.add({
+vim.pack.add {
   { src = 'https://github.com/folke/flash.nvim' },
   { src = 'https://github.com/yokowasis/emmet-vim' },
   {
@@ -12,38 +12,27 @@ vim.pack.add({
   { src = 'https://github.com/tpope/vim-dadbod' },
   { src = 'https://github.com/kristijanhusak/vim-dadbod-ui' },
   { src = 'https://github.com/kristijanhusak/vim-dadbod-completion' },
-  { src = 'https://github.com/thesimonho/kanagawa-paper.nvim' },
   { src = 'https://github.com/NeogitOrg/neogit' },
   { src = 'https://github.com/sindrets/diffview.nvim' },
   { src = 'https://github.com/rcarriga/nvim-notify' },
   { src = 'https://github.com/folke/noice.nvim' },
   { src = 'https://github.com/theHamsta/nvim-dap-virtual-text' },
-})
+}
 
 -- =============================================================================
 -- FLASH NAVIGATION
 -- =============================================================================
-require("flash").setup({})
+require('flash').setup {}
 
-vim.keymap.set({ "n", "x", "o" }, "s", function()
-  require("flash").jump()
-end, { desc = "Flash" })
+vim.keymap.set({ 'n', 'x', 'o' }, 's', function() require('flash').jump() end, { desc = 'Flash' })
 
-vim.keymap.set({ "n", "x", "o" }, "S", function()
-  require("flash").treesitter()
-end, { desc = "Flash Treesitter" })
+vim.keymap.set({ 'n', 'x', 'o' }, 'S', function() require('flash').treesitter() end, { desc = 'Flash Treesitter' })
 
-vim.keymap.set("o", "r", function()
-  require("flash").remote()
-end, { desc = "Remote Flash" })
+vim.keymap.set('o', 'r', function() require('flash').remote() end, { desc = 'Remote Flash' })
 
-vim.keymap.set({ "o", "x" }, "R", function()
-  require("flash").treesitter_search()
-end, { desc = "Treesitter Search" })
+vim.keymap.set({ 'o', 'x' }, 'R', function() require('flash').treesitter_search() end, { desc = 'Treesitter Search' })
 
-vim.keymap.set("c", "<c-s>", function()
-  require("flash").toggle()
-end, { desc = "Toggle Flash Search" })
+vim.keymap.set('c', '<c-s>', function() require('flash').toggle() end, { desc = 'Toggle Flash Search' })
 
 -- =============================================================================
 -- EMMET
@@ -51,7 +40,7 @@ end, { desc = "Toggle Flash Search" })
 vim.g.user_emmet_settings = {
   typescriptreact = {
     attribute_name = {
-      ["class"] = "class",
+      ['class'] = 'class',
     },
   },
 }
@@ -59,25 +48,23 @@ vim.g.user_emmet_settings = {
 -- =============================================================================
 -- MULTICURSOR
 -- =============================================================================
-local mc = require("multicursor-nvim")
+local mc = require 'multicursor-nvim'
 mc.setup()
 
 local set = vim.keymap.set
 
-set({ "n", "x" }, "<c-d>", function()
-  mc.matchAddCursor(1)
-end)
+set({ 'n', 'x' }, '<c-d>', function() mc.matchAddCursor(1) end)
 
-set("n", "<c-leftmouse>", mc.handleMouse)
-set("n", "<c-leftdrag>", mc.handleMouseDrag)
-set("n", "<c-leftrelease>", mc.handleMouseRelease)
+set('n', '<c-leftmouse>', mc.handleMouse)
+set('n', '<c-leftdrag>', mc.handleMouseDrag)
+set('n', '<c-leftrelease>', mc.handleMouseRelease)
 
-set({ "n", "x" }, "<c-q>", mc.toggleCursor)
+set({ 'n', 'x' }, '<c-q>', mc.toggleCursor)
 
 mc.addKeymapLayer(function(layerSet)
-  layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
+  layerSet({ 'n', 'x' }, '<leader>x', mc.deleteCursor)
 
-  layerSet("n", "<esc>", function()
+  layerSet('n', '<esc>', function()
     if not mc.cursorsEnabled() then
       mc.enableCursors()
     else
@@ -87,28 +74,26 @@ mc.addKeymapLayer(function(layerSet)
 end)
 
 local hl = vim.api.nvim_set_hl
-hl(0, "MultiCursorCursor", { reverse = true })
-hl(0, "MultiCursorVisual", { link = "Visual" })
-hl(0, "MultiCursorSign", { link = "SignColumn" })
-hl(0, "MultiCursorMatchPreview", { link = "Search" })
-hl(0, "MultiCursorDisabledCursor", { reverse = true })
-hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
-hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
+hl(0, 'MultiCursorCursor', { reverse = true })
+hl(0, 'MultiCursorVisual', { link = 'Visual' })
+hl(0, 'MultiCursorSign', { link = 'SignColumn' })
+hl(0, 'MultiCursorMatchPreview', { link = 'Search' })
+hl(0, 'MultiCursorDisabledCursor', { reverse = true })
+hl(0, 'MultiCursorDisabledVisual', { link = 'Visual' })
+hl(0, 'MultiCursorDisabledSign', { link = 'SignColumn' })
 
 -- =============================================================================
 -- GRUG-FAR (SEARCH & REPLACE)
 -- =============================================================================
-require("grug-far").setup({
+require('grug-far').setup {
   headerMaxWidth = 80,
-})
+}
 
-vim.api.nvim_create_user_command("GrugFar", function()
-  require("grug-far").open()
-end, {})
+vim.api.nvim_create_user_command('GrugFar', function() require('grug-far').open() end, {})
 
 local set = vim.keymap.set
 
-set("n", "<leader>S", "<cmd>GrugFar<cr>", { desc = "Search and Replace (grug-far)" })
+set('n', '<leader>S', '<cmd>GrugFar<cr>', { desc = 'Search and Replace (grug-far)' })
 
 -- set("n", "<leader>sw", function()
 --   require("grug-far").grug_far({ prefills = { search = vim.fn.expand("<cword>") } })
@@ -123,34 +108,25 @@ set("n", "<leader>S", "<cmd>GrugFar<cr>", { desc = "Search and Replace (grug-far
 -- =============================================================================
 vim.g.db_ui_use_nerd_fonts = 1
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "sql", "mysql", "plsql" },
-  callback = function()
-    vim.fn["compe#register"]({ source = "vim-dadbod-completion" })
-  end,
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'sql', 'mysql', 'plsql' },
+  callback = function() vim.fn['compe#register'] { source = 'vim-dadbod-completion' } end,
 })
-
--- =============================================================================
--- KANAGAWA-PAPER COLORSCHEME
--- =============================================================================
-require("kanagawa-paper").setup({})
-
-vim.cmd("colorscheme kanagawa-paper-ink")
 
 -- =============================================================================
 -- NOICE (UI OVERLAY FOR MESSAGES, CMDLINE, AND POPUPMENU)
 -- =============================================================================
-require("notify").setup({
-  background_colour = "#000000",
-  stages = "static",
-})
+require('notify').setup {
+  background_colour = '#000000',
+  stages = 'static',
+}
 
-require("noice").setup({
+require('noice').setup {
   lsp = {
     override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true,
+      ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+      ['vim.lsp.util.stylize_markdown'] = true,
+      ['cmp.entry.get_documentation'] = true,
     },
   },
   presets = {
@@ -160,4 +136,4 @@ require("noice").setup({
     inc_rename = false,
     lsp_doc_border = true,
   },
-})
+}
