@@ -142,6 +142,7 @@ vim.cmd("colorscheme kanagawa-paper-ink")
 -- =============================================================================
 require("notify").setup({
   background_colour = "#000000",
+  stages = "static",
 })
 
 require("noice").setup({
