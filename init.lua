@@ -790,9 +790,10 @@ do
   --
   -- You can press `g?` for help in this menu.
   -- local ensure_installed = vim.tbl_keys(servers or {})
+  local ensure_installed = {}
   vim.list_extend(ensure_installed, {
     -- You can add other tools here that you want Mason to install
-    'stylua',
+    -- 'stylua',
     'tailwindcss',
     'html',
     'intelephense',
@@ -802,13 +803,13 @@ do
     'gofumpt',
     'gopls',
     'shfmt',
-    'rust-analyzer',
-    'ruff',
+    -- 'rust-analyzer',
+    -- 'ruff',
     'biome',
-    'clang-format',
+    -- 'clang-format',
     'prettierd',
     'js-debug-adapter',
-    'ty',
+    -- 'ty',
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
