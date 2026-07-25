@@ -715,8 +715,47 @@ do
       cmd = { 'clangd', '--background-index' },
     },
     gopls = {},
-    ty = {},
+
+    -- install with npm i -g
+    basedpyright = {},
+
+    -- install with pkg
     rust_analyzer = {},
+    stylua = {}, -- Used to format Lua code
+
+    -- lua_ls = {
+    --   on_init = function(client)
+    --     client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
+    --
+    --     if client.workspace_folders then
+    --       local path = client.workspace_folders[1].name
+    --       if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
+    --     end
+    --
+    --     client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+    --       runtime = {
+    --         version = 'LuaJIT',
+    --         path = { 'lua/?.lua', 'lua/?/init.lua' },
+    --       },
+    --       workspace = {
+    --         checkThirdParty = false,
+    --         -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
+    --         --  See https://github.com/neovim/nvim-lspconfig/issues/3189
+    --         library = vim.tbl_extend('force', vim.api.nvim_get_runtime_file('', true), {
+    --           '${3rd}/luv/library',
+    --           '${3rd}/busted/library',
+    --         }),
+    --       },
+    --     })
+    --   end,
+    --   ---@type lspconfig.settings.lua_ls
+    --   settings = {
+    --     Lua = {
+    --       format = { enable = false }, -- Disable formatting (formatting is done by stylua)
+    --     },
+    --   },
+    -- },
+
     --
     -- Some languages (like typescript) have entire language plugins that can be useful:
     --    https://github.com/pmizio/typescript-tools.nvim
@@ -727,43 +766,6 @@ do
     -- Tailwind CSS configuration for TSX support
     tailwindcss = {
       filetypes = { 'typescriptreact', 'javascriptreact', 'html', 'css' },
-    },
-
-    stylua = {}, -- Used to format Lua code
-
-    -- Special Lua Config, as recommended by neovim help docs
-    lua_ls = {
-      on_init = function(client)
-        client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
-
-        if client.workspace_folders then
-          local path = client.workspace_folders[1].name
-          if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
-        end
-
-        local current_settings = client.config.settings --[[@as lspconfig.settings.lua_ls]]
-        client.config.settings.Lua = vim.tbl_deep_extend('force', current_settings.Lua, {
-          runtime = {
-            version = 'LuaJIT',
-            path = { 'lua/?.lua', 'lua/?/init.lua' },
-          },
-          workspace = {
-            checkThirdParty = false,
-            -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
-            --  See https://github.com/neovim/nvim-lspconfig/issues/3189
-            library = vim.tbl_extend('force', vim.api.nvim_get_runtime_file('', true), {
-              '${3rd}/luv/library',
-              '${3rd}/busted/library',
-            }),
-          },
-        })
-      end,
-      ---@type lspconfig.settings.lua_ls
-      settings = {
-        Lua = {
-          format = { enable = false }, -- Disable formatting (formatting is done by stylua)
-        },
-      },
     },
   }
 
@@ -793,7 +795,7 @@ do
   local ensure_installed = {}
   vim.list_extend(ensure_installed, {
     -- You can add other tools here that you want Mason to install
-    -- 'stylua',
+    'vtsls',
     'tailwindcss',
     'html',
     'intelephense',
@@ -803,13 +805,15 @@ do
     'gofumpt',
     'gopls',
     'shfmt',
-    -- 'rust-analyzer',
-    -- 'ruff',
     'biome',
-    -- 'clang-format',
     'prettierd',
     'js-debug-adapter',
-    -- 'ty',
+
+    -- Install Manually
+    -- 'basedpyright',
+    -- 'rust-analyzer',
+    -- 'ruff',
+    -- 'clang-format',
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -886,6 +890,7 @@ do
       cpp = { 'clang_format' },
       sh = { 'shfmt' },
       go = { 'gofumpt' },
+      lua = { 'stylua' },
       python = {
         -- To fix auto-fixable lint errors
         'ruff_fix',
