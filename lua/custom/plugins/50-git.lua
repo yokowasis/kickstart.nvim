@@ -1,16 +1,3 @@
--- NEOGIT
-require('neogit').setup {
-  integrations = {
-    telescope = true,
-    diffview = true,
-  },
-  sections = {
-    untracked = { folded = false },
-    unstaged = { folded = false },
-    staged = { folded = false },
-  },
-}
-
 -- "Git Mapping
 function GitPullAndNotify()
   vim.notify('Pull Processing...', vim.log.levels.INFO, {
@@ -38,27 +25,9 @@ function GitPushAndNotify()
   })
 end
 
-function OpenGitStatus()
-  -- Check if neogit is already open
-  local neogit_open = false
-  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    local name = vim.api.nvim_buf_get_name(buf)
-    if name:match 'NeogitStatus' then
-      neogit_open = true
-      vim.api.nvim_buf_delete(buf, { force = true })
-      break
-    end
-  end
-
-  if not neogit_open then
-    vim.cmd [[Neotree close]]
-    vim.cmd [[Neogit]]
-  end
-end
-
 function CreateBranchAndPush(branchName) RunCommandAndNotify('git checkout -b ' .. branchName .. ' && git push -u origin ' .. branchName) end
 
-vim.keymap.set('n', '<c-e>', OpenGitStatus, {
+vim.keymap.set('n', '<c-e>', ':Telescope git_status<cr>', {
   desc = '[G]it [S]tatus',
 })
 
@@ -131,20 +100,8 @@ vim.keymap.set('n', '<leader>gu', GitPullAndNotify, {
   silent = true,
 })
 
-vim.keymap.set('n', '<leader>gd', '<cmd>Neogit diff<CR>', {
-  desc = '[G]it [D]iff',
-  noremap = true,
-  silent = true,
-})
-
-vim.keymap.set('n', '<leader>gb', '<cmd>Neogit branch<CR>', {
+vim.keymap.set('n', '<leader>gb', ':Telescope git_branches<cr>', {
   desc = '[G]it [B]ranch',
-  noremap = true,
-  silent = true,
-})
-
-vim.keymap.set('n', '<leader>gv', '<cmd>DiffviewOpen<CR>', {
-  desc = '[G]it [V]iew Diff (current file)',
   noremap = true,
   silent = true,
 })
@@ -171,21 +128,6 @@ end, {})
 
 vim.keymap.set('n', '<leader>gi', ':GitInitPush<CR>', {
   desc = '[G]it [I]nit and Push',
-  noremap = true,
-  silent = true,
-})
-
-vim.keymap.set('n', '<leader>coo', function()
-  -- Get current line and extract branch name, then checkout with neogit
-  local line = vim.api.nvim_get_current_line()
-  local branch = line:match 'origin/(.+)'
-  if branch then
-    vim.cmd('Neogit branch checkout ' .. branch)
-  else
-    vim.notify('No origin branch found on current line', vim.log.levels.WARN)
-  end
-end, {
-  desc = 'Checkout Origin Branch',
   noremap = true,
   silent = true,
 })

@@ -12,8 +12,6 @@ vim.pack.add {
   { src = 'https://github.com/tpope/vim-dadbod' },
   { src = 'https://github.com/kristijanhusak/vim-dadbod-ui' },
   { src = 'https://github.com/kristijanhusak/vim-dadbod-completion' },
-  { src = 'https://github.com/NeogitOrg/neogit' },
-  { src = 'https://github.com/sindrets/diffview.nvim' },
   { src = 'https://github.com/rcarriga/nvim-notify' },
   { src = 'https://github.com/folke/noice.nvim' },
   { src = 'https://github.com/theHamsta/nvim-dap-virtual-text' },

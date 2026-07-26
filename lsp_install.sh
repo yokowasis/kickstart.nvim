@@ -1,2 +1,2 @@
-npm i -g basedpyright
-pkg install rust-analyzer ruff clang
+npm i -g basedpyright stylua
+pkg install rust-analyzer ruff clang stylua
