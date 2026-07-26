@@ -31,11 +31,7 @@ function GitPushAndNotify()
     timeout = 5000, -- 5 seconds instead of 10 hours
   })
 
-  local command = 'git pull --rebase && git push'
-  local cmd_to_run = command
-  if type(command) == 'string' then cmd_to_run = { vim.o.shell, vim.o.shellcmdflag, command } end
-
-  vim.fn.jobstart(cmd_to_run, {
+  vim.fn.jobstart(cmd_to_run 'git pull --rebase && git push', {
     on_stdout = function(id, data, e) notif(id, data, e, 4000) end,
     on_stderr = function(id, data, e) notif(id, data, e, 4000) end,
     on_exit = function(id, data, e) notif(id, data, e, 4000) end,

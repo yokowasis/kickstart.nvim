@@ -9,6 +9,12 @@ function notif(jobid, data, event, timeout, notifid)
   }) end
 end
 
+function cmd_to_run(command)
+  local cmd_to_run = command
+  if type(command) == 'string' then cmd_to_run = { vim.o.shell, vim.o.shellcmdflag, command } end
+  return cmd_to_run
+end
+
 function CompileAndRun()
   local filetype = GetFileType()
 
