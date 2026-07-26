@@ -146,7 +146,7 @@ function BuildAndNotify()
     timeout = 36000000,
   })
 
-  vim.fn.jobstart('npm run build', {
+  vim.fn.jobstart(cmd_to_run 'npm run build', {
     on_stdout = function(id, data, e) notif(id, data, e, 4000) end,
     on_stderr = function(id, data, e) notif(id, data, e, 4000) end,
     on_exit = function(id, data, e) notif(id, data, e, 4000) end,
@@ -173,11 +173,7 @@ function RunCommandAndNotify(command, timeout, title)
     timeout = timeout,
   })
 
-  -- CRITICAL FIX: Convert string to a table using your Neovim bash shell configuration
-  local cmd_to_run = command
-  if type(command) == 'string' then cmd_to_run = { vim.o.shell, vim.o.shellcmdflag, command } end
-
-  vim.fn.jobstart(cmd_to_run, {
+  vim.fn.jobstart(cmd_to_run(command), {
     -- Kept your original callbacks exactly as they were
     on_stdout = function(id, data, e) notif(id, data, e, 4000) end,
     on_stderr = function(id, data, e) notif(id, data, e, 4000) end,
