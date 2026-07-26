@@ -510,6 +510,16 @@ do
     --  All the info you're looking for is in `:help telescope.setup()`
     --
     defaults = {
+      layout_strategy = 'horizontal',
+      layout_config = {
+        horizontal = {
+          -- Sets the width of the entire Telescope window (80% of screen)
+          width = 0.9,
+          -- Sets the width of the right preview pane (60% of Telescope window)
+          preview_width = 0.6,
+        },
+      },
+
       file_ignore_patterns = {
         'node_modules',
         'package-lock.json',
