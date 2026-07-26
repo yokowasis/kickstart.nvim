@@ -1,6 +1,6 @@
 -- noswap
 vim.o.swapfile = false
-vim.o.guifont = 'JetBrainsMono NFM:h14:sb'
+vim.o.guifont = 'JetBrainsMono NF:h14:sb'
 vim.o.list = false
 
 -- disable spell for pandoc
@@ -60,11 +60,9 @@ else
 end
 
 -- auto cd to current directory
-vim.api.nvim_create_autocmd("VimEnter", {
+vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()
-    if vim.fn.isdirectory(vim.fn.expand("%:p")) == 0 then
-      vim.cmd("cd %:p:h")
-    end
+    if vim.fn.isdirectory(vim.fn.expand '%:p') == 0 then vim.cmd 'cd %:p:h' end
   end,
 })
 
@@ -135,7 +133,6 @@ vim.opt.sessionoptions = {
   'terminal', -- save terminal state
 }
 
-
 -- Folding
 vim.o.foldmethod = 'indent'
 
@@ -161,16 +158,12 @@ vim.api.nvim_create_augroup('remember_folds', { clear = true })
 vim.api.nvim_create_autocmd('BufWinLeave', {
   group = 'remember_folds',
   pattern = '*',
-  callback = function()
-    vim.cmd 'silent! mkview'
-  end,
+  callback = function() vim.cmd 'silent! mkview' end,
 })
 vim.api.nvim_create_autocmd('BufWinEnter', {
   group = 'remember_folds',
   pattern = '*',
-  callback = function()
-    pcall(vim.cmd, 'silent! loadview')
-  end,
+  callback = function() pcall(vim.cmd, 'silent! loadview') end,
 })
 
 return {}
