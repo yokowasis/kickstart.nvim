@@ -71,6 +71,25 @@ end, {
   silent = false,
 })
 
+local function secure_git_pull()
+  -- Prompt user for explicit confirmation
+  vim.ui.input({ prompt = 'Wipe local changes and pull? (y/n): ' }, function(input)
+    -- Normalize input to lowercase
+    if input and input:lower() == 'y' then
+      print '\nStarting Git reset and pull...'
+
+      -- Combine commands into a single string
+      local cmd = 'git reset --hard HEAD && git clean -f -d && git pull'
+      RunCommandAndNotify(cmd)
+    else
+      vim.notify('Operation aborted by user.', vim.log.levels.WARN)
+    end
+  end)
+end
+
+-- Keymap registration: Press <leader>gp in Normal mode to trigger
+vim.keymap.set('n', '<leader>gr', secure_git_pull, { desc = 'Git: Hard Reset & Pull' })
+
 vim.keymap.set('n', '<leader>gc', function()
   local commitMessage = vim.fn.input 'Enter commit message: '
   if commitMessage == '' then return end
