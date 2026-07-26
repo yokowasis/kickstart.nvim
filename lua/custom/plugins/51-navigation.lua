@@ -5,9 +5,7 @@ local function smart_buffer_delete()
 
   -- Count only listed buffers (exclude help, quickfix, etc.)
   for _, buf in ipairs(buffers) do
-    if buf.listed == 1 then
-      table.insert(listed_buffers, buf)
-    end
+    if buf.listed == 1 then table.insert(listed_buffers, buf) end
   end
 
   -- If this is the last buffer, quit Neovim
