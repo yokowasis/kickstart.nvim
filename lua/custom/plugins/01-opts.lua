@@ -22,42 +22,7 @@ isMac = sysname == 'Darwin'
 isLinux = sysname == 'Linux'
 
 -- neovide auto focus
-if vim.g.neovide then
-  vim.defer_fn(function() vim.cmd 'NeovideFocus' end, 200)
-
-  if isWindows then
-    -- new neovide window in Windows
-    vim.keymap.set('n', '<C-n>', ':silent !neovide<cr>', {
-      desc = 'Python',
-      noremap = true,
-      silent = true,
-    })
-    vim.keymap.set('i', '<C-n>', ':silent !neovide<cr>', {
-      desc = 'Python',
-      noremap = true,
-      silent = true,
-    })
-  else
-    -- new neovide window in MACOS
-    vim.keymap.set('n', '<D-n>', ':silent !neovide<cr>', {
-      desc = 'Python',
-      noremap = true,
-      silent = true,
-    })
-    vim.keymap.set('i', '<D-n>', ':silent !neovide<cr>', {
-      desc = 'Python',
-      noremap = true,
-      silent = true,
-    })
-  end
-else
-  -- new nvim-qt window in Android
-  vim.keymap.set('n', '<M-n>', ':silent !nvim-qt<cr>', {
-    desc = 'Python',
-    noremap = true,
-    silent = true,
-  })
-end
+if vim.g.neovide then vim.defer_fn(function() vim.cmd 'NeovideFocus' end, 200) end
 
 -- independent clipboard
 vim.opt.clipboard = ''
@@ -89,19 +54,7 @@ vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', {
 })
 vim.o.hlsearch = true
 
-vim.api.nvim_set_keymap('n', '<leader>cpr', ':CphReceive<cr>', {
-  noremap = true,
-  silent = false,
-  desc = '[C]ompetitive [P]rogramming [R]eceive',
-})
-
-vim.api.nvim_set_keymap('n', '<leader>cpt', ':CphTest<cr>', {
-  noremap = true,
-  silent = false,
-  desc = '[C]ompetitive [P]rogramming [T]est',
-})
-
--- save Cursor
+-- save/restore cursor position on quit/open
 vim.cmd [[
   autocmd BufReadPost *
         \ if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' &&
