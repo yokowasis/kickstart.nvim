@@ -147,19 +147,32 @@ function BuildAndNotify()
   })
 end
 
-function RunCommandInNewTab(command) vim.cmd(':-1tabnew | te  ' .. command) end
+function RunCommandInNewTab(command)
+  -- 1. Create a clean new tab
+  vim.cmd 'tabnew'
+
+  -- 2. Open an empty terminal in that tab
+  local term_id = vim.fn.termopen(vim.o.shell)
+
+  -- 3. Safely send the raw text command followed by a carriage return
+  vim.api.nvim_chan_send(term_id, command .. '\r')
+end
 
 function RunCommandAndNotify(command, timeout, title)
-  if timeout == nil then
-    timeout = 5000 -- 5 seconds instead of 10 hours!
-  end
+  if timeout == nil then timeout = 5000 end
   if title == nil then title = 'Run Command' end
+
   vim.notify(title, vim.log.levels.INFO, {
     title = title,
     timeout = timeout,
   })
 
-  vim.fn.jobstart(command, {
+  -- CRITICAL FIX: Convert string to a table using your Neovim bash shell configuration
+  local cmd_to_run = command
+  if type(command) == 'string' then cmd_to_run = { vim.o.shell, vim.o.shellcmdflag, command } end
+
+  vim.fn.jobstart(cmd_to_run, {
+    -- Kept your original callbacks exactly as they were
     on_stdout = function(id, data, e) notif(id, data, e, 4000) end,
     on_stderr = function(id, data, e) notif(id, data, e, 4000) end,
     on_exit = function(id, data, e) notif(id, data, e, 4000) end,
