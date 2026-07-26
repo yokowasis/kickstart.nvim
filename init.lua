@@ -711,6 +711,7 @@ do
   --  See `:help lsp-config` for information about keys and how to configure
   ---@type table<string, vim.lsp.Config>
   local servers = {
+    -- for Windows with devcpp copy .clangd into project directory
     clangd = {
       cmd = { 'clangd', '--background-index' },
     },
