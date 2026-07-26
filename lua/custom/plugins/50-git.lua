@@ -19,15 +19,9 @@ function GitPullAndNotify()
   })
 
   vim.fn.jobstart('git fetch --all && git pull --rebase', {
-    on_stdout = function(id, data, e)
-      notif(id, data, e, 4000)
-    end,
-    on_stderr = function(id, data, e)
-      notif(id, data, e, 4000)
-    end,
-    on_exit = function(id, data, e)
-      notif(id, data, e, 4000)
-    end,
+    on_stdout = function(id, data, e) notif(id, data, e, 4000) end,
+    on_stderr = function(id, data, e) notif(id, data, e, 4000) end,
+    on_exit = function(id, data, e) notif(id, data, e, 4000) end,
   })
 end
 
@@ -38,15 +32,9 @@ function GitPushAndNotify()
   })
 
   vim.fn.jobstart('git pull --rebase && git push', {
-    on_stdout = function(id, data, e)
-      notif(id, data, e, 4000)
-    end,
-    on_stderr = function(id, data, e)
-      notif(id, data, e, 4000)
-    end,
-    on_exit = function(id, data, e)
-      notif(id, data, e, 4000)
-    end,
+    on_stdout = function(id, data, e) notif(id, data, e, 4000) end,
+    on_stderr = function(id, data, e) notif(id, data, e, 4000) end,
+    on_exit = function(id, data, e) notif(id, data, e, 4000) end,
   })
 end
 
@@ -68,17 +56,13 @@ function OpenGitStatus()
   end
 end
 
-function CreateBranchAndPush(branchName)
-  RunCommandAndNotify('git checkout -b ' .. branchName .. ' && git push -u origin ' .. branchName)
-end
+function CreateBranchAndPush(branchName) RunCommandAndNotify('git checkout -b ' .. branchName .. ' && git push -u origin ' .. branchName) end
 
 vim.keymap.set('n', '<c-e>', OpenGitStatus, {
   desc = '[G]it [S]tatus',
 })
 
-function GitCommit(commitMessage)
-  RunCommandAndNotify('git add . && git commit -m "' .. commitMessage .. '"')
-end
+function GitCommit(commitMessage) RunCommandAndNotify('git add . && git commit -m "' .. commitMessage .. '"') end
 
 function RevertToCommitUnderCursor()
   local commit = vim.fn.expand '<cword>'
@@ -108,10 +92,8 @@ vim.keymap.set('n', '<leader>gx', UndoCommit, { desc = 'Discard changes in last 
 vim.keymap.set('n', '<leader>gr', RevertToCommitUnderCursor, { desc = 'Reset HEAD to commit under cursor + force push' })
 
 vim.keymap.set('n', '<leader>ga', function()
-  local branchName = vim.fn.input 'Enter commit message: '
-  if branchName == '' then
-    return
-  end
+  local branchName = vim.fn.input 'Enter New Branch Name: '
+  if branchName == '' then return end
 
   CreateBranchAndPush(branchName)
 end, {
@@ -122,9 +104,7 @@ end, {
 
 vim.keymap.set('n', '<leader>gc', function()
   local commitMessage = vim.fn.input 'Enter commit message: '
-  if commitMessage == '' then
-    return
-  end
+  if commitMessage == '' then return end
 
   GitCommit(commitMessage)
 end, {
