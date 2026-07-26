@@ -2,49 +2,51 @@
 
 ## What this repo is
 
-Personal Neovim configuration based on kickstart.nvim. Single `init.lua` entry point, not a distribution. Config lives at `%localappdata%\nvim` (Windows).
+Personal Neovim configuration forked from [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). Single `init.lua` entry point (~1106 lines), not a distribution. Config lives at `%localappdata%\nvim` (Windows).
 
 ## Upstream
 
-Forked from [nvim-lua/kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). This fork tracks the upstream but has local customizations in `init.lua`, `lua/kickstart/plugins/debug.lua`, and root config files (`dprint.json`).
+Forked from nvim-lua/kickstart.nvim. This fork tracks upstream but has customizations in `init.lua`, `lua/kickstart/plugins/debug.lua`, `lua/kickstart/plugins/neo-tree.lua`, and root config files.
 
 ### Syncing with upstream
 
 ```sh
-# Add upstream remote (one-time)
 git remote add upstream https://github.com/nvim-lua/kickstart.nvim.git
-
-# Fetch and merge upstream changes
 git fetch upstream
 git merge upstream/master --no-edit
-
-# If conflicts occur, resolve them then:
+# Resolve conflicts, then:
 git add <resolved-files>
 git commit --no-edit
 ```
 
-**Conflict hotspots** (files both sides edit):
-- `init.lua` — the big one. Sections 1 (options), 4 (UI plugins), 6 (LSP servers), 7 (formatting), 8 (autocomplete), 9 (treesitter), 10 (examples) all differ.
-- `lua/kickstart/plugins/debug.lua` — fork has JS/TS debugging; upstream only has Go.
-- `lua/custom/plugins/` — never conflicts (your own code, not in upstream).
-- `.gitignore` — upstream ignores `nvim-pack-lock.json`; your fork may not.
+**Conflict hotspots**: `init.lua` (sections 1, 4, 6, 7, 8, 9, 10), `lua/kickstart/plugins/debug.lua` (fork has JS/TS debug), `lua/kickstart/plugins/neo-tree.lua` (fork adds reveal keymap). `lua/custom/plugins/` never conflicts. `.gitignore` — upstream ignores `nvim-pack-lock.json`; this fork tracks it.
 
-**Resolution strategy**: For `init.lua`, keep both sides. Upstream changes bring new features/fixes; your changes bring personal preference. For `debug.lua`, keep the fork's additions (JS/TS debug). For `.gitignore`, prefer your fork's version (track `nvim-pack-lock.json`).
+**Resolution strategy**: For `init.lua`, keep both sides. For `debug.lua`, keep fork's JS/TS additions. For `neo-tree.lua`, keep fork's reveal keymap. For `.gitignore`, prefer fork's version (track `nvim-pack-lock.json`).
 
 ### Tracking changes vs upstream
 
-Changes not in `lua/custom/` are documented in `CHANGES.md`. Update it whenever you modify a file that also exists in upstream.
+Changes outside `lua/custom/` are documented in `CHANGES.md`. Update it whenever you modify a file that also exists in upstream.
 
 ## Structure
 
-- `init.lua` — main config, ~1100 lines, all core setup (options, keymaps, LSP, plugins, formatting, treesitter)
-- `lua/custom/plugins/` — personal plugin configs, auto-loaded by `init.lua` via `require 'custom.plugins'`. Files prefixed with numbers load in order (e.g. `00-plugins.lua` runs first)
-- `lua/kickstart/plugins/` — example plugins from kickstart (debug, indent_line, lint, autopairs, neo-tree, gitsigns)
+- `init.lua` — main config, all core setup (options, keymaps, LSP, plugins, formatting, treesitter, autocomplete)
+- `lua/custom/plugins/` — personal plugin configs, auto-loaded via `require 'custom.plugins'`. Files prefixed with numbers load in alphanumeric order:
+  - `00-plugins.lua` — plugin registrations (flash, emmet, multicursor, grug-far, dadbod, noice/notify)
+  - `01-functions.lua` — global utility functions (compile/run, git helpers, npm, session management)
+  - `01-opts.lua` — personal option overrides (font, clipboard, folding, etc.)
+  - `50-git.lua` — Neogit, Diffview, git keymaps and helper functions
+  - `51-navigation.lua` — tabs, splits, file explorer, buffer close
+  - `52-terminal.lua` — terminal keymaps (open/close/navigate)
+  - `53-window.lua` — window resize keymaps
+  - `55-startup.lua` — session auto-loading
+  - `98-bookmarks.lua` — placeholder for bookmarks
+  - `99-keymaps.lua` — all remaining keymaps (system clipboard, LSP overrides, npm, scaffold, companion, etc.)
+- `lua/kickstart/plugins/` — kickstart example plugins (debug, indent_line, lint, autopairs, neo-tree, gitsigns)
 - `KEYMAPS.md` — full keymap reference, grouped by category
 
 ## Plugin manager
 
-Uses `vim.pack` (built-in Neovim plugin manager, not lazy.nvim or packer). Plugins are added via `vim.pack.add()` and built via the `PackChanged` autocommand. Lockfile: `nvim-pack-lock.json` (gitignored in upstream; track it in your fork).
+Uses `vim.pack` (built-in Neovim plugin manager). Plugins added via `vim.pack.add()` and built via `PackChanged` autocommand. Lockfile: `nvim-pack-lock.json` (tracked in this fork).
 
 ## Commands
 
@@ -53,22 +55,24 @@ Uses `vim.pack` (built-in Neovim plugin manager, not lazy.nvim or packer). Plugi
 - `:Mason` — manage LSP servers and tools (`g?` for help)
 - `:checkhealth` — verify system setup
 - `:Tutor` — Neovim tutorial
+- `:PackUpdate` — custom command for `vim.pack.update(nil, { force = true })`
 
 ## Formatting
 
 - **Lua**: stylua (config: `.stylua.toml`). Formatting is done by stylua, not lua_ls.
-- **JS/TS/JSON/CSS/HTML/Markdown/YAML**: biome (via conform.nvim)
+- **JS/TS/JSX/TSX/SCSS/Pandoc/JSON/CSS/YML/HTML**: biome (via conform.nvim)
+- **Markdown**: prettierd
 - **PHP**: pretty-php
 - **Go**: gofumpt
 - **Python**: ruff (fix + format + organize imports)
 - **C/C++**: clang-format
 - **Shell**: shfmt
 
-Format-on-save is enabled for specific filetypes in `conform.nvim` (init.lua:819-845). Manual format: `<leader>f`.
+Format-on-save is enabled for all above filetypes in conform.nvim (`init.lua:839-857`). Manual format: `<leader>ff`.
 
 ## LSP
 
-Servers configured in `init.lua:710-763`. Mason auto-installs them. Key servers: clangd, vtsls, tailwindcss, stylua, lua_ls. Note: `lua_ls` has `documentFormattingProvider = false` since stylua handles formatting.
+Servers configured in `init.lua:713-771`. Mason auto-installs them. Key servers: clangd, vtsls, tailwindcss, gopls, basedpyright, rust-analyzer. Note: `lua_ls` is configured but commented out — stylua handles formatting instead.
 
 ## Testing & verification
 
@@ -76,8 +80,11 @@ No test suite. This is a config repo. Verify by opening Neovim and running `:che
 
 ## Gotchas
 
-- `vim.g.mapleader = ' '` must be set before plugins load (init.lua:98)
-- `vim.loader.enable()` is called for faster startup (init.lua:93)
+- `vim.g.mapleader = ' '` must be set before plugins load (`init.lua:98`)
+- `vim.loader.enable()` is called for faster startup (`init.lua:93`)
 - Nerd Font support: set `vim.g.have_nerd_font = true` in init.lua if you have one
-- Snippets source is hardcoded to `~/git/friendly-snippets` path (init.lua:915) — adjust if your path differs
+- Snippets source is hardcoded to `~/git/friendly-snippets` path (`init.lua:933`) — adjust if your path differs
 - Custom plugins use `vim.pack.add()` in `00-plugins.lua`, not inside individual plugin files
+- Global utility functions are defined in `01-functions.lua` (`CompileAndRun`, `RunCommandInNewTab`, etc.) and available everywhere after init
+- Clipboard is intentionally isolated from OS clipboard by default (`vim.opt.clipboard = ''` in `01-opts.lua:28`)
+- Shell is hardcoded to `bash` for terminal commands (`52-terminal.lua:1`); adjust on non-Windows or if bash is not in PATH

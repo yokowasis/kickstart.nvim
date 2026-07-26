@@ -2,7 +2,7 @@
 
 Tracks changes made in this fork compared to upstream [nvim-lua/kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). Only covers changes outside `lua/custom/` (personal plugins are not listed here).
 
-Last synced with upstream: **2026-07-19**
+Last synced with upstream: **2026-07-26**
 
 ---
 
@@ -11,12 +11,14 @@ Last synced with upstream: **2026-07-19**
 ### Options (Section 1)
 
 - **Nerd Font**: `vim.g.have_nerd_font = true` (upstream: `false`)
-- **Clipboard**: disabled (upstream enables `unnamedplus` on startup)
+- **Clipboard**: disabled (`unnamedplus` line commented out)
 - **Terminal exit keymap**: `<Esc><Esc>` in terminal mode commented out (upstream has it active)
+- **Relativenumber**: set additionally via `vim.wo.relativenumber = true` in custom opts override (upstream: commented out)
 
 ### UI Plugins (Section 4)
 
 - **mini.surround**: custom keymaps (`ra`/`rd`/`rf`/`rF`/`rh`/`rr`/`rn`) instead of defaults
+- **Colorscheme**: kanagawa-paper.nvim (`kanagawa-paper-ink`) instead of upstream's tokyonight
 
 ### Telescope (Section 5)
 
@@ -27,15 +29,19 @@ Last synced with upstream: **2026-07-19**
 - **clangd**: enabled with `--background-index` (upstream: commented out)
 - **vtsls**: enabled (upstream: commented out `ts_ls`)
 - **tailwindcss**: enabled for TSX/JSX/HTML/CSS (upstream: not configured)
+- **lua_ls**: configured but commented out (upstream: active); formatting delegated to stylua
 
 ### Mason Tools (Section 6)
 
-Added to `ensure_installed`: `tailwindcss`, `html`, `intelephense`, `pretty-php`, `svelte`, `vtsls`, `gofumpt`, `gopls`, `shfmt`, `rust-analyzer`, `ruff`, `biome`, `clang-format`
+Added to `ensure_installed`: `vtsls`, `tailwindcss`, `html`, `intelephense`, `pretty-php`, `svelte`, `gofumpt`, `gopls`, `shfmt`, `biome`, `prettierd`, `js-debug-adapter`.
+Commented out (install manually): `basedpyright`, `rust-analyzer`, `ruff`, `clang-format`.
+Note: upstream only installs `stylua`; this fork installs significantly more.
 
 ### Formatting (Section 7)
 
-- **Format-on-save**: enabled for JS, TS, JSX, TSX, SCSS, Pandoc, Markdown, JSON, CSS, YML, HTML, PHP, CPP, SH, Go, Python (upstream: commented out)
-- **Formatters**: biome for JS/TS/JSON/CSS/HTML/YAML/Markdown, pretty-php with `-s2` arg, clang-format, shfmt, gofumpt, ruff (fix + format + organize imports)
+- **Format-on-save**: enabled for Lua, JS, TS, JSX, TSX, SCSS, Pandoc, Markdown, JSON, CSS, YML, HTML, PHP, CPP, SH, Go, Python (upstream: commented out)
+- **Formatters**: biome for JS/TS/JSX/TSX/SCSS/Pandoc/JSON/CSS/YML/HTML, prettierd for Markdown, pretty-php with `-s2` arg, clang-format, shfmt, gofumpt, stylua for Lua, ruff (fix + format + organize imports) for Python
+- **Format keymap**: `<leader>ff` (upstream: `<leader>f`)
 
 ### Autocomplete (Section 8)
 
@@ -49,6 +55,7 @@ Added to `ensure_installed`: `tailwindcss`, `html`, `intelephense`, `pretty-php`
 ### Examples (Section 10)
 
 - Uncommented `require 'kickstart.plugins.*'` lines (debug, indent_line, lint, autopairs, neo-tree)
+- `kickstart.plugins.gitsigns` remains commented out (gitsigns configured inline in Section 4)
 - Uncommented `require 'custom.plugins'`
 
 ---
@@ -61,7 +68,15 @@ Added to `ensure_installed`: `tailwindcss`, `html`, `intelephense`, `pretty-php`
 
 ---
 
+## lua/kickstart/plugins/neo-tree.lua
+
+- **Reveal keymap**: `\` maps to `Neotree reveal` (upstream: not present; Neo-tree is commented out upstream)
+
+---
+
 ## Root files
 
 - **dprint.json**: added (not in upstream). Configures dprint with TypeScript, JSON, Markdown, TOML, Malva, Markup, and YAML plugins.
 - **KEYMAPS.md**: added (not in upstream). Full keymap reference grouped by category.
+- **AGENTS.md**: added (not in upstream). AI assistant instructions for working with this config.
+- **CHANGES.md**: this file (not in upstream). Tracks fork changes.
