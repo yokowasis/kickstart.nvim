@@ -102,14 +102,12 @@ function Npm_install()
   local package_lock_exists = vim.fn.filereadable 'package-lock.json' == 1
   local yarn_lock_exists = vim.fn.filereadable 'yarn.lock' == 1
   local pnpm_lock_exists = vim.fn.filereadable 'pnpm-lock.yaml' == 1
-  if package_lock_exists then
-    RunCommandInNewTab 'npm install --legacy-peer-deps'
-  elseif yarn_lock_exists then
+  if yarn_lock_exists then
     RunCommandInNewTab 'yarn'
   elseif pnpm_lock_exists then
     RunCommandInNewTab 'pnpm install'
   else
-    RunCommandInNewTab 'npm install --legacy-peer-deps'
+    RunCommandInNewTab 'npm install --legacy-peer-deps && exit'
   end
 end
 

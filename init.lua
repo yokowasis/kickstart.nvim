@@ -1061,6 +1061,8 @@ do
     'json',
     'python',
     'css',
+    'yaml',
+    'toml',
   }
   require('nvim-treesitter').install(parsers)
 
