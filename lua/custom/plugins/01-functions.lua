@@ -107,7 +107,7 @@ function Npm_install()
   elseif pnpm_lock_exists then
     RunCommandInNewTab 'pnpm install'
   else
-    RunCommandInNewTab 'npm install --legacy-peer-deps && exit'
+    RunCommandInNewTab 'npm install --legacy-peer-deps'
   end
 end
 
@@ -159,7 +159,7 @@ function RunCommandInNewTab(command)
   local term_id = vim.fn.termopen(vim.o.shell)
 
   -- 3. Safely send the raw text command followed by a carriage return
-  vim.api.nvim_chan_send(term_id, command .. '\r')
+  vim.api.nvim_chan_send(term_id, command .. '&& exit' .. '\r')
 end
 
 function RunCommandAndNotify(command, timeout, title)
