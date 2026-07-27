@@ -527,7 +527,12 @@ do
         'pnpm-lock.yaml',
         'lazy-lock.json',
       },
-      mappings = {},
+
+      mappings = {
+        i = {
+          ['<C-e>'] = require('telescope.actions').close, -- Maps Ctrl+e to close Telescope in insert mode
+        },
+      },
     },
     extensions = {
       ['ui-select'] = { require('telescope.themes').get_dropdown() },
@@ -1054,7 +1059,7 @@ do
     'query',
     'vim',
     'vimdoc',
-    'javascrpipt',
+    'javascript',
     'typescript',
     'tsx',
     'jsx',
