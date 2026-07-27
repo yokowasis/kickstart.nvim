@@ -97,6 +97,11 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- Auto Close Terminal when exit
+vim.api.nvim_create_autocmd('TermClose', {
+  callback = function() vim.cmd 'bdelete!' end,
+})
+
 -- Remember folds between sessions
 vim.api.nvim_create_augroup('remember_folds', { clear = true })
 vim.api.nvim_create_autocmd('BufWinLeave', {
