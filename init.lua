@@ -517,6 +517,7 @@ do
           width = 0.9,
           -- Sets the width of the right preview pane (60% of Telescope window)
           preview_width = 0.6,
+          preview_cutoff = 0,
         },
       },
 
@@ -736,6 +737,7 @@ do
       cmd = { 'clangd', '--background-index' },
     },
     gopls = {},
+    intelephense = {},
 
     -- install with npm i -g
     basedpyright = {},
