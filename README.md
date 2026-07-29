@@ -79,4 +79,10 @@ git fetch upstream
 git merge upstream/master --no-edit
 ```
 
+- Resolve the conflict
+- git add .
+- git config --global core.editor nvim
+- git rebase --continue
+- git push --force-with-lease origin master
+
 See [AGENTS.md](AGENTS.md) for conflict resolution strategy and [CHANGES.md](CHANGES.md) for the diff vs upstream.
