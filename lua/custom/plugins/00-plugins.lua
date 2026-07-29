@@ -15,6 +15,7 @@ vim.pack.add {
   { src = 'https://github.com/rcarriga/nvim-notify' },
   { src = 'https://github.com/folke/noice.nvim' },
   { src = 'https://github.com/theHamsta/nvim-dap-virtual-text' },
+  { src = 'https://github.com/zbirenbaum/copilot.lua' },
 }
 
 -- =============================================================================
