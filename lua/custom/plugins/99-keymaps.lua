@@ -33,6 +33,7 @@ vim.keymap.set('n', '<S-insert>', '"+p:silent! %s/\\r//g<cr>', {
   noremap = true,
   silent = true,
 })
+
 vim.keymap.set('i', '<S-insert>', '<C-r>*<C-o>:silent! %s/\\r//g<cr>', {
   desc = '[P]aste from system clipboard',
   noremap = true,
@@ -98,6 +99,13 @@ vim.keymap.set('x', '<BS>', '"_d', {
 -- telescope keymap
 vim.keymap.set('n', '<leader>?', ':Telescope keymaps<CR>', {
   desc = 'Show Keymaps',
+  noremap = true,
+  silent = true,
+})
+
+-- color scheme preview
+vim.keymap.set('n', '<leader>cs', ':Telescope colorscheme enable_preview=true<CR>', {
+  desc = 'Show Color Schemes',
   noremap = true,
   silent = true,
 })

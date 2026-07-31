@@ -392,13 +392,20 @@ do
   --   },
   -- }
 
-  vim.pack.add { gh 'thesimonho/kanagawa-paper.nvim' }
-  require('kanagawa-paper').setup {}
+  vim.pack.add {
+    gh 'thesimonho/kanagawa-paper.nvim',
+    gh 'daltonmenezes/aura-theme',
+    gh 'rebelot/kanagawa.nvim',
+    gh 'folke/tokyonight.nvim',
+  }
+
+  vim.opt.runtimepath:append(vim.fn.stdpath 'data' .. '/site/pack/core/opt/aura-theme/packages/neovim')
+  -- require('kanagawa-paper').setup {}
 
   -- Load the colorscheme here.
   -- Like many other themes, this one has different styles, and you could load
   -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  vim.cmd 'colorscheme kanagawa-paper-ink'
+  vim.cmd 'colorscheme aura-soft-dark'
 
   -- Highlight todo, notes, etc in comments
   vim.pack.add { gh 'folke/todo-comments.nvim' }
