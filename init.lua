@@ -539,6 +539,11 @@ do
       mappings = {
         i = {
           ['<C-e>'] = require('telescope.actions').close, -- Maps Ctrl+e to close Telescope in insert mode
+          ['<CR>'] = require('telescope.actions').select_tab, -- Maps Enter to open selection in a new tab
+          ['<C-Down>'] = require('telescope.actions').preview_scrolling_down,
+          opts = { speed = 1 },
+          ['<C-Up>'] = require('telescope.actions').preview_scrolling_up,
+          opts = { speed = 1 },
         },
       },
     },
