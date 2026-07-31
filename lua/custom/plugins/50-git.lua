@@ -105,7 +105,7 @@ vim.keymap.set('n', '<leader>gb', ':Telescope git_branches<cr>', {
   silent = true,
 })
 
-vim.keymap.set('n', '<leader>gq', function() RunCommandInNewTab 'git add . && git commit -m "Quick Commit" && git push' end, {
+vim.keymap.set('n', '<leader>gq', function() RunCommandAndNotify 'git add . && git commit -m "Quick Commit" && git push' end, {
   desc = '[G]it [Q]uick Commit and Push',
   noremap = true,
   silent = true,
