@@ -307,7 +307,7 @@ vim.keymap.set('n', '<leader>fmf', 'gg=G<c-o>', {
 })
 
 -- Search and Replace
-vim.keymap.set('n', '<leader>sar', ':%s///g<left><left><left>', {
+vim.keymap.set('n', '<leader>sar', ':%s/xxx/yyy/g<left><left><left><left><left><left>', {
   noremap = true,
   silent = false,
   desc = '[S]earch [A]nd [R]eplace',
@@ -321,11 +321,16 @@ vim.keymap.set('v', '<leader>sar', '"zy:%s/<c-r>z//g<left><left>', {
 })
 
 -- Search and Replace Fighting Kirby
-vim.keymap.set('n', '<leader>sak', [[:%s/\v(.*);/console.log(\1);/<Left>]], {
-  noremap = true,
-  silent = false,
-  desc = '[S]earch [A]nd [K]irby',
-})
+vim.keymap.set(
+  'n',
+  '<leader>sak',
+  [[:%s/\v(.*);/console.log(\1);/<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
+  {
+    noremap = true,
+    silent = false,
+    desc = '[S]earch [A]nd [K]irby',
+  }
+)
 
 -- Search and Replace Line Break
 vim.keymap.set('n', '<leader>sal', [[:%s/xxx\n\n/yyy\r/<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]], {
