@@ -320,6 +320,13 @@ vim.keymap.set('v', '<leader>sar', '"zy:%s/<c-r>z//g<left><left>', {
   desc = '[S]earch [A]nd [R]eplace',
 })
 
+-- Search and Replace Fighting Kirby
+vim.keymap.set('n', '<leader>sak', [[:%s/\v(.*);/console.log(\1);/<Left>]], {
+  noremap = true,
+  silent = false,
+  desc = '[S]earch [A]nd [K]irby',
+})
+
 -- Search and Replace with Number of rows
 vim.keymap.set('v', '<leader>san', function()
   -- Get the selected text
