@@ -327,6 +327,13 @@ vim.keymap.set('n', '<leader>sak', [[:%s/\v(.*);/console.log(\1);/<Left>]], {
   desc = '[S]earch [A]nd [K]irby',
 })
 
+-- Search and Replace Line Break
+vim.keymap.set('n', '<leader>sal', [[:%s/xxx\n\n/yyy\r/<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]], {
+  noremap = true,
+  silent = false,
+  desc = '[S]earch [A]nd [L]ine Break',
+})
+
 -- Search and Replace with Number of rows
 vim.keymap.set('v', '<leader>san', function()
   -- Get the selected text
