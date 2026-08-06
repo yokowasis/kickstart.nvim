@@ -219,7 +219,7 @@ vim.keymap.set('n', '<leader>rb', function() RunCommandAndNotify 'npm run build'
   silent = false,
   desc = '[R]un [B]uild',
 })
-vim.keymap.set('n', '<leader>rd', function() RunCommandInNewTab 'npm run dev' end, {
+vim.keymap.set('n', '<leader>rd', function() RunCommandInBackgroundTab 'npm run dev' end, {
   noremap = true,
   silent = false,
   desc = '[R]un [D]ev',

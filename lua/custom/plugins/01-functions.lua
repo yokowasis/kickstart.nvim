@@ -159,7 +159,30 @@ function RunCommandInNewTab(command)
   local term_id = vim.fn.termopen(vim.o.shell)
 
   -- 3. Safely send the raw text command followed by a carriage return
-  vim.api.nvim_chan_send(term_id, command .. '&& exit' .. '\r')
+  vim.api.nvim_chan_send(term_id, command .. ' && exit' .. '\r')
+end
+
+function RunCommandInNewLeftTab(command)
+  -- Create a new tab to the left of the current one
+  vim.cmd '-tabnew'
+
+  -- Open an empty terminal
+  local term_id = vim.fn.termopen(vim.o.shell)
+
+  -- Run the command and exit
+  vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
+end
+
+function RunCommandInBackgroundTab(command)
+  local current = vim.api.nvim_get_current_tabpage()
+
+  vim.cmd '-tabnew'
+
+  local term_id = vim.fn.termopen(vim.o.shell)
+  vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
+
+  -- Go back to the original tab
+  vim.api.nvim_set_current_tabpage(current)
 end
 
 function RunCommandAndNotify(command, timeout, title)
