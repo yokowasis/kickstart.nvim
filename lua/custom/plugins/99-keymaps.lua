@@ -422,12 +422,6 @@ vim.keymap.set(
   }
 )
 
-vim.keymap.set('n', '<leader>sg', ':Telescope live_grep<CR>', {
-  desc = '[S]earch by [G]rep',
-  noremap = true,
-  silent = false,
-})
-
 vim.keymap.set('n', '<leader>sc', customSearchGrep, {
   desc = '[S]earch by [G]rep [C]ustom',
   noremap = true,
