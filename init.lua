@@ -758,6 +758,7 @@ do
     -- install with pkg
     rust_analyzer = {},
     stylua = {}, -- Used to format Lua code
+    svelte = {},
 
     -- lua_ls = {
     --   on_init = function(client)
