@@ -12,17 +12,20 @@ Last synced with upstream: **2026-07-26**
 
 - **Nerd Font**: `vim.g.have_nerd_font = true` (upstream: `false`)
 - **Clipboard**: disabled (`unnamedplus` line commented out)
-- **Terminal exit keymap**: `<Esc><Esc>` in terminal mode commented out (upstream has it active)
-- **Relativenumber**: set additionally via `vim.wo.relativenumber = true` in custom opts override (upstream: commented out)
+- **Terminal exit keymap**: `<Esc><Esc>` in terminal mode commented out (upstream has it active; terminal keymaps now live in `lua/custom/plugins/52-terminal.lua`)
+- **Window navigation**: `<C-h>/<C-j>/<C-k>/<C-l>` focus keymaps commented out (upstream has them active)
+- **Relativenumber**: set additionally via `vim.wo.relativenumber = true` in `01-opts.lua` (upstream: commented out)
 
 ### UI Plugins (Section 4)
 
 - **mini.surround**: custom keymaps (`ra`/`rd`/`rf`/`rF`/`rh`/`rr`/`rn`) instead of defaults
-- **Colorscheme**: kanagawa-paper.nvim (`kanagawa-paper-ink`) instead of upstream's tokyonight
+- **Colorscheme**: aura-theme (`aura-soft-dark`) instead of upstream's tokyonight; tokyonight/kanagawa/kanagawa-paper also registered
 
 ### Telescope (Section 5)
 
 - **file_ignore_patterns**: added `node_modules`, `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `lazy-lock.json`
+- **Insert-mode mappings**: `<C-e>` closes the picker, `<C-D>` selects in new tab, `<C-Up>`/`<C-Down>` scroll preview
+- **`<leader>sf` / `<leader>sg`**: configured with `layout_strategy = 'vertical'` except sg and map `<CR>` to `select_tab`, so results open in a new Neovim tab
 
 ### LSP Servers (Section 6)
 
@@ -45,7 +48,7 @@ Note: upstream only installs `stylua`; this fork installs significantly more.
 
 ### Autocomplete (Section 8)
 
-- **LuaSnip**: added `store_selection_keys = '<tab>'`, `filetype_extend('svelte', ...)` , custom snippet loader path (`~/git/friendly-snippets`)
+- **LuaSnip**: added `store_selection_keys = '<tab>'`, `filetype_extend('svelte', ...)` , custom snippet loader path (`~/git/friendly-snippets`), and `<C-l>`/`<C-h>` choice-change keymaps
 - **blink.cmp**: keymap preset changed from `'default'` to `'enter'`, added custom `<C-x>` toggle mapping
 
 ### Treesitter (Section 9)
@@ -77,6 +80,6 @@ Note: upstream only installs `stylua`; this fork installs significantly more.
 ## Root files
 
 - **dprint.json**: added (not in upstream). Configures dprint with TypeScript, JSON, Markdown, TOML, Malva, Markup, and YAML plugins.
-- **KEYMAPS.md**: added (not in upstream). Full keymap reference grouped by category.
+- **KEYMAPS.md**: added (not in upstream). Full keymap reference grouped by category. Notes that git is Telescope-based and Neogit/Diffview are not used.
 - **AGENTS.md**: added (not in upstream). AI assistant instructions for working with this config.
 - **CHANGES.md**: this file (not in upstream). Tracks fork changes.

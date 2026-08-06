@@ -22,12 +22,7 @@ Leader is `<Space>`. Source: `init.lua`, `lua/custom/plugins/`, `lua/kickstart/p
 
 ## Window Navigation
 
-| Key     | Mode | Action           | Source   |
-| ------- | ---- | ---------------- | -------- |
-| `<C-h>` | n    | Move focus left  | init.lua |
-| `<C-l>` | n    | Move focus right | init.lua |
-| `<C-j>` | n    | Move focus down  | init.lua |
-| `<C-k>` | n    | Move focus up    | init.lua |
+The default `<C-h>/<C-j>/<C-k>/<C-l>` focus keymaps are **commented out** in `init.lua`. Use terminal-mode `<C-w><C-w>` to switch windows (see [Terminal](#terminal)), or the standard `<C-w>` + direction.
 
 ## Window Resize
 
@@ -68,8 +63,8 @@ Leader is `<Space>`. Source: `init.lua`, `lua/custom/plugins/`, `lua/kickstart/p
 | Key                | Mode | Action                                        | Source     |
 | ------------------ | ---- | --------------------------------------------- | ---------- |
 | `<leader><leader>` | n    | List buffers                                  | init.lua   |
-| `<leader>sf`       | n    | Find files                                    | init.lua   |
-| `<leader>sg`       | n    | Live grep                                     | 99-keymaps |
+| `<leader>sf`       | n    | Find files (opens in new tab)                 | init.lua   |
+| `<leader>sg`       | n    | Live grep (opens in new tab)                  | init.lua   |
 | `<leader>sc`       | n    | Live grep (custom: by extension + dir)        | 99-keymaps |
 | `<leader>sw`       | n, v | Grep current word                             | init.lua   |
 | `<leader>sh`       | n    | Search help                                   | init.lua   |
@@ -108,22 +103,22 @@ Leader is `<Space>`. Source: `init.lua`, `lua/custom/plugins/`, `lua/kickstart/p
 
 ## Git
 
-| Key           | Mode | Action                              | Source     |
-| ------------- | ---- | ----------------------------------- | ---------- |
-| `<C-e>`       | n    | Toggle Neogit status                | 50-git     |
-| `<leader>gc`  | n    | Git commit                          | 50-git     |
-| `<leader>gp`  | n    | Git push                            | 50-git     |
-| `<leader>gu`  | n    | Git pull                            | 50-git     |
-| `<leader>gd`  | n    | Neogit diff                         | 50-git     |
-| `<leader>gb`  | n    | Neogit branch                       | 50-git     |
-| `<leader>gv`  | n    | Diffview open                       | 50-git     |
-| `<leader>gh`  | n    | File history (Telescope)            | 50-git     |
-| `<leader>gl`  | n    | Git log (Telescope)                 | 50-git     |
-| `<leader>ga`  | n    | Create branch and push              | 50-git     |
-| `<leader>gi`  | n    | Git init + push                     | 50-git     |
-| `<leader>gx`  | n    | Undo last commit                    | 50-git     |
-| `<leader>gr`  | n    | Reset to commit + force push        | 50-git     |
-| `<leader>coo` | n    | Checkout origin branch under cursor | 50-git     |
+Git is powered by Telescope pickers and helper commands (Neogit/Diffview are no longer used).
+
+| Key          | Mode | Action                          | Source     |
+| ------------ | ---- | ------------------------------- | ---------- |
+| `<C-e>`      | n    | Git status (Telescope)          | 50-git     |
+| `<leader>gc` | n    | Git commit (prompts for message)| 50-git     |
+| `<leader>gp` | n    | Git pull --rebase + push        | 50-git     |
+| `<leader>gu` | n    | Git fetch --all + pull --rebase | 50-git     |
+| `<leader>gb` | n    | Git branches (Telescope)        | 50-git     |
+| `<leader>gh` | n    | Git file history (Telescope)    | 50-git     |
+| `<leader>gl` | n    | Git log (Telescope)             | 50-git     |
+| `<leader>ga` | n    | Create branch and push          | 50-git     |
+| `<leader>gq` | n    | Quick commit + push             | 50-git     |
+| `<leader>gi` | n    | Git init + push (`:GitInitPush`)| 50-git     |
+| `<leader>gx` | n    | Undo N commits (`reset --soft`) | 50-git     |
+| `<leader>gr` | n    | Hard reset & pull (wipe local)  | 50-git     |
 
 ## Gitsigns
 

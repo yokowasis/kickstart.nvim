@@ -4,15 +4,15 @@ Personal Neovim configuration forked from [kickstart.nvim](https://github.com/nv
 
 ## Features
 
-- **Single-file** `init.lua` entry point (~1100 lines) — modular custom plugins in `lua/custom/plugins/`
+- **Single-file** `init.lua` entry point (~1180 lines) — modular custom plugins in `lua/custom/plugins/`
 - **Plugin manager**: built-in `vim.pack` (no lazy.nvim, no packer)
 - **LSP**: clangd, vtsls, gopls, basedpyright, rust-analyzer, tailwindcss, intelephense, svelte — auto-installed via Mason
 - **Format on save**: stylua (Lua), biome (JS/TS/JSX/TSX/CSS/JSON/YML/HTML), ruff (Python), pretty-php, clang-format, shfmt, gofumpt, prettierd (Markdown)
 - **Autocomplete**: blink.cmp with LuaSnip + friendly-snippets
 - **Debugging**: nvim-dap with JS/TS/Next.js client/server configurations
-- **Navigation**: Telescope, flash.nvim, Neo-tree
-- **Git**: Neogit + Diffview
-- **AI**: CodeCompanion
+- **Navigation**: Telescope (results open in new tabs), flash.nvim, Neo-tree
+- **Git**: Telescope-based git pickers + git helper commands
+- **AI**: Copilot + CodeCompanion
 - **Database**: vim-dadbod + dadbod-ui
 - **Session management**: auto-load/save per-project `.vim` sessions
 
@@ -45,12 +45,12 @@ Start Neovim and run `:checkhealth`. All plugins auto-install via `vim.pack` hoo
 init.lua                  # Main config — options, LSP, formatting, autocomplete, treesitter
 lua/
   custom/plugins/
-    00-plugins.lua        # Plugin registrations (flash, emmet, multicursor, grug-far, dadbod, noice)
+    00-plugins.lua        # Plugin registrations (flash, emmet, multicursor, grug-far, dadbod, noice, copilot)
     01-functions.lua      # Global utility functions (CompileAndRun, npm helpers, git helpers)
-    01-opts.lua           # Personal option overrides (font, clipboard, folding)
-    50-git.lua            # Neogit, Diffview, git keymaps
+    01-opts.lua           # Personal option overrides (font, clipboard, folding, winborder, session, fold save)
+    50-git.lua            # Telescope-based git pickers, git helper functions
     51-navigation.lua     # Tabs, splits, file explorer, buffer close
-    52-terminal.lua       # Terminal keymaps
+    52-terminal.lua       # Terminal keymaps + SaveInitVim/EditSnippets commands
     53-window.lua         # Window resize
     55-startup.lua        # Session auto-loading
     98-bookmarks.lua      # Bookmarks placeholder
@@ -70,6 +70,9 @@ See [KEYMAPS.md](KEYMAPS.md) for the full reference (Leader is `<Space>`).
 - `:PackUpdate` — force update all plugins (`vim.pack.update(nil, { force = true })`)
 - `:GrugFar` — open grug-far search and replace
 - `:GitInitPush` — create GitHub repo and push from current directory
+- `:SaveInitVim` / `:LoadInitVim` — commit & push / pull this config repo
+- `:SaveGlobalSnippets` / `:LoadGlobalSnippets` — push/pull friendly-snippets
+- `:EditSnippets` — edit snippet files
 
 ## Syncing with Upstream
 
