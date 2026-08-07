@@ -1,14 +1,14 @@
--- vim.o.shell = 'bash'
+local default_terminal = 'bash'
 
 -- open terminal
-vim.keymap.set('n', '<leader>``', ':horizontal terminal bash <CR><C-w>J<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-', {
+vim.keymap.set('n', '<leader>``', ':horizontal terminal ' .. default_terminal .. ' <CR><C-w>J<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-', {
   desc = 'Open Terminal',
   noremap = false,
   silent = true,
 })
 
 -- vertical terminal
-vim.keymap.set('n', '<leader>`v', '<C-w>v:terminal bash <CR>', {
+vim.keymap.set('n', '<leader>`v', '<C-w>v:terminal ' .. default_terminal .. ' <CR>', {
   desc = 'Open Terminal [V]ertical',
   noremap = false,
   silent = true,
