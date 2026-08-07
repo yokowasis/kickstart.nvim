@@ -179,7 +179,13 @@ function RunCommandInBackgroundTab(command)
   vim.cmd '-tabnew'
 
   local term_id = vim.fn.termopen(vim.o.shell)
-  vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
+
+  -- Close the terminal after the command finishes executing
+  if isWindows then
+    vim.api.nvim_chan_send(term_id, command .. ' & exit\r')
+  else
+    vim.api.nvim_chan_send(term_id, command .. ' ; exit\r')
+  end
 
   -- Go back to the original tab
   vim.api.nvim_set_current_tabpage(current)
