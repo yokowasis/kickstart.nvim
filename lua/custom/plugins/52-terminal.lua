@@ -1,32 +1,14 @@
-vim.o.shell = ''
-
-if isWindows then
-  vim.cmd [[command! SaveInitVim :tabnew | exe ':te git -C '. stdpath("config") .' add . & git -C ' . stdpath("config")  . ' commit -m save & git -C ' . stdpath("config")  . ' push']]
-  vim.cmd [[command! SaveGlobalSnippets :tabnew | exe ':te git -C '. stdpath("config") .'/../../../git/friendly-snippets add . & git -C '. stdpath("config") .'/../../../git/friendly-snippets commit -m save & git -C '. stdpath("config") .'/../../../git/friendly-snippets push']]
-  vim.cmd [[command! LoadGlobalSnippets :tabnew | exe ':te git -C '. stdpath("config") .'/../../../git/friendly-snippets pull']]
-
-  vim.o.shell = 'pwsh'
-else
-  vim.cmd [[command! SaveInitVim :tabnew | exe ':te git -C '. stdpath("config") .' add . && git -C ' . stdpath("config")  . ' commit -m save && git -C ' . stdpath("config")  . ' push']]
-  vim.cmd [[command! SaveGlobalSnippets :tabnew | exe ':te git -C ~/git/friendly-snippets add . && git -C ~/git/friendly-snippets commit -m save && git -C ~/git/friendly-snippets push']]
-  vim.cmd [[command! LoadGlobalSnippets :tabnew | exe ':te git -C ~/git/friendly-snippets pull']]
-
-  vim.o.shell = 'bash'
-end
-
-vim.cmd [[command! LoadInitVim :tabnew | exe ':te git -C '. stdpath("config") .' pull' ]]
-vim.cmd [[command! EditInitVim :tabnew | exe 'edit '. stdpath('config').'/lua/custom/plugins/00-init.lua']]
-vim.cmd [[command! EditSnippets :lua require("luasnip.loaders").edit_snippet_files()]]
+-- vim.o.shell = 'bash'
 
 -- open terminal
-vim.keymap.set('n', '<leader>``', ':horizontal terminal ' .. vim.o.shell .. '<CR><C-w>J<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-', {
+vim.keymap.set('n', '<leader>``', ':horizontal terminal bash <CR><C-w>J<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-', {
   desc = 'Open Terminal',
   noremap = false,
   silent = true,
 })
 
 -- vertical terminal
-vim.keymap.set('n', '<leader>`v', '<C-w>v:terminal ' .. vim.o.shell .. '<CR>', {
+vim.keymap.set('n', '<leader>`v', '<C-w>v:terminal bash <CR>', {
   desc = 'Open Terminal [V]ertical',
   noremap = false,
   silent = true,

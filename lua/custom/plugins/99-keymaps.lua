@@ -64,7 +64,7 @@ vim.keymap.set('i', '<C-s>', '<Esc>:w<cr>a', {
 })
 
 -- "Toggle Wrap
-vim.keymap.set('n', '<leader>ww', ':set wrap!<CR><CTR>', {
+vim.keymap.set('n', '<leader>ww', ':set wrap!<CR>', {
   desc = '[W]ord [W]rap',
   noremap = true,
   silent = true,
