@@ -1,7 +1,8 @@
 default_terminal = 'bash'
 
 if isLinux then vim.o.shell = '/usr/bin/bash' end
-vim.o.shell = 'cmd.exe'
+
+if isWindows then vim.o.shell = 'cmd.exe' end
 
 -- open terminal
 vim.keymap.set('n', '<leader>``', ':horizontal terminal ' .. default_terminal .. ' <CR><C-w>J<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-', {
