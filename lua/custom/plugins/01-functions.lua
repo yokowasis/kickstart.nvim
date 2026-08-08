@@ -102,12 +102,20 @@ function Npm_install()
   local package_lock_exists = vim.fn.filereadable 'package-lock.json' == 1
   local yarn_lock_exists = vim.fn.filereadable 'yarn.lock' == 1
   local pnpm_lock_exists = vim.fn.filereadable 'pnpm-lock.yaml' == 1
+  local go_mod_exists = vim.fn.filereadable 'go.mod' == 1
+  local pyproject_toml_exists = vim.fn.filereadable 'pyproject.toml' == 1
+
   if yarn_lock_exists then
     RunCommandInNewTab 'yarn'
   elseif pnpm_lock_exists then
     RunCommandInNewTab 'pnpm install'
-  else
+  elseif package_lock_exists then
     RunCommandInNewTab 'npm install --legacy-peer-deps'
+  elseif go_mod_exists then
+    RunCommandInNewTab 'go mod tidy'
+  elseif pyproject_toml_exists then
+    RunCommandInNewTab 'uv sync'
+  else
   end
 end
 
