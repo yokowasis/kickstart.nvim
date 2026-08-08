@@ -103,15 +103,7 @@ require('dap-go').setup {
 
 -- 1. Define the adapters using the js-debug-adapter installed by Mason
 -- We use the direct path to dapDebugServer.js to avoid PATH/binary linking issues.
-local js_debug_adapter_path = vim.fs.joinpath(
-  vim.fn.stdpath('data'),
-  'mason',
-  'packages',
-  'js-debug-adapter',
-  'js-debug',
-  'src',
-  'dapDebugServer.js'
-)
+local js_debug_adapter_path = vim.fs.joinpath(vim.fn.stdpath 'data', 'mason', 'packages', 'js-debug-adapter', 'js-debug', 'src', 'dapDebugServer.js')
 
 local node_terminal = {
   type = 'server',
@@ -146,8 +138,8 @@ require('dap').adapters['pwa-chrome'] = chrome
 require('dap').adapters['chrome'] = chrome
 
 -- 2. Define configurations for TS/JS
-local js_based_languages = { 'typescript', 'javascript', 'typescriptreact' }
-local chrome_runtime = vim.fn.has('win32') == 0 and '/usr/local/bin/chrome-dev' or nil
+local js_based_languages = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' }
+local chrome_runtime = vim.fn.has 'win32' == 0 and '/usr/local/bin/chrome-dev' or nil
 
 for _, language in ipairs(js_based_languages) do
   require('dap').configurations[language] = {
