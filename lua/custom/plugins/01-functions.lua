@@ -115,7 +115,17 @@ function Npm_install()
     RunCommandInNewTab 'go mod tidy'
   elseif pyproject_toml_exists then
     RunCommandInNewTab 'uv sync'
-  else
+  end
+end
+
+function Run_dev()
+  local package_json_exists = vim.fn.filereadable 'package.json' == 1
+  local dev_sh_exists = vim.fn.filereadable 'dev.sh' == 1
+
+  if package_json_exists then
+    RunCommandInBackgroundTab 'npm run dev'
+  elseif dev_sh_exists then
+    RunCommandInBackgroundTab 'bash dev.sh'
   end
 end
 
