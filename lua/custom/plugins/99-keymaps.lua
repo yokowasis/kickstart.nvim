@@ -5,6 +5,13 @@ vim.keymap.set('n', '<leader>cr', CompileAndRun, {
   desc = '[C]ompile and [R]un',
 })
 
+-- Edit Snippets
+vim.keymap.set('n', '<leader>sne', function() require('luasnip.loaders').edit_snippet_files() end, {
+  noremap = true,
+  silent = false,
+  desc = '[S]nippets [E]dit',
+})
+
 -- emmet
 vim.api.nvim_set_keymap('i', '<C-A>', '<Plug>(emmet-expand-abbr)', {
   noremap = true,
@@ -266,12 +273,6 @@ vim.api.nvim_set_keymap('n', '<leader>nq', ":execute 'mksession! ' . fnameescape
 vim.keymap.set('n', 'k', vim.lsp.buf.signature_help, {
   noremap = true,
   silent = true,
-})
-
-vim.keymap.set('n', '<leader>sne', ':EditSnippets<cr>', {
-  noremap = true,
-  silent = false,
-  desc = '[Sn]ippets [E]dit',
 })
 
 -- "Snippet Format"
