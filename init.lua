@@ -1041,7 +1041,7 @@ do
 
   require('nvim-treesitter.install').compilers = { 'clang', 'gcc', 'zig' }
 
-  -- Ensure basic parsers are installed
+  -- Ensure installed trestitter basic parsers are installed
   local parsers = {
     'bash',
     'c',
