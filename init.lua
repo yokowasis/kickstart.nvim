@@ -1056,6 +1056,7 @@ do
     'vimdoc',
     'javascript',
     'typescript',
+    'svelte',
     'tsx',
     'jsx',
     'json',
