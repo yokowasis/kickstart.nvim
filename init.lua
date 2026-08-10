@@ -397,6 +397,10 @@ do
     gh 'daltonmenezes/aura-theme',
     gh 'rebelot/kanagawa.nvim',
     gh 'folke/tokyonight.nvim',
+    {
+      src = "https://github.com/rose-pine/neovim",
+      name = "rose-pine",
+    },
   }
 
   vim.opt.runtimepath:append(vim.fn.stdpath 'data' .. '/site/pack/core/opt/aura-theme/packages/neovim')
@@ -405,7 +409,7 @@ do
   -- Load the colorscheme here.
   -- Like many other themes, this one has different styles, and you could load
   -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  vim.cmd 'colorscheme aura-soft-dark'
+  vim.cmd 'colorscheme rose-pine-main'
 
   -- Highlight todo, notes, etc in comments
   vim.pack.add { gh 'folke/todo-comments.nvim' }
