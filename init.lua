@@ -1003,6 +1003,14 @@ do
 
     sources = {
       default = { 'lsp', 'path', 'snippets' },
+      per_filetype = {
+        sql = { 'snippets', 'dadbod', 'path' },
+        mysql = { 'snippets', 'dadbod', 'path' },
+        plsql = { 'snippets', 'dadbod', 'path' },
+      },
+      providers = {
+        dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
+      },
     },
 
     snippets = { preset = 'luasnip' },

@@ -149,11 +149,6 @@ set('n', '<leader>S', '<cmd>GrugFar<cr>', { desc = 'Search and Replace (grug-far
 -- =============================================================================
 vim.g.db_ui_use_nerd_fonts = 1
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'sql', 'mysql', 'plsql' },
-  callback = function() vim.fn['compe#register'] { source = 'vim-dadbod-completion' } end,
-})
-
 -- =============================================================================
 -- NOICE (UI OVERLAY FOR MESSAGES, CMDLINE, AND POPUPMENU)
 -- =============================================================================
