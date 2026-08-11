@@ -398,8 +398,8 @@ do
     gh 'rebelot/kanagawa.nvim',
     gh 'folke/tokyonight.nvim',
     {
-      src = "https://github.com/rose-pine/neovim",
-      name = "rose-pine",
+      src = 'https://github.com/rose-pine/neovim',
+      name = 'rose-pine',
     },
   }
 

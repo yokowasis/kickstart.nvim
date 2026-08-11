@@ -79,6 +79,7 @@ See [KEYMAPS.md](KEYMAPS.md) for the full reference (Leader is `<Space>`).
 Snippets come from [friendly-snippets](https://github.com/rafamadriz/friendly-snippets), stored at `~/git/friendly-snippets`. Custom snippets live there too.
 
 **`$TM_SELECTED_TEXT` workflow:**
+
 1. Select text in visual mode
 2. Press `<Tab>` (LuaSnip stores the selection)
 3. Expand a snippet (e.g. `/**` for JSDoc, `\textbf{}` for LaTeX bold)
