@@ -8,7 +8,7 @@ Personal Neovim configuration forked from [kickstart.nvim](https://github.com/nv
 - **Plugin manager**: built-in `vim.pack` (no lazy.nvim, no packer)
 - **LSP**: clangd, vtsls, gopls, basedpyright, rust-analyzer, tailwindcss, intelephense, svelte — auto-installed via Mason
 - **Format on save**: stylua (Lua), biome (JS/TS/JSX/TSX/CSS/JSON/YML/HTML), ruff (Python), pretty-php, clang-format, shfmt, gofumpt, prettierd (Markdown)
-- **Autocomplete**: blink.cmp with LuaSnip + friendly-snippets
+- **Autocomplete**: blink.cmp with LuaSnip + friendly-snippets (`$TM_SELECTED_TEXT` support via `<Tab>` in visual mode)
 - **Debugging**: nvim-dap with JS/TS/Next.js client/server configurations
 - **Navigation**: Telescope (results open in new tabs), flash.nvim, Neo-tree
 - **Git**: Telescope-based git pickers + git helper commands
@@ -73,6 +73,18 @@ See [KEYMAPS.md](KEYMAPS.md) for the full reference (Leader is `<Space>`).
 - `:SaveInitVim` / `:LoadInitVim` — commit & push / pull this config repo
 - `:SaveGlobalSnippets` / `:LoadGlobalSnippets` — push/pull friendly-snippets
 - `:EditSnippets` — edit snippet files
+
+## Snippets
+
+Snippets come from [friendly-snippets](https://github.com/rafamadriz/friendly-snippets), stored at `~/git/friendly-snippets`. Custom snippets live there too.
+
+**`$TM_SELECTED_TEXT` workflow:**
+1. Select text in visual mode
+2. Press `<Tab>` (LuaSnip stores the selection)
+3. Expand a snippet (e.g. `/**` for JSDoc, `\textbf{}` for LaTeX bold)
+4. `$TM_SELECTED_TEXT` is replaced with your selection
+
+Configure at `init.lua:941-942` (`store_selection_keys = '<tab>'`).
 
 ## Syncing with Upstream
 

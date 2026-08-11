@@ -358,7 +358,7 @@ vim.keymap.set('v', '<leader>san', function()
   local end_line = current_line + tonumber(rows) - 1
 
   -- Generate the command but don't execute it
-  local cmd = ':' .. current_line .. ',' .. end_line .. 's/' .. vim.fn.escape(selected, '/') .. '//g'
+  local cmd = ':' .. current_line .. ',' .. end_line .. 's/' .. vim.fn.escape(selected, '/') .. '/'.. vim.fn.escape(selected, '/') ..'/g'
   vim.fn.feedkeys(cmd .. vim.api.nvim_replace_termcodes('<Left><Left>', true, false, true))
 end, {
   noremap = true,
