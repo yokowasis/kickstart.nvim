@@ -784,7 +784,7 @@ do
 
     -- Tailwind CSS configuration for TSX support
     tailwindcss = {
-      filetypes = { 'typescriptreact', 'javascriptreact', 'html', 'css' },
+      filetypes = { 'typescriptreact', 'javascriptreact', 'html', 'css', 'svelte' },
     },
   }
 
