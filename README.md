@@ -39,6 +39,21 @@ Start Neovim and run `:checkhealth`. All plugins auto-install via `vim.pack` hoo
 - `bash` in PATH (for terminal and compile/run commands)
 - Language-specific: Node.js, Go, Rust, Python, PHP (as needed)
 
+## Treesitter (Windows)
+
+On Windows, Treesitter needs a CLI compiler to build parsers.
+
+1. Install the CLI globally:
+   ```sh
+   npm i -g tree-sitter-cli
+   ```
+2. Treesitter looks for `cl.exe` to compile parsers, so copy `gcc.exe` to `cl.exe` (e.g. into your MinGW/GCC `bin` directory, or anywhere on `PATH`):
+   ```sh
+   cp /mingw64/bin/gcc.exe /mingw64/bin/cl.exe
+   ```
+
+Run `:TSInstall <language>` (or `:checkhealth treesitter`) to verify.
+
 ## Structure
 
 ```
