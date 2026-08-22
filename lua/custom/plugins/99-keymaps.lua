@@ -322,16 +322,18 @@ vim.keymap.set('v', '<leader>sar', '"zy:%s/<c-r>z//g<left><left>', {
 })
 
 -- Search and Replace Fighting Kirby
-vim.keymap.set(
-  'n',
-  '<leader>sak',
-  [[:%s/\v(.*);/console.log(\1);/<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
-  {
-    noremap = true,
-    silent = false,
-    desc = '[S]earch [A]nd [K]irby',
-  }
-)
+vim.keymap.set('v', '<leader>sak', [[y:%s/\v(<C-r>")/\1.xxx/<left><left><left><left><left><left><left><left><left>]], {
+  noremap = true,
+  silent = false,
+  desc = '[S]earch [K]irby',
+})
+
+-- Search and Replace Fighting Kirby
+vim.keymap.set('n', '<leader>sak', [[:%s/\v(xxx)/\1.yyy/<left><left><left><left><left><left><left><left><left>]], {
+  noremap = true,
+  silent = false,
+  desc = '[S]earch [A]nd [K]irby',
+})
 
 -- Search and Replace Line Break
 vim.keymap.set('n', '<leader>sal', [[:%s/xxx\n\n/yyy\r/<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]], {
@@ -371,13 +373,6 @@ vim.keymap.set('v', '<leader>svr', ':s/<c-r>"//g<left><left>', {
   noremap = true,
   silent = false,
   desc = '[S]earch And [V]isual [R]eplace',
-})
-
--- Search and Visual Replace
-vim.keymap.set('v', '<leader>sk', ':s/\\(.*\\)/\\1/g<left><left><left><left><left><left><left><left><left><left><left>', {
-  noremap = true,
-  silent = false,
-  desc = '[S]earch [K]irby',
 })
 
 vim.keymap.set('n', '<leader>fnp', function() NextJSNewPage(vim.fn.input 'Enter Page Name: ') end, {
