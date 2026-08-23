@@ -346,10 +346,7 @@ vim.keymap.set('n', '<leader>sal', [[:%s/xxx\n\n/yyy\r/<Left><Left><Left><Left><
 vim.keymap.set('v', '<leader>san', function()
   -- Ask for number of rows
   local rows = vim.fn.input 'Number of rows to affect: '
-  if rows == '' then
-    print 'Operation cancelled'
-    return
-  end
+  if rows == '' then rows = 0 end
 
   vim.cmd 'normal! "zy'
   local selected = vim.fn.getreg 'z'

@@ -163,14 +163,21 @@ end
 function search_and_replace(line_affected, search, replace)
   if not search or search == '' then return end
   line_affected = tonumber(line_affected) or 1
-  if line_affected <= 0 then return end
+  if line_affected < 0 then return end
   replace = replace or ''
 
   local bufnr = 0
-  local cursor_row = vim.api.nvim_win_get_cursor(0)[1] - 1
   local total_lines = vim.api.nvim_buf_line_count(bufnr)
-  local start_row = cursor_row
-  local end_row = math.min(start_row + line_affected, total_lines)
+  local start_row, end_row
+
+  if line_affected == 0 then
+    start_row = 0
+    end_row = total_lines
+  else
+    local cursor_row = vim.api.nvim_win_get_cursor(0)[1] - 1
+    start_row = cursor_row
+    end_row = math.min(start_row + line_affected, total_lines)
+  end
 
   if start_row >= total_lines then return end
 
