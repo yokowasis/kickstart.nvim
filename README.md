@@ -8,12 +8,12 @@ Personal Neovim configuration forked from [kickstart.nvim](https://github.com/nv
 - **Plugin manager**: built-in `vim.pack` (no lazy.nvim, no packer)
 - **LSP**: clangd, vtsls, gopls, basedpyright, rust-analyzer, tailwindcss, intelephense, svelte — auto-installed via Mason
 - **Format on save**: stylua (Lua), biome (JS/TS/JSX/TSX/CSS/JSON/YML/HTML), ruff (Python), pretty-php, clang-format, shfmt, gofumpt, prettierd (Markdown)
-- **Autocomplete**: blink.cmp with LuaSnip + friendly-snippets (`$TM_SELECTED_TEXT` support via `<Tab>` in visual mode)
+- **Autocomplete**: blink.cmp with LuaSnip + friendly-snippets + dadbod-completion (`$TM_SELECTED_TEXT` support via `<Tab>` in visual mode)
 - **Debugging**: nvim-dap with JS/TS/Next.js client/server configurations
 - **Navigation**: Telescope (results open in new tabs), flash.nvim, Neo-tree
 - **Git**: Telescope-based git pickers + git helper commands
 - **AI**: Copilot + CodeCompanion
-- **Database**: vim-dadbod + dadbod-ui
+- **Database**: vim-dadbod + dadbod-ui + vim-dadbod-completion
 - **Session management**: auto-load/save per-project `.vim` sessions
 
 ## Installation
@@ -61,11 +61,11 @@ init.lua                  # Main config — options, LSP, formatting, autocomple
 lua/
   custom/plugins/
     00-plugins.lua        # Plugin registrations (flash, emmet, multicursor, grug-far, dadbod, noice, copilot)
-    01-functions.lua      # Global utility functions (CompileAndRun, npm helpers, git helpers)
+    01-functions.lua      # Global utility functions (search_and_replace, CompileAndRun, npm helpers, git helpers)
     01-opts.lua           # Personal option overrides (font, clipboard, folding, winborder, session, fold save)
     50-git.lua            # Telescope-based git pickers, git helper functions
     51-navigation.lua     # Tabs, splits, file explorer, buffer close
-    52-terminal.lua       # Terminal keymaps + SaveInitVim/EditSnippets commands
+    52-terminal.lua       # Terminal keymaps and shell configuration
     53-window.lua         # Window resize
     55-startup.lua        # Session auto-loading
     98-bookmarks.lua      # Bookmarks placeholder
@@ -85,9 +85,6 @@ See [KEYMAPS.md](KEYMAPS.md) for the full reference (Leader is `<Space>`).
 - `:PackUpdate` — force update all plugins (`vim.pack.update(nil, { force = true })`)
 - `:GrugFar` — open grug-far search and replace
 - `:GitInitPush` — create GitHub repo and push from current directory
-- `:SaveInitVim` / `:LoadInitVim` — commit & push / pull this config repo
-- `:SaveGlobalSnippets` / `:LoadGlobalSnippets` — push/pull friendly-snippets
-- `:EditSnippets` — edit snippet files
 
 ## Snippets
 

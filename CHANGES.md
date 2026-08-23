@@ -19,7 +19,7 @@ Last synced with upstream: **2026-07-26**
 ### UI Plugins (Section 4)
 
 - **mini.surround**: custom keymaps (`ra`/`rd`/`rf`/`rF`/`rh`/`rr`/`rn`) instead of defaults
-- **Colorscheme**: aura-theme (`aura-soft-dark`) instead of upstream's tokyonight; tokyonight/kanagawa/kanagawa-paper also registered
+- **Colorscheme**: rose-pine (`rose-pine-main`) active; aura-theme, tokyonight, kanagawa also registered
 
 ### Telescope (Section 5)
 
@@ -31,8 +31,8 @@ Last synced with upstream: **2026-07-26**
 
 - **clangd**: enabled with `--background-index` (upstream: commented out)
 - **vtsls**: enabled (upstream: commented out `ts_ls`)
-- **tailwindcss**: enabled for TSX/JSX/HTML/CSS (upstream: not configured)
-- **lua_ls**: configured but commented out (upstream: active); formatting delegated to stylua
+- **tailwindcss**: enabled for TSX/JSX/HTML/CSS/Svelte (upstream: not configured)
+- **lua_ls**: disabled in favor of stylua for formatting
 
 ### Mason Tools (Section 6)
 
@@ -48,12 +48,13 @@ Note: upstream only installs `stylua`; this fork installs significantly more.
 
 ### Autocomplete (Section 8)
 
-- **LuaSnip**: added `store_selection_keys = '<tab>'`, `filetype_extend('svelte', ...)` , custom snippet loader path (`~/git/friendly-snippets`), and `<C-l>`/`<C-h>` choice-change keymaps
-- **blink.cmp**: keymap preset changed from `'default'` to `'enter'`, added custom `<C-x>` toggle mapping
+- **LuaSnip**: added `store_selection_keys = '<tab>'`, `filetype_extend('svelte', ...)`, custom snippet loader path (`~/git/friendly-snippets`), and `<C-l>`/`<C-h>` choice-change keymaps
+- **blink.cmp**: keymap preset changed from `'default'` to `'enter'`, added custom `<C-x>` toggle mapping, dadbod completion provider for SQL/MySQL/PLSQL, and `signature = { enabled = false }`
 
 ### Treesitter (Section 9)
 
 - **Compilers**: added `require('nvim-treesitter.install').compilers = { 'clang', 'gcc', 'zig' }`
+- **Parsers**: added `svelte`, `jsx`, `tsx`, `json`, `sql`, and others to ensured parsers
 
 ### Examples (Section 10)
 
@@ -67,7 +68,7 @@ Note: upstream only installs `stylua`; this fork installs significantly more.
 
 - **keymaps**: `<F10>` for step_over (upstream: `<F2>`), `<leader>ba`/`<leader>Ba`/`<leader>bt` for breakpoint/UI (upstream: `<leader>b`/`<leader>B`)
 - **js-debug-adapter**: added to `ensure_installed`
-- **JS/TS debugging**: entire section added — adapters (`pwa-node`, `pwa-chrome`, `node_terminal`, `chrome`) and configurations for Next.js server/client debugging
+- **JS/TS debugging**: entire section added — adapters (`pwa-node`, `pwa-chrome`, `node_terminal`, `chrome`) and configurations for Next.js server/client debugging (languages: `typescript`, `javascript`, `typescriptreact`, `javascriptreact`)
 
 ---
 

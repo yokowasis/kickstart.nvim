@@ -75,7 +75,6 @@ The default `<C-h>/<C-j>/<C-k>/<C-l>` focus keymaps are **commented out** in `in
 | `<leader>s.`       | n    | Recent files                                  | init.lua   |
 | `<leader>/`        | n    | Fuzzy find in current buffer                  | init.lua   |
 | `<leader>s/`       | n    | Live grep in open files                       | init.lua   |
-| `<leader>sn`       | n    | Search Neovim config files                    | init.lua   |
 
 ## LSP
 
@@ -207,20 +206,20 @@ Gitsigns is configured inline in `init.lua` but recommended keymaps from `kickst
 | ------------ | ---- | -------------------------------------------- | ---------- |
 | `<leader>cr` | n    | Compile and run (C++, JS, TS, Python, Shell) | 99-keymaps |
 | `<leader>rb` | n    | npm run build                                | 99-keymaps |
-| `<leader>rd` | n    | npm run dev (in tab)                         | 99-keymaps |
+| `<leader>rd` | n    | Run dev server (npm or dev.sh) in background | 99-keymaps |
 | `<leader>ri` | n    | npm/yarn/pnpm install                        | 99-keymaps |
 | `<leader>rl` | n    | five-server (live server)                    | 99-keymaps |
 
 ## Search & Replace
 
-| Key           | Mode | Action                      | Source     |
-| ------------- | ---- | --------------------------- | ---------- |
-| `<leader>S`   | n    | Open grug-far               | 00-plugins |
-| `<leader>sar` | n, v | Search and replace          | 99-keymaps |
-| `<leader>san` | v    | Search and replace N rows   | 99-keymaps |
-| `<leader>svr` | v    | Search and visual replace   | 99-keymaps |
-| `<leader>sk`  | v    | Search Kirby (regex replace)| 99-keymaps |
-| `<c-h>`       | n    | Interactive search & replace| 99-keymaps |
+| Key           | Mode | Action                                              | Source     |
+| ------------- | ---- | --------------------------------------------------- | ---------- |
+| `<leader>S`   | n    | Open grug-far                                       | 00-plugins |
+| `<leader>sar` | n, v | Search and replace                                  | 99-keymaps |
+| `<leader>san` | v    | Search & replace N rows (preserves case, 0 = all)   | 99-keymaps |
+| `<leader>svr` | v    | Search and visual replace                           | 99-keymaps |
+| `<leader>sak` | n, v | Search and replace Kirby regex                      | 99-keymaps |
+| `<leader>sal` | n    | Search and replace line break                       | 99-keymaps |
 
 ## Code Scaffolding
 
