@@ -342,12 +342,8 @@ vim.keymap.set('n', '<leader>sal', [[:%s/xxx\n\n/yyy\r/<Left><Left><Left><Left><
   desc = '[S]earch [A]nd [L]ine Break',
 })
 
--- Search and Replace with Number of rows
+-- Search and Replace with Number of rows preserve case
 vim.keymap.set('v', '<leader>san', function()
-  -- Get the selected text
-  vim.cmd 'normal! "zy'
-  local selected = vim.fn.getreg 'z'
-
   -- Ask for number of rows
   local rows = vim.fn.input 'Number of rows to affect: '
   if rows == '' then
@@ -355,12 +351,11 @@ vim.keymap.set('v', '<leader>san', function()
     return
   end
 
-  -- Get current line number
-  local current_line = vim.fn.line '.'
-  local end_line = current_line + tonumber(rows) - 1
+  vim.cmd 'normal! "zy'
+  local selected = vim.fn.getreg 'z'
 
   -- Generate the command but don't execute it
-  local cmd = ':' .. current_line .. ',' .. end_line .. 's/' .. vim.fn.escape(selected, '/') .. '/' .. vim.fn.escape(selected, '/') .. '/g'
+  local cmd = 'y:lua search_and_replace(' .. rows .. ',"' .. selected .. '","' .. selected .. '")'
   vim.fn.feedkeys(cmd .. vim.api.nvim_replace_termcodes('<Left><Left>', true, false, true))
 end, {
   noremap = true,
@@ -405,18 +400,6 @@ vim.keymap.set('n', '<leader>fsg', function() SvelteKitNewAPIGet(vim.fn.input 'E
   silent = false,
   desc = 'New [G]et Route',
 })
-
-vim.keymap.set(
-  'n',
-  '<c-h>',
-  function() SearchAndReplace(vim.fn.input 'Enter Search Term: ', vim.fn.input 'Enter Replace Term: ') end,
-  -- ":%s/vim.fn.input('Enter Search Term: ')/vim.fn.input('Enter Replace Term: ')/g",
-  {
-    noremap = true,
-    silent = false,
-    desc = '[S]earch and [R]eplace',
-  }
-)
 
 vim.keymap.set('n', '<leader>sc', customSearchGrep, {
   desc = '[S]earch by [G]rep [C]ustom',
