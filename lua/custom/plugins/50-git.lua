@@ -12,6 +12,25 @@ function GitPullAndNotify()
   })
 end
 
+function GitAddAndRebaseContinue()
+  vim.notify('Add and Rebase Continue Processing...', vim.log.levels.INFO, {
+    title = 'Git',
+    timeout = 5000, -- 5 seconds instead of 10 hours
+  })
+
+  vim.fn.jobstart(cmd_to_run 'git add . && git rebase --continue', {
+    on_stdout = function(id, data, e) notif(id, data, e, 4000) end,
+    on_stderr = function(id, data, e) notif(id, data, e, 4000) end,
+    on_exit = function(id, data, e) notif(id, data, e, 4000) end,
+  })
+end
+
+vim.keymap.set('n', '<leader>ge', GitAddAndRebaseContinue, {
+  desc = '[G]it R[e]base Continue',
+  noremap = true,
+  silent = true,
+})
+
 function GitPushAndNotify()
   vim.notify('Push Processing...', vim.log.levels.INFO, {
     title = 'Git',
