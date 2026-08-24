@@ -231,7 +231,8 @@ vim.keymap.set('n', '<leader>rd', Run_dev, {
   silent = false,
   desc = '[R]un [D]ev',
 })
-vim.keymap.set('n', '<leader>ri', Npm_install, {
+
+vim.keymap.set('n', '<leader>ri', function() RunCommandInNewTab 'p i' end, {
   noremap = true,
   silent = false,
   desc = '[R]un npm [I]nstall',

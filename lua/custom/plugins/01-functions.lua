@@ -271,7 +271,11 @@ function RunCommandInNewTab(command)
   local term_id = vim.fn.termopen(vim.o.shell)
 
   -- 3. Safely send the raw text command followed by a carriage return
-  vim.api.nvim_chan_send(term_id, command .. ' && exit' .. '\r')
+  if isWindows then
+    vim.api.nvim_chan_send(term_id, 'bash -ic "' .. command .. '" & exit\r')
+  else
+    vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
+  end
 end
 
 function RunCommandInNewLeftTab(command)
@@ -282,7 +286,11 @@ function RunCommandInNewLeftTab(command)
   local term_id = vim.fn.termopen(vim.o.shell)
 
   -- Run the command and exit
-  vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
+  if isWindows then
+    vim.api.nvim_chan_send(term_id, 'bash -ic "' .. command .. '" & exit\r')
+  else
+    vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
+  end
 end
 
 function RunCommandInBackgroundTab(command)
