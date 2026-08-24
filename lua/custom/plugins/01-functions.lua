@@ -197,9 +197,7 @@ end
 
 vim.api.nvim_create_user_command('LoadInitVim', LoadInitVim, {})
 
-function RunCommandInNewTab(command)
-  vim.cmd 'tabnew'
-
+function RunInTerminal(command)
   if isWindows then
     local term_id = vim.fn.jobstart('bash.exe', { term = true })
     vim.api.nvim_chan_send(term_id, vim.fn.escape(command, '\\') .. ' && exit\r')
@@ -209,11 +207,16 @@ function RunCommandInNewTab(command)
   end
 end
 
+function RunCommandInNewTab(command)
+  vim.cmd 'tabnew'
+
+  RunInTerminal(command)
+end
+
 function RunCommandInNewLeftTab(command)
   vim.cmd '-tabnew'
 
-  local term_id = vim.fn.jobstart(vim.o.shell .. ' -i', { term = true })
-  vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
+  RunInTerminal(command)
 end
 
 function RunCommandInBackgroundTab(command)
@@ -221,8 +224,7 @@ function RunCommandInBackgroundTab(command)
 
   vim.cmd '-tabnew'
 
-  local term_id = vim.fn.jobstart(vim.o.shell .. ' -i', { term = true })
-  vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
+  RunInTerminal(command)
 
   -- Go back to the original tab
   vim.api.nvim_set_current_tabpage(current)
