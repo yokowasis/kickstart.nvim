@@ -15,65 +15,6 @@ function cmd_to_run(command)
   return cmd_to_run
 end
 
-function CompileAndRun()
-  local filetype = GetFileType()
-
-  -- Get full folder path of the current buffer
-  local folder_path = vim.fn.expand '%:p:h'
-
-  -- get full path up to "labs" folder
-  local labs_fullfolder = folder_path:match '(.+labs)'
-
-  -- Get the filename (with extension) of the current buffer
-  local filename_with_extension = vim.fn.expand '%:t'
-
-  -- Get the filename without the extension
-  local filename_without_extension = vim.fn.expand '%:t:r'
-
-  -- Get the file extension of the current buffer
-  local file_extension = vim.fn.fnamemodify(filename_with_extension, ':e')
-
-  if file_extension == 'cjs' or file_extension == 'mjs' then
-    filetype = 'javascript'
-  elseif file_extension == 'md' then
-    filetype = 'markdown'
-  end
-
-  local iste = true
-
-  if filetype == 'cpp' then
-    vim.cmd(
-      ':tabnew | te g++ --std=c++17 '
-        .. folder_path
-        .. '/'
-        .. filename_with_extension
-        .. ' -o '
-        .. folder_path
-        .. '/'
-        .. filename_without_extension
-        .. '.out'
-        .. ' && '
-        .. folder_path
-        .. '/'
-        .. filename_without_extension
-        .. '.out'
-    )
-  elseif filetype == 'javascript' then
-    vim.cmd(':tabnew | te node ' .. folder_path .. '/' .. filename_with_extension)
-  elseif file_extension == 'py' then
-    vim.cmd(':tabnew | te python ' .. folder_path .. '/' .. filename_with_extension)
-  elseif filetype == 'typescript' then
-    vim.cmd(':tabnew | te ts-node ' .. folder_path .. '/' .. filename_with_extension)
-  elseif filetype == 'shell' then
-    vim.cmd(':tabnew | te bash ' .. folder_path .. '/' .. filename_with_extension)
-  else
-    vim.notify('Filetype ' .. filetype .. ' not supported for compile and run')
-    return
-  end
-
-  if iste then vim.api.nvim_feedkeys('i', 'n', true) end
-end
-
 -- livegrep search
 function customSearchGrep()
   local extension = vim.fn.input 'Enter File Extension (*): '
@@ -264,33 +205,17 @@ function BuildAndNotify()
 end
 
 function RunCommandInNewTab(command)
-  -- 1. Create a clean new tab
   vim.cmd 'tabnew'
 
-  -- 2. Open an empty terminal in that tab
-  local term_id = vim.fn.termopen(vim.o.shell)
-
-  -- 3. Safely send the raw text command followed by a carriage return
-  if isWindows then
-    vim.api.nvim_chan_send(term_id, 'bash -ic "' .. command .. '" & exit\r')
-  else
-    vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
-  end
+  local term_id = vim.fn.jobstart(vim.o.shell .. ' -i', { term = true })
+  vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
 end
 
 function RunCommandInNewLeftTab(command)
-  -- Create a new tab to the left of the current one
   vim.cmd '-tabnew'
 
-  -- Open an empty terminal
-  local term_id = vim.fn.termopen(vim.o.shell)
-
-  -- Run the command and exit
-  if isWindows then
-    vim.api.nvim_chan_send(term_id, 'bash -ic "' .. command .. '" & exit\r')
-  else
-    vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
-  end
+  local term_id = vim.fn.jobstart(vim.o.shell .. ' -i', { term = true })
+  vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
 end
 
 function RunCommandInBackgroundTab(command)
@@ -298,14 +223,8 @@ function RunCommandInBackgroundTab(command)
 
   vim.cmd '-tabnew'
 
-  local term_id = vim.fn.termopen(vim.o.shell)
-
-  -- Close the terminal after the command finishes executing
-  if isWindows then
-    vim.api.nvim_chan_send(term_id, command .. ' & exit\r')
-  else
-    vim.api.nvim_chan_send(term_id, command .. ' ; exit\r')
-  end
+  local term_id = vim.fn.jobstart(vim.o.shell .. ' -i', { term = true })
+  vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
 
   -- Go back to the original tab
   vim.api.nvim_set_current_tabpage(current)

@@ -1,5 +1,5 @@
 -- Create a mapping for compiling and running code
-vim.keymap.set('n', '<leader>cr', CompileAndRun, {
+vim.keymap.set('n', '<leader>cr', function() RunCommandInNewTab('compile_run ' .. vim.fn.expand '%:p') end, {
   noremap = true,
   silent = false,
   desc = '[C]ompile and [R]un',

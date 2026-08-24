@@ -1,5 +1,7 @@
 default_terminal = 'bash'
 
+vim.o.shell = default_terminal
+
 if isLinux then vim.o.shell = '/usr/bin/bash' end
 
 if isWindows then vim.o.shell = 'cmd.exe' end
