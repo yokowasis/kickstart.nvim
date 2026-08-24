@@ -184,12 +184,14 @@ function BuildAndNotify()
 end
 
 function LoadInitVim()
-  RunCommandAndNotify('git -C ~/git/friendly-snippets pull', 5000, 'Updating Friendly Snippets')
-  RunCommandAndNotify('git -C ~/git/api-key pull', 5000, 'Updating Api Key')
+  local home = vim.fn.expand '~'
+
+  RunCommandAndNotify('git -C ' .. home .. '/git/friendly-snippets pull', 5000, 'Updating Friendly Snippets')
+  RunCommandAndNotify('git -C ' .. home .. '/git/api-key pull', 5000, 'Updating Api Key')
   if isWindows then
-    RunCommandAndNotify('git -C ~/AppData/Local/nvim pull', 5000, 'Updating Neovim Config')
+    RunCommandAndNotify('git -C ' .. home .. '/AppData/Local/nvim pull', 5000, 'Updating Neovim Config')
   else
-    RunCommandAndNotify('git -C ~/.config/nvim pull', 5000, 'Updating Neovim Config')
+    RunCommandAndNotify('git -C ' .. home .. '/.config/nvim pull', 5000, 'Updating Neovim Config')
   end
 end
 
