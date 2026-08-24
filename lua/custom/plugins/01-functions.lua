@@ -132,27 +132,6 @@ function search_and_replace(line_affected, search, replace)
   vim.api.nvim_buf_set_lines(bufnr, start_row, end_row, false, updated_lines)
 end
 
--- NPM
-function Npm_install()
-  local package_lock_exists = vim.fn.filereadable 'package-lock.json' == 1
-  local yarn_lock_exists = vim.fn.filereadable 'yarn.lock' == 1
-  local pnpm_lock_exists = vim.fn.filereadable 'pnpm-lock.yaml' == 1
-  local go_mod_exists = vim.fn.filereadable 'go.mod' == 1
-  local pyproject_toml_exists = vim.fn.filereadable 'pyproject.toml' == 1
-
-  if yarn_lock_exists then
-    RunCommandInNewTab 'yarn'
-  elseif pnpm_lock_exists then
-    RunCommandInNewTab 'pnpm install'
-  elseif package_lock_exists then
-    RunCommandInNewTab 'npm install --legacy-peer-deps'
-  elseif go_mod_exists then
-    RunCommandInNewTab 'go mod tidy'
-  elseif pyproject_toml_exists then
-    RunCommandInNewTab 'uv sync'
-  end
-end
-
 function Run_dev()
   local package_json_exists = vim.fn.filereadable 'package.json' == 1
   local dev_sh_exists = vim.fn.filereadable 'dev.sh' == 1
@@ -207,8 +186,13 @@ end
 function RunCommandInNewTab(command)
   vim.cmd 'tabnew'
 
-  local term_id = vim.fn.jobstart(vim.o.shell .. ' -i', { term = true })
-  vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
+  if isWindows then
+    local term_id = vim.fn.jobstart('bash.exe', { term = true })
+    vim.api.nvim_chan_send(term_id, vim.fn.escape(command, '\\') .. ' && exit\r')
+  else
+    local term_id = vim.fn.jobstart(vim.o.shell .. ' -i', { term = true })
+    vim.api.nvim_chan_send(term_id, command .. ' && exit\r')
+  end
 end
 
 function RunCommandInNewLeftTab(command)
