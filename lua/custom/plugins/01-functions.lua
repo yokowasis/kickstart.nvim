@@ -193,6 +193,8 @@ function LoadInitVim()
   end
 end
 
+vim.api.nvim_create_user_command('LoadInitVim', LoadInitVim, {})
+
 function RunCommandInNewTab(command)
   vim.cmd 'tabnew'
 
