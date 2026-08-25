@@ -195,7 +195,30 @@ function LoadInitVim()
   end
 end
 
+function SaveInitVim()
+  local home = vim.fn.expand '~'
+
+  RunCommandAndNotify('git -C ' .. home .. '/git/friendly-snippets add .', 5000, 'Staging Friendly Snippets')
+  RunCommandAndNotify('git -C ' .. home .. '/git/friendly-snippets commit -m "Update Friendly Snippets"', 5000, 'Committing Friendly Snippets')
+  RunCommandAndNotify('git -C ' .. home .. '/git/friendly-snippets push', 5000, 'Pushing Friendly Snippets')
+
+  RunCommandAndNotify('git -C ' .. home .. '/git/api-key add .', 5000, 'Staging Api Key')
+  RunCommandAndNotify('git -C ' .. home .. '/git/api-key commit -m "Update Api Key"', 5000, 'Committing Api Key')
+  RunCommandAndNotify('git -C ' .. home .. '/git/api-key push', 5000, 'Pushing Api Key')
+
+  if isWindows then
+    RunCommandAndNotify('git -C ' .. home .. '/AppData/Local/nvim add .', 5000, 'Staging Neovim Config')
+    RunCommandAndNotify('git -C ' .. home .. '/AppData/Local/nvim commit -m "Update Neovim Config"', 5000, 'Committing Neovim Config')
+    RunCommandAndNotify('git -C ' .. home .. '/AppData/Local/nvim push', 5000, 'Pushing Neovim Config')
+  else
+    RunCommandAndNotify('git -C ' .. home .. '/.config/nvim add .', 5000, 'Staging Neovim Config')
+    RunCommandAndNotify('git -C ' .. home .. '/.config/nvim commit -m "Update Neovim Config"', 5000, 'Committing Neovim Config')
+    RunCommandAndNotify('git -C ' .. home .. '/.config/nvim push', 5000, 'Pushing Neovim Config')
+  end
+end
+
 vim.api.nvim_create_user_command('LoadInitVim', LoadInitVim, {})
+vim.api.nvim_create_user_command('SaveInitVim', SaveInitVim, {})
 
 function RunInTerminal(command)
   if isWindows then
