@@ -470,7 +470,7 @@ end, {
   desc = '[F]ile [C]opy current file path to clipboard',
 })
 
-vim.keymap.set('n', '<leader>fe', function() os.execute 'explorer.exe .' end, {
+vim.keymap.set('n', '<leader>fe', function() RunCommandAndNotify("bash -ic file_explorer") end, {
   noremap = true,
   silent = true,
   desc = '[F]ile [E]xplorer on current file folder',
