@@ -147,7 +147,7 @@ vim.api.nvim_create_user_command('GitInitPush', function()
   local cmd = 'git init && git add . && git commit -m "Initial commit" && git branch -M main && gh repo create '
     .. repo
     .. ' --private --source=. --remote=origin --push'
-  vim.cmd('terminal ' .. cmd)
+  RunCommandInNewTab(cmd)
 end, {})
 
 vim.keymap.set('n', '<leader>gi', ':GitInitPush<CR>', {
