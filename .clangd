@@ -1,3 +1,6 @@
+If:
+  PathMatch: '^[a-zA-Z]:/.*'
+
 CompileFlags:
   Add:
     - -Wall
@@ -16,3 +19,4 @@ CompileFlags:
     - 'C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include-fixed'
     - -isystem
     - 'C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include'
+

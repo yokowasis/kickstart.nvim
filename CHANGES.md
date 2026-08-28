@@ -29,7 +29,7 @@ Last synced with upstream: **2026-07-26**
 
 ### LSP Servers (Section 6)
 
-- **clangd**: enabled with `--background-index` (upstream: commented out)
+- **clangd**: enabled with `--background-index` and `--query-driver` (upstream: commented out)
 - **vtsls**: enabled (upstream: commented out `ts_ls`)
 - **tailwindcss**: enabled for TSX/JSX/HTML/CSS/Svelte (upstream: not configured)
 - **lua_ls**: disabled in favor of stylua for formatting

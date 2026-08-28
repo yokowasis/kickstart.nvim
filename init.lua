@@ -762,7 +762,11 @@ do
   local servers = {
     -- for Windows with devcpp copy .clangd into project directory
     clangd = {
-      cmd = { 'clangd', '--background-index', '--query-driver=/usr/bin/g++' },
+      cmd = {
+        'clangd',
+        '--background-index',
+        '--query-driver=/usr/bin/g++,/usr/bin/clang++,/opt/homebrew/bin/g++*,/opt/homebrew/opt/gcc/bin/g++*',
+      },
     },
     gopls = {},
     intelephense = {},
