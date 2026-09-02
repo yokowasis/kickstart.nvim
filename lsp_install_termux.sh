@@ -3,6 +3,8 @@
 
 rustup component add rust-analyzer
 uv tool install basedpyright
-uv tool install ruff
-uv tool install clang-format
-uv tool install git+https://github.com/johnnymorganz/stylua
+pkg install ruff
+pkg install clang
+pkg install rust
+pkg install stylua
+npm i -g basedpyright
