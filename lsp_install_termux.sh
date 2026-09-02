@@ -1,8 +1,7 @@
 # brew install rustup
 # brew install uv
 
-rustup component add rust-analyzer
-uv tool install basedpyright
+pkg install rust-analyzer
 pkg install ruff
 pkg install clang
 pkg install rust
