@@ -1,6 +1,3 @@
-# brew install rustup
-# brew install uv
-
 pkg install rust-analyzer
 pkg install ruff
 pkg install clang
