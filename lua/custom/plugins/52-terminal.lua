@@ -13,6 +13,13 @@ vim.keymap.set('n', '<leader>``', ':horizontal terminal ' .. default_terminal ..
   silent = true,
 })
 
+-- open terminal fullscreen
+vim.keymap.set('n', '<leader>`f', ':tab terminal ' .. default_terminal .. '<CR>i', {
+  desc = 'Open Fullscreen Terminal',
+  noremap = false,
+  silent = true,
+})
+
 -- vertical terminal
 vim.keymap.set('n', '<leader>`v', '<C-w>v:terminal ' .. default_terminal .. ' <CR>', {
   desc = 'Open Terminal [V]ertical',
