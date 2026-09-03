@@ -232,11 +232,18 @@ vim.keymap.set('n', '<leader>rd', Run_dev, {
   desc = '[R]un [D]ev',
 })
 
+vim.keymap.set('n', '<leader>rg', function() RunCommandInNewTab 'lazygit' end, {
+  noremap = true,
+  silent = false,
+  desc = '[R]un Lazy[G]it',
+})
+
 vim.keymap.set('n', '<leader>ri', function() RunCommandInNewTab 'p i' end, {
   noremap = true,
   silent = false,
   desc = '[R]un npm [I]nstall',
 })
+
 vim.keymap.set('n', '<leader>rl', function() RunCommandInNewTab 'five-server' end, {
   noremap = true,
   silent = false,
@@ -453,7 +460,7 @@ end, {
   desc = '[F]ile [C]opy current file path to clipboard',
 })
 
-vim.keymap.set('n', '<leader>fe', function() RunCommandAndNotify("bash -ic file_explorer") end, {
+vim.keymap.set('n', '<leader>fe', function() RunCommandAndNotify 'bash -ic file_explorer' end, {
   noremap = true,
   silent = true,
   desc = '[F]ile [E]xplorer on current file folder',
