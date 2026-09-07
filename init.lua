@@ -801,7 +801,6 @@ do
   --  See `:help lsp-config` for information about keys and how to configure
   ---@type table<string, vim.lsp.Config>
   local servers = {
-<<<<<<< HEAD
     -- for Windows with devcpp copy .clangd into project directory
     clangd = {
       cmd = {
@@ -827,18 +826,6 @@ do
     --
     -- But for many setups, the LSP (`ts_ls`) will work just fine
     vtsls = {},
-=======
-    -- clangd = {},
-    -- gopls = {},
-    -- pyright = {},
-    -- tsc = {},
-    --
-    -- Some languages (like rust) have entire language plugins that can be useful:
-    --    https://github.com/mrcjkb/rustaceanvim
-    --
-    -- But for many setups, the LSP (`rust_analyzer`) will work just fine
-    -- rust_analyzer = {},
->>>>>>> upstream/master
 
     -- Tailwind CSS configuration for TSX support
     tailwindcss = {
