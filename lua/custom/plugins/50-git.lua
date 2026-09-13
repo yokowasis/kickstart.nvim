@@ -70,6 +70,12 @@ end, {
   silent = false,
 })
 
+vim.keymap.set('n', '<leader>gy', function() RunCommandInNewTab 'lazygit' end, {
+  desc = 'Lazygit',
+  noremap = true,
+  silent = false,
+})
+
 local function secure_git_pull()
   -- Prompt user for explicit confirmation
   vim.ui.input({ prompt = 'Wipe local changes and pull? (y/n): ' }, function(input)
