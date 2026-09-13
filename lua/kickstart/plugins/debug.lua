@@ -107,7 +107,7 @@ local js_debug_adapter_path = vim.fs.joinpath(vim.fn.stdpath 'data', 'mason', 'p
 
 local node_terminal = {
   type = 'server',
-  host = 'localhost',
+  host = '127.0.0.1',
   port = '${port}',
   executable = {
     command = 'node',
@@ -120,7 +120,7 @@ local node_terminal = {
 
 local chrome = {
   type = 'server',
-  host = 'localhost',
+  host = '127.0.0.1',
   port = '${port}',
   executable = {
     command = 'node',
@@ -139,10 +139,20 @@ require('dap').adapters['chrome'] = chrome
 
 -- 2. Define configurations for TS/JS
 local js_based_languages = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' }
-local chrome_runtime = vim.fn.has 'win32' == 0 and '/usr/local/bin/chrome-dev' or nil
+local chrome_runtime = vim.fn.has 'win32' == 0
+    and (vim.fn.executable '/usr/local/bin/chromedev.sh' == 1 and '/usr/local/bin/chromedev.sh' or '/usr/bin/google-chrome')
+  or nil
 
 for _, language in ipairs(js_based_languages) do
   require('dap').configurations[language] = {
+    -- Launch current file with Node
+    {
+      type = 'pwa-node',
+      request = 'launch',
+      name = 'Nvim: Launch Current File (Node)',
+      program = '${file}',
+      cwd = '${workspaceFolder}',
+    },
     -- Server-side Next.js debugging
     {
       type = 'pwa-node',
@@ -160,7 +170,7 @@ for _, language in ipairs(js_based_languages) do
       type = 'pwa-chrome',
       request = 'launch',
       name = 'Nvim: Debug JS Client',
-      url = 'http://localhost:3000',
+      url = 'http://127.0.0.1:3000',
       webRoot = '${workspaceFolder}',
       runtimeExecutable = chrome_runtime,
       -- By default, pwa-chrome uses a clean, isolated Chrome profile.
@@ -173,6 +183,7 @@ for _, language in ipairs(js_based_languages) do
       type = 'pwa-chrome',
       request = 'attach',
       name = 'Nvim: Attach to Chrome',
+      address = '127.0.0.1',
       port = 9222,
       webRoot = '${workspaceFolder}',
     },
