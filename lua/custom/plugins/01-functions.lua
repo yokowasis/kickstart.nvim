@@ -300,6 +300,15 @@ function CloseHiddenBuffers()
   })
 end
 
+function GetSessionName(cwd)
+  cwd = cwd or vim.fn.getcwd()
+  local normalized = vim.fs.normalize(cwd)
+  if #normalized > 3 and normalized:sub(-1) == '/' then normalized = normalized:sub(1, -2) end
+  return normalized:gsub(':', ''):gsub('/', '%%') .. '.vim'
+end
+
+function GetSessionPath(cwd) return vim.fn.expand('~/' .. GetSessionName(cwd)) end
+
 vim.api.nvim_create_user_command('PackUpdate', function() vim.pack.update(nil, { force = true }) end, {})
 
 return {}

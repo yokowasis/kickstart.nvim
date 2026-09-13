@@ -1,7 +1,17 @@
 if vim.fn.argc() == 0 then
   vim.defer_fn(function()
-    local session_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. '.vim'
-    local session_path = vim.fn.expand('~/' .. session_name)
+    local session_name = GetSessionName()
+    local session_path = GetSessionPath()
+
+    if vim.fn.filereadable(session_path) ~= 1 then
+      local legacy_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. '.vim'
+      local legacy_path = vim.fn.expand('~/' .. legacy_name)
+      if vim.fn.filereadable(legacy_path) == 1 then
+        session_name = legacy_name
+        session_path = legacy_path
+      end
+    end
+
     if vim.fn.filereadable(session_path) == 1 then
       vim.cmd('silent! source ' .. vim.fn.fnameescape(session_path))
       vim.notify('Session loaded: ' .. session_name, vim.log.levels.INFO)
