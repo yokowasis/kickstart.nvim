@@ -2,7 +2,7 @@
 
 Tracks changes made in this fork compared to upstream [nvim-lua/kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). Only covers changes outside `lua/custom/` (personal plugins are not listed here).
 
-Last synced with upstream: **2026-07-26**
+Last synced with upstream: **2026-09-14**
 
 ---
 
