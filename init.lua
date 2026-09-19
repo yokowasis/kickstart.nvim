@@ -819,6 +819,7 @@ do
     rust_analyzer = {},
     stylua = {}, -- Used to format Lua code
     svelte = {},
+    csharp_ls = {},
 
     --
     -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -990,6 +991,7 @@ do
       sh = { 'shfmt' },
       go = { 'gofumpt' },
       lua = { 'stylua' },
+      cs = { 'csharpier' },
       python = {
         -- To fix auto-fixable lint errors
         'ruff_fix',
