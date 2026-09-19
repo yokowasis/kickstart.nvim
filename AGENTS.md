@@ -67,6 +67,7 @@ Uses `vim.pack` (built-in Neovim plugin manager). Plugins added via `vim.pack.ad
 - **Python**: ruff (fix + format + organize imports)
 - **C/C++**: clang-format
 - **Shell**: shfmt
+- **C#**: csharpier
 
 Format-on-save is enabled for all above filetypes in conform.nvim (`init.lua:839-857`). Manual format: `<leader>ff`.
 

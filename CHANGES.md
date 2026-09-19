@@ -36,14 +36,14 @@ Last synced with upstream: **2026-09-16**
 
 ### Mason Tools (Section 6)
 
-Added to `ensure_installed`: `vtsls`, `tailwindcss`, `html`, `intelephense`, `pretty-php`, `svelte`, `gofumpt`, `gopls`, `shfmt`, `biome`, `prettierd`, `js-debug-adapter`.
+Added to `ensure_installed`: `vtsls`, `tailwindcss`, `html`, `intelephense`, `pretty-php`, `svelte`, `gofumpt`, `gopls`, `shfmt`, `biome`, `prettierd`, `js-debug-adapter`, `csharpier`.
 Commented out (install manually): `basedpyright`, `rust-analyzer`, `ruff`, `clang-format`.
 Note: upstream only installs `stylua`; this fork installs significantly more.
 
 ### Formatting (Section 7)
 
-- **Format-on-save**: enabled for Lua, JS, TS, JSX, TSX, SCSS, Pandoc, Markdown, JSON, CSS, YML, HTML, PHP, CPP, SH, Go, Python (upstream: commented out)
-- **Formatters**: biome for JS/TS/JSX/TSX/SCSS/Pandoc/JSON/CSS/YML/HTML, prettierd for Markdown, pretty-php with `-s2` arg, clang-format, shfmt, gofumpt, stylua for Lua, ruff (fix + format + organize imports) for Python
+- **Format-on-save**: enabled for Lua, JS, TS, JSX, TSX, SCSS, Pandoc, Markdown, JSON, CSS, YML, HTML, PHP, CPP, SH, Go, Python, C# (upstream: commented out)
+- **Formatters**: biome for JS/TS/JSX/TSX/SCSS/Pandoc/JSON/CSS/YML/HTML, prettierd for Markdown, pretty-php with `-s2` arg, clang-format, shfmt, gofumpt, stylua for Lua, csharpier for C#, ruff (fix + format + organize imports) for Python
 - **Format keymap**: `<leader>ff` (upstream: `<leader>f`)
 
 ### Autocomplete (Section 8)

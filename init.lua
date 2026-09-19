@@ -907,6 +907,7 @@ do
     'biome',
     'prettierd',
     'js-debug-adapter',
+    'csharpier',
 
     -- Install Manually
     -- 'basedpyright',
@@ -953,6 +954,7 @@ do
         go = true,
         python = true,
         svelte = true,
+        cs = true,
       }
       if enabled_filetypes[vim.bo[bufnr].filetype] then
         return { timeout_ms = 500 }
