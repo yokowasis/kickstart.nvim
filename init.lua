@@ -811,6 +811,7 @@ do
     },
     gopls = {},
     intelephense = {},
+    lemminx = {},
 
     -- install with npm i -g
     basedpyright = {},
@@ -907,7 +908,6 @@ do
     'biome',
     'prettierd',
     'js-debug-adapter',
-    'csharpier',
 
     -- Install Manually
     -- 'basedpyright',
@@ -955,6 +955,7 @@ do
         python = true,
         svelte = true,
         cs = true,
+        xml = true,
       }
       if enabled_filetypes[vim.bo[bufnr].filetype] then
         return { timeout_ms = 500 }
@@ -994,6 +995,7 @@ do
       go = { 'gofumpt' },
       lua = { 'stylua' },
       cs = { 'csharpier' },
+      xml = { 'xmlformatter' },
       python = {
         -- To fix auto-fixable lint errors
         'ruff_fix',
