@@ -198,23 +198,47 @@ end
 function SaveInitVim()
   local home = vim.fn.expand '~'
 
-  RunCommandAndNotify('git -C ' .. home .. '/git/friendly-snippets add .', 5000, 'Staging Friendly Snippets')
-  RunCommandAndNotify('git -C ' .. home .. '/git/friendly-snippets commit -m "Update Friendly Snippets"', 5000, 'Committing Friendly Snippets')
-  RunCommandAndNotify('git -C ' .. home .. '/git/friendly-snippets push', 5000, 'Pushing Friendly Snippets')
+  RunCommandAndNotify(
+    'git -C "'
+      .. home
+      .. '/git/friendly-snippets" add . && '
+      .. 'git -C "'
+      .. home
+      .. '/git/friendly-snippets" commit -m "Update Friendly Snippets" && '
+      .. 'git -C "'
+      .. home
+      .. '/git/friendly-snippets" push',
+    5000,
+    'Updating Friendly Snippets'
+  )
 
-  RunCommandAndNotify('git -C ' .. home .. '/git/api-key add .', 5000, 'Staging Api Key')
-  RunCommandAndNotify('git -C ' .. home .. '/git/api-key commit -m "Update Api Key"', 5000, 'Committing Api Key')
-  RunCommandAndNotify('git -C ' .. home .. '/git/api-key push', 5000, 'Pushing Api Key')
+  RunCommandAndNotify(
+    'git -C "'
+      .. home
+      .. '/git/api-key" add . && '
+      .. 'git -C "'
+      .. home
+      .. '/git/api-key" commit -m "Update Api Key" && '
+      .. 'git -C "'
+      .. home
+      .. '/git/api-key" push',
+    5000,
+    'Updating Api Key'
+  )
+
+  local nvim_path
 
   if isWindows then
-    RunCommandAndNotify('git -C ' .. home .. '/AppData/Local/nvim add .', 5000, 'Staging Neovim Config')
-    RunCommandAndNotify('git -C ' .. home .. '/AppData/Local/nvim commit -m "Update Neovim Config"', 5000, 'Committing Neovim Config')
-    RunCommandAndNotify('git -C ' .. home .. '/AppData/Local/nvim push', 5000, 'Pushing Neovim Config')
+    nvim_path = home .. '/AppData/Local/nvim'
   else
-    RunCommandAndNotify('git -C ' .. home .. '/.config/nvim add .', 5000, 'Staging Neovim Config')
-    RunCommandAndNotify('git -C ' .. home .. '/.config/nvim commit -m "Update Neovim Config"', 5000, 'Committing Neovim Config')
-    RunCommandAndNotify('git -C ' .. home .. '/.config/nvim push', 5000, 'Pushing Neovim Config')
+    nvim_path = home .. '/.config/nvim'
   end
+
+  RunCommandAndNotify(
+    'git -C "' .. nvim_path .. '" add . && ' .. 'git -C "' .. nvim_path .. '" commit -m "Update Neovim Config" && ' .. 'git -C "' .. nvim_path .. '" push',
+    5000,
+    'Updating Neovim Config'
+  )
 end
 
 vim.api.nvim_create_user_command('LoadInitVim', LoadInitVim, {})
