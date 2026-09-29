@@ -24,6 +24,11 @@ vim.keymap.set('v', '<C-v>', '"+p:silent! %s/\\r//g<cr>', {
   noremap = true,
   silent = true,
 })
+vim.keymap.set('t', '<C-v>', '<C-\\><C-n>"+p:silent! %s/\\r//g<cr>a', {
+  desc = '[P]aste from system clipboard',
+  noremap = true,
+  silent = true,
+})
 vim.keymap.set('n', '<C-v>', '"+p:silent! %s/\\r//g<cr>', {
   desc = '[P]aste from system clipboard',
   noremap = true,
