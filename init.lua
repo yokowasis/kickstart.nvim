@@ -907,9 +907,9 @@ do
     'biome',
     'prettierd',
     'js-debug-adapter',
-    'csharpier',
 
     -- Install Manually
+    -- 'csharpier',
     -- 'basedpyright',
     -- 'rust-analyzer',
     -- 'ruff',
