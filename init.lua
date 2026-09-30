@@ -909,6 +909,7 @@ do
     'biome',
     'prettierd',
     'js-debug-adapter',
+    'astro-language-server',
 
     -- Install Manually
     -- 'csharpier',
