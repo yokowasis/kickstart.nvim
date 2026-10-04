@@ -2,7 +2,7 @@
 
 Tracks changes made in this fork compared to upstream [nvim-lua/kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). Only covers changes outside `lua/custom/` (personal plugins are not listed here).
 
-Last synced with upstream: **2026-09-16**
+Last synced with upstream: **2026-10-04**
 
 ---
 
@@ -55,6 +55,7 @@ Note: upstream only installs `stylua`; this fork installs significantly more.
 
 - **Compilers**: added `require('nvim-treesitter.install').compilers = { 'clang', 'gcc', 'zig' }`
 - **Parsers**: added `svelte`, `jsx`, `tsx`, `json`, `sql`, and others to ensured parsers
+- **Buffer validity**: `treesitter_try_attach` checks `nvim_buf_is_valid(buf)` before loading the parser (upstream PR #2169)
 
 ### Examples (Section 10)
 
