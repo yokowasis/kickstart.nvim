@@ -4,7 +4,10 @@ vim.o.shell = default_terminal
 
 if isLinux then vim.o.shell = 'bash' end
 
-if isWindows then vim.o.shell = 'cmd.exe' end
+if isWindows then
+  vim.o.shell = 'cmd.exe'
+  default_terminal = '"C:\\Program Files\\Git\\usr\\bin\\bash.exe"'
+end
 
 -- open terminal
 vim.keymap.set('n', '<leader>``', ':horizontal terminal ' .. default_terminal .. ' <CR><C-w>J<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-', {
