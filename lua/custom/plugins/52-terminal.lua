@@ -6,7 +6,7 @@ if isLinux then vim.o.shell = 'bash' end
 
 if isWindows then
   vim.o.shell = 'cmd.exe'
-  default_terminal = 'cmd.exe'
+  default_terminal = '"C:\\Program Files\\Git\\bin\\bash.exe"'
 end
 
 -- open terminal

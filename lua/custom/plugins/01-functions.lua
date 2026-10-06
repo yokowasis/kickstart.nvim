@@ -246,7 +246,7 @@ vim.api.nvim_create_user_command('SaveInitVim', SaveInitVim, {})
 
 function RunInTerminal(command)
   if isWindows then
-    local term_id = vim.fn.jobstart('bash.exe', { term = true })
+    local term_id = vim.fn.jobstart(default_terminal, { term = true })
     vim.api.nvim_chan_send(term_id, vim.fn.escape(command, '\\') .. ' && exit\r')
   else
     local term_id = vim.fn.jobstart(vim.o.shell .. ' -i', { term = true })
