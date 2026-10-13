@@ -910,9 +910,9 @@ do
     'biome',
     'prettierd',
     'js-debug-adapter',
-    'astro-language-server',
 
     -- Install Manually
+    -- 'astro-language-server',
     -- 'csharpier',
     -- 'basedpyright',
     -- 'rust-analyzer',
