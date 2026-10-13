@@ -836,6 +836,8 @@ do
 
     bashls = {},
 
+    astro = {},
+
     -- Special Lua Config, as recommended by neovim help docs
     lua_ls = {
       on_init = function(client)
@@ -908,8 +910,10 @@ do
     'biome',
     'prettierd',
     'js-debug-adapter',
+    'astro-language-server',
 
     -- Install Manually
+    -- 'csharpier',
     -- 'basedpyright',
     -- 'rust-analyzer',
     -- 'ruff',
@@ -945,6 +949,7 @@ do
         pandoc = true,
         markdown = true,
         json = true,
+        jsonc = true,
         css = true,
         yml = true,
         html = true,
@@ -986,6 +991,7 @@ do
       pandoc = { 'biome' },
       markdown = { 'prettierd' },
       json = { 'biome' },
+      jsonc = { 'biome' },
       css = { 'biome' },
       yml = { 'biome' },
       html = { 'biome' },
@@ -1167,11 +1173,11 @@ do
   ---@param buf integer
   ---@param language string
   local function treesitter_try_attach(buf, language)
-    -- Check if a parser exists and load it
-    if not vim.treesitter.language.add(language) then return end
-
     -- Check if the buffer is valid (might not be after install completes)
     if not vim.api.nvim_buf_is_valid(buf) then return end
+
+    -- Check if a parser exists and load it
+    if not vim.treesitter.language.add(language) then return end
 
     -- Enable syntax highlighting and other treesitter features
     vim.treesitter.start(buf, language)
