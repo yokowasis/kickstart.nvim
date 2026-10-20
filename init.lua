@@ -573,13 +573,7 @@ do
         },
       },
 
-      file_ignore_patterns = {
-        'node_modules',
-        'package-lock.json',
-        'yarn.lock',
-        'pnpm-lock.yaml',
-        'lazy-lock.json',
-      },
+      file_ignore_patterns = {},
 
       mappings = {
         i = {
@@ -587,7 +581,6 @@ do
           ['<CR>'] = require('telescope.actions').select_default,
           ['<C-D>'] = require('telescope.actions').select_tab,
           ['<C-Down>'] = require('telescope.actions').preview_scrolling_down,
-          opts = { speed = 1 },
           ['<C-Up>'] = require('telescope.actions').preview_scrolling_up,
           opts = { speed = 1 },
         },
@@ -623,6 +616,24 @@ do
   vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
   vim.keymap.set('n', '<leader>sg', function()
     builtin.live_grep {
+      additional_args = function()
+        return {
+          '--glob',
+          '!**/node_modules/**',
+          '--glob',
+          '!**/package-lock.json',
+          '--glob',
+          '!**/yarn.lock',
+          '--glob',
+          '!**/pnpm-lock.yaml',
+          '--glob',
+          '!**/bun.lockb',
+          '--glob',
+          '!**/bun.lock',
+          '--glob',
+          '!**/Cargo.lock',
+        }
+      end,
       attach_mappings = function(_, map)
         map({ 'i', 'n' }, '<CR>', actions.select_tab)
         return true
