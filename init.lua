@@ -832,6 +832,7 @@ do
     stylua = {}, -- Used to format Lua code
     svelte = {},
     csharp_ls = {},
+    biome = {},
 
     --
     -- Some languages (like typescript) have entire language plugins that can be useful:
