@@ -49,6 +49,10 @@ On Windows, Treesitter needs a CLI compiler to build parsers.
    ```
 2. Treesitter looks for a C/C++ compiler to compile parsers. Install the appropriate Desktop Development with C++ workload via the Visual Studio Installer. This will provide the necessary compilers (like cl.exe) needed by Treesitter's build process.
 
+   ```powershell
+   Add-PathToUserProfile "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64"
+   ```
+
 Run `:TSInstall <language>` (or `:checkhealth treesitter`) to verify.
 
 ## Structure
