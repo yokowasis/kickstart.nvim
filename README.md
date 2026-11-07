@@ -47,10 +47,7 @@ On Windows, Treesitter needs a CLI compiler to build parsers.
    ```sh
    npm i -g tree-sitter-cli
    ```
-2. Treesitter looks for `cl.exe` to compile parsers, so copy `gcc.exe` to `cl.exe` (e.g. into your MinGW/GCC `bin` directory, or anywhere on `PATH`):
-   ```sh
-   cp /mingw64/bin/gcc.exe /mingw64/bin/cl.exe
-   ```
+2. Treesitter looks for a C/C++ compiler to compile parsers. Install the appropriate Desktop Development with C++ workload via the Visual Studio Installer. This will provide the necessary compilers (like cl.exe) needed by Treesitter's build process.
 
 Run `:TSInstall <language>` (or `:checkhealth treesitter`) to verify.
 
