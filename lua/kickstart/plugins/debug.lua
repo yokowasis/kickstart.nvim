@@ -107,7 +107,7 @@ local js_debug_adapter_path = vim.fs.joinpath(vim.fn.stdpath 'data', 'mason', 'p
 
 local node_terminal = {
   type = 'server',
-  host = '127.0.0.1',
+  host = 'localhost',
   port = '${port}',
   executable = {
     command = 'node',
@@ -120,7 +120,7 @@ local node_terminal = {
 
 local chrome = {
   type = 'server',
-  host = '127.0.0.1',
+  host = 'localhost',
   port = '${port}',
   executable = {
     command = 'node',
@@ -170,7 +170,7 @@ for _, language in ipairs(js_based_languages) do
       type = 'pwa-chrome',
       request = 'launch',
       name = 'Nvim: Debug JS Client',
-      url = 'http://127.0.0.1:3000',
+      url = 'http://localhost:3000',
       webRoot = '${workspaceFolder}',
       runtimeExecutable = chrome_runtime,
       -- By default, pwa-chrome uses a clean, isolated Chrome profile.
@@ -183,7 +183,7 @@ for _, language in ipairs(js_based_languages) do
       type = 'pwa-chrome',
       request = 'attach',
       name = 'Nvim: Attach to Chrome',
-      address = '127.0.0.1',
+      address = 'localhost',
       port = 9222,
       webRoot = '${workspaceFolder}',
     },
