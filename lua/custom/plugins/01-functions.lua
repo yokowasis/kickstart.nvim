@@ -331,7 +331,7 @@ function GetSessionName(cwd)
   return normalized:gsub(':', ''):gsub('/', '%%') .. '.vim'
 end
 
-function GetSessionPath(cwd) return vim.fn.expand('~/' .. GetSessionName(cwd)) end
+function GetSessionPath(cwd) return vim.fn.expand('~/nvim-session/' .. GetSessionName(cwd)) end
 
 vim.api.nvim_create_user_command('PackUpdate', function() vim.pack.update(nil, { force = true }) end, {})
 
