@@ -27,6 +27,9 @@ if vim.g.neovide then vim.defer_fn(function() vim.cmd 'NeovideFocus' end, 200) e
 -- independent clipboard
 vim.opt.clipboard = ''
 
+-- unix file format
+vim.o.ff = 'unix'
+
 -- set autoindent expandtab tabstop=2 shiftwidth=2
 vim.o.autoindent = true
 vim.o.expandtab = true
