@@ -67,9 +67,10 @@ Note: upstream only installs `stylua`; this fork installs significantly more.
 
 ## lua/kickstart/plugins/debug.lua
 
+- **Lazy setup**: `mason-nvim-dap`, `dapui`, `dap-go`, and JS/TS adapter/configuration setup are deferred into `ensure_dap_setup()` and initialized on first debug keymap press (avoids loading `mason-registry` synchronously at startup)
 - **keymaps**: `<F10>` for step_over (upstream: `<F2>`), `<leader>ba`/`<leader>Ba`/`<leader>bt` for breakpoint/UI (upstream: `<leader>b`/`<leader>B`)
 - **js-debug-adapter**: added to `ensure_installed`
-- **JS/TS debugging**: entire section added — adapters (`pwa-node`, `pwa-chrome`, `node_terminal`, `chrome`) and configurations for launching current file with Node, Next.js server/client debugging, and attaching to running Chrome on 127.0.0.1:9222 (languages: `typescript`, `javascript`, `typescriptreact`, `javascriptreact`)
+- **JS/TS debugging**: entire section added — adapters (`pwa-node`, `pwa-chrome`, `node_terminal`, `chrome`) and configurations for launching current file with Node, Next.js server/client debugging, and attaching to running Chrome on 127.0.0.1:9222 (languages: `typescript`, `javascript`, `typescriptreact`, `javascriptreact`, `svelte`)
 
 ---
 
