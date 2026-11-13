@@ -1,3 +1,3 @@
-sudo npm i -g tree-sitter-cli basedpyright bash-language-server
+sudo npm i -g tree-sitter-cli basedpyright bash-language-server --allow-scripts=tree-sitter-cli
 sudo apt install clangd clang-format build-essential unzip
-brew install rust-analyzer ruff lua-language-server stylua
+brew install rust-analyzer ruff lua-language-server stylua golang
